@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 //local
 import {
   BusinessApplicationService,
+  RentalApplicationService,
   DashboardService,
 } from 'src/app/modules/dashboards/services';
 
@@ -13,8 +14,8 @@ import {
   //ProgramsComponent,
   BusinessApplicationsComponent,
   BusinessApplicationsAddComponent,
-  //RentalApplicationsComponent,
-  //RentalApplicationsAddComponent
+  RentalApplicationsComponent,
+  RentalApplicationsAddComponent
 } from 'src/app/modules/dashboards/components';
 
 export const DashboardRoutes: Routes = [
@@ -55,7 +56,7 @@ export const DashboardRoutes: Routes = [
         path: 'businessapplications-add',
         component: BusinessApplicationsAddComponent,
         data: {
-          title: 'Add Business Applications',
+          title: 'Add Business Application',
           subjectTableName: 'businessapplications-add',
           urls: [
             { title: '' }
@@ -69,7 +70,7 @@ export const DashboardRoutes: Routes = [
         path: 'businessapplications-edit/:id',
         component: BusinessApplicationsAddComponent,
         data: {
-          title: 'Edit Business Applications',
+          title: 'Edit Business Application',
           subjectTableName: 'businessapplications-edit',
           urls: [
             { title: '' }
@@ -77,6 +78,45 @@ export const DashboardRoutes: Routes = [
         },
         resolve: {
           componentData: BusinessApplicationService
+        }
+      },
+      {
+        path: 'rentalapplications',
+        component: RentalApplicationsComponent,
+        data: {
+          title: 'Rental Applications',
+          subjectTableName: 'rentalapplications',
+          urls: [
+            { title: '' }
+          ]
+        }
+      },
+      {
+        path: 'rentalapplications-add',
+        component: RentalApplicationsAddComponent,
+        data: {
+          title: 'Add Rental Application',
+          subjectTableName: 'rentalapplications-add',
+          urls: [
+            { title: '' }
+          ]
+        },
+        resolve: {
+          componentData: RentalApplicationService
+        }
+      },
+      {
+        path: 'rentalapplications-edit/:id',
+        component: RentalApplicationsAddComponent,
+        data: {
+          title: 'Edit Rental Application',
+          subjectTableName: 'rentalapplications-edit',
+          urls: [
+            { title: '' }
+          ]
+        },
+        resolve: {
+          componentData: RentalApplicationService
         }
       },
       {

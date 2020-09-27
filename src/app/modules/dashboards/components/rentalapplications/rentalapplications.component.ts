@@ -17,11 +17,11 @@ import { StorageService } from 'src/app/services/storage.service';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
-  selector: 'app-businessapplications',
-  templateUrl: './businessapplications.component.html',
-  styleUrls: ['./businessapplications.component.css']
+  selector: 'app-rentalapplications',
+  templateUrl: './rentalapplications.component.html',
+  styleUrls: ['./rentalapplications.component.css']
 })
-export class BusinessApplicationsComponent implements OnInit {
+export class RentalApplicationsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
@@ -35,11 +35,11 @@ export class BusinessApplicationsComponent implements OnInit {
   ) { }
 
   doralData: any = []
-  businessApplicationList: any = []
+  rentalApplicationList: any = []
   rows: any = []
   modelConfig: PopupModel;
   loggedInuserEmail: string;
-  businessApplicationForm: FormGroup;
+  rentalApplicationForm: FormGroup;
 
   dtOptions: DataTables.Settings = {
     pagingType: 'full_numbers',
@@ -64,20 +64,20 @@ export class BusinessApplicationsComponent implements OnInit {
     this.loggedInuserEmail = this.storageService.getItem('userData') &&
       this.storageService.getItem('userData')['userName'];
     this.dropdownSettings = new MultiselectModel();
-    await this.getBusinessApplicationList();
+    await this.getRentalApplicationList();
     this.setupFilters(); // Don't change order
 
     this.spinner.hide();
   }
 
-  private async getBusinessApplicationList() {
+  private async getRentalApplicationList() {
     try {
-      this.businessApplicationList = await this.ignatiusService.getQueryReportObservable(
+      this.rentalApplicationList = await this.ignatiusService.getQueryReportObservable(
         this.doralData.appData,
-        { "ReportId": this.doralData.businessApplicationsData.BusinessApplicationListReportId }
+        { "ReportId": this.doralData.rentalApplicationsData.RentalApplicationListReportId }
       ).toPromise();
 
-      this.rows = [...this.businessApplicationList];
+      this.rows = [...this.rentalApplicationList];
       this.dtTrigger.next();
     } catch (error) {
       this.toastr.error('Error in loading applications', 'Error')
@@ -92,10 +92,10 @@ export class BusinessApplicationsComponent implements OnInit {
   applyFilter(): void {
     this.spinner.show();
     if(this.selectedStatus.length){
-      let filteredRows = this.businessApplicationList.filter(app => this.selectedStatus.includes(app.status));
+      let filteredRows = this.rentalApplicationList.filter(app => this.selectedStatus.includes(app.status));
       this.rows = filteredRows;  
     } else {
-      this.rows = this.businessApplicationList;
+      this.rows = this.rentalApplicationList;
     }
 
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -111,54 +111,54 @@ export class BusinessApplicationsComponent implements OnInit {
   }
 
   private setupFilters(): void {
-    this.statusList = [...new Set(this.businessApplicationList.map(app => app.status))].filter(status => status);
+    this.statusList = [...new Set(this.rentalApplicationList.map(app => app.status))].filter(status => status);
   }
 
   editRecord(id) {
-    this.router.navigate([`businessapplications-edit/${id}`])
+    this.router.navigate([`rentalapplications-edit/${id}`])
   }
 
-  openSubmitBusinessApplicationPopup(row, content) {
+  openSubmitRentalApplicationPopup(row, content) {
     this.selectedRow = row;
     this.modelConfig = new PopupModel();
-    this.modelConfig.title = 'Submit Business Application';
+    this.modelConfig.title = 'Submit Rental Application';
     this.modelConfig.settings.size = 'sm';
     this.ngbModal.open(content, this.modelConfig.settings)
   }
 
-  submitBusinessApplication() {
+  submitRentalApplication() {
     const obj = {};
     //obj['date_of_applicant_submission'] = new Date();
     //obj['submitted_by'] = this.loggedInuserEmail;
     //obj['status'] = 'Submitted';
-    //this.updateBusinessApplication(obj);
+    //this.updateRentalApplication(obj);
   }
 
-  private async updateBusinessApplication(appObject) {
+  private async updateRentalApplication(appObject) {
     try {
       this.modelConfig.busy = true;
       const recordFAD = new FormActionData(0,
-        this.doralData.businessApplicationsData.TableId,
+        this.doralData.rentalApplicationsData.TableId,
         new Where(Number(this.selectedRow.id)),
         new Array<FieldListItem>()
       );
       const recordPackage = new PackageJob(environment.applicationId,
         this.doralData.documentsData.DocumentFileId,
         this.doralData.documentsData.RelatedApplicationsFieldId,
-        Number(this.selectedRow.id), true, 0, "Business Application Attachment");
+        Number(this.selectedRow.id), true, 0, "Rental Application Attachment");
 
       for (let key in appObject) {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }
       await this.ignatiusService.postPackage(recordPackage).toPromise();
       await this.ignatiusService.putData(recordFAD).toPromise();
-      this.businessApplicationUpdateCompleted('Submitted', null, true);
+      this.rentalApplicationUpdateCompleted('Submitted', null, true);
     } catch (error) {
-      this.businessApplicationUpdateCompleted(null, 'Submitting', false);
+      this.rentalApplicationUpdateCompleted(null, 'Submitting', false);
     }
   }
 
-  private businessApplicationUpdateCompleted(msg = '', err = '', success = true) {
+  private rentalApplicationUpdateCompleted(msg = '', err = '', success = true) {
     if (success) {
       this.modelConfig.busy = false;
       for (let itrator of this.rows) {
@@ -166,12 +166,12 @@ export class BusinessApplicationsComponent implements OnInit {
           itrator.status = 'Submitted';
         }
       }
-      this.toastr.success(`Business Application ${msg} successfully`, 'Success');
+      this.toastr.success(`Rental Application ${msg} successfully`, 'Success');
       this.ngbModal.dismissAll();
     } else {
       this.modelConfig.busy = false;
       this.ngbModal.dismissAll();
-      this.toastr.error(`Error in ${err} Business Application`, 'Error');
+      this.toastr.error(`Error in ${err} Rental Application`, 'Error');
     }
   }
 

@@ -85,6 +85,7 @@ export class ProjectSpecificService {
 		// projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
 		// projectSpecificData.documentsData.RelatedCommThreadFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Threads');
 		projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Business Applications');
+		projectSpecificData.documentsData.RelatedRentalApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Rental Applications');
 		// projectSpecificData.documentsData.RelatedCommResponsesFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Responses');
 		// projectSpecificData.documentsData.RelatedPaymentRequestsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Payment Requests');
 		

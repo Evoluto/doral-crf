@@ -43,6 +43,7 @@ export class DocumentsData {
     TableId: number
     RecordIdFieldId: number
     RelatedBusinessApplicationsFieldId: number
+    RelatedRentalApplicationsFieldId: number
     // DocumentFileId:number
     // DocumentTypeExpenditureCategoryMultipleChoiceID:number
     // DocumentTypeSelectionMultipleChoiceID:number

@@ -23,7 +23,7 @@ export class DashboardService implements Resolve<Object[]>{
     switch (subjectTableName) {
       case "dashboard":
 
-        postBodies.push({ "ApplicationTableId": projectSpecificData.businessApplicationsData.TableId })
+        //////??????????? NES - NOT NOW postBodies.push({ "ApplicationTableId": projectSpecificData.businessApplicationsData.TableId })
         
         observables = observables.concat(
           this.ignatiusService.getQueryReportObservables(

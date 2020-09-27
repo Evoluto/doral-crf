@@ -20,6 +20,7 @@ import { DashboardRoutes } from './dashboard.routing';
 import {
   DashboardService,
   BusinessApplicationService,
+  RentalApplicationService,
   ExportService
 } from 'src/app/modules/dashboards/services';
 
@@ -27,7 +28,9 @@ import {
   UnauthorisedComponent,
   DashboardComponent,
   BusinessApplicationsComponent,
-  BusinessApplicationsAddComponent
+  BusinessApplicationsAddComponent,
+  RentalApplicationsComponent,
+  RentalApplicationsAddComponent
 } from 'src/app/modules/dashboards/components';
 
 import { AdminGuard } from 'src/app/modules/dashboards/guards';
@@ -52,10 +55,13 @@ import { DashboardResolverService } from 'src/app/services/dashboard-resolver.se
     DashboardComponent,
     BusinessApplicationsComponent,
     BusinessApplicationsAddComponent,
+    RentalApplicationsComponent,
+    RentalApplicationsAddComponent,
   ],
   providers: [
     DashboardService,
     BusinessApplicationService,
+    RentalApplicationService,
     DashboardResolverService,
     CurrencyPipe,
     AdminGuard,
