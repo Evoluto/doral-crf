@@ -3,62 +3,65 @@ import { AppData } from "./app-data"
 export class ProjectSpecificData {
     appId: number
     appData: AppData
-    applicationsData: ApplicationsData
-    applicantsData: ApplicantsData
-    projectsData: ProjectsData
-    commThreadData: CommThreadData
-    commRespData: CommRespData
-    paymentRequestData: PaymentRequestData
+    programsData: ProgramsData
+    businessApplicationsData: BusinessApplicationsData
+    rentalApplicationsData: RentalApplicationsData
     documentsData: DocumentsData
-    treasuryReportingData: TreasuryReportingData
+    requredDocumentsData: RequiredDocumentsData
+    householdMembersData: HouseholdMembersData
 }
 
-export class ApplicationsData {
+export class ProgramsData {
     TableId: number
-    ApplicationListReportId: number
+    ProgramListReportId: number
     RecordIdFieldId: number
 }
 
-export class ApplicantsData {
+export class BusinessApplicationsData {
     TableId: number
-}
-
-export class ProjectsData {
-    TableId: number
-    RecordIdFieldId:number
-    RelatedApplicationsId: number
-}
-
-export class CommThreadData {
-    TableId: number
+    BusinessApplicationListReportId: number
     RecordIdFieldId: number
+    RelatedProgramsFieldId:number
 }
 
-export class CommRespData {
+export class RentalApplicationsData {
     TableId: number
+    RentalApplicationListReportId: number
     RecordIdFieldId: number
-    RelatedThreadId: number
-    ResponseFieldId: number
+    RelatedProgramsFieldId:number
 }
 
-export class PaymentRequestData {
+export class HouseholdMembersData {
     TableId: number
+    HouseholdMembersListReportId: number
     RecordIdFieldId: number
-    MilestoneMultipleChoiceID:number
-    RelatedProjectsId:number
+    RelatedProgramsFieldId:number
+    RelatedRentalApplicationsFieldId:number
 }
 
 export class DocumentsData {
     TableId: number
     RecordIdFieldId: number
-    RelatedApplicationsFieldId: number
-    DocumentFileId:number
-    DocumentTypeExpenditureCategoryMultipleChoiceID:number
-    DocumentTypeSelectionMultipleChoiceID:number
-    DocumentTypeId: number
-    RelatedCommThreadFieldId: number
-    RelatedCommResponsesFieldId: number
-    RelatedPaymentRequestsFieldId:number
+    RelatedBusinessApplicationsFieldId: number
+    // DocumentFileId:number
+    // DocumentTypeExpenditureCategoryMultipleChoiceID:number
+    // DocumentTypeSelectionMultipleChoiceID:number
+    // DocumentTypeId: number
+    // RelatedCommThreadFieldId: number
+    // RelatedCommResponsesFieldId: number
+    // RelatedPaymentRequestsFieldId:number
+}
+export class RequiredDocumentsData {
+    TableId: number
+    RecordIdFieldId: number
+    //RelatedBusinessApplicationsFieldId: number
+    // DocumentFileId:number
+    // DocumentTypeExpenditureCategoryMultipleChoiceID:number
+    // DocumentTypeSelectionMultipleChoiceID:number
+    // DocumentTypeId: number
+    // RelatedCommThreadFieldId: number
+    // RelatedCommResponsesFieldId: number
+    // RelatedPaymentRequestsFieldId:number
 }
 
 export class TreasuryReportingData {

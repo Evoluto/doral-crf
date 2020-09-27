@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
     private storageService: StorageService
   ) { }
 
-  dfaData: any = []
+  doralData: any = []
   pledgeList: any = []
   modelConfig: PopupModel;
   pledgeForm: FormGroup;
@@ -140,8 +140,8 @@ export class DashboardComponent implements OnInit {
   private async getPledgeList() {
     try {
       this.pledgeList = await this.ignatiusService.getQueryReportObservable(
-        this.dfaData.appData,
-        { "ApplicationTableId": this.dfaData.pledgesData.TableId }
+        this.doralData.appData,
+        { "ApplicationTableId": this.doralData.pledgesData.TableId }
       ).toPromise()
     } catch (error) {
       throw error;
@@ -170,7 +170,7 @@ export class DashboardComponent implements OnInit {
     try {
       this.modelConfig.busy = true;
       const recordFAD = new FormActionData(0,
-        this.dfaData.pledgesData.TableId,
+        this.doralData.pledgesData.TableId,
         null,
         new Array<FieldListItem>()
       );

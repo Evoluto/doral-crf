@@ -19,11 +19,11 @@ import { PopupModel } from 'src/app/modules/dashboards/models/popup';
  * @title Stepper overview
  */
 @Component({
-  selector: 'app-applications-add',
-  templateUrl: './applications-add.component.html',
-  styleUrls: ['./applications-add.component.css']
+  selector: 'app-businessapplications-add',
+  templateUrl: './businessapplications-add.component.html',
+  styleUrls: ['./businessapplications-add.component.css']
 })
-export class ApplicationsAddComponent implements OnInit {
+export class BusinessApplicationsAddComponent implements OnInit {
 
   recordId: string;
   applicationEditData: any;
@@ -31,7 +31,7 @@ export class ApplicationsAddComponent implements OnInit {
   applicationEditDocumentData: any;
 
   applicantList: Array<{ id: string, name: string }>;
-  dfaData = this.projectSpecificService.getProjectSpecificData();
+  doralData = this.projectSpecificService.getProjectSpecificData();
   documents: Array<any> = [];
   deletedDocuments: Array<any> = [];
   documentTypes = {
@@ -408,7 +408,7 @@ export class ApplicationsAddComponent implements OnInit {
   private async createApplication(appObject) {
     try {
       const recordFAD = new FormActionData(0,
-        this.dfaData.applicationsData.TableId,
+        this.doralData.businessApplicationsData.TableId,
         null,
         new Array<FieldListItem>()
       );
@@ -436,7 +436,7 @@ export class ApplicationsAddComponent implements OnInit {
     const applicantId = this.storageService.getItem('userSessionData').applicantId;
     const dunsNum = this.fifthFormGroup.get('dunsNumber').value;
     const recordFAD = new FormActionData(0,
-      this.dfaData.applicantsData.TableId,
+      this.doralData.businessApplicationsData.TableId,
       new Where(Number(applicantId)),
       new Array<FieldListItem>()
     );
@@ -449,7 +449,7 @@ export class ApplicationsAddComponent implements OnInit {
   private async updateApplication(appObject) {
     try {
       const recordFAD = new FormActionData(0,
-        this.dfaData.applicationsData.TableId,
+        this.doralData.businessApplicationsData.TableId,
         new Where(Number(this.recordId)),
         new Array<FieldListItem>()
       );
@@ -676,7 +676,7 @@ export class ApplicationsAddComponent implements OnInit {
         if (condition) continue;
 
         const recordFAD = new FormActionData(0,
-          this.dfaData.documentsData.TableId,
+          this.doralData.documentsData.TableId,
           null,
           new Array<FieldListItem>()
         );
@@ -753,12 +753,13 @@ export class ApplicationsAddComponent implements OnInit {
   }
 
   downloadFile(file: any) {
-    this.ignatiusService.downloadFile(
-      this.dfaData.documentsData.TableId,
-      file["id"],
-      this.dfaData.documentsData.DocumentFileId,
-      file["document"]
-    );
+    // NES - FOR NOW
+    // this.ignatiusService.downloadFile(
+    //   this.doralData.documentsData.TableId,
+    //   file["id"],
+    //   this.doralData.documentsData.DocumentFileId,
+    //   file["document"]
+    // );
   }
 
   deleteDocument(docId) {
@@ -796,7 +797,7 @@ export class ApplicationsAddComponent implements OnInit {
         const formActionData =
           new FormActionData(
             0,
-            this.dfaData.documentsData.TableId,
+            this.doralData.documentsData.TableId,
             new Where(id),
             null
           );

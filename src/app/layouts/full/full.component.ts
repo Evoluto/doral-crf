@@ -19,7 +19,7 @@ import { forkJoin,Observable } from 'rxjs';
 
 export class FullComponent implements OnInit {
   ngOnInit() {
-    this.dfaData = this.projectSpecificService.getProjectSpecificData();
+    this.doralData = this.projectSpecificService.getProjectSpecificData();
     
     this.setApplicant();
     this.dynamicLogo = this.logoUrl;
@@ -44,9 +44,8 @@ export class FullComponent implements OnInit {
   lightObjUrl: string;
   darkObjUrl: string;
   projectSpecificData: any;
-  dfaData: any = [];
+  doralData: any = [];
   comms: any = [];
-  // ContractsData: any;
 
   constructor(
     private ignatiusService: IgnatiusService,
@@ -148,8 +147,8 @@ export class FullComponent implements OnInit {
 
   setApplicant() {
     this.ignatiusService.getQueryReportObservable(
-      this.dfaData.appData,
-      { "ApplicationTableId": this.dfaData.applicantsData.TableId }
+      this.doralData.appData,
+      { "ApplicationTableId": this.doralData.applicantsData.TableId }
     ).subscribe(
       response => {
         if (response && response.length > 0) {
@@ -180,11 +179,11 @@ export class FullComponent implements OnInit {
     console.log(userData.userName);
     let observables = new Array<Observable<Object[]>>();
     let postBodies = new Array<any>();
-        postBodies.push({ "ApplicationTableId": this.dfaData.commRespData.TableId });
+        postBodies.push({ "ApplicationTableId": this.doralData.commRespData.TableId });
         
         observables = observables.concat(
           this.ignatiusService.getQueryReportObservables(
-            this.dfaData.appData,
+            this.doralData.appData,
             postBodies
           )
         );

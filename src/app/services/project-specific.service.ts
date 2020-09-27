@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { AppData, AppItem } from '../models/app-data';
 import {
 	ProjectSpecificData as ProjectSpecificData,
-	ApplicationsData,
-	ApplicantsData,
-	ProjectsData,
-	CommThreadData,
-	CommRespData,
-	PaymentRequestData,
+	ProgramsData,
+	BusinessApplicationsData,
+	RentalApplicationsData,
 	DocumentsData,
-	TreasuryReportingData
+	RequiredDocumentsData,
+	HouseholdMembersData
 } from '../models/project-specific-data';
 
 @Injectable()
@@ -17,7 +15,7 @@ export class ProjectSpecificService {
 	constructor() { }
 
 	getProjectSpecificData(): ProjectSpecificData {
-		let projectSpecificData = JSON.parse(localStorage.getItem('dfaData'));
+		let projectSpecificData = JSON.parse(localStorage.getItem('doralData'));
 		projectSpecificData.appData = this.parseAppData(projectSpecificData.appData);
 		return projectSpecificData;
 	}
@@ -46,74 +44,50 @@ export class ProjectSpecificService {
 
 		appData = this.parseAppData(appData);
 
-		/* ===================== [1] Table = 'Applications' =================*/
-		let applicationsData = appData.Tables.find(t => t.Name === 'Applications');
-		projectSpecificData.applicationsData = new ApplicationsData();
-		projectSpecificData.applicationsData.TableId = applicationsData.Id;
-		projectSpecificData.applicationsData.ApplicationListReportId = appData.getAppItemId(applicationsData.Reports, 'List All');
-		projectSpecificData.applicationsData.RecordIdFieldId = appData.getAppItemId(applicationsData.Fields, 'Record Id');
+		/* ===================== [1] Table = 'Programs' =================*/
+		let programsData = appData.Tables.find(t => t.Name === 'Programs');
+		projectSpecificData.programsData = new ProgramsData();
+		projectSpecificData.programsData.TableId = programsData.Id;
+		projectSpecificData.programsData.ProgramListReportId = appData.getAppItemId(programsData.Reports, 'List All');
+		projectSpecificData.programsData.RecordIdFieldId = appData.getAppItemId(programsData.Fields, 'Record Id');
 
-		/* ===================== [2] Table = 'Applicants' ====================*/
-		let applicantsData = appData.Tables.find(t => t.Name === 'Applicants');
-		projectSpecificData.applicantsData = new ApplicantsData();
-		projectSpecificData.applicantsData.TableId = applicantsData.Id;
+		/* ===================== [2] Table = 'Business Applications' ====================*/
+		let businessApplicationsData = appData.Tables.find(t => t.Name === 'Business Applications');
+		projectSpecificData.businessApplicationsData = new BusinessApplicationsData();
+		projectSpecificData.businessApplicationsData.TableId = businessApplicationsData.Id;
+		projectSpecificData.businessApplicationsData.BusinessApplicationListReportId = appData.getAppItemId(businessApplicationsData.Reports, 'List All');
+		projectSpecificData.businessApplicationsData.RecordIdFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Record Id');
+		projectSpecificData.businessApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Related Programs');
 
-		/* ===================== [3] Table = 'Projects' ======================*/
-		let projectsData = appData.Tables.find(t => t.Name === 'Projects');
-		projectSpecificData.projectsData = new ProjectsData();
-		projectSpecificData.projectsData.TableId = projectsData.Id;
-		projectSpecificData.projectsData.RecordIdFieldId = appData.getAppItemId(projectsData.Fields, 'Record Id');
-		projectSpecificData.projectsData.RelatedApplicationsId = appData.getAppItemId(projectsData.Fields, 'Related Applications');
+		/* ===================== [3] Table = 'Rental Applications' ======================*/
+		let rentalApplicationsData = appData.Tables.find(t => t.Name === 'Rental Applications');
+		projectSpecificData.rentalApplicationsData = new RentalApplicationsData();
+		projectSpecificData.rentalApplicationsData.TableId = rentalApplicationsData.Id;
+		projectSpecificData.rentalApplicationsData.RecordIdFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Record Id');
+		projectSpecificData.rentalApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Related Programs');
 
-		/* ===================== [4] Table = 'Comm Threads' ==================*/
-		let commThreadData = appData.Tables.find(t => t.Name === 'Comm Threads');
-		projectSpecificData.commThreadData = new CommThreadData();
-		projectSpecificData.commThreadData.TableId = commThreadData.Id;
-		projectSpecificData.commThreadData.RecordIdFieldId = appData.getAppItemId(commThreadData.Fields, 'Record Id');
+		/* ===================== [4] Table = 'Household Members' ======================*/
+		let householdMembersData = appData.Tables.find(t => t.Name === 'Household Members');
+		projectSpecificData.householdMembersData = new HouseholdMembersData();
+		projectSpecificData.householdMembersData.TableId = householdMembersData.Id;
+		projectSpecificData.householdMembersData.RecordIdFieldId = appData.getAppItemId(householdMembersData.Fields, 'Record Id');
+		projectSpecificData.householdMembersData.RelatedProgramsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Programs');
+		projectSpecificData.householdMembersData.RelatedRentalApplicationsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Rental Applications');
 
-		/* ===================== [5] Table = 'Comm Responses' ================*/
-		let commRespData = appData.Tables.find(t => t.Name === 'Comm Responses');
-		projectSpecificData.commRespData = new CommRespData();
-		projectSpecificData.commRespData.TableId = commRespData.Id;
-		projectSpecificData.commRespData.RecordIdFieldId = appData.getAppItemId(commRespData.Fields, 'Record Id');
-		projectSpecificData.commRespData.RelatedThreadId = appData.getAppItemId(commRespData.Fields, 'Related Comm Threads');
-		projectSpecificData.commRespData.ResponseFieldId = appData.getAppItemId(commRespData.Fields, 'Response');
-
-
-		/* ===================== [6] Table = 'Payment Requests' ================*/
-		let paymentRequestData = appData.Tables.find(t => t.Name === 'Payment Requests');
-		projectSpecificData.paymentRequestData = new PaymentRequestData();
-		projectSpecificData.paymentRequestData.TableId = paymentRequestData.Id;
-		projectSpecificData.paymentRequestData.RecordIdFieldId = appData.getAppItemId(paymentRequestData.Fields, 'Record Id');
-		projectSpecificData.paymentRequestData.MilestoneMultipleChoiceID = appData.getAppItemId(paymentRequestData.Fields, 'Milestone');
-		projectSpecificData.paymentRequestData.RelatedProjectsId = appData.getAppItemId(paymentRequestData.Fields, 'Related Projects');
-
-
-		/* ===================== [7] Table = 'Documents' ================*/
+		/* ===================== [5] Table = 'Documents' ================*/
 		let documentsData = appData.Tables.find(t => t.Name === 'Documents');
 		projectSpecificData.documentsData = new DocumentsData();
 		projectSpecificData.documentsData.TableId = documentsData.Id;
 		projectSpecificData.documentsData.RecordIdFieldId = appData.getAppItemId(documentsData.Fields, 'Record Id');
-		projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
-		projectSpecificData.documentsData.DocumentTypeExpenditureCategoryMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Expenditure Category');
-		projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Selection');
-		projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
-		projectSpecificData.documentsData.RelatedCommThreadFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Threads');
-		projectSpecificData.documentsData.RelatedApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Applications');
-		projectSpecificData.documentsData.RelatedCommResponsesFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Responses');
-		projectSpecificData.documentsData.RelatedPaymentRequestsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Payment Requests');
-
+		// projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
+		// projectSpecificData.documentsData.DocumentTypeExpenditureCategoryMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Expenditure Category');
+		// projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Selection');
+		// projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
+		// projectSpecificData.documentsData.RelatedCommThreadFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Threads');
+		projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Business Applications');
+		// projectSpecificData.documentsData.RelatedCommResponsesFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Responses');
+		// projectSpecificData.documentsData.RelatedPaymentRequestsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Payment Requests');
 		
-		
-		/* ===================== [8] Table = 'Expenditures' ================*/
-		let treasuryReportingData = appData.Tables.find(t => t.Name === 'Expenditures');
-		projectSpecificData.treasuryReportingData = new TreasuryReportingData();
-		projectSpecificData.treasuryReportingData.TableId = treasuryReportingData.Id;
-		projectSpecificData.treasuryReportingData.RecordIdFieldId = appData.getAppItemId(treasuryReportingData.Fields, 'Record Id');
-		projectSpecificData.treasuryReportingData.RelatedPaymentRequestsFieldId = appData.getAppItemId(treasuryReportingData.Fields, 'Related Payment Requests');
-		projectSpecificData.treasuryReportingData.TypeMultipleChoiceID = appData.getAppItemId(treasuryReportingData.Fields, 'Type');
-		projectSpecificData.treasuryReportingData.ExpenditureCategoryMultipleChoiceID = appData.getAppItemId(treasuryReportingData.Fields, 'Expenditure Category');
-
 		projectSpecificData.appData = JSON.parse(JSON.stringify(appData));
 		projectSpecificData.appData.Tables.forEach(t => t.Fields = null);
 
@@ -121,6 +95,6 @@ export class ProjectSpecificService {
 		/**
 		 * Saving in local storage 
 		 */
-		localStorage.setItem('dfaData', JSON.stringify(projectSpecificData));
+		localStorage.setItem('doralData', JSON.stringify(projectSpecificData));
 	}
 }

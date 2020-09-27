@@ -21,36 +21,5 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       }
     ]
-  },
-  {
-    id: 2,
-    path: '/projects',
-    title: 'Projects',
-    icon: 'fa fa-folder',
-    class: '',
-    ddclass: '',
-    extralink: false,
-    submenu: []
-  },
-  // {
-  //   id: 3,
-  //   path: '/expenditures',
-  //   title: 'Expenditures',
-  //   icon: 'fa fa-folder',
-  //   class: '',
-  //   ddclass: '',
-  //   extralink: false,
-  //   submenu: []
-  // },
-  {
-    id: 4,
-    path: '/payments',
-    title: 'Payment Requests',
-    icon: 'fa fa-folder',
-    class: '',
-    ddclass: '',
-    extralink: false,
-    submenu: []
-  },
-  
+  }
 ];

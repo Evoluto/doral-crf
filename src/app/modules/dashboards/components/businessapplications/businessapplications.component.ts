@@ -17,11 +17,11 @@ import { StorageService } from 'src/app/services/storage.service';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
-  selector: 'app-applications',
-  templateUrl: './applications.component.html',
-  styleUrls: ['./applications.component.css']
+  selector: 'app-businessapplications',
+  templateUrl: './businessapplications.component.html',
+  styleUrls: ['./businessapplications.component.css']
 })
-export class ApplicationsComponent implements OnInit {
+export class BusinessApplicationsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +34,7 @@ export class ApplicationsComponent implements OnInit {
     private toastr: ToastrService,
   ) { }
 
-  dfaData: any = []
+  doralData: any = []
   applicationList: any = []
   rows: any = []
   modelConfig: PopupModel;
@@ -60,7 +60,7 @@ export class ApplicationsComponent implements OnInit {
 
   async ngOnInit() {
     this.spinner.show();
-    this.dfaData = this.projectSpecificService.getProjectSpecificData();
+    this.doralData = this.projectSpecificService.getProjectSpecificData();
     this.loggedInuserEmail = this.storageService.getItem('userData') &&
       this.storageService.getItem('userData')['userName'];
     this.dropdownSettings = new MultiselectModel();
@@ -73,8 +73,8 @@ export class ApplicationsComponent implements OnInit {
   private async getApplicationList() {
     try {
       this.applicationList = await this.ignatiusService.getQueryReportObservable(
-        this.dfaData.appData,
-        { "ReportId": this.dfaData.applicationsData.ApplicationListReportId }
+        this.doralData.appData,
+        { "ReportId": this.doralData.applicationsData.ApplicationListReportId }
       ).toPromise();
 
       this.rows = [...this.applicationList];
@@ -138,13 +138,13 @@ export class ApplicationsComponent implements OnInit {
     try {
       this.modelConfig.busy = true;
       const recordFAD = new FormActionData(0,
-        this.dfaData.applicationsData.TableId,
+        this.doralData.applicationsData.TableId,
         new Where(Number(this.selectedRow.id)),
         new Array<FieldListItem>()
       );
       const recordPackage = new PackageJob(environment.applicationId,
-        this.dfaData.documentsData.DocumentFileId,
-        this.dfaData.documentsData.RelatedApplicationsFieldId,
+        this.doralData.documentsData.DocumentFileId,
+        this.doralData.documentsData.RelatedApplicationsFieldId,
         Number(this.selectedRow.id), true, 0, "Application Attachment");
 
       for (let key in appObject) {
@@ -179,30 +179,30 @@ export class ApplicationsComponent implements OnInit {
     this.spinner.show();
     await this.ignatiusService
       .getQueryReportObservable(
-        this.dfaData.appData,
+        this.doralData.appData,
         {
-          "ApplicationTableId": this.dfaData.documentsData.TableId,
+          "ApplicationTableId": this.doralData.documentsData.TableId,
           "ConditionGroups": [
             {
               "Type": "all",
               "Conditions": [
                 {
                   "ConditionField": {
-                    "Id": this.dfaData.documentsData.RelatedApplicationsFieldId
+                    "Id": this.doralData.documentsData.RelatedApplicationsFieldId
                   },
                   "OperationType": "is equal",
                   "Value": Number(file.id)
                 },
                 {
                   "ConditionField": {
-                    "Id": this.dfaData.documentsData.DocumentTypeId
+                    "Id": this.doralData.documentsData.DocumentTypeId
                   },
                   "OperationType": "is equal",
                   "Value": "Package file"
                 },
                 {
                   "ConditionField": {
-                    "Id": this.dfaData.documentsData.DocumentFileId
+                    "Id": this.doralData.documentsData.DocumentFileId
                   },
                   "OperationType": "start with",
                   "Value": "CTCApplication"
@@ -218,9 +218,9 @@ export class ApplicationsComponent implements OnInit {
           }
           let pdfJob = response.sort((a, b) => b["datecreated"] - a["datecreated"]);
           this.ignatiusService.downloadFile(
-            this.dfaData.documentsData.TableId,
+            this.doralData.documentsData.TableId,
             pdfJob[0]["id"],
-            this.dfaData.documentsData.DocumentFileId,
+            this.doralData.documentsData.DocumentFileId,
             pdfJob[0]["document"]
           );
           this.spinner.hide();
@@ -234,10 +234,10 @@ export class ApplicationsComponent implements OnInit {
 
   async createPaymentRequest(id) {
     this.ignatiusService.getTargetTableObservable(
-      this.dfaData.appData,
+      this.doralData.appData,
       id,
-      this.dfaData.projectsData.TableId as number,
-      this.dfaData.projectsData.RelatedApplicationsId as number
+      this.doralData.projectsData.TableId as number,
+      this.doralData.projectsData.RelatedApplicationsId as number
     ).subscribe(res => {
       const project: any = res[0];
       this.router.navigate(['/payments/add'], { queryParams: { project: project.id } });

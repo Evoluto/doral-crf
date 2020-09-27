@@ -9,7 +9,7 @@ import { forkJoin, Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectService implements Resolve<Object[]>{
+export class BusinessApplicationService implements Resolve<Object[]>{
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Object[] | import("rxjs").Observable<Object[]> | Promise<Object[]> {
@@ -21,28 +21,43 @@ export class ProjectService implements Resolve<Object[]>{
 
     switch (subjectTableName) {
 
-      case "projects-view":
+      case "businessapplications-add":
+
+        // NES - FOR NOW
+        // observables.push(
+        //   this.ignatiusService.getDropdownValues(
+        //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
+        //   )
+        // )
+
+        break;
+
+      case "businessapplications-edit":
 
         const recordId = route.paramMap.get("id");
 
-        observables.push(
-          this.ignatiusService.getTargetTableObservable(
-            projectSpecificData.appData,
-            recordId,
-            projectSpecificData.projectsData.TableId as number,
-            projectSpecificData.projectsData.RecordIdFieldId as number
-          )
-        );
-
+        // NES - FOR NOW
+        // observables.push(
+        //   this.ignatiusService.getDropdownValues(
+        //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
+        //   )
+        // )
 
         observables.push(
           this.ignatiusService.getTargetTableObservable(
             projectSpecificData.appData,
             recordId,
-            projectSpecificData.paymentRequestData.TableId as number,
-            projectSpecificData.paymentRequestData.RelatedProjectsId as number
+            projectSpecificData.businessApplicationsData.TableId as number,
+            projectSpecificData.businessApplicationsData.RecordIdFieldId as number
           )
         );
+
+        observables.push(this.ignatiusService.getTargetTableObservable(
+          projectSpecificData.appData,
+          recordId,
+          projectSpecificData.documentsData.TableId,
+          projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId as number
+        ))
 
         break;
     }

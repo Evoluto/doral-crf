@@ -19,26 +19,15 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { DashboardRoutes } from './dashboard.routing';
 import {
   DashboardService,
-  CommunicationService,
-  ApplicationService,
-  PaymentService,
+  BusinessApplicationService,
   ExportService
 } from 'src/app/modules/dashboards/services';
 
 import {
   UnauthorisedComponent,
   DashboardComponent,
-  ProjectsComponent,
-  ProjectsViewComponent,
-  ExpendituresComponent,
-  ApplicationsComponent,
-  PaymentComponent,
-  CommunicationsComponent,
-  ApplicationsAddComponent,
-  CommresponsesComponent,
-  CommunicationsAddComponent,
-  PaymentAddComponent,
-  PaymentViewComponent
+  BusinessApplicationsComponent,
+  BusinessApplicationsAddComponent
 } from 'src/app/modules/dashboards/components';
 
 import { AdminGuard } from 'src/app/modules/dashboards/guards';
@@ -61,23 +50,12 @@ import { DashboardResolverService } from 'src/app/services/dashboard-resolver.se
   declarations: [
     UnauthorisedComponent,
     DashboardComponent,
-    ProjectsComponent,
-    ProjectsViewComponent,
-    ExpendituresComponent,
-    ApplicationsComponent,
-    PaymentComponent,
-    CommunicationsComponent,
-    ApplicationsAddComponent,
-    CommresponsesComponent,
-    CommunicationsAddComponent,
-    PaymentAddComponent,
-    PaymentViewComponent,
+    BusinessApplicationsComponent,
+    BusinessApplicationsAddComponent,
   ],
   providers: [
     DashboardService,
-    CommunicationService,
-    ApplicationService,
-    PaymentService,
+    BusinessApplicationService,
     DashboardResolverService,
     CurrencyPipe,
     AdminGuard,

@@ -22,60 +22,7 @@ export class CommunicationService implements Resolve<Object[]>{
     switch (subjectTableName) {
       case "threads":
 
-        postBodies.push({ "ApplicationTableId": projectSpecificData.commThreadData.TableId });
-        postBodies.push({ "ApplicationTableId": projectSpecificData.commRespData.TableId });
-       
-        observables = observables.concat(
-          this.ignatiusService.getQueryReportObservables(
-            projectSpecificData.appData,
-            postBodies,
-          )
-        );
-
-        break;
-      case "responses":
-        const recordId = route.paramMap.get("id");
-
-        if (recordId) {
-          observables.push(
-            this.ignatiusService.getTargetTableObservable(
-              projectSpecificData.appData,
-              recordId,
-              projectSpecificData.commRespData.TableId as number,
-              projectSpecificData.commRespData.RelatedThreadId as number
-            )
-          );
-
-          observables.push(
-            this.ignatiusService.getTargetTableObservable(
-              projectSpecificData.appData,
-              recordId,
-              projectSpecificData.commThreadData.TableId as number,
-              projectSpecificData.commThreadData.RecordIdFieldId as number,
-            )
-          );
-
-          observables.push(
-            this.ignatiusService.getTargetTableObservable(
-              projectSpecificData.appData,
-              recordId,
-              projectSpecificData.documentsData.TableId,
-              projectSpecificData.documentsData.RelatedCommThreadFieldId as number
-            )
-          );
-        }
-
-        break;
-      case "thread-add":
-        postBodies.push({ "ApplicationTableId": projectSpecificData.applicationsData.TableId });
-       
-        observables = observables.concat(
-          this.ignatiusService.getQueryReportObservables(
-            projectSpecificData.appData,
-            postBodies
-          )
-        );
-
+        
         break;
     }
 

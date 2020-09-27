@@ -3,27 +3,18 @@ import { Routes } from '@angular/router';
 
 //local
 import {
-  CommunicationService,
-  ApplicationService,
+  BusinessApplicationService,
   DashboardService,
-  PaymentService,
-  ProjectService
 } from 'src/app/modules/dashboards/services';
 
 import {
   DashboardComponent,
   UnauthorisedComponent,
-  ApplicationsComponent,
-  ProjectsComponent,
-  ProjectsViewComponent,
-  ExpendituresComponent,
-  PaymentComponent,
-  CommunicationsComponent,
-  CommresponsesComponent,
-  ApplicationsAddComponent,
-  CommunicationsAddComponent,
-  PaymentAddComponent,
-  PaymentViewComponent
+  //ProgramsComponent,
+  BusinessApplicationsComponent,
+  BusinessApplicationsAddComponent,
+  //RentalApplicationsComponent,
+  //RentalApplicationsAddComponent
 } from 'src/app/modules/dashboards/components';
 
 export const DashboardRoutes: Routes = [
@@ -50,176 +41,42 @@ export const DashboardRoutes: Routes = [
         }
       },
       {
-        path: 'applications',
-        component: ApplicationsComponent,
+        path: 'businessapplications',
+        component: BusinessApplicationsComponent,
         data: {
-          title: 'Applications',
-          subjectTableName: 'applications',
+          title: 'Business Applications',
+          subjectTableName: 'businessapplications',
           urls: [
             { title: '' }
           ]
         }
       },
       {
-        path: 'applications-add',
-        component: ApplicationsAddComponent,
+        path: 'businessapplications-add',
+        component: BusinessApplicationsAddComponent,
         data: {
-          title: 'Add Applications',
-          subjectTableName: 'applications-add',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: ApplicationService
-        }
-      },
-      {
-        path: 'applications-edit/:id',
-        component: ApplicationsAddComponent,
-        data: {
-          title: 'Edit Applications',
-          subjectTableName: 'applications-edit',
+          title: 'Add Business Applications',
+          subjectTableName: 'businessapplications-add',
           urls: [
             { title: '' }
           ]
         },
         resolve: {
-          componentData: ApplicationService
+          componentData: BusinessApplicationService
         }
       },
       {
-        path: 'projects',
-        component: ProjectsComponent,
+        path: 'businessapplications-edit/:id',
+        component: BusinessApplicationsAddComponent,
         data: {
-          title: 'Projects',
-          subjectTableName: 'projects',
-          urls: [
-            { title: '' }
-          ]
-        }
-      },
-      {
-        path: 'projects/view/:id',
-        component: ProjectsViewComponent,
-        data: {
-          title: 'View Project',
-          subjectTableName: 'projects-view',
-          urls: [
-            { title: 'View Project' }
-          ]
-        },
-        resolve: {
-          componentData: ProjectService
-        }
-      },
-      {
-        path: 'expenditures',
-        component: ExpendituresComponent,
-        data: {
-          title: 'Expenditures',
-          subjectTableName: 'expenditures',
-          urls: [
-            { title: '' }
-          ]
-        }
-      },
-      {
-        path: 'payments',
-        component: PaymentComponent,
-        data: {
-          title: 'Payment Requests',
-          subjectTableName: 'payments',
+          title: 'Edit Business Applications',
+          subjectTableName: 'businessapplications-edit',
           urls: [
             { title: '' }
           ]
         },
         resolve: {
-          componentData: PaymentService
-        }
-      },
-      {
-        path: 'payments/add',
-        component: PaymentAddComponent,
-        data: {
-          title: 'Add Payments',
-          subjectTableName: 'payments-add',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: PaymentService
-        }
-      },
-      {
-        path: 'payments/edit/:id',
-        component: PaymentAddComponent,
-        data: {
-          title: 'Edit Payments',
-          subjectTableName: 'payments-edit',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: PaymentService
-        }
-      },
-      {
-        path: 'payments/view/:id',
-        component: PaymentViewComponent,
-        data: {
-          title: 'View Payments',
-          subjectTableName: 'payments-view',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: PaymentService
-        }
-      },
-      {
-        path: 'communications',
-        component: CommunicationsComponent,
-        data: {
-          title: 'Communications',
-          subjectTableName: 'threads',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: CommunicationService
-        }
-      },
-      {
-        path: 'communications/:id',
-        component: CommresponsesComponent,
-        data: {
-          title: 'Thread Responses',
-          subjectTableName: 'responses',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: CommunicationService
-        }
-      },
-      {
-        path: 'communications-add',
-        component: CommunicationsAddComponent,
-        data: {
-          title: 'Add Ticket',
-          subjectTableName: 'thread-add',
-          urls: [
-            { title: '' }
-          ]
-        },
-        resolve: {
-          componentData: CommunicationService
+          componentData: BusinessApplicationService
         }
       },
       {
