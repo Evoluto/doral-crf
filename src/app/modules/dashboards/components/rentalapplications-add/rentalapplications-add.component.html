@@ -25,25 +25,55 @@
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup"
           (ngSubmit)="onStepTwoSubmit()">
-          <ng-template matStepLabel>Contact Info</ng-template>
+          <ng-template matStepLabel>General Applicant Information</ng-template>
           <br>
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Primary Applicant (contact person):</span>
+                <span class="bolt">Applicant’s Name:</span>
               </p>
               <input class="form-control"
-                placeholder="Enter Primary Applicant ..."
-                formControlName="primary_applicant">
+                placeholder="Enter Applicant’s Name ..."
+                formControlName="applicant_name">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Home Address:</span>
+                <span class="bolt">Social Security Number:</span>
               </p>
               <input class="form-control"
-                placeholder="Enter Home Address ..."
+                placeholder="Enter Applicant's SS# ..."
                 rows="4"
-                formControlName="home_address">
+                formControlName="applicant_ss_num">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Co-Applicant’s Name:</span>
+              </p>
+              <input type="email" class="form-control"
+                placeholder="Enter Co-Applicant’s Name ..."
+                formControlName="co_applicant_name">
+            </div>
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Social Security Number:</span>
+              </p>
+                <input class="form-control"
+                  placeholder="Enter Co-Applicant's SS# ..."
+                  formControlName="co_applicant_ss_num">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                <span class="bolt">Address:</span>
+              </p>
+              <input type="email" class="form-control"
+                placeholder="Enter Address ..."
+                formControlName="address">          
             </div>
           </div>
           <br>
@@ -60,11 +90,9 @@
               <p>
                 <span class="bolt">Phone:</span>
               </p>
-              <div class="col-md-6">
                 <input class="form-control"
                   placeholder="Enter Phone ..."
                   formControlName="phone">
-              </div>
             </div>
           </div>
           <br>
@@ -84,81 +112,28 @@
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup"
           (ngSubmit)="onStepThreeSubmit()">
-          <ng-template matStepLabel>Business Info</ng-template>
+          <ng-template matStepLabel>Household</ng-template>
           <br>
           <div class="row">
             <div class="col-md-4">
               <p>
-                <span class="bolt">Organization Type (dropdown):</span>
+                <span class="bolt">Household Size (Number of People who live in unit):</span>
               </p>
-              <input class="form-control"
-                placeholder="Enter Organization Type ..."
-                formControlName="organization_type">
             </div>
-            <div class="col-md-4">
-              <p>
-                <span class="bolt">Business Legal Name (as listed in Sunbiz.org):</span>
-              </p>
+            <div class="col-md-2">
               <input class="form-control"
-                placeholder="Enter Business Legal Name ..."
-                formControlName="business_legal_name">
-            </div>
-            <div class="col-md-4">
-              <p>
-                <span class="bolt">Doing Business As (if different than legal name):</span>
-              </p>
-              <input class="form-control"
-                placeholder="Enter DBA ..."
-                formControlName="dba">
+                placeholder="Enter Household Size ..."
+                formControlName="household_size">
             </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
               <p>
-                <span class="bolt">EIN (Federal Employer Identification Number):</span>
+                <span class="bolt">Create add Household Members like Documents</span>
               </p>
-              <input type="email" class="form-control"
-                placeholder="Enter EIN ..."
-                formControlName="ein">
-            </div>
-            <div class="col-md-4">
-              <p>
-                <span class="bolt">City of Doral Business Tax Receipt (BTR) Number:</span>
-              </p>
-              <input class="form-control"
-                placeholder="Enter BTR ..."
-                formControlName="btr">
-            </div>
-            <div class="col-md-4">
-              <p>
-                <span class="bolt">Primary Business Activity:</span>
-              </p>
-              <input class="form-control"
-                placeholder="Enter Primary Business Activity ..."
-                formControlName="business_activity">
             </div>
           </div>
-          <br>
-          <div class="row">
-            <div class="col-md-4">
-              <p>
-                <span class="bolt">Mailing Address:</span>
-              </p>
-              <input class="form-control"
-                placeholder="Enter Mailing Address ..."
-                formControlName="mailing_address">
-            </div>
-            <div class="col-md-4">
-              <p>
-                <span class="bolt">Business Property Address:</span>
-              </p>
-              <input class="form-control"
-                placeholder="Enter Business Property Address ..."
-                formControlName="business_property_address">
-            </div>
-          </div>
-          <br>
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
@@ -175,73 +150,159 @@
       <mat-step [stepControl]="fourthFormGroup">
         <form [formGroup]="fourthFormGroup"
           (ngSubmit)="onStepFourSubmit()">
-          <ng-template matStepLabel>Business Details</ng-template>
+          <ng-template matStepLabel>Employment</ng-template>
+          <br>
+
+          <!-- <div class="row">
+            <div class="col-md-12">
+              Applicant
+            </div>
+          </div> -->
+          <hr>
+          <div class="row">
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Applicant Name:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter Applicant Name ..."
+                formControlName="name">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Name of Employer:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter Name of Employer ..."
+                formControlName="employer">
+            </div>
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Employer Phone:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter Employer Phone ..."
+                formControlName="employer_phone">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Employer Address:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input type="email" class="form-control"
+                placeholder="Enter Employer Address ..."
+                formControlName="employer_address">
+            </div>
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Position:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter Position ..."
+                formControlName="position">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Years Employed:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter Years Employed ..."
+                formControlName="years_employed">
+            </div>
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Supervisor:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter Supervisor ..."
+                formControlName="supervisor">
+            </div>
+          </div>
+          <hr>
+          <br>
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back</button>
+            <button mat-flat-button
+              matStepperNext
+              class="btn-dfa-dark">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step four end -->
+
+      <!-- Step five start -->
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup"
+          (ngSubmit)="onStepFiveSubmit()">
+          <ng-template matStepLabel>Landlord</ng-template>
           <br>
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Number of Employees (2019 Taxes):</span>
+                <span class="bolt">Landlord:</span>
               </p>
               <input class="form-control"
-                placeholder="Enter Number of Employees (2019 Taxes) ..."
-                formControlName="number_of_employees_last_year">
+                placeholder="Enter Landlord ..."
+                formControlName="landlord">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Current Number of Employees:</span>
+                <span class="bolt">Authorized Representative:</span>
               </p>
               <input class="form-control"
-                placeholder="Enter Current Number of Employees ..."
-                formControlName="number_of_employees_current">
+                placeholder="Enter Authorized Representative ..."
+                formControlName="landlord_authorized_representative">
             </div>
           </div>
           <br>
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Date Business Established:</span>
+                <span class="bolt">Landlord Address:</span>
               </p>
               <input class="form-control"
-                placeholder="Enter Date Business Est. ..."
-                formControlName="date_business_established">
+                placeholder="Enter Landlord Address ..."
+                formControlName="landlord_address">
             </div>
+          </div>
+          <br>
+          <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Does Your Business (dropdown):</span>
+                <span class="bolt">Landlord Email:</span>
               </p>
               <input type="email" class="form-control"
-                placeholder="Enter Own or Lease ..."
-                formControlName="own_or_lease">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Monthly Rent/Mortgage:</span>
-              </p>
-              <input class="form-control"
-                placeholder="Enter Monthly Rent/Mortgage ..."
-                formControlName="monthly_rent_mortgage">
+                placeholder="Enter Landlord Email ..."
+                formControlName="landlord_email">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Last Month Rent/Mortgage Paid:</span>
+                <span class="bolt">Landlord Phone:</span>
               </p>
-              <input class="form-control"
-                placeholder="Enter Last Month Rent/Mortgage Paid ..."
-                formControlName="last_rent_mortgage_paid">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Is Your Business a National Chain Store or Franchise (checkbox):</span>
-              </p>
-              <input class="form-control"
-                placeholder="Is Your Business a National Chain Store or Franchise ..."
-                formControlName="national_chain_or_franchise">
+                <input class="form-control"
+                  placeholder="Enter Landlord Phone ..."
+                  formControlName="landlord_phone">
             </div>
           </div>
           <br>
@@ -255,217 +316,7 @@
           </div>
         </form>
       </mat-step>
-      <!-- Step four end -->
-
-      <!-- Step five start -->
-      <mat-step [stepControl]="fifthFormGroup">
-        <form [formGroup]="fifthFormGroup"
-          (ngSubmit)="onStepFiveSubmit()">
-          <ng-template matStepLabel>Applicants</ng-template>
-          <br>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Applicant 1 Name:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Enter Applicant 1 Name ..."
-                formControlName="applicant1_name">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Ownership %:</span>
-              </p>
-            </div>
-            <div class="col-md-2">
-              <input class="form-control"
-                placeholder="Enter Applicant 1 Ownership % ..."
-                formControlName="applicant1_ownership_percentage">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Applicant 2 Name:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Enter Applicant 2 Name ..."
-                formControlName="applicant2_name">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Ownership %:</span>
-              </p>
-            </div>
-            <div class="col-md-2">
-              <input class="form-control"
-                placeholder="Enter Applicant 2 Ownership % ..."
-                formControlName="applicant2_ownership_percentage">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Applicant 3 Name:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Enter Applicant 3 Name ..."
-                formControlName="applicant3_name">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Ownership %:</span>
-              </p>
-            </div>
-            <div class="col-md-2">
-              <input class="form-control"
-                placeholder="Enter Applicant 3 Ownership % ..."
-                formControlName="applicant3_ownership_percentage">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Applicant 4 Name:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Enter Applicant 4 Name ..."
-                formControlName="applicant4_name">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Ownership %:</span>
-              </p>
-            </div>
-            <div class="col-md-2">
-              <input class="form-control"
-                placeholder="Enter Applicant 4 Ownership % ..."
-                formControlName="applicant4_ownership_percentage">
-            </div>
-          </div>
-          <br>
-          <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next</button>
-          </div>
-        </form>
-      </mat-step>
       <!-- Step five end -->
-
-
-      <!-- Step six start -->
-      <mat-step [stepControl]="sixthFormGroup">
-        <form [formGroup]="sixthFormGroup"
-          (ngSubmit)="onStepSixSubmit()">
-          <ng-template matStepLabel>Financials</ng-template>
-          <br>
-          <div class="row">
-            <div class="col-md-3">
-              <p>
-                <span class="bolt">Grant Amount Requested($10,000 max):</span>
-              </p>
-            </div>
-            <div class="col-md-3">
-              <input class="form-control"
-                placeholder="Enter Grant Amount Requested ..."
-                formControlName="amount_requested">
-            </div>
-            <div class="col-md-3">
-              <p>
-                <span class="bolt">Estimated Loss:</span>
-              </p>
-            </div>
-            <div class="col-md-3">
-              <input class="form-control"
-                placeholder="Enter Estimated Loss ..."
-                formControlName="estimated_loss">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <p>
-                <span class="bolt">Business Financial Summary:</span>
-              </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-9">
-              <table width="100%" border="1">
-                <thead>
-                  <th>Type of Financial Info</th>
-                  <th>2019</th>
-                  <th>2020 (January - September)</th>
-                </thead>
-                <tr>
-                  <th>Gross Revenues</th>
-                  <td><input class="form-control"
-                    placeholder="Enter 2019 Gross Revenues ..."
-                    formControlName="gross_revenue_last_year"></td>
-                  <td><input class="form-control"
-                    placeholder="Enter 2020 Gross Revenues ..."
-                    formControlName="gross_revenue_this_year"></td>
-                </tr>
-                <tr>
-                  <th>Total Payroll Expense</th>
-                  <td><input class="form-control"
-                    placeholder="Enter 2019 Total Payroll Expense ..."
-                    formControlName="payroll_last_year"></td>
-                  <td><input class="form-control"
-                    placeholder="Enter 2020 Total Payroll Expense ..."
-                    formControlName="payroll_this_year"></td>
-                </tr>
-                <tr>
-                  <th>Pre-Tax Profit</th>
-                  <td><input class="form-control"
-                    placeholder="Enter 2019 Pre-Tax Profit ..."
-                    formControlName="pre_tax_profit_last_year"></td>
-                  <td><input class="form-control"
-                    placeholder="Enter 2020 Pre-Tax Profit ..."
-                    formControlName="pre_tax_profit_this_year"></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <p>
-                <span class="bolt">Describe the Costs you Seek to Cover with the Reimbursement Grant:</span>
-              </p>
-            </div>
-            <div class="col-md-12">
-              <textarea class="form-control"
-                rows=5
-                placeholder="Describe the Costs you Seek to Cover with the Reimbursement Grant ..."
-                formControlName="costs_to_recover"></textarea>
-            </div>
-          </div>
-          <br>
-          <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next</button>
-          </div>
-        </form>
-      </mat-step>
-      <!-- Step six end -->
 
       <!-- Step seven start -->
       <mat-step [completed]="isCompletedStepSeven">
@@ -587,12 +438,11 @@
                   mat-flat-button>Back</button>
                 <button mat-flat-button
                   matStepperNext
-                  class="btn-dfa-dark">Next</button>
+                  class="btn-dfa-dark">Next</button> 
                 <!-- <button mat-flat-button
                   *ngIf="seventhFormStatus"
                   matStepperNext
-                  class="btn-dfa-dark">Next</button> -->
-                
+                  class="btn-dfa-dark">Next</button>  -->      
               </div>
             </form>
           </div>
