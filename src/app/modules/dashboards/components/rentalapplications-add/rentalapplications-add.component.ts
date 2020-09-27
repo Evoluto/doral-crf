@@ -283,6 +283,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   }
 
   private async createRentalApplication(appObject) {
+    alert("here")
     try {
       const recordFAD = new FormActionData(0,
         this.doralData.rentalApplicationsData.TableId,

@@ -42,7 +42,7 @@ export class Constants {
         certifier_title: 'certifier_title',
         certify: 'certify',
         status: 'status',
-        related_progrms: 'related_programs',
+        related_programs: 'related_programs',
     };
 
     public static BUSINESS_APPLICATIONS_MAPPING_REQUIRED: Array<string> = [
@@ -75,7 +75,7 @@ export class Constants {
         certifier_title: 'certifier_title',
         certify: 'certify',
         status: 'status',
-        related_progrms: 'related_programs',
+        related_programs: 'related_programs',
     };
 
     public static RENTAL_APPLICATIONS_MAPPING_REQUIRED: Array<string> = [
