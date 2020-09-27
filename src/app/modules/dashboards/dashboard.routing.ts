@@ -31,7 +31,7 @@ export const DashboardRoutes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         data: {
-          title: 'Funding Overview',
+          title: '',
           subjectTableName: 'dashboard',
           urls: [
             { title: '' }

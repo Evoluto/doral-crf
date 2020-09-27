@@ -21,7 +21,8 @@ export class FullComponent implements OnInit {
   ngOnInit() {
     this.doralData = this.projectSpecificService.getProjectSpecificData();
     
-    this.setApplicant();
+    //// NES - NOT NOW
+    //this.setApplicant();
     this.dynamicLogo = this.logoUrl;
     if (this.router.url === '/') {
       this.router.navigate(['/']);
@@ -145,41 +146,42 @@ export class FullComponent implements OnInit {
     }
   }
 
-  setApplicant() {
-    this.ignatiusService.getQueryReportObservable(
-      this.doralData.appData,
-      { "ApplicationTableId": this.doralData.applicantsData.TableId }
-    ).subscribe(
-      response => {
-        if (response && response.length > 0) {
-          let data: any = response[0];
-          this.storageService.setItem('userSessionData', {
-            applicantId: data.id,
-            applicantName: data.applicant_name,
-            allocationAmount: data.allocation_amount,
-            remaining_amount: data.remaining_amount,
-            duns_number: data.duns_number,
-            city: data.city,
-            state: data.state,
-          })
-        } else {
-          console.log('Error ===> Applicant Data not found');
-          localStorage.clear();
-        }
-      },
-      error => {
-        console.log('Error ===> Applicant Data not found');
-        localStorage.clear();
-      }
-    )
-  }
+  // setApplicant() {
+  //   this.ignatiusService.getQueryReportObservable(
+  //     this.doralData.appData,
+  //     { "ApplicationTableId": this.doralData.applicantsData.TableId }
+  //   ).subscribe(
+  //     response => {
+  //       if (response && response.length > 0) {
+  //         let data: any = response[0];
+  //         this.storageService.setItem('userSessionData', {
+  //           applicantId: data.id,
+  //           applicantName: data.applicant_name,
+  //           allocationAmount: data.allocation_amount,
+  //           remaining_amount: data.remaining_amount,
+  //           duns_number: data.duns_number,
+  //           city: data.city,
+  //           state: data.state,
+  //         })
+  //       } else {
+  //         console.log('Error ===> Applicant Data not found');
+  //         localStorage.clear();
+  //       }
+  //     },
+  //     error => {
+  //       console.log('Error ===> Applicant Data not found');
+  //       localStorage.clear();
+  //     }
+  //   )
+  // }
 
   private async getResponses() {
     const userData = this.storageService.getItem('userData');
     console.log(userData.userName);
     let observables = new Array<Observable<Object[]>>();
     let postBodies = new Array<any>();
-        postBodies.push({ "ApplicationTableId": this.doralData.commRespData.TableId });
+    // NES - NOT NOW    
+    //postBodies.push({ "ApplicationTableId": this.doralData.commRespData.TableId });
         
         observables = observables.concat(
           this.ignatiusService.getQueryReportObservables(

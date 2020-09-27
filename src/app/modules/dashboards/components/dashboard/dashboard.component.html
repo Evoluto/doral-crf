@@ -1,43 +1,33 @@
 <div class="row">
   <!-- Column -->
-  <div class="col-md-6 col-lg-3 col-xlg-3">
+  <div class="col-md-6 col-lg-6 col-xlg-6">
     <div class="card">
       <div class="box p-2 rounded bg-info text-center">
-        <h1 class="font-weight-light text-white">${{applicant.allocation_amount | number}}</h1>
-        <h6 class="text-white">Total Allocated</h6>
+        <h1 class="font-weight-light text-white">Small Business Assistance</h1>
       </div>
     </div>
+    <br>
+    <button class="btn btn-dfa-dark btn-sm"
+      [routerLink]="['/businessapplications']">
+      <i class="fa fa-plus"></i> I want to request Small Business Assistance
+    </button>
   </div>
   <!-- Column -->
-  <div class="col-md-6 col-lg-3 col-xlg-3">
-    <div class="card">
-      <div class="box p-2 rounded bg-danger text-center">
-        <h1 class="font-weight-light text-white">${{applicant.total_submitted | number}}</h1>
-        <h6 class="text-white">Total Submitted</h6>
-      </div>
-    </div>
-  </div>
-  <!-- Column -->
-  <div class="col-md-6 col-lg-3 col-xlg-3">
+  <div class="col-md-6 col-lg-6 col-xlg-6">
     <div class="card">
       <div class="box p-2 rounded bg-success text-center">
-        <h1 class="font-weight-light text-white">${{applicant.total_approved | number}}</h1>
-        <h6 class="text-white">Total Approved</h6>
+        <h1 class="font-weight-light text-white">Emergency Rental Assistance</h1>
       </div>
     </div>
-  </div>
-  <!-- Column -->
-  <div class="col-md-6 col-lg-3 col-xlg-3">
-    <div class="card">
-      <div class="box p-2 rounded bg-warning text-center">
-        <h1 class="font-weight-light text-white">${{applicant.allocation_amount - applicant.total_approved | number}}</h1>
-        <h6 class="text-white">Remaining Balance</h6>
-      </div>
-    </div>
+    <br>
+    <button class="btn btn-dfa-dark btn-sm"
+      [routerLink]="['/rentalapplications']">
+      <i class="fa fa-plus"></i> I want to request Emergency Rental Assistance
+    </button>
   </div>
 </div>
 
-<div class="card">
+<!-- <div class="card">
   <div class="card-header bg-secondary text-white">
     <h4>Application Activity</h4>
   </div>
@@ -123,4 +113,4 @@
   <div class="card-body" *ngIf="threads.length == 0">
     <div class="card-header text-center">No new communications.</div>
   </div>
-</div>
+</div> -->

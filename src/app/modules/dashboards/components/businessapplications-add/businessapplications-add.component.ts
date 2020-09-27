@@ -66,6 +66,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    alert("here") 
     this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
     this.documentSelectionTypes = componentData[0];
