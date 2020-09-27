@@ -28,52 +28,43 @@
           <ng-template matStepLabel>Contact Info</ng-template>
           <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Primary Applicant (contact person):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Primary Applicant ..."
                 formControlName="primary_applicant">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Home Address:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Home Address ..."
                 rows="4"
                 formControlName="home_address">
             </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Email:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input type="email" class="form-control"
                 placeholder="Enter Email ..."
                 formControlName="email">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Phone:</span>
               </p>
-            </div>
-            <div class="col-md-12">
-              <input class="form-control"
-                placeholder="Enter Phone ..."
-                formControlName="phone">
+              <div class="col-md-6">
+                <input class="form-control"
+                  placeholder="Enter Phone ..."
+                  formControlName="phone">
+              </div>
             </div>
           </div>
           <br>
@@ -93,102 +84,78 @@
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup"
           (ngSubmit)="onStepThreeSubmit()">
-          <ng-template matStepLabel>Rental Info</ng-template>
+          <ng-template matStepLabel>Business Info</ng-template>
           <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
                 <span class="bolt">Organization Type (dropdown):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Organization Type ..."
                 formControlName="organization_type">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
-                <span class="bolt">Rental Legal Name (as listed in Sunbiz.org):</span>
+                <span class="bolt">Business Legal Name (as listed in Sunbiz.org):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
-                placeholder="Enter Rental Legal Name ..."
-                formControlName="rental_legal_name">
+                placeholder="Enter Business Legal Name ..."
+                formControlName="business_legal_name">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
-                <span class="bolt">Doing Rental As (if different than legal name):</span>
+                <span class="bolt">Doing Business As (if different than legal name):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter DBA ..."
                 formControlName="dba">
             </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
                 <span class="bolt">EIN (Federal Employer Identification Number):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input type="email" class="form-control"
                 placeholder="Enter EIN ..."
                 formControlName="ein">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
-                <span class="bolt">City of Doral Rental Tax Receipt (BTR) Number:</span>
+                <span class="bolt">City of Doral Business Tax Receipt (BTR) Number:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter BTR ..."
                 formControlName="btr">
             </div>
+            <div class="col-md-4">
+              <p>
+                <span class="bolt">Primary Business Activity:</span>
+              </p>
+              <input class="form-control"
+                placeholder="Enter Primary Business Activity ..."
+                formControlName="business_activity">
+            </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
                 <span class="bolt">Mailing Address:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Mailing Address ..."
                 formControlName="mailing_address">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
               <p>
-                <span class="bolt">Rental Property Address:</span>
+                <span class="bolt">Business Property Address:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
-                placeholder="Enter Rental Property Address ..."
-                formControlName="rental_property_address">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <p>
-                <span class="bolt">Primary Rental Activity:</span>
-              </p>
-            </div>
-            <div class="col-md-12">
-              <input class="form-control"
-                placeholder="Enter Primary Rental Activity ..."
-                formControlName="primary_rental_activity">
+                placeholder="Enter Business Property Address ..."
+                formControlName="business_property_address">
             </div>
           </div>
           <br>
@@ -197,7 +164,6 @@
               class="btn-dfa-light"
               mat-flat-button>Back</button>
             <button mat-flat-button
-              *ngIf="thirdFormStatus"
               matStepperNext
               class="btn-dfa-dark">Next</button>
           </div>
@@ -209,89 +175,72 @@
       <mat-step [stepControl]="fourthFormGroup">
         <form [formGroup]="fourthFormGroup"
           (ngSubmit)="onStepFourSubmit()">
-          <ng-template matStepLabel>Rental Details</ng-template>
+          <ng-template matStepLabel>Business Details</ng-template>
           <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Number of Employees (2019 Taxes):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Number of Employees (2019 Taxes) ..."
                 formControlName="number_of_employees_last_year">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Current Number of Employees:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Current Number of Employees ..."
-                formControlName="current_number_of_employees">
+                formControlName="number_of_employees_current">
             </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
-                <span class="bolt">Date Rental Established:</span>
+                <span class="bolt">Date Business Established:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
-                placeholder="Enter Date Rental Est. ..."
-                formControlName="date_rental_established">
+                placeholder="Enter Date Business Est. ..."
+                formControlName="date_business_established">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
-                <span class="bolt">Does Your Rental (dropdown):</span>
+                <span class="bolt">Does Your Business (dropdown):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input type="email" class="form-control"
                 placeholder="Enter Own or Lease ..."
                 formControlName="own_or_lease">
             </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Monthly Rent/Mortgage:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Monthly Rent/Mortgage ..."
                 formControlName="monthly_rent_mortgage">
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Last Month Rent/Mortgage Paid:</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
                 placeholder="Enter Last Month Rent/Mortgage Paid ..."
                 formControlName="last_rent_mortgage_paid">
             </div>
           </div>
+          <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
-                <span class="bolt">Is Your Rental a National Chain Store or Franchise (checkbox):</span>
+                <span class="bolt">Is Your Business a National Chain Store or Franchise (checkbox):</span>
               </p>
-            </div>
-            <div class="col-md-12">
               <input class="form-control"
-                placeholder="Is Your Rental a National Chain Store or Franchise ..."
+                placeholder="Is Your Business a National Chain Store or Franchise ..."
                 formControlName="national_chain_or_franchise">
             </div>
           </div>
@@ -300,8 +249,7 @@
             <button matStepperPrevious
               class="btn-dfa-light"
               mat-flat-button>Back</button>
-            <button mat-flat-button
-              *ngIf="fourthFormStatus"
+              <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
           </div>
@@ -316,88 +264,88 @@
           <ng-template matStepLabel>Applicants</ng-template>
           <br>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Applicant 1 Name:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <input class="form-control"
                 placeholder="Enter Applicant 1 Name ..."
                 formControlName="applicant1_name">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Ownership %:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <input class="form-control"
                 placeholder="Enter Applicant 1 Ownership % ..."
                 formControlName="applicant1_ownership_percentage">
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Applicant 2 Name:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <input class="form-control"
                 placeholder="Enter Applicant 2 Name ..."
                 formControlName="applicant2_name">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Ownership %:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <input class="form-control"
                 placeholder="Enter Applicant 2 Ownership % ..."
                 formControlName="applicant2_ownership_percentage">
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Applicant 3 Name:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <input class="form-control"
                 placeholder="Enter Applicant 3 Name ..."
                 formControlName="applicant3_name">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Ownership %:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <input class="form-control"
                 placeholder="Enter Applicant 3 Ownership % ..."
                 formControlName="applicant3_ownership_percentage">
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Applicant 4 Name:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <input class="form-control"
                 placeholder="Enter Applicant 4 Name ..."
                 formControlName="applicant4_name">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <p>
                 <span class="bolt">Ownership %:</span>
               </p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <input class="form-control"
                 placeholder="Enter Applicant 4 Ownership % ..."
                 formControlName="applicant4_ownership_percentage">
@@ -409,7 +357,6 @@
               class="btn-dfa-light"
               mat-flat-button>Back</button>
             <button mat-flat-button
-              *ngIf="fifthFormStatus"
               matStepperNext
               class="btn-dfa-dark">Next</button>
           </div>
@@ -449,20 +396,22 @@
           <div class="row">
             <div class="col-md-12">
               <p>
-                <span class="bolt">Rental Financial Summary:</span>
+                <span class="bolt">Business Financial Summary:</span>
               </p>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
-              <table>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+              <table width="100%" border="1">
                 <thead>
                   <th>Type of Financial Info</th>
                   <th>2019</th>
                   <th>2020 (January - September)</th>
                 </thead>
                 <tr>
-                  <td>Gross Revenues</td>
+                  <th>Gross Revenues</th>
                   <td><input class="form-control"
                     placeholder="Enter 2019 Gross Revenues ..."
                     formControlName="gross_revenue_last_year"></td>
@@ -471,7 +420,7 @@
                     formControlName="gross_revenue_this_year"></td>
                 </tr>
                 <tr>
-                  <td>Total Payroll Expense</td>
+                  <th>Total Payroll Expense</th>
                   <td><input class="form-control"
                     placeholder="Enter 2019 Total Payroll Expense ..."
                     formControlName="payroll_last_year"></td>
@@ -480,7 +429,7 @@
                     formControlName="payroll_this_year"></td>
                 </tr>
                 <tr>
-                  <td>Pre-Tax Profit</td>
+                  <th>Pre-Tax Profit</th>
                   <td><input class="form-control"
                     placeholder="Enter 2019 Pre-Tax Profit ..."
                     formControlName="pre_tax_profit_last_year"></td>
@@ -491,6 +440,7 @@
               </table>
             </div>
           </div>
+          <br>
           <div class="row">
             <div class="col-md-12">
               <p>
@@ -510,7 +460,6 @@
               class="btn-dfa-light"
               mat-flat-button>Back</button>
             <button mat-flat-button
-              *ngIf="sixthFormStatus"
               matStepperNext
               class="btn-dfa-dark">Next</button>
           </div>
@@ -639,6 +588,11 @@
                 <button mat-flat-button
                   matStepperNext
                   class="btn-dfa-dark">Next</button>
+                <!-- <button mat-flat-button
+                  *ngIf="seventhFormStatus"
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button> -->
+                
               </div>
             </form>
           </div>

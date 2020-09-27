@@ -68,7 +68,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   ngOnInit() {
     this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
-    this.documentSelectionTypes = componentData[0];
+    //this.documentSelectionTypes = componentData[0];
     this.rentalApplicationEditData = (componentData && componentData[1]) ? componentData[1][0] : {};
     this.rentalApplicationEditDocumentData = (componentData && componentData[2]) ? componentData[2] : [];
     this.rentalApplicationEditDocumentData = this.rentalApplicationEditDocumentData.filter(
@@ -98,23 +98,23 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   private setupSecondForm() {
     this.secondFormGroup = new FormGroup({
-      primary_applicant: new FormControl(this.rentalApplicationEditData.primary_applicant || '', Validators.required),
-      home_address: new FormControl(this.rentalApplicationEditData.home_address || '', Validators.required),
-      email: new FormControl(this.rentalApplicationEditData.email || '', [Validators.required, Validators.email]),
-      phone: new FormControl(this.rentalApplicationEditData.phone || '', [Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$")])
+      primary_applicant: new FormControl(this.rentalApplicationEditData.primary_applicant || ''),// Validators.required),
+      home_address: new FormControl(this.rentalApplicationEditData.home_address || ''),// Validators.required),
+      email: new FormControl(this.rentalApplicationEditData.email || ''),// [Validators.required, Validators.email]),
+      phone: new FormControl(this.rentalApplicationEditData.phone || ''),// [Validators.required, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$")])
     });
   }
 
   private setupThirdForm() {
     this.thirdFormGroup = new FormGroup({
-      organization_type: new FormControl(this.rentalApplicationEditData.organization_type || '', Validators.required),
-      rental_legal_name: new FormControl(this.rentalApplicationEditData.rental_legal_name || '', Validators.required),
-      dba: new FormControl(this.rentalApplicationEditData.dba || '', Validators.required),
-      ein: new FormControl(this.rentalApplicationEditData.ein || '', Validators.required),
-      btr: new FormControl(this.rentalApplicationEditData.btr || '', Validators.required),
-      mailing_address: new FormControl(this.rentalApplicationEditData.mailing_address || '', Validators.required),
-      rental_property_address: new FormControl(this.rentalApplicationEditData.rental_property_address || '', Validators.required),
-      rental_activity: new FormControl(this.rentalApplicationEditData.rental_activity || '', Validators.required)
+      organization_type: new FormControl(this.rentalApplicationEditData.organization_type || ''),// Validators.required),
+      business_legal_name: new FormControl(this.rentalApplicationEditData.business_legal_name || ''),// Validators.required),
+      dba: new FormControl(this.rentalApplicationEditData.dba || ''),//, Validators.required),
+      ein: new FormControl(this.rentalApplicationEditData.ein || ''),//, Validators.required),
+      btr: new FormControl(this.rentalApplicationEditData.btr || ''),//, Validators.required),
+      mailing_address: new FormControl(this.rentalApplicationEditData.mailing_address || ''),//, Validators.required),
+      business_property_address: new FormControl(this.rentalApplicationEditData.business_property_address || ''),//, Validators.required),
+      business_activity: new FormControl(this.rentalApplicationEditData.business_activity || ''),//, Validators.required)
     });
   }
 
@@ -122,13 +122,13 @@ export class RentalApplicationsAddComponent implements OnInit {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
     this.fourthFormGroup = new FormGroup({
-      number_of_employees_last_year: new FormControl(this.rentalApplicationEditData.number_of_employees_last_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      number_of_employees_current: new FormControl(this.rentalApplicationEditData.number_of_employees_current || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      date_rental_established: new FormControl(this.rentalApplicationEditData.date_rental_established || '', Validators.required),
-      own_or_lease: new FormControl(this.rentalApplicationEditData.own_or_lease || '', Validators.required),
-      monthly_rent_mortgage: new FormControl(this.rentalApplicationEditData.monthly_rent_mortgage || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      last_rent_mortgage_paid: new FormControl(this.rentalApplicationEditData.last_rent_mortgage_paid || '', Validators.required),
-      national_chain_or_franchise: new FormControl(this.rentalApplicationEditData.national_chain_or_franchise || '', Validators.required)
+      number_of_employees_last_year: new FormControl(this.rentalApplicationEditData.number_of_employees_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      number_of_employees_current: new FormControl(this.rentalApplicationEditData.number_of_employees_current || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      date_business_established: new FormControl(this.rentalApplicationEditData.date_business_established || ''),//, Validators.required),
+      own_or_lease: new FormControl(this.rentalApplicationEditData.own_or_lease || ''),//, Validators.required),
+      monthly_rent_mortgage: new FormControl(this.rentalApplicationEditData.monthly_rent_mortgage || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      last_rent_mortgage_paid: new FormControl(this.rentalApplicationEditData.last_rent_mortgage_paid || ''),//, Validators.required),
+      national_chain_or_franchise: new FormControl(this.rentalApplicationEditData.national_chain_or_franchise || ''),//, Validators.required)
     });
   }
 
@@ -136,11 +136,11 @@ export class RentalApplicationsAddComponent implements OnInit {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
     this.fifthFormGroup = new FormGroup({
-      applicant1_name: new FormControl(this.rentalApplicationEditData.applicant1_name || '', Validators.required),
+      applicant1_name: new FormControl(this.rentalApplicationEditData.applicant1_name || ''),//, Validators.required),
       applicant2_name: new FormControl(this.rentalApplicationEditData.applicant2_name || ''),
       applicant3_name: new FormControl(this.rentalApplicationEditData.applicant3_name || ''),
       applicant4_name: new FormControl(this.rentalApplicationEditData.applicant4_name || ''),
-      applicant1_ownership_percentage: new FormControl(this.rentalApplicationEditData.applicant1_ownership_percentage || '', [Validators.required,Validators.pattern(NumberPattern)]),
+      applicant1_ownership_percentage: new FormControl(this.rentalApplicationEditData.applicant1_ownership_percentage || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       applicant2_ownership_percentage: new FormControl(this.rentalApplicationEditData.applicant2_ownership_percentage || '', Validators.pattern(NumberPattern)),
       applicant3_ownership_percentage: new FormControl(this.rentalApplicationEditData.applicant3_ownership_percentage || '', Validators.pattern(NumberPattern)),
       applicant4_ownership_percentage: new FormControl(this.rentalApplicationEditData.applicant4_ownership_percentage || '', Validators.pattern(NumberPattern)),
@@ -151,15 +151,15 @@ export class RentalApplicationsAddComponent implements OnInit {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
     this.sixthFormGroup = new FormGroup({
-      amount_requested: new FormControl(this.rentalApplicationEditData.amount_requested || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      estimated_loss: new FormControl(this.rentalApplicationEditData.estimated_loss || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      gross_revenue_last_year: new FormControl(this.rentalApplicationEditData.gross_revenue_last_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      gross_revenue_this_year: new FormControl(this.rentalApplicationEditData.gross_revenue_this_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      payroll_last_year: new FormControl(this.rentalApplicationEditData.payroll_last_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      payroll_this_year: new FormControl(this.rentalApplicationEditData.payroll_this_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      pre_tax_profit_last_year: new FormControl(this.rentalApplicationEditData.pre_tax_profit_last_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      pre_tax_profit_this_year: new FormControl(this.rentalApplicationEditData.pre_tax_profit_this_year || '', [Validators.required,Validators.pattern(NumberPattern)]),
-      costs_to_recover: new FormControl(this.rentalApplicationEditData.costs_to_recover || '', Validators.required),
+      amount_requested: new FormControl(this.rentalApplicationEditData.amount_requested || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      estimated_loss: new FormControl(this.rentalApplicationEditData.estimated_loss || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      gross_revenue_last_year: new FormControl(this.rentalApplicationEditData.gross_revenue_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      gross_revenue_this_year: new FormControl(this.rentalApplicationEditData.gross_revenue_this_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      payroll_last_year: new FormControl(this.rentalApplicationEditData.payroll_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      payroll_this_year: new FormControl(this.rentalApplicationEditData.payroll_this_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      pre_tax_profit_last_year: new FormControl(this.rentalApplicationEditData.pre_tax_profit_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      pre_tax_profit_this_year: new FormControl(this.rentalApplicationEditData.pre_tax_profit_this_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      costs_to_recover: new FormControl(this.rentalApplicationEditData.costs_to_recover || ''),//, Validators.required),
     });
   }
 
@@ -266,7 +266,7 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.fourthFormGroup.value,
       this.fifthFormGroup.value,
       this.sixthFormGroup.value,
-      this.seventhFormGroup.value,
+      //this.seventhFormGroup.value,
       this.eighthFormGroup.value,
     )
     delete formData.dunsNumber;
