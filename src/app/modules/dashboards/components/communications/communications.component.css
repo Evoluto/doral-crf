@@ -1,0 +1,18 @@
+tbody tr {
+    cursor: pointer !important;
+}
+
+.comm-filter-label {
+    margin: 0px 5px 0px 50px;
+}
+
+.select-type-btn{
+    width: 110px;
+    margin: 0px 2px 0px 0px;
+    text-align: left;
+}
+
+.comm-attachment{
+    color: #bfccec;
+    padding: 5px;
+}

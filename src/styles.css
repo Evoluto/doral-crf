@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800'); */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.form-check-label { font-weight: 400; }
+
+.add-file-label{
+    border-radius: 7px;
+    border-width: thin;
+    border-color: gray;
+    border-style: solid;
+    cursor: pointer;
+    padding: 1px;
+    background-color: lavender;
+}
+
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: #336391 !important;  
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #336391 !important; 
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #336391 !important; 
+}
+.mat-checkbox-ripple .mat-ripple-element,.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: #336391 !important;
+}
+
+.btn-dfa-light {
+    background-color: #7291e0 !important;
+    color: white !important;
+}
+
+.btn-dfa-dark {
+    background-color: #336391 !important;
+    color: white !important;
+}
+
+.bg-dfa {
+    background-color: aliceblue !important; 
+}

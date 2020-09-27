@@ -1,0 +1,139 @@
+<div class="card">
+  <div class="card-header">
+    <button class="btn btn-dfa-dark btn-sm"
+      [routerLink]="['/applications-add']">
+      <i class="fa fa-plus"></i> Application
+    </button>
+    <button class="btn btn-dfa-dark btn-sm" (click)="openFilter(filterTemplate)">
+      <i class="fa fa-filter" [style.color]="selectedStatus.length ? 'lightsalmon' : 'white'"></i> Filter
+    </button>
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table datatable
+        [dtOptions]="dtOptions"
+        [dtTrigger]="dtTrigger"
+        class="row-border hover">
+        <thead>
+          <tr>
+            <th>Actions</th>
+            <th>App #</th>
+            <th>Title</th>
+            <th>Total Request</th>
+            <th>Applicant</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rw of rows">
+            <td class="text-left">
+              <i *ngIf="(rw.status == 'Approved' || rw.status == 'Submitted') && +rw.open_pr_count == 0 && +rw.max_milestone_percentage < 100 && +rw.project_count"
+                class="fas fa-dollar-sign text-success action-btn" 
+                (click)="createPaymentRequest(rw.id)"
+                data-toggle="tooltip" 
+                data-placement="top" 
+                title="Payment Request"></i>
+              <i *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                class="fa fa-file-pdf text-danger action-btn"
+                (click)="downloadFile(rw)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Download PDF"></i>
+              <i *ngIf="rw.status === 'Open'"
+                class="fa fa-edit text-info action-btn"
+                (click)="editRecord(rw.id)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Edit">
+              </i>
+              <i *ngIf="rw.status === 'Open'"
+                class="fa fa-check text-success action-btn"
+                (click)="openSubmitApplicationPopup(rw,submitApplicationTemp)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Submit">
+              </i>
+            </td>
+            <td>{{ 'APP-'+rw.id }}</td>
+            <td>{{ rw.application_title }}</td>
+            <td>{{ rw.total_request | currency}}</td>
+            <td>{{ rw.applicant_name }}</td>
+            <td>{{ rw.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Filter template start -->
+<ng-template #filterTemplate
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      Filters
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <ng-multiselect-dropdown [placeholder]="'Select Status'"
+          style="width: 100%;"
+          [data]="statusList"
+          [(ngModel)]="selectedStatus"
+          [settings]="dropdownSettings">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button"
+          class="btn btn-dfa-dark"
+          (click)="applyFilter()">
+          Apply
+        </button>
+        <button type="button"
+          class="btn btn-dfa-light"
+          (click)="modal.close()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Filter template End -->
+
+
+<ng-template #submitApplicationTemp
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      {{modelConfig.title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        Are you sure you want to submit ?
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-success"
+          (click)="submitApplication()">
+          <span *ngIf="!modelConfig.busy">Submit</span>
+          <span *ngIf="modelConfig.busy"><i class="fa fa-cog fa-spin"></i> <strong> Submitting...</strong></span>
+        </button>
+        <button type="button"
+          class="btn btn-dark"
+          (click)="modal.close('Save click')">Close</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

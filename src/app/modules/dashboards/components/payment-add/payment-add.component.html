@@ -1,0 +1,2138 @@
+<div class="card">
+  <div class="card-body">
+    <mat-horizontal-stepper [linear]="true"
+      #stepper>
+
+      <!-- Step one start -->
+      <mat-step [completed]="stepOneFormStatus">
+        <form [formGroup]="firstFormGroup"
+          (ngSubmit)="onStepOneSubmit()">
+          <ng-template matStepLabel>Request Amounts</ng-template>
+          <br>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Project</label>
+                <select class="form-control"
+                  (change)="onProjectChange($event.target.value)"
+                  formControlName="relatedProjects">
+                  <option value=""
+                    hidden>- Select a Project -</option>
+                  <option *ngFor="let pl of projectsList"
+                    value="{{pl.id}}">{{pl.application_title+' - '+'APP-'+pl.related_applications}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Milestone</label>
+                <select class="form-control"
+                  formControlName="milestone"
+                  (change)="onMilestoneChange($event.target.value)">
+                  <option value=""
+                    hidden>- Select a Milestone -</option>
+                  <option *ngFor="let ml of milestonesList"
+                    value="{{ml.value}}">{{ml.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <table class="table table-bordered table-hover">
+              <thead class="cost-table-header">
+                <tr>
+                  <th class="bolt">Expenditure Category</th>
+                  <th class="bolt">Project Budget</th>
+                  <th class="bolt">Prior Payment Requests</th>
+                  <th class="bolt"
+                    [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    Requested Payment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <p>Administrative Expenses</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_admin_exp_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_admin_exp_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planAdminExpPRAmount',
+                        applicationData.plan_admin_exp_amount_total,
+                        selectedProject.plan_admin_exp_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planAdminExpPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Personnel and Services Diverted to a Substantially Different Use</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_budgeted_diverted_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_budgeted_diverted_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                          'planBudgetedDivertedPRAmount',
+                          applicationData.plan_budgeted_diverted_amount_total,
+                          selectedProject.plan_budgeted_diverted_pr_total,
+                          $event.target.value
+                          )"
+                        formControlName="planBudgetedDivertedPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <td>
+                    <p>COVID-19 Testing and Contact Tracing</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_testing_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_testing_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planTestingPRAmount',
+                        applicationData.plan_testing_amount_total,
+                        selectedProject.plan_testing_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planTestingPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Economic Support (Other than Small Business, Housing, and Food Assistance)</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_economic_support_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_economic_support_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                          'planEconomicSupportPRAmount',
+                          applicationData.plan_economic_support_amount_total,
+                          selectedProject.plan_economic_support_pr_total,
+                          $event.target.value
+                          )"
+                        formControlName="planEconomicSupportPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Expenses Associated with the Issuance of Tax Anticipation Notes</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_issuance_of_tax_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_issuance_of_tax_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                          'planIssuanceOfTaxPRAmount',
+                          applicationData.plan_issuance_of_tax_amount_total,
+                          selectedProject.plan_issuance_of_tax_pr_total,
+                          $event.target.value
+                          )"
+                        formControlName="planIssuanceOfTaxPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <td>
+                    <p>Facilitating Distance Learning</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_distance_learning_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_distance_learning_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planDistanceLearningPRAmount',
+                        applicationData.plan_distance_learning_amount_total,
+                        selectedProject.plan_distance_learning_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planDistanceLearningPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Food Programs</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_food_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_food_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planFoodPRAmount',
+                        applicationData.plan_food_amount_total,
+                        selectedProject.plan_food_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planFoodPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Housing Support</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_housing_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_housing_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planHousingPRAmount',
+                        applicationData.plan_housing_amount_total,
+                        selectedProject.plan_housing_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planHousingPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Improve Telework Capabilities of Public Employees</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_telework_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_telework_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planTeleworkPRAmount',
+                        applicationData.plan_telework_amount_total,
+                        selectedProject.plan_telework_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planTeleworkPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Medical Expenses</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_medical_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_medical_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planMedicalPRAmount',
+                        applicationData.plan_medical_amount_total,
+                        selectedProject.plan_medical_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planMedicalPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <td>
+                    <p>Nursing Home Assistance</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_nursing_home_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_nursing_home_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planNursingHomePRAmount',
+                        applicationData.plan_nursing_home_amount_total,
+                        selectedProject.plan_nursing_home_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planNursingHomePRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <td>
+                    <p>Payroll for Public Health and Safety Employees</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_payroll_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_payroll_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planPayrollPRAmount',
+                        applicationData.plan_payroll_amount_total,
+                        selectedProject.plan_payroll_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planPayrollPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Personal Protective Equipment</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_ppe_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_ppe_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planPpePRAmount',
+                        applicationData.plan_ppe_amount_total,
+                        selectedProject.plan_ppe_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planPpePRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Public Health Expenses</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_public_health_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_public_health_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planPublicHealthPRAmount',
+                        applicationData.plan_public_health_amount_total,
+                        selectedProject.plan_public_health_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planPublicHealthPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <td>
+                    <p>Small Business Assistance</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_small_business_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_small_business_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planSmallBusinessPRAmount',
+                        applicationData.plan_small_business_amount_total,
+                        selectedProject.plan_small_business_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planSmallBusinessPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Unemployment Benefits</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_unemployment_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_unemployment_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planUnemploymentPRAmount',
+                        applicationData.plan_unemployment_amount_total,
+                        selectedProject.plan_unemployment_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planUnemploymentPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Workers' Compensation</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_workers_comp_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_workers_comp_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planWorkersCompPRAmount',
+                        applicationData.plan_workers_comp_amount_total,
+                        selectedProject.plan_workers_comp_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planWorkersCompPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <td>
+                    <p>Other Items Not Listed Above - to include other eligible expenses that are not captured in the
+                      available expenditure categories</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{applicationData.plan_other_items_amount_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        value="{{selectedProject.plan_other_items_pr_total}}"
+                        readonly
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onPRAmountChange(
+                        'planOtherItemsPRAmount',
+                        applicationData.plan_other_items_amount_total,
+                        selectedProject.plan_other_items_pr_total,
+                        $event.target.value
+                        )"
+                        formControlName="planOtherItemsPRAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                </tr>
+                <tr style="background-color: #beccec;">
+                  <td class="text-center">
+                    <span style="font-weight: 700;">Total</span>
+                  </td>
+                  <td>
+                    <span style="font-weight: 700;">{{applicationData.total_request | currency}}</span>
+                  </td>
+                  <td>
+                    <span style="font-weight: 700;">{{selectedProject.total_payment_requests | currency}}</span>
+                  </td>
+                  <td [hidden]="!firstFormGroup.get('relatedProjects').value || !firstFormGroup.get('milestone').value">
+                    <span
+                      style="font-weight: 700;">{{firstFormGroup.get('paymentRequestTotal').value | currency}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="stepper-button-row">
+            <button type="button"
+              mat-flat-button
+              (click)="verifyStepperOne()"
+              class="btn-success">Verify</button>
+            <button mat-flat-button
+              *ngIf="stepOneFormStatus"
+              matStepperNext
+              class="btn-dfa-dark">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step one end -->
+
+      <!-- Step two start -->
+      <mat-step [completed]="
+        secondFormGroup.get('amountsIncludeContractsOver50k').value === 'True' ||
+        secondFormGroup.get('amountsIncludeGrantsOver50k').value === 'True' ||
+        secondFormGroup.get('amountsIncludeLoansOver50k').value === 'True' ||
+        secondFormGroup.get('amountsIncludeTransfersOver50k').value === 'True' ||
+        secondFormGroup.get('amountsIncludePaymentsOver50k').value === 'True'
+      ">
+        <form [formGroup]="secondFormGroup"
+          (ngSubmit)="onStepTwoSubmit()">
+          <ng-template matStepLabel>Payments Made</ng-template>
+
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <label>Select Yes if any payments include the following</label>
+            </div>
+            <div class="col-md-12">
+              <table class="table table-bordered">
+                <tr>
+                  <td>Contracts:</td>
+                  <td>
+                    <mat-radio-group aria-label="Select an option"
+                      formControlName="amountsIncludeContractsOver50k"
+                      (change)="onContractsSelectionChange($event)">
+                      <mat-radio-button value="True">Yes</mat-radio-button>
+                      <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Grants:</td>
+                  <td>
+                    <mat-radio-group aria-label="Select an option"
+                      formControlName="amountsIncludeGrantsOver50k"
+                      (change)="onGrantsSelectionChange($event)">
+                      <mat-radio-button value="True">Yes</mat-radio-button>
+                      <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Loans:</td>
+                  <td>
+                    <mat-radio-group aria-label="Select an option"
+                      formControlName="amountsIncludeLoansOver50k"
+                      (change)="onLoansSelectionChange($event)">
+                      <mat-radio-button value="True">Yes</mat-radio-button>
+                      <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Transfers to other Government Entities:</td>
+                  <td>
+                    <mat-radio-group aria-label="Select an option"
+                      formControlName="amountsIncludeTransfersOver50k"
+                      (change)="onTransfersSelectionChange($event)">
+                      <mat-radio-button value="True">Yes</mat-radio-button>
+                      <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Direct Payments:</td>
+                  <td>
+                    <mat-radio-group aria-label="Select an option"
+                      formControlName="amountsIncludePaymentsOver50k"
+                      (change)="onDirectPaymentsSelectionChange($event)">
+                      <mat-radio-button value="True">Yes</mat-radio-button>
+                      <mat-radio-button value="False">No</mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back</button>
+            <button type="submit"
+              mat-flat-button
+              matStepperNext
+              class="btn-dfa-dark">Next</button>
+          </div>
+        </form>
+        <br>
+
+
+      </mat-step>
+      <!-- Step two end -->
+
+      <!-- contract form start -->
+      <mat-step [completed]="ContractsFormStatus"
+        *ngIf="contractsFormData.length > 0">
+        <ng-template matStepLabel>Contracts</ng-template>
+        <br>
+
+        <div class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">
+            <h3>Contracts
+              <a class="btn btn-sm btn-rounded btn-dfa-dark float-right"
+                href="https://d3dr6irtq668i9.cloudfront.net/templates/CRFFundsDataGatheringTemplate.xlsx"
+                download><i class="fas fa-file-excel"></i>
+              </a>
+              <button class="btn btn-sm btn-rounded btn-success float-right"
+                (click)="addPaymentFormRow('Contracts')">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button *ngIf="contractsFormData.length > 1"
+                class="btn btn-sm btn-rounded btn-danger float-right"
+                (click)="removePaymentFormSelectedRow('Contracts',null,true)">
+                Delete All rows
+              </button>
+            </h3>
+
+            <p class="card-text">
+              NOTE: The U.S. Treasury requires all funding be mapped to COVID-related Expenditure Categories.  DFA
+              further requests that each Applicant provide line item detail for each payment made.  All line item data
+              must match the summary information entered on the previous screen.  Please download the Excel template,
+              found to the right, to guide the format needed for entry.  Applicants are encouraged to fill out the line
+              items on the Excel sheet, copy the data from the worksheet without headers, and paste it in the area below
+              for each Expenditure type.
+            </p>
+          </div>
+
+          <div class="card-body bg-dfa">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea (paste)="onPastePaymentForm('Contracts',$event)"
+                    class="form-control"
+                    placeholder="Paste template data without column headers here..."></textarea>
+                </div>
+              </div>
+              <br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Type of Expenditure</th>
+                    <th>Expenditure Category</th>
+                    <th>Contractor Name</th>
+                    <th>Contract Identifying No.</th>
+                    <th>Contract Number</th>
+                    <th>Invoice Number</th>
+                    <th>Payment Date</th>
+                    <th>Invoice Amount</th>
+                    <th>Check Number</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of contractsFormData">
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromExpenditureType[row.tempId]"
+                        title="Expenditure Type"
+                        readonly>
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromExpenditureCategory[row.tempId]"
+                        (change)="onChangeExpenditureCategory('Contracts',row.tempId,$event.target.value)"
+                        title="Expenditure Category">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromPayeeName[row.tempId]"
+                        (change)="onChangePayeeName('Contracts',row.tempId,$event.target.value)"
+                        title="Contractor Name">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromPayeeIdentifyingNumber[row.tempId]"
+                        (change)="onChangePayeeIdentifyingNumber('Contracts',row.tempId,$event.target.value)"
+                        title="Contractor Identifying No">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromItemNumber[row.tempId]"
+                        (change)="onChangeItemNumber('Contracts',row.tempId,$event.target.value)"
+                        title="Contract Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromItemDescription[row.tempId]"
+                        (change)="onChangeItemDescription('Contracts',row.tempId,$event.target.value)"
+                        title="Invoice Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromItemDate[row.tempId]"
+                        (change)="onChangeItemDate('Contracts',row.tempId,$event.target.value)"
+                        title="Payment Date">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromItemAmount[row.tempId]"
+                        (change)="onChangeItemAmount('Contracts',row.tempId,$event.target.value)"
+                        title="Invoice Amount">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="contractsFromMiscInfo[row.tempId]"
+                        (change)="onChangeMiscInfo('Contracts',row.tempId,$event.target.value)"
+                        title="Check Number">
+                    </td>
+                    <td>
+                      <button *ngIf="contractsFormData.length > 1"
+                        class="btn btn-sm btn-rounded btn-danger float-right"
+                        (click)="removePaymentFormSelectedRow('Contracts',row.tempId)">
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  (click)="verifyForms('Contracts')"
+                  class="btn-success">Verify</button>
+                <button *ngIf="ContractsFormStatus"
+                  mat-flat-button
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- contract form end -->
+
+
+      <!-- grants form start -->
+      <mat-step [completed]="GrantsFormStatus"
+        *ngIf="grantsFormData.length > 0">
+        <ng-template matStepLabel>Grants</ng-template>
+        <br>
+
+        <div class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">
+            <h3>Grants
+              <a class="btn btn-sm btn-rounded btn-dfa-dark float-right"
+                href="https://d3dr6irtq668i9.cloudfront.net/templates/CRFFundsDataGatheringTemplate.xlsx"
+                download><i class="fas fa-file-excel"></i>
+              </a>
+              <button class="btn btn-sm btn-rounded btn-success float-right"
+                (click)="addPaymentFormRow('Grants')">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button *ngIf="grantsFormData.length > 1"
+                class="btn btn-sm btn-rounded btn-danger float-right"
+                (click)="removePaymentFormSelectedRow('Grants',null,true)">
+                Delete All rows
+              </button>
+            </h3>
+            <p class="card-text">
+              NOTE: The U.S. Treasury requires all funding be mapped to COVID-related Expenditure Categories.  DFA
+              further requests that each Applicant provide line item detail for each payment made.  All line item data
+              must match the summary information entered on the previous screen.  Please download the Excel template,
+              found to the right, to guide the format needed for entry.  Applicants are encouraged to fill out the line
+              items on the Excel sheet, copy the data from the worksheet without headers, and paste it in the area below
+              for each Expenditure type.
+            </p>
+          </div>
+          <div class="card-body bg-dfa">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea (paste)="onPastePaymentForm('Grants',$event)"
+                    class="form-control"
+                    placeholder="Paste template data without column headers here..."></textarea>
+                </div>
+              </div>
+              <br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Type of Expenditure</th>
+                    <th>Expenditure Category</th>
+                    <th>Subrecipient Name</th>
+                    <th>Subrecipient Identifying No.</th>
+                    <th>Award Number</th>
+                    <th>Award Date</th>
+                    <th>Award Amount</th>
+                    <th>Award Description</th>
+                    <th>Award Payment Method</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of grantsFormData">
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromExpenditureType[row.tempId]"
+                        title="Expenditure Type"
+                        readonly>
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromExpenditureCategory[row.tempId]"
+                        (change)="onChangeExpenditureCategory('Grants',row.tempId,$event.target.value)"
+                        title="Expenditure Category">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromPayeeName[row.tempId]"
+                        (change)="onChangePayeeName('Grants',row.tempId,$event.target.value)"
+                        title="Subrecipient Name">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromPayeeIdentifyingNumber[row.tempId]"
+                        (change)="onChangePayeeIdentifyingNumber('Grants',row.tempId,$event.target.value)"
+                        title="Subrecipient Identifying No.">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromItemNumber[row.tempId]"
+                        (change)="onChangeItemNumber('Grants',row.tempId,$event.target.value)"
+                        title="Award Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromItemDate[row.tempId]"
+                        (change)="onChangeItemDate('Grants',row.tempId,$event.target.value)"
+                        title="Award Date">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromItemAmount[row.tempId]"
+                        (change)="onChangeItemAmount('Grants',row.tempId,$event.target.value)"
+                        title="Award Amount">
+                    </td>
+
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromItemDescription[row.tempId]"
+                        (change)="onChangeItemDescription('Grants',row.tempId,$event.target.value)"
+                        title="Award Description">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="grantsFromMiscInfo[row.tempId]"
+                        (change)="onChangeMiscInfo('Grants',row.tempId,$event.target.value)"
+                        title="Award Payment Method">
+                    </td>
+                    <td>
+                      <button *ngIf="grantsFormData.length > 1"
+                        class="btn btn-sm btn-rounded btn-danger float-right"
+                        (click)="removePaymentFormSelectedRow('Grants',row.tempId)">
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  (click)="verifyForms('Grants')"
+                  class="btn-success">Verify</button>
+                <button mat-flat-button
+                  *ngIf="GrantsFormStatus"
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- grants form end -->
+
+      <!-- loans form start -->
+      <mat-step [completed]="LoansFormStatus"
+        *ngIf="loansFormData.length > 0">
+        <ng-template matStepLabel>Loans</ng-template>
+        <br>
+
+        <div class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">
+            <h3>Loans
+              <a class="btn btn-sm btn-rounded btn-dfa-dark float-right"
+                href="https://d3dr6irtq668i9.cloudfront.net/templates/CRFFundsDataGatheringTemplate.xlsx"
+                download><i class="fas fa-file-excel"></i>
+              </a>
+              <button class="btn btn-sm btn-rounded btn-success float-right"
+                (click)="addPaymentFormRow('Loans')">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button *ngIf="loansFormData.length > 1"
+                class="btn btn-sm btn-rounded btn-danger float-right"
+                (click)="removePaymentFormSelectedRow('Loans',null,true)">
+                Delete All rows
+              </button>
+            </h3>
+            <p class="card-text">
+              NOTE: The U.S. Treasury requires all funding be mapped to COVID-related Expenditure Categories.  DFA
+              further requests that each Applicant provide line item detail for each payment made.  All line item data
+              must match the summary information entered on the previous screen.  Please download the Excel template,
+              found to the right, to guide the format needed for entry.  Applicants are encouraged to fill out the line
+              items on the Excel sheet, copy the data from the worksheet without headers, and paste it in the area below
+              for each Expenditure type.
+            </p>
+          </div>
+          <div class="card-body bg-dfa">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea (paste)="onPastePaymentForm('Loans',$event)"
+                    class="form-control"
+                    placeholder="Paste template data without column headers here..."></textarea>
+                </div>
+              </div>
+              <br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Type of Expenditure</th>
+                    <th>Expenditure Category</th>
+                    <th>Borrower Name</th>
+                    <th>Borrower Identifying Number</th>
+                    <th>Loan Number</th>
+                    <th>Loan Date</th>
+                    <th>Loan Amount</th>
+                    <th>Loan Description</th>
+                    <th>Loan Expiration Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of loansFormData">
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromExpenditureType[row.tempId]"
+                        title="Expenditure Type"
+                        readonly>
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromExpenditureCategory[row.tempId]"
+                        (change)="onChangeExpenditureCategory('Loans',row.tempId,$event.target.value)"
+                        title="Expenditure Category">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromPayeeName[row.tempId]"
+                        (change)="onChangePayeeName('Loans',row.tempId,$event.target.value)"
+                        title="Borrower Name">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromPayeeIdentifyingNumber[row.tempId]"
+                        (change)="onChangePayeeIdentifyingNumber('Loans',row.tempId,$event.target.value)"
+                        title="Borrower Identifying Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromItemNumber[row.tempId]"
+                        (change)="onChangeItemNumber('Loans',row.tempId,$event.target.value)"
+                        title="Loan Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromItemDate[row.tempId]"
+                        (change)="onChangeItemDate('Loans',row.tempId,$event.target.value)"
+                        title="Loan Date">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromItemAmount[row.tempId]"
+                        (change)="onChangeItemAmount('Loans',row.tempId,$event.target.value)"
+                        title="Loan Amount">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromItemDescription[row.tempId]"
+                        (change)="onChangeItemDescription('Loans',row.tempId,$event.target.value)"
+                        title="Loan Description">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="loansFromPopDate[row.tempId]"
+                        (change)="onChangePopDate('Loans',row.tempId,$event.target.value)"
+                        title="Loan Expiration Date">
+                    </td>
+                    <td>
+                      <button *ngIf="loansFormData.length > 1"
+                        class="btn btn-sm btn-rounded btn-danger float-right"
+                        (click)="removePaymentFormSelectedRow('Loans',row.tempId)">
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  (click)="verifyForms('Loans')"
+                  class="btn-success">Verify</button>
+                <button mat-flat-button
+                  *ngIf="LoansFormStatus"
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- loans form end -->
+
+      <!-- transfers form start -->
+      <mat-step [completed]="TransfersFormStatus"
+        *ngIf="transfersFormData.length > 0">
+        <ng-template matStepLabel>Transfers</ng-template>
+        <br>
+        <div class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">
+            <h3>Transfers
+              <a class="btn btn-sm btn-rounded btn-dfa-dark float-right"
+                href="https://d3dr6irtq668i9.cloudfront.net/templates/CRFFundsDataGatheringTemplate.xlsx"
+                download><i class="fas fa-file-excel"></i>
+              </a>
+              <button class="btn btn-sm btn-rounded btn-success float-right"
+                (click)="addPaymentFormRow('Transfers')">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button *ngIf="transfersFormData.length > 1"
+                class="btn btn-sm btn-rounded btn-danger float-right"
+                (click)="removePaymentFormSelectedRow('Transfers',null,true)">
+                Delete All rows
+              </button>
+            </h3>
+            <p class="card-text">
+              NOTE: The U.S. Treasury requires all funding be mapped to COVID-related Expenditure Categories.  DFA
+              further requests that each Applicant provide line item detail for each payment made.  All line item data
+              must match the summary information entered on the previous screen.  Please download the Excel template,
+              found to the right, to guide the format needed for entry.  Applicants are encouraged to fill out the line
+              items on the Excel sheet, copy the data from the worksheet without headers, and paste it in the area below
+              for each Expenditure type.
+            </p>
+          </div>
+          <div class="card-body bg-dfa">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea (paste)="onPastePaymentForm('Transfers',$event)"
+                    class="form-control"
+                    placeholder="Paste template data without column headers here..."></textarea>
+                </div>
+              </div>
+              <br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Type of Expenditure</th>
+                    <th>Expenditure Category</th>
+                    <th>Transferee Name</th>
+                    <th>Transferee Identifying Number</th>
+                    <th>Transfer Date</th>
+                    <th>Transfer Amount</th>
+                    <th>Transfer Description</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of transfersFormData">
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromExpenditureType[row.tempId]"
+                        title="Expenditure Type"
+                        readonly>
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromExpenditureCategory[row.tempId]"
+                        (change)="onChangeExpenditureCategory('Transfers',row.tempId,$event.target.value)"
+                        title="Expenditure Category">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromPayeeName[row.tempId]"
+                        (change)="onChangePayeeName('Transfers',row.tempId,$event.target.value)"
+                        title="Transferee Name">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromPayeeIdentifyingNumber[row.tempId]"
+                        (change)="onChangePayeeIdentifyingNumber('Transfers',row.tempId,$event.target.value)"
+                        title="Transferee Identifying Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromItemDate[row.tempId]"
+                        (change)="onChangeItemDate('Transfers',row.tempId,$event.target.value)"
+                        title="Transfer Date">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromItemAmount[row.tempId]"
+                        (change)="onChangeItemAmount('Transfers',row.tempId,$event.target.value)"
+                        title="Transfer Amount">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="transfersFromItemDescription[row.tempId]"
+                        (change)="onChangeItemDescription('Transfers',row.tempId,$event.target.value)"
+                        title="Loan Description">
+                    </td>
+                    <td>
+                      <button *ngIf="transfersFormData.length > 1"
+                        class="btn btn-sm btn-rounded btn-danger float-right"
+                        (click)="removePaymentFormSelectedRow('Transfers',row.tempId)">
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  (click)="verifyForms('Transfers')"
+                  class="btn-success">Verify</button>
+                <button mat-flat-button
+                  *ngIf="TransfersFormStatus"
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- transfers form end -->
+
+      <!-- directPayments form start -->
+      <mat-step [completed]="DirectPaymentsFormStatus"
+        *ngIf="directPaymentsFormData.length > 0">
+        <ng-template matStepLabel>Direct Payments</ng-template>
+        <br>
+        <div class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">
+            <h3>Direct Payments
+              <a class="btn btn-sm btn-rounded btn-dfa-dark float-right"
+                href="https://d3dr6irtq668i9.cloudfront.net/templates/CRFFundsDataGatheringTemplate.xlsx"
+                download><i class="fas fa-file-excel"></i>
+              </a>
+              <button class="btn btn-sm btn-rounded btn-success float-right"
+                (click)="addPaymentFormRow('Direct Payments')">
+                <i class="fa fa-plus"></i>
+              </button>
+              <button *ngIf="directPaymentsFormData.length > 1"
+                class="btn btn-sm btn-rounded btn-danger float-right"
+                (click)="removePaymentFormSelectedRow('Direct Payments',null,true)">
+                Delete All rows
+              </button>
+            </h3>
+            <p class="card-text">
+              NOTE: The U.S. Treasury requires all funding be mapped to COVID-related Expenditure Categories.  DFA
+              further requests that each Applicant provide line item detail for each payment made.  All line item data
+              must match the summary information entered on the previous screen.  Please download the Excel template,
+              found to the right, to guide the format needed for entry.  Applicants are encouraged to fill out the line
+              items on the Excel sheet, copy the data from the worksheet without headers, and paste it in the area below
+              for each Expenditure type.
+            </p>
+          </div>
+          <div class="card-body bg-dfa">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <textarea (paste)="onPastePaymentForm('Direct Payments',$event)"
+                    class="form-control"
+                    placeholder="Paste template data without column headers here..."></textarea>
+                </div>
+              </div>
+              <br>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Type of Expenditure</th>
+                    <th>Expenditure Category</th>
+                    <th>Payee Name</th>
+                    <th>Payee Identifying Number</th>
+                    <th>Direct Payment Date</th>
+                    <th>Direct Payment Amount</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of directPaymentsFormData">
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="directPaymentsFromExpenditureType[row.tempId]"
+                        title="Expenditure Type"
+                        readonly>
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="directPaymentsFromExpenditureCategory[row.tempId]"
+                        (change)="onChangeExpenditureCategory('Direct Payments',row.tempId,$event.target.value)"
+                        title="Expenditure Category">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="directPaymentsFromPayeeName[row.tempId]"
+                        (change)="onChangePayeeName('Direct Payments',row.tempId,$event.target.value)"
+                        title="Payee Name">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="directPaymentsFromPayeeIdentifyingNumber[row.tempId]"
+                        (change)="onChangePayeeIdentifyingNumber('Direct Payments',row.tempId,$event.target.value)"
+                        title="Payee Identifying Number">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="directPaymentsFromItemDate[row.tempId]"
+                        (change)="onChangeItemDate('Direct Payments',row.tempId,$event.target.value)"
+                        title="Direct Payment Date">
+                    </td>
+                    <td>
+                      <input type="text"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        class="form-control"
+                        [value]="directPaymentsFromItemAmount[row.tempId]"
+                        (change)="onChangeItemAmount('Direct Payments',row.tempId,$event.target.value)"
+                        title="Direct Payment Amount">
+                    </td>
+                    <td>
+                      <button *ngIf="directPaymentsFormData.length > 1"
+                        class="btn btn-sm btn-rounded btn-danger float-right"
+                        (click)="removePaymentFormSelectedRow('Direct Payments',row.tempId)">
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  (click)="verifyForms('Direct Payments')"
+                  class="btn-success">Verify</button>
+                <button mat-flat-button
+                  *ngIf="DirectPaymentsFormStatus"
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- directPayments form end -->
+
+
+      <!-- Step three start -->
+      <mat-step [completed]="isCompletedStepThree">
+
+        <ng-template matStepLabel>Documentation</ng-template>
+        <br>
+        <div *ngIf="recordId"
+          class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">Existing Documents</div>
+          <div class="card-body">
+            <table id="doctable"
+              class="table table borderless">
+              <tbody *ngIf="paymentEditDocumentData.length === 0">
+                <tr>
+                  <td colspan="2">
+                    No attachments.
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="paymentEditDocumentData.length > 0">
+                <tr *ngFor="let aed of paymentEditDocumentData"
+                  style="border-top:none !important">
+                  <td>
+                    <span>{{aed.document_title}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document_type_expenditure_category}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document}}</span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="downloadFile(aed)">
+                      <i class="fa fa-download text-success"></i>
+                    </button>
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="deleteDocument(aed.id)">
+                      <i class="fa fa-trash text-danger"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card bg-dfa">
+          <div class="card-header bg-secondary text-white">
+            Add New documents
+            <button class="btn btn-sm btn-rounded btn-success float-right"
+              (click)="addDocumentFormRow()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onStepThreeSubmit()">
+              <span *ngIf="documents.length === 0">Click on Plus button to add documents.</span>
+              <br>
+              <table class="table table-bordered">
+                <tr *ngFor="let doc of documents">
+                  <td>
+                    <input class="form-control"
+                      type="text"
+                      (change)="onChangeDocumentTitle(doc.tempId,$event.target.value)"
+                      [value]="documentTitles[doc.tempId]"
+                      [name]="documentTitles[doc.tempId]"
+                      placeholder="Document title">
+                  </td>
+                  <td>
+                    <select class="form-control"
+                      [value]="documentExpenditureCategories[doc.tempId]"
+                      [name]="documentExpenditureCategories[doc.tempId]"
+                      (change)="onChangeDocumentExpenditureCategories(doc.tempId,$event.target.value)">
+                      <option value=""
+                        hidden>- Select Expenditure Category -</option>
+                      <option *ngFor="let de of documentTypeExpenditures"
+                        value="{{de.value}}">{{de.name}}</option>
+                    </select>
+                  </td>
+                  <td>
+                    <div class="col-md-10">
+                      <input type="file"
+                        class="form-control-file form-control-sm"
+                        id="add_file"
+                        (change)="handleUpload(doc.tempId,$event)">
+                    </div>
+                  </td>
+                  <td>
+                    <button (click)="removeDocumentRow(doc.tempId)"
+                      class="btn btn-sm btn-rounded btn-danger">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- Step three end -->
+
+      <!-- Step four start -->
+      <mat-step [stepControl]="fourthFormGroup">
+        <ng-template matStepLabel>Save</ng-template>
+        <br>
+
+        <div [hidden]="!loading"
+          class="alert alert-success"
+          style="font-size: 30px;">
+          <i class="fa fa-cog fa-spin"></i> Saving ... (Do not refresh or close browser window)
+        </div>
+
+        <form [hidden]="loading" [formGroup]="fourthFormGroup"
+          (ngSubmit)="onStepFourSubmit()">
+
+          <label class="text-success"
+            *ngIf="getPaymentValidationStatus()==='True'">
+            <i class="fa fa-check text-success"></i> Expenditures match. Save and then Submit from Payment Request
+            listing.
+          </label>
+          <label class="text-danger"
+            style="text-align:center"
+            *ngIf="getPaymentValidationStatus()==='False'">
+            <i class="fa fa-times text-danger"></i> Expenditures must match request in order to Submit Payment Request.
+            Save for now, or make additional changes as needed.
+          </label>
+
+          <table class="table table-bordered table-sm table-hover">
+            <thead class="bg-dfa">
+              <tr>
+                <th width="30">Expenditure Category</th>
+                <th width="10">Requested Payment</th>
+                <th width="10">Contracts</th>
+                <th width="10">Grants</th>
+                <th width="10">Loans</th>
+                <th width="10">Transfers</th>
+                <th width="10">Direct Payments</th>
+                <th width="10">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Administrative Expenses</td>
+                <td>{{firstFormGroup.get('planAdminExpPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Administrative Expenses') | currency}}</td>
+                <td>{{showSummaryData('Grants','Administrative Expenses') | currency}}</td>
+                <td>{{showSummaryData('Loans','Administrative Expenses') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Administrative Expenses') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Administrative Expenses') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planAdminExpPRAmount').value,'Administrative Expenses')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planAdminExpPRAmount').value,'Administrative Expenses')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Personnel and Services Diverted to a Substantially Different Use</td>
+                <td>{{firstFormGroup.get('planBudgetedDivertedPRAmount').value | currency}}</td>
+                <td>
+                  {{showSummaryData('Contracts','Personnel and Services Diverted to a Substantially Different Use') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Grants','Personnel and Services Diverted to a Substantially Different Use') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Loans','Personnel and Services Diverted to a Substantially Different Use') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Transfers','Personnel and Services Diverted to a Substantially Different Use') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Direct Payments','Personnel and Services Diverted to a Substantially Different Use') | currency}}
+                </td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planBudgetedDivertedPRAmount').value,'Personnel and Services Diverted to a Substantially Different Use')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planBudgetedDivertedPRAmount').value,'Personnel and Services Diverted to a Substantially Different Use')"></i>
+                </td>
+              </tr>
+
+              <!-- <tr>
+                <td>COVID-19 Testing and Contact Tracing</td>
+                <td>{{firstFormGroup.get('planTestingPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','COVID-19 Testing and Contact Tracing') | currency}}</td>
+                <td>{{showSummaryData('Grants','COVID-19 Testing and Contact Tracing') | currency}}</td>
+                <td>{{showSummaryData('Loans','COVID-19 Testing and Contact Tracing') | currency}}</td>
+                <td>{{showSummaryData('Transfers','COVID-19 Testing and Contact Tracing') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','COVID-19 Testing and Contact Tracing') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planTestingPRAmount').value,'COVID-19 Testing and Contact Tracing')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planTestingPRAmount').value,'COVID-19 Testing and Contact Tracing')"></i>
+                </td>
+              </tr> -->
+
+              <!-- <tr>
+                <td>Economic Support (Other than Small Business, Housing, and Food Assistance)</td>
+                <td>{{firstFormGroup.get('planEconomicSupportPRAmount').value | currency}}</td>
+                <td>
+                  {{showSummaryData('Contracts','Economic Support (Other than Small Business, Housing, and Food Assistance)') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Grants','Economic Support (Other than Small Business, Housing, and Food Assistance)') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Loans','Economic Support (Other than Small Business, Housing, and Food Assistance)') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Transfers','Economic Support (Other than Small Business, Housing, and Food Assistance)') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Direct Payments','Economic Support (Other than Small Business, Housing, and Food Assistance)') | currency}}
+                </td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planEconomicSupportPRAmount').value,'Economic Support (Other than Small Business, Housing, and Food Assistance)')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planEconomicSupportPRAmount').value,'Economic Support (Other than Small Business, Housing, and Food Assistance)')"></i>
+                </td>
+              </tr> -->
+
+              <!-- <tr>
+                <td>Expenses Associated with the Issuance of Tax Anticipation Notes</td>
+                <td>{{firstFormGroup.get('planIssuanceOfTaxPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Expenses Associated with the Issuance of Tax Anticipation Notes') | currency}}
+                </td>
+                <td>{{showSummaryData('Grants','Expenses Associated with the Issuance of Tax Anticipation Notes') | currency}}</td>
+                <td>{{showSummaryData('Loans','Expenses Associated with the Issuance of Tax Anticipation Notes') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Expenses Associated with the Issuance of Tax Anticipation Notes') | currency}}
+                </td>
+                <td>
+                  {{showSummaryData('Direct Payments','Expenses Associated with the Issuance of Tax Anticipation Notes') | currency}}
+                </td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planIssuanceOfTaxPRAmount').value,'Expenses Associated with the Issuance of Tax Anticipation Notes')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planIssuanceOfTaxPRAmount').value,'Expenses Associated with the Issuance of Tax Anticipation Notes')"></i>
+                </td>
+              </tr> -->
+
+              <tr>
+                <td>Facilitating Distance Learning</td>
+                <td>{{firstFormGroup.get('planDistanceLearningPRAmount').value | currency }}</td>
+                <td>{{showSummaryData('Contracts','Facilitating Distance Learning') | currency}}</td>
+                <td>{{showSummaryData('Grants','Facilitating Distance Learning') | currency}}</td>
+                <td>{{showSummaryData('Loans','Facilitating Distance Learning') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Facilitating Distance Learning') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Facilitating Distance Learning') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planDistanceLearningPRAmount').value,'Facilitating Distance Learning')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planDistanceLearningPRAmount').value,'Facilitating Distance Learning')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Food Programs</td>
+                <td>{{firstFormGroup.get('planFoodPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Food Programs') | currency}}</td>
+                <td>{{showSummaryData('Grants','Food Programs') | currency}}</td>
+                <td>{{showSummaryData('Loans','Food Programs') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Food Programs') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Food Programs') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planFoodPRAmount').value,'Food Programs')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planFoodPRAmount').value,'Food Programs')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Housing Support</td>
+                <td>{{firstFormGroup.get('planHousingPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Housing Support') | currency}}</td>
+                <td>{{showSummaryData('Grants','Housing Support') | currency}}</td>
+                <td>{{showSummaryData('Loans','Housing Support') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Housing Support') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Housing Support') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planHousingPRAmount').value,'Housing Support')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planHousingPRAmount').value,'Housing Support')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Improve Telework Capabilities of Public Employees</td>
+                <td>{{firstFormGroup.get('planTeleworkPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Improve Telework Capabilities of Public Employees') | currency}}</td>
+                <td>{{showSummaryData('Grants','Improve Telework Capabilities of Public Employees') | currency}}</td>
+                <td>{{showSummaryData('Loans','Improve Telework Capabilities of Public Employees') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Improve Telework Capabilities of Public Employees') | currency}}</td>
+                <td>
+                  {{showSummaryData('Direct Payments','Improve Telework Capabilities of Public Employees') | currency}}
+                </td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planTeleworkPRAmount').value,'Improve Telework Capabilities of Public Employees')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planTeleworkPRAmount').value,'Improve Telework Capabilities of Public Employees')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Medical Expenses</td>
+                <td>{{firstFormGroup.get('planMedicalPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Medical Expenses') | currency}}</td>
+                <td>{{showSummaryData('Grants','Medical Expenses') | currency}}</td>
+                <td>{{showSummaryData('Loans','Medical Expenses') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Medical Expenses') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Medical Expenses') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planMedicalPRAmount').value,'Medical Expenses')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planMedicalPRAmount').value,'Medical Expenses')"></i>
+                </td>
+              </tr>
+
+              <!-- <tr>
+                <td>Nursing Home Assistance</td>
+                <td>{{firstFormGroup.get('planNursingHomePRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Nursing Home Assistance') | currency}}</td>
+                <td>{{showSummaryData('Grants','Nursing Home Assistance') | currency}}</td>
+                <td>{{showSummaryData('Loans','Nursing Home Assistance') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Nursing Home Assistance') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Nursing Home Assistance') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planNursingHomePRAmount').value,'Nursing Home Assistance')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planNursingHomePRAmount').value,'Nursing Home Assistance')"></i>
+                </td>
+              </tr> -->
+
+              <tr>
+                <td>Payroll for Public Health and Safety Employees</td>
+                <td>{{firstFormGroup.get('planPayrollPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Payroll for Public Health and Safety Employees') | currency}}</td>
+                <td>{{showSummaryData('Grants','Payroll for Public Health and Safety Employees') | currency}}</td>
+                <td>{{showSummaryData('Loans','Payroll for Public Health and Safety Employees') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Payroll for Public Health and Safety Employees') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Payroll for Public Health and Safety Employees') | currency}}
+                </td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planPayrollPRAmount').value,'Payroll for Public Health and Safety Employees')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planPayrollPRAmount').value,'Payroll for Public Health and Safety Employees')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Personal Protective Equipment</td>
+                <td>{{firstFormGroup.get('planPpePRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Personal Protective Equipment') | currency}}</td>
+                <td>{{showSummaryData('Grants','Personal Protective Equipment') | currency}}</td>
+                <td>{{showSummaryData('Loans','Personal Protective Equipment') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Personal Protective Equipment') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Personal Protective Equipment') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planPpePRAmount').value,'Personal Protective Equipment')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planPpePRAmount').value,'Personal Protective Equipment')"></i>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Public Health Expenses</td>
+                <td>{{firstFormGroup.get('planPublicHealthPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Public Health Expenses') | currency}}</td>
+                <td>{{showSummaryData('Grants','Public Health Expenses') | currency}}</td>
+                <td>{{showSummaryData('Loans','Public Health Expenses') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Public Health Expenses') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Public Health Expenses') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planPublicHealthPRAmount').value,'Public Health Expenses')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planPublicHealthPRAmount').value,'Public Health Expenses')"></i>
+                </td>
+              </tr>
+
+              <!-- <tr>
+                <td>Small Business Assistance</td>
+                <td>{{firstFormGroup.get('planSmallBusinessPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Small Business Assistance') | currency}}</td>
+                <td>{{showSummaryData('Grants','Small Business Assistance') | currency}}</td>
+                <td>{{showSummaryData('Loans','Small Business Assistance') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Small Business Assistance') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Small Business Assistance') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planSmallBusinessPRAmount').value,'Small Business Assistance')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planSmallBusinessPRAmount').value,'Small Business Assistance')"></i>
+                </td>
+              </tr> -->
+
+              <!-- <tr>
+                <td>Unemployment Benefits</td>
+                <td>{{firstFormGroup.get('planUnemploymentPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Unemployment Benefits') | currency}}</td>
+                <td>{{showSummaryData('Grants','Unemployment Benefits') | currency}}</td>
+                <td>{{showSummaryData('Loans','Unemployment Benefits') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Unemployment Benefits') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Unemployment Benefits') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planUnemploymentPRAmount').value,'Unemployment Benefits')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planUnemploymentPRAmount').value,'Unemployment Benefits')"></i>
+                </td>
+              </tr> -->
+
+              <!-- <tr>
+                <td>Workers Compensation</td>
+                <td>{{firstFormGroup.get('planWorkersCompPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts',"Workers Compensation") | currency}}</td>
+                <td>{{showSummaryData('Grants',"Workers Compensation") | currency}}</td>
+                <td>{{showSummaryData('Loans',"Workers Compensation") | currency}}</td>
+                <td>{{showSummaryData('Transfers',"Workers Compensation") | currency}}</td>
+                <td>{{showSummaryData('Direct Payments',"Workers Compensation") | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planWorkersCompPRAmount').value,'Workers Compensation')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planWorkersCompPRAmount').value,'Workers Compensation')"></i>
+                </td>
+              </tr> -->
+
+              <tr>
+                <td>Other Items Not Listed Above - to include other eligible expenses that are not captured in the
+                  available expenditure categories</td>
+                <td>{{firstFormGroup.get('planOtherItemsPRAmount').value | currency}}</td>
+                <td>{{showSummaryData('Contracts','Other Items') | currency}}</td>
+                <td>{{showSummaryData('Grants','Other Items') | currency}}</td>
+                <td>{{showSummaryData('Loans','Other Items') | currency}}</td>
+                <td>{{showSummaryData('Transfers','Other Items') | currency}}</td>
+                <td>{{showSummaryData('Direct Payments','Other Items') | currency}}</td>
+                <td>
+                  <i class="fa fa-check text-success"
+                    *ngIf="getSummaryStatus(firstFormGroup.get('planOtherItemsPRAmount').value,'Other Items')"></i>
+                  <i class="fa fa-times text-danger"
+                    *ngIf="!getSummaryStatus(firstFormGroup.get('planOtherItemsPRAmount').value,'Other Items')"></i>
+                </td>
+              </tr>
+
+              <tr style="background-color: #beccec;">
+                <td class="text-center">
+                  <span style="font-weight: 700;">Total</span>
+                </td>
+                <td>
+                  <span style="font-weight: 700;">{{firstFormGroup.get('paymentRequestTotal').value | currency}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back</button>
+            <button mat-flat-button
+              matStepperNext
+              class="btn-dfa-dark">Save</button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
+          </div>
+        </form>
+
+      </mat-step>
+      <!-- Step four end -->
+
+    </mat-horizontal-stepper>
+  </div>
+</div>
+
+<ng-template #discardchanges
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      {{modelConfig.title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        Are you sure you want to discard all changes and continue ?
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button"
+          class="btn btn-success"
+          (click)="redirectToPayments(true)">Yes</button>
+        <button type="button"
+          class="btn btn-dark"
+          (click)="modal.close('discard')">No</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

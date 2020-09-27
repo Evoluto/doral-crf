@@ -1,0 +1,688 @@
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    Project Details
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-2">
+        <label>Project Title</label>
+      </div>
+      <div class="col-md-4">
+        {{paymentViewData.project_name}}
+      </div>
+      <div class="col-md-2">
+        <label>Milestone</label>
+      </div>
+      <div class="col-md-4">
+        {{paymentViewData.milestone}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    Requested Amount
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-sm table-hover">
+      <thead class="cost-table-header">
+        <tr>
+          <th class="bolt"
+            width="40%">Expenditure Category</th>
+          <th class="bolt"
+            width="30%">Project Budget</th>
+          <th class="bolt"
+            width="30%">Requested Payment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Administrative Expenses</td>
+          <td>{{applicationData.plan_admin_exp_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_admin_exp_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Personnel and Services Diverted to a Substantially Different Use</td>
+          <td>{{applicationData.plan_budgeted_diverted_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_budgeted_diverted_pr_amount | currency}}</td>
+        </tr>
+
+        <!-- <tr>
+          <td>COVID-19 Testing and Contact Tracing</td>
+          <td>{{applicationData.plan_testing_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_testing_pr_amount | currency}}</td>
+        </tr> -->
+
+        <!-- <tr>
+          <td>Economic Support (Other than Small Business, Housing, and Food Assistance)</td>
+          <td>{{applicationData.plan_economic_support_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_economic_support_pr_amount | currency}}</td>
+        </tr> -->
+
+        <!-- <tr>
+          <td>Expenses Associated with the Issuance of Tax Anticipation Notes</td>
+          <td>{{applicationData.plan_issuance_of_tax_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_issuance_of_tax_pr_amount | currency}}</td>
+        </tr> -->
+
+        <tr>
+          <td>Facilitating Distance Learning</td>
+          <td>{{applicationData.plan_distance_learning_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_distance_learning_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Food Programs</td>
+          <td>{{applicationData.plan_food_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_food_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Housing Support</td>
+          <td>{{applicationData.plan_housing_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_housing_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Improve Telework Capabilities of Public Employees</td>
+          <td>{{applicationData.plan_telework_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_telework_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Medical Expenses</td>
+          <td>{{applicationData.plan_medical_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_medical_pr_amount | currency}}</td>
+        </tr>
+
+        <!-- <tr>
+          <td>Nursing Home Assistance</td>
+          <td>{{applicationData.plan_nursing_home_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_nursing_home_pr_amount | currency}}</td>
+        </tr> -->
+
+        <tr>
+          <td>Payroll for Public Health and Safety Employees</td>
+          <td>{{applicationData.plan_payroll_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_payroll_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Personal Protective Equipment</td>
+          <td>{{applicationData.plan_ppe_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_ppe_pr_amount | currency}}</td>
+        </tr>
+
+        <tr>
+          <td>Public Health Expenses</td>
+          <td>{{applicationData.plan_public_health_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_public_health_pr_amount | currency}}</td>
+        </tr>
+
+        <!-- <tr>
+          <td>Small Business Assistance</td>
+          <td>{{applicationData.plan_small_business_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_small_business_pr_amount | currency}}</td>
+        </tr> -->
+
+        <!-- <tr>
+          <td>Unemployment Benefits</td>
+          <td>{{applicationData.plan_unemployment_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_unemployment_pr_amount | currency}}</td>
+        </tr> -->
+
+        <!-- <tr>
+          <td>Workers' Compensation</td>
+          <td>{{applicationData.plan_workers_comp_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_workers_comp_pr_amount | currency}}</td>
+        </tr> -->
+
+        <tr>
+          <td>Other Items Not Listed Above - to include other eligible expenses that are not captured in the
+            available expenditure categories</td>
+          <td>{{applicationData.plan_other_items_amount_total | currency}}</td>
+          <td>{{paymentViewData.plan_other_items_pr_amount | currency}}</td>
+        </tr>
+
+        <tr style="background-color: #beccec;">
+          <td class="text-center">
+            <span style="font-weight: 700;">Total</span>
+          </td>
+          <td>
+            <span style="font-weight: 700;">{{applicationData.total_request | currency}}</span>
+          </td>
+          <td>
+            <span style="font-weight: 700;">{{paymentViewData.total_payment_request | currency}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <div class="card">
+  <div class="card-header bg-secondary text-white">
+    Payments Made
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-3">
+        <label>Contracts</label>
+      </div>
+      <div class="col-md-3">
+        {{paymentViewData.amounts_include_contracts_over_50k}}
+      </div>
+      <div class="col-md-3">
+        <label>Grants</label>
+      </div>
+      <div class="col-md-3">
+        {{paymentViewData.amounts_include_grants_over_50k}}
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-3">
+        <label>Loans</label>
+      </div>
+      <div class="col-md-3">
+        {{paymentViewData.amounts_include_loans_over_50k}}
+      </div>
+      <div class="col-md-3">
+        <label>Transfers</label>
+      </div>
+      <div class="col-md-3">
+        {{paymentViewData.amounts_include_transfers_over_50k}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <label>Direct Payments</label>
+      </div>
+      <div class="col-md-3">
+        {{paymentViewData.amounts_include_payments_over_50k}}
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+
+<!-- contract form start -->
+<div *ngIf="contractsFormData.length > 0"
+  class="card">
+  <div class="card-header bg-secondary text-white">
+    Contracts
+  </div>
+  <div class="card-body">
+    <form>
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>Type of Expenditure</th>
+            <th>Expenditure Category</th>
+            <th>Contractor Name</th>
+            <th>Contract Identifying No.</th>
+            <th>Contract Number</th>
+            <th>Invoice Number</th>
+            <th>Payment Date</th>
+            <th>Invoice Amount</th>
+            <th>Check Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of contractsFormData">
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromExpenditureType[row.tempId]"
+                placeholder="Expenditure Type">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromExpenditureCategory[row.tempId]"
+                placeholder="Expenditure Category">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromPayeeName[row.tempId]"
+                placeholder="Payee Name">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromPayeeIdentifyingNumber[row.tempId]"
+                placeholder="Payee Identifying Number">
+            </td>
+            <td>
+              <input type="text"
+              readonly
+                class="form-control"
+                [value]="contractsFromItemNumber[row.tempId]"
+                placeholder="Contract Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromItemDescription[row.tempId]"
+                placeholder="Invoice Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromItemDate[row.tempId]"
+                placeholder="Contract Date">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromItemAmount[row.tempId]|currency"
+                placeholder="Contract Amount">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="contractsFromMiscInfo[row.tempId]"
+                placeholder="Check Number">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+
+<!-- grants form start -->
+<div *ngIf="grantsFormData.length > 0"
+  class="card">
+  <div class="card-header bg-secondary text-white">
+    Grants
+  </div>
+  <div class="card-body">
+    <form>
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>Type of Expenditure</th>
+            <th>Expenditure Category</th>
+            <th>Subrecipient Name</th>
+            <th>Subrecipient Identifying No.</th>
+            <th>Award Number</th>
+            <th>Award Date</th>
+            <th>Award Amount</th>
+            <th>Award Description</th>
+            <th>Award Payment Method</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of grantsFormData">
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromExpenditureType[row.tempId]"
+                placeholder="Expenditure Type">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromExpenditureCategory[row.tempId]"
+                placeholder="Expenditure Category">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromPayeeName[row.tempId]"
+                placeholder="Payee Name">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromPayeeIdentifyingNumber[row.tempId]"
+                placeholder="Payee Identifying Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromItemNumber[row.tempId]"
+                placeholder="Award Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromItemDate[row.tempId]"
+                placeholder="Grant Date">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromItemAmount[row.tempId]|currency"
+                placeholder="Grant Amount">
+            </td>    
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromItemDescription[row.tempId]"
+                (change)="nChangeItemDescription('Grants',row.tempId,$event.target.value)"
+                placeholder="Award Description">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="grantsFromMiscInfo[row.tempId]"
+                placeholder="Award Payment Method">
+            </td>        
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+
+
+
+<!-- loans form start -->
+<div *ngIf="loansFormData.length > 0"
+  class="card">
+  <div class="card-header bg-secondary text-white">
+    Loans
+  </div>
+  <div class="card-body">
+    <form>
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>Type of Expenditure</th>
+            <th>Expenditure Category</th>
+            <th>Borrower Name</th>
+            <th>Borrower Identifying Number</th>
+            <th>Loan Number</th>
+            <th>Loan Date</th>
+            <th>Loan Amount</th>
+            <th>Loan Description</th>
+            <th>Loan Expiration Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of loansFormData">
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromExpenditureType[row.tempId]"
+                placeholder="Expenditure Type">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromExpenditureCategory[row.tempId]"
+                placeholder="Expenditure Category">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromPayeeName[row.tempId]"
+                placeholder="Payee Name">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromPayeeIdentifyingNumber[row.tempId]"
+                placeholder="Payee Identifying Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromItemNumber[row.tempId]"
+                placeholder="Loan Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromItemDate[row.tempId]"
+                placeholder="Loan Date">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromItemAmount[row.tempId]|currency"
+                placeholder="Loan Amount">
+            </td>    
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromItemDescription[row.tempId]"
+                placeholder="Loan Description">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="loansFromPopDate[row.tempId]"
+                placeholder="Loan Expiration Date">
+            </td>       
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+
+<!-- transfers form start -->
+<div *ngIf="transfersFormData.length > 0"
+  class="card">
+  <div class="card-header bg-secondary text-white">
+    Transfers
+  </div>
+  <div class="card-body">
+    <form>
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>Type of Expenditure</th>
+            <th>Expenditure Category</th>
+            <th>Transferee Name</th>
+            <th>Transferee Identifying Number</th>
+            <th>Transfer Date</th>
+            <th>Transfer Amount</th>
+            <th>Transfer Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of transfersFormData">
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromExpenditureType[row.tempId]"
+                placeholder="Expenditure Type">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromExpenditureCategory[row.tempId]"
+                placeholder="Expenditure Category">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromPayeeName[row.tempId]"
+                placeholder="Payee Name">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromPayeeIdentifyingNumber[row.tempId]"
+                placeholder="Payee Identifying Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromItemDate[row.tempId]"
+                placeholder="Transfer Date">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromItemAmount[row.tempId]|currency"
+                placeholder="Transfer Amount">
+            </td>    
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="transfersFromItemDescription[row.tempId]"
+                placeholder="Loan Description">
+            </td>        
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+<!-- directPayments form start -->
+<div *ngIf="directPaymentsFormData.length > 0"
+  class="card">
+  <div class="card-header bg-secondary text-white">
+    Direct Payments 
+  </div>
+  <div class="card-body">
+    <form>
+      <table class="table table-sm table-bordered">
+        <thead>
+          <tr>
+            <th>Type of Expenditure</th>
+            <th>Expenditure Category</th>
+            <th>Payee Name</th>
+            <th>Payee Identifying Number</th>
+            <th>Direct Payment Date</th>
+            <th>Direct Payment Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of directPaymentsFormData">
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="directPaymentsFromExpenditureType[row.tempId]"
+                placeholder="Expenditure Type">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="directPaymentsFromExpenditureCategory[row.tempId]"
+                placeholder="Expenditure Category">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="directPaymentsFromPayeeName[row.tempId]"
+                placeholder="Payee Name">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="directPaymentsFromPayeeIdentifyingNumber[row.tempId]"
+                placeholder="Payee Identifying Number">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="directPaymentsFromItemDate[row.tempId]"
+                placeholder="Direct Payment Date">
+            </td>
+            <td>
+              <input type="text"
+                readonly
+                class="form-control"
+                [value]="directPaymentsFromItemAmount[row.tempId]|currency"
+                placeholder="Direct Payment Amount">
+            </td>            
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-header bg-secondary text-white">Existing Documents</div>
+  <div class="card-body">
+    <table id="doctable"
+      class="table table-sm">
+      <tbody *ngIf="paymentEditDocumentData.length === 0">
+        <tr>
+          <td colspan="2">
+            No attachments.
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="paymentEditDocumentData.length > 0">
+        <tr *ngFor="let aed of paymentEditDocumentData"
+          style="border-top:none !important">
+          <td>
+            <span>{{aed.document_title}}</span>
+          </td>
+          <td>
+            <span>{{aed.document_type_expenditure_category}}</span>
+          </td>
+          <td>
+            <span>{{aed.document}}</span>
+          </td>
+          <td class="text-right">
+            <button type="button"
+              class="btn btn-sm btn-circle"
+              (click)="downloadFile(aed)">
+              <i class="fa fa-download text-success"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

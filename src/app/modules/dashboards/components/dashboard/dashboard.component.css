@@ -1,0 +1,8 @@
+tbody tr {
+    cursor: pointer !important;
+}
+
+.comm-attachment{
+    color: #bfccec;
+    padding: 5px;
+}

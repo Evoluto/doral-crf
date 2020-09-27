@@ -1,0 +1,173 @@
+<!-- ============================================================== -->
+<!-- toggle and nav items -->
+<!-- ============================================================== -->
+<ul class="navbar-nav float-left mr-auto">
+    <li class="nav-item d-none d-md-block">
+        <a (click)="toggleSidebar.emit()"
+            class="nav-link sidebartoggler waves-effect waves-light">
+            <i class="icon-arrow-left-circle font-18"></i>
+        </a>
+    </li>
+</ul>
+<!-- ============================================================== -->
+<!-- Right side toggle and nav items -->
+<!-- ============================================================== -->
+<ul class="navbar-nav float-right">
+    <!--   <li class="nav-item d-lg-block">
+        <form class="app-search">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <a class="srh-btn">
+                <i class="ti-search"></i>
+            </a>
+        </form>
+    </li> -->
+    <!-- ============================================================== -->
+    <!-- User profile and search -->
+    <!-- ============================================================== -->
+    <li class="nav-item dropdown"
+        ngbDropdown>
+        <a ngbDropdownToggle
+            class="nav-link waves-effect waves-dark pro-pic dropdown custom-applicant-name"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+            <span style="font-size:1.5em;">{{applicant}}</span>
+        </a>
+    </li>
+    <li *ngIf="showApplicants"
+        class="nav-item dropdown"
+        ngbDropdown>
+        <a ngbDropdownToggle
+            class="nav-link text-white waves-effect waves-dark pro-pic dropdown"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+            <i style="font-size: 2em;"
+                class="mdi mdi-account-switch"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right"
+            ngbDropdownMenu>
+            <select [(ngModel)]="selApplicant"
+                class="form-control custom-select"
+                style="width:200px; 
+                overflow:hidden; 
+                white-space:nowrap; 
+                text-overflow:ellipsis;"
+                (ngModelChange)="onChange($event)">
+                <option *ngFor="let app of apps"
+                    [(ngValue)]="app"
+                    [selected]="app.applicant_name===applicant">{{app.applicant_name}}</option>
+            </select>
+        </div>
+    </li>
+    <li style="position: absolute;
+    color:#fff;
+    top: 18px;
+    right: 116px;">
+        {{userSessionData.applicantName}}
+    </li>
+    <li class="nav-item dropdown">
+        <a (click)="gotoComm()"
+            class="nav-link dropdown-toggle waves-effect waves-dark">
+            <i class="fa fa-envelope"
+                style="color: #fff;font-size:22px;line-height:unset"></i>
+            <div *ngIf="newMsg == false"
+                class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+        </a>
+    </li>
+    <li class="nav-item dropdown"
+        ngbDropdown>
+        <a ngbDropdownToggle
+            class="nav-link text-white waves-effect waves-dark pro-pic dropdown"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+            <i style="font-size: 2em;"
+                class="mdi mdi-account-circle"></i>
+            <!-- <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"> -->
+        </a>
+        <div class="dropdown-menu dropdown-menu-right"
+            ngbDropdownMenu>
+
+            <div class="d-flex no-block align-items-center p-15 bg-white text-muted m-b-10">
+                <div class="m-l-10">
+                    <p class=" m-b-0">{{username}}</p>
+                </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <a (click)="openModal(modalcontent)"
+                class="dropdown-item">
+                <i class="ti-lock m-r-5 m-l-5"></i> Change Password</a>
+            <div class="dropdown-divider"></div>
+            <a (click)="logout()"
+                class="dropdown-item"
+                href="javascript: void(0);">
+                <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+        </div>
+    </li>
+    <!-- ============================================================== -->
+    <!-- User profile and search -->
+    <!-- ============================================================== -->
+</ul>
+
+
+<ng-template #modalcontent
+    let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Change Password</h4>
+    </div>
+    <div class="modal-body"
+        (keydown)="keyDownSubmitPassword($event)">
+        <div *ngIf="modalMessage"
+            class="alert alert-danger">
+            {{ modalMessage }}
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group row">
+                    <div class="col-12 ">
+                        <input [(ngModel)]="currentPassword"
+                            class="form-control form-control-lg"
+                            type="password"
+                            required=""
+                            placeholder="Current Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 ">
+                        <input [(ngModel)]="newPassword"
+                            class="form-control form-control-lg"
+                            type="password"
+                            required=""
+                            placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 ">
+                        <input [(ngModel)]="confirmPassword"
+                            class="form-control form-control-lg"
+                            type="password"
+                            required=""
+                            placeholder="Confirm Password">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="card-body">
+            <button [disabled]="!enableSavePassword()"
+                type="submit"
+                class="btn btn-success"
+                (click)="submitPassword()">
+                <i class="fa fa-check"></i>
+                Save
+            </button>
+            <button type="button"
+                class="btn btn-dark"
+                (click)="modal.close()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</ng-template>

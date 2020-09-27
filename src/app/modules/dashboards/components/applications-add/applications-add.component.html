@@ -1,0 +1,1096 @@
+<div class="card">
+  <div class="card-header">
+    <!-- <button class="btn btn-info btn-sm"
+          [routerLink]="['/communications-add']">
+          <i class="fa fa-plus"></i> Ticket
+        </button> -->
+  </div>
+  <div class="card-body">
+    <mat-horizontal-stepper [linear]="true"
+      #stepper>
+
+      <!-- Step one start -->
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup"
+          (ngSubmit)="onStepOneSubmit()">
+          <ng-template matStepLabel>Intake</ng-template>
+          <br>
+
+          <div class="row">
+            <p>
+              The CARES Act requires payments from the CFR to be used to cover cost that are necessary for the public
+              health emergency with respect to COVID-19, not included in the most recent budget and cost incurred
+              between March 1, 2020 through December 30, 2020.
+            </p>
+            <p>
+              The following five (5) questions have been designed to aid your entity in the determination of an eligible
+              plan to be submitted via this application process. If answers to 1, 2, and 5 are No and 3 and 4 are Yes,
+              additional consideration should be given to whether this is an eligible plan.Explanations will be used by
+              DFA/CTEH to determine if criteria has been met.
+            </p>
+          </div>
+
+          <div *ngIf="recordId">
+            <hr style="background-color: #bfcced">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Application ID</label> : {{'APP-' + applicationEditData.id}}
+              </div>
+            </div>
+          </div>
+          <hr style="background-color: #bfcced">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label>Application Title</label>
+            </div>
+            <div class="col-md-6">
+              <input type="text"
+                formControlName="applicationTitle"
+                placeholder="Application Title"
+                class="form-control">
+            </div>
+          </div>
+
+          <hr style="background-color: #bfcced">
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                [ngClass]="{'text-danger': firstFormGroup.get('isCovid').hasError('required') && firstFormGroup.get('isCovid').touched}">
+                1. Is the plan connected to the COVID-19 emergency? If no, explain.
+              </span>
+            </div>
+            <div class="col-md-2">
+              <mat-radio-group aria-label="Select an option"
+                (change)="onIntakeChange('isCovid',$event.value)"
+                formControlName="isCovid">
+                <mat-radio-button value="True">Yes</mat-radio-button>
+                <mat-radio-button value="False">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-md-6">
+              <textarea formControlName="isCovidComments"
+                formC
+                class="form-control">Type here ...</textarea>
+            </div>
+          </div>
+          <hr style="background-color: #bfcced">
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                [ngClass]="{'text-danger': firstFormGroup.get('isNecessary').hasError('required') && firstFormGroup.get('isNecessary').touched}">
+                2.Does the plan contain “necessary” cost? If no, explain.</span>
+            </div>
+            <div class="col-md-2">
+              <mat-radio-group aria-label="Select an option"
+                (change)="onIntakeChange('isNecessary',$event.value)"
+                formControlName="isNecessary">
+                <mat-radio-button value="True">Yes</mat-radio-button>
+                <mat-radio-button value="False">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-md-6">
+              <textarea class="form-control"
+                formControlName="isNecessaryComments">Type here ...</textarea>
+            </div>
+          </div>
+          <hr style="background-color: #bfcced">
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                [ngClass]="{'text-danger': firstFormGroup.get('hasNormalCosts').hasError('required') && firstFormGroup.get('hasNormalCosts').touched}">
+                3.Does the plan include normal operating costs that would have been covered if revenue had not
+                experienced a short fall? If yes, explain.</span>
+            </div>
+            <div class="col-md-2">
+              <mat-radio-group aria-label="Select an option"
+                (change)="onIntakeChange('hasNormalCosts',$event.value)"
+                formControlName="hasNormalCosts">
+                <mat-radio-button value="True">Yes</mat-radio-button>
+                <mat-radio-button value="False">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-md-6">
+              <textarea class="form-control"
+                formControlName="hasNormalCostsComments">Type here ...</textarea>
+            </div>
+          </div>
+          <hr style="background-color: #bfcced">
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                [ngClass]="{'text-danger': firstFormGroup.get('hasOtherFunding').hasError('required') && firstFormGroup.get('hasOtherFunding').touched}">
+                4. Does the plan include cost funded through another budget line item, allotment, or allocation as
+                of March 27,2020? If yes, explain.</span>
+            </div>
+            <div class="col-md-2">
+              <mat-radio-group aria-label="Select an option"
+                (change)="onIntakeChange('hasOtherFunding',$event.value)"
+                formControlName="hasOtherFunding">
+                <mat-radio-button value="True">Yes</mat-radio-button>
+                <mat-radio-button value="False">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-md-6">
+              <textarea class="form-control"
+                formControlName="hasOtherFundingComments">Type here ...</textarea>
+            </div>
+          </div>
+          <hr style="background-color: #bfcced">
+          <div class="row">
+            <div class="col-md-4">
+              <span
+                [ngClass]="{'text-danger': firstFormGroup.get('completedOnTime').hasError('required') && firstFormGroup.get('completedOnTime').touched}">
+                5. Will the plan be completed by the date assigned by your respective association? If no,
+                explain.</span>
+            </div>
+            <div class="col-md-2">
+              <mat-radio-group aria-label="Select an option"
+                (change)="onIntakeChange('completedOnTime',$event.value)"
+                formControlName="completedOnTime">
+                <mat-radio-button value="True">Yes</mat-radio-button>
+                <mat-radio-button value="False">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-md-6">
+              <textarea class="form-control"
+                formControlName="completedOnTimeComments">Type here ...</textarea>
+            </div>
+          </div>
+          <hr style="background-color: #bfcced">
+
+          <div class="stepper-button-row">
+            <button mat-flat-button
+              matStepperNext
+              class="btn-dfa-dark">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step one end -->
+
+      <!-- Step two start -->
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup"
+          (ngSubmit)="onStepTwoSubmit()">
+          <ng-template matStepLabel>Project Scope</ng-template>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                <span class="bolt">Project Definition:</span>
+                Please enter a brief description of your project to be considered for action.
+              </p>
+            </div>
+            <div class="col-md-12">
+              <textarea class="form-control"
+                rows="3"
+                placeholder="Enter project definition here ..."
+                formControlName="projectDefinition"></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                <span class="bolt">Project Description:</span>
+                Please provide a detailed description as to why this plan is necessary and reasonable for your city/town
+                or county to prevent, to prepare for, and respond to the COVID -19 public health emergency.
+              </p>
+            </div>
+            <div class="col-md-12">
+              <textarea class="form-control"
+                placeholder="Enter project description here ..."
+                rows="4"
+                formControlName="projectDescription"></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back</button>
+            <button mat-flat-button
+              matStepperNext
+              class="btn-dfa-dark">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step two end -->
+
+
+      <!-- Step three start -->
+      <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup"
+          (ngSubmit)="onStepThreeSubmit()">
+          <ng-template matStepLabel>Project Amount</ng-template>
+          <br>
+          <div class="row">
+            <p>
+              <span class="bolt">Plan Budget:</span>
+              Provide detailed information related to anticipated costs. All costs must be allocated to the
+              Expenditure Categories issued by the U.S. Treasury. These categories are mandated for Federal Reporting
+              for all CARES Act funding.
+            </p>
+          </div>
+          <br>
+          <div class="row">
+            <table class="table table-bordered table-hover">
+              <thead class="cost-table-header">
+                <tr>
+                  <th class="bolt"
+                    width="35%">Expenditure Category</th>
+                  <th class="bolt"
+                    width="15%">Cost Incurred</th>
+                  <th class="bolt"
+                    width="15%">Estimated Costs</th>
+                  <th class="bolt"
+                    width="35%">Cost Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <p>Administrative Expenses</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planAdminExp')"
+                        formControlName="planAdminExpAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planAdminExp')"
+                        formControlName="planAdminExpAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (change)="onChangeCostDescription('planAdminExp')"
+                        class="form-control"
+                        formControlName="planAdminExpDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Personnel and Services Diverted to a Substantially Different Use</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planBudgetedDiverted')"
+                        formControlName="planBudgetedDivertedAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planBudgetedDiverted')"
+                        formControlName="planBudgetedDivertedAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planBudgetedDiverted')"
+                        formControlName="planBudgetedDivertedDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <td>
+                    <p>COVID-19 Testing and Contact Tracing</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planTesting')"
+                        formControlName="planTestingAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planTesting')"
+                        formControlName="planTestingAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                   <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planTesting')"
+                        formControlName="planTestingDesc">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Economic Support (Other than Small Business, Housing, and Food Assistance)</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planEconomicSupport')"
+                        formControlName="planEconomicSupportAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planEconomicSupport')"
+                        formControlName="planEconomicSupportAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planEconomicSupport')"
+                        formControlName="planEconomicSupportDesc">
+
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Expenses Associated with the Issuance of Tax Anticipation Notes</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planIssuanceOfTax')"
+                        formControlName="planIssuanceOfTaxAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planIssuanceOfTax')"
+                        formControlName="planIssuanceOfTaxAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                   <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planIssuanceOfTax')"
+                        formControlName="planIssuanceOfTaxDesc">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <td>
+                    <p>Facilitating Distance Learning</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planDistanceLearning')"
+                        formControlName="planDistanceLearningAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planDistanceLearning')"
+                        formControlName="planDistanceLearningAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planDistanceLearning')"
+                        formControlName="planDistanceLearningDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Food Programs</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planFood')"
+                        formControlName="planFoodAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planFood')"
+                        formControlName="planFoodAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planFood')"
+                        formControlName="planFoodDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Housing Support</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planHousing')"
+                        formControlName="planHousingAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planHousing')"
+                        formControlName="planHousingAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planHousing')"
+                        formControlName="planHousingDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Improve Telework Capabilities of Public Employees</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planTelework')"
+                        formControlName="planTeleworkAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planTelework')"
+                        formControlName="planTeleworkAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planTelework')"
+                        formControlName="planTeleworkDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Medical Expenses</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planMedical')"
+                        formControlName="planMedicalAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planMedical')"
+                        formControlName="planMedicalAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planMedical')"
+                        formControlName="planMedicalDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <td>
+                    <p>Nursing Home Assistance</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planNursingHome')"
+                        formControlName="planNursingHomeAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planNursingHome')"
+                        formControlName="planNursingHomeAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                   <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planNursingHome')"
+                        formControlName="planNursingHomeDesc">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <td>
+                    <p>Payroll for Public Health and Safety Employees</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planPayroll')"
+                        formControlName="planPayrollAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planPayroll')"
+                        formControlName="planPayrollAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planPayroll')"
+                        formControlName="planPayrollDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Personal Protective Equipment</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planPpe')"
+                        formControlName="planPpeAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planPpe')"
+                        formControlName="planPpeAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planPpe')"
+                        formControlName="planPpeDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <p>Public Health Expenses</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planPublicHealth')"
+                        formControlName="planPublicHealthAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planPublicHealth')"
+                        formControlName="planPublicHealthAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planPublicHealth')"
+                        formControlName="planPublicHealthDesc">
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- <tr>
+                  <td>
+                    <p>Small Business Assistance</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planSmallBusiness')"
+                        formControlName="planSmallBusinessAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planSmallBusiness')"
+                        formControlName="planSmallBusinessAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                   <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planSmallBusiness')"
+                        formControlName="planSmallBusinessDesc">
+
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Unemployment Benefits</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planUnemployment')"
+                        formControlName="planUnemploymentAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planUnemployment')"
+                        formControlName="planUnemploymentAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                   <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planUnemployment')"
+                        formControlName="planUnemploymentDesc">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <!-- <tr>
+                  <td>
+                    <p>Workers' Compensation</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planWorkersComp')"
+                        formControlName="planWorkersCompAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planWorkersComp')"
+                        formControlName="planWorkersCompAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                   <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planWorkersComp')"
+                        formControlName="planWorkersCompDesc">
+                    </div>
+                  </td>
+                </tr> -->
+
+                <tr>
+                  <td>
+                    <p>Other Items Not Listed Above - to include other eligible expenses that are not captured in the
+                      available expenditure categories</p>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onCompletedChange('planOtherItems')"
+                        formControlName="planOtherItemsAmount"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        (keyup)="onToBeCompletedChange('planOtherItems')"
+                        formControlName="planOtherItemsAmountTBC"
+                        class="form-control">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <input type="text"
+                        class="form-control"
+                        (change)="onChangeCostDescription('planOtherItems')"
+                        formControlName="planOtherItemsDesc">
+
+                    </div>
+                  </td>
+                </tr>
+                <tr style="background-color: #beccec;">
+                  <td class="text-center">
+                    <span style="font-weight: 700;">Total</span>
+                  </td>
+                  <td>
+                    <span style="font-weight: 700;">{{thirdFormGroup.get('workCompletedTotal').value | currency}}</span>
+                  </td>
+                  <td colspan="2">
+                    <span
+                      style="font-weight: 700;">{{thirdFormGroup.get('workToBeCompletedTotal').value | currency}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back</button>
+            <button mat-flat-button
+              type="button"
+              (click)="verfyThridForm()"
+              class="btn-success">Verify</button>
+            <button mat-flat-button
+              *ngIf="thirdFormStatus"
+              matStepperNext
+              class="btn-dfa-dark">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step three end -->
+
+      <!-- Step four start -->
+      <mat-step [completed]="isCompletedStepFour">
+
+        <ng-template matStepLabel>Documentation</ng-template>
+        <br>
+
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <strong class="bolt">Documentation : </strong>Documents uploaded here are only for those related
+              application and pre-planning activities. For invoice
+              and expenditure related documentation, please upload via the Payment Request module.
+            </p>
+          </div>
+        </div>
+        <br>
+
+        <div *ngIf="recordId"
+          class="card bg-dfa">
+          <div class="card-header">Existing Documents</div>
+          <div class="card-body">
+            <table id="doctable"
+              class="table">
+              <tbody *ngIf="applicationEditDocumentData.length === 0">
+                <tr>
+                  <td colspan="2">
+                    No attachments.
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="applicationEditDocumentData.length > 0">
+                <tr *ngFor="let aed of applicationEditDocumentData"
+                  style="border-top:none !important">
+                  <td>
+                    <span>{{aed.document_title}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document_type_selection}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document}}</span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="downloadFile(aed)">
+                      <i class="fa fa-download text-success"></i>
+                    </button>
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="deleteDocument(aed.id)">
+                      <i class="fa fa-trash text-danger"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card bg-dfa">
+          <div class="card-header">
+            Add New documents
+            <button class="btn btn-sm btn-rounded btn-success float-right"
+              (click)="addDocumentFormRow()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onStepFourSubmit()">
+              <span *ngIf="documents.length === 0">Click on Plus button to add documents.</span>
+              <br>
+
+              <table class="table table-bordered">
+                <tr *ngFor="let doc of documents">
+                  <td>
+                    <select [value]="documentTypes[doc.tempId]"
+                      name="documentTypes[doc.tempId]"
+                      class="form-control"
+                      (change)="onChangeDocumentType(doc.tempId,$event.target.value)">
+                      <option value=""
+                        hidden>- Select type -</option>
+                      <option value="{{opt.value}}"
+                        *ngFor="let opt of documentSelectionTypes">
+                        {{opt.name}}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <input class="form-control"
+                      type="text"
+                      (change)="onChangeDocumentTitle(doc.tempId,$event.target.value)"
+                      [value]="documentTitles[doc.tempId]"
+                      name="documentTitles[doc.tempId]"
+                      placeholder="Document Title">
+                  </td>
+                  <td>
+                    <div class="col-md-10">
+                      <input type="file"
+                        class="form-control-file form-control-sm"
+                        id="add_file"
+                        (change)="handleUpload(doc.tempId,$event)">
+                    </div>
+                  </td>
+                  <td>
+                    <button (click)="removeDocumentRow(doc.tempId)"
+                      class="btn btn-sm btn-rounded btn-danger">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- Step four end -->
+
+      <!-- Step Five start -->
+      <mat-step>
+        <ng-template matStepLabel>Certification</ng-template>
+        <br>
+
+        <div [hidden]="!loading"
+          class="alert alert-success"
+          style="font-size: 30px;">
+          <i class="fa fa-cog fa-spin"></i> Saving ... (Do not refresh or close browser window)
+        </div>
+
+        <form [hidden]="loading"
+          [formGroup]="fifthFormGroup"
+          (ngSubmit)="onStepFiveSubmit()">
+
+          <table class="table table-bordered">
+            <tr>
+              <td width="4%">
+                <mat-checkbox class="example-margin"
+                  formControlName="certify1">
+                </mat-checkbox>
+              </td>
+              <td width="96%">
+                <p [ngClass]="{'field-has-error': fifthFormGroup.get('certify1').hasError('required') }">
+                  I certify the City/Town or County submitting this application requires funding in advance of the
+                  project. I understand any unused portion of CFR or submitted expenditure deemed ineligible will
+                  require
+                  the City/Town or County to return these funds to the Department of Finance and Administration for
+                  return
+                  to the Federal Government at the end of the project
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td width="4%">
+                <div class="form-group">
+                  <mat-checkbox class="example-margin"
+                    formControlName="certify2"></mat-checkbox>
+                </div>
+              </td>
+              <td width="96%">
+                <p [ngClass]="{'field-has-error': fifthFormGroup.get('certify2').hasError('required') }">
+                  I certify the submitted application meets the requirements issued by the US Treasury for Coronavirus
+                  Relief Funds (CRF).
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Certifier Name</label>
+                      <input type="text"
+                        formControlName="ceoName"
+                        placeholder="Certifier Name"
+                        class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Certifier Title</label>
+                      <input type="text"
+                        formControlName="ceoTitle"
+                        placeholder="Certifier Title"
+                        class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="!dunsNumber">
+              <td colspan="2">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>DUNS Number</label>
+                      <input type="text"
+                        formControlName="dunsNumber"
+                        placeholder="DUNS Number"
+                        class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <p class="duns-info">
+                      Please make sure that the DUNS Number you enter is correct. You will not be able to modify it once
+                      you enter Save.
+                    </p>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back</button>
+            <button mat-flat-button
+              class="btn-dfa-dark"
+              type="submit">Save</button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
+          </div>
+        </form>
+
+      </mat-step>
+      <!-- Step Five end -->
+
+    </mat-horizontal-stepper>
+  </div>
+</div>
+
+<ng-template #discardchanges
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      {{modelConfig.title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        Are you sure you want to discard all changes and continue ?
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button"
+          class="btn btn-success"
+          (click)="redirectToApps(true)">Yes</button>
+        <button type="button"
+          class="btn btn-dark"
+          (click)="modal.close('discard')">No</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="applications">Application</label>
+                    <select [(ngModel)]="selApplication"
+                        name="applications"
+                        #a
+                        class="form-control"
+                        id="applications">
+                        <option [ngValue]="null"
+                            [disabled]="true"
+                            hidden>- Select an Application -</option>
+                        <option [value]="item.ID"
+                            *ngFor="let item of applications">
+                            {{item.Text}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="thread-subject">Subject</label>
+                    <input [(ngModel)]="threadRecord.subject"
+                        placeholder="Enter Subject"
+                        name="thread-subject"
+                        id="thread-subject"
+                        type="text"
+                        class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="thread-details">Details</label>
+                    <textarea [(ngModel)]="threadRecord.details"
+                        name="thread-details"
+                        id="thread-details"
+                        rows="3"
+                        class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-dfa">
+                    <div class="card-header">
+                        Add New documents
+                        <button class="btn btn-sm btn-rounded btn-success float-right"
+                            (click)="addDocumentFormRow()">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <span *ngIf="documents.length === 0">Click on Plus
+                                button to add documents.</span>
+                            <br>
+
+                            <table class="table table-bordered">
+                                <tr *ngFor="let doc of documents">
+                                    <td>
+                                        <input class="form-control"
+                                            type="text"
+                                            [ngModelOptions]="{standalone: true}"
+                                            (change)="onChangeDocumentTitle(doc)"
+                                            [(ngModel)]="documentTitles[doc.tempId]"
+                                            [name]="documentTitles[doc.tempId]"
+                                            placeholder="Document title">
+                                    </td>
+                                    <td>
+                                        <div class="col-md-10">
+                                            <input type="file"
+                                                class="form-control-file form-control-sm"
+                                                id="add_file"
+                                                (change)="handleUpload(doc.tempId,$event)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button (click)="removeDocumentRow(doc.tempId)"
+                                            class="btn btn-sm btn-rounded btn-danger">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit"
+            class="btn btn-success"
+            (click)="saveThread()">
+            Save
+        </button>
+
+    </div>
+</div>

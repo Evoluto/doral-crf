@@ -1,0 +1,85 @@
+<div class="card">
+    <div class="card-header">
+        <button class="btn btn-info btn-sm" [routerLink]="['/communications-add']">
+            <i class="fa fa-plus"></i> Ticket
+        </button>
+        <button class="btn btn-dfa-dark btn-sm" (click)="openFilter(filterTemplate)">
+            <i class="fa fa-filter" [style.color]="selectedType.length ? 'lightsalmon' : 'white'"></i> 
+            Filter
+        </button>
+    </div>
+
+    <div class="card-body">
+        <table datatable
+            [dtOptions]="dtOptions"
+            [dtTrigger]="dtTrigger"
+            class="row-border hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Applicant</th>
+                    <th>App #</th>
+                    <th>Application Title</th>
+                    <th>Type</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rw of rows" (click)="rowClick(rw)">
+                    <td class="text-left">
+                        <span *ngIf="hasAttachment(rw)" class="comm-attachment">
+                            <i class="fa fa-paperclip text-secondary"></i>
+                        </span>
+                        <span *ngIf="rw.new" class="badge badge-success">NEW REPLY</span>
+                    </td>
+                    <td>{{ rw.applicant_name }}</td>
+                    <td>{{ rw.related_applications && 'APP-' + rw.related_applications }}</td>
+                    <td>{{ rw.application_title }}</td>
+                    <td>{{ rw.type }}</td>
+                    <td>{{ rw.subject }}</td>
+                    <td>{{ rw.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Filter template start -->
+<ng-template #filterTemplate
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      Filters
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <ng-multiselect-dropdown [placeholder]="'Select Type'"
+          style="width: 100%;"
+          [data]="threadTypes"
+          [(ngModel)]="selectedType"
+          [settings]="dropdownSettings()">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button"
+          class="btn btn-dfa-dark"
+          (click)="applyFilter()">
+          Apply
+        </button>
+        <button type="button"
+          class="btn btn-dfa-light"
+          (click)="modal.close()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Filter template End -->

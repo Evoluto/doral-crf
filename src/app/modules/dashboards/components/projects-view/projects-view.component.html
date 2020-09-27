@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-dfa-light" (click)="exitPage()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+  </div>  
+</div>
+
+<br>
+
+<div class="row">
+  <!-- Column -->
+  <div class="col-md-6 col-lg-3 col-xlg-3">
+    <div class="card">
+      <div class="box p-2 rounded bg-info text-center">
+        <h1 class="font-weight-light text-white">${{projectsData.total_request | number}}</h1>
+        <h6 class="text-white">Total Budget</h6>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+  <div class="col-md-6 col-lg-3 col-xlg-3">
+    <div class="card">
+      <div class="box p-2 rounded bg-danger text-center">
+        <h1 class="font-weight-light text-white">${{projectsData.total_payment_requests | number}}</h1>
+        <h6 class="text-white">Total Payment Requests</h6>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+  <div class="col-md-6 col-lg-3 col-xlg-3">
+    <div class="card">
+      <div class="box p-2 rounded bg-success text-center">
+        <h1 class="font-weight-light text-white">${{projectsData.total_payments_received | number}}</h1>
+        <h6 class="text-white">Payments Received</h6>
+      </div>
+    </div>
+  </div>
+  <!-- Column -->
+  <div class="col-md-6 col-lg-3 col-xlg-3">
+    <div class="card">
+      <div class="box p-2 rounded bg-warning text-center">
+        <h1 class="font-weight-light text-white">
+          ${{projectsData.total_request - projectsData.total_approved_payment_requests | number}}</h1>
+        <h6 class="text-white">Remaining Balance</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    Applicant Info
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2"><label>Applicant Name</label></div>
+      <div class="col-md-4">{{userSessionData.applicantName}}</div>
+
+      <div class="col-md-2"><label>Application </label></div>
+      <div class="col-md-4">{{projectsData.application_title}} <i (click)="downloadFile(projectsData.related_applications)"
+        style="cursor: pointer;"
+        class="fa fa-file-pdf text-danger"></i></div>
+
+      <div class="col-md-2"></div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    Project Budget
+  </div>
+  <div class="card-body">
+    <ngx-charts-advanced-pie-chart [view]="chartsView"
+      [scheme]="chartsColorScheme"
+      [results]="chartData"
+      [gradient]="chartsGradient">
+    </ngx-charts-advanced-pie-chart>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    Payment Requests
+    <div class="float-right">
+      <button *ngIf="(projectsData.status == 'Approved' || projectsData.status == 'Submitted') && +projectsData.open_pr_count == 0 && +projectsData.max_milestone_percentage < 100"
+        class="btn btn-dfa-dark btn-sm" 
+        (click)="createPaymentRequest(projectsData.id)">
+        <i class="fa fa-plus"></i> Request
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Milestone</th>
+          <th>Status</th>
+          <th>Total Payment Request </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rw of paymentRequests">
+          <td>{{ rw.milestone }}</td>
+          <td>{{ rw.status}}</td>
+          <td>{{ rw.total_payment_request | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

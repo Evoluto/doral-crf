@@ -1,0 +1,117 @@
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center blue-bg">
+    <div>
+        <div class="auth-box"
+            style="width:500px; margin-top: 40px; background-color:#346491">
+            <div id="loginform">
+                <div class="logo">
+                    <img src="/assets/images/dfaLogoTagLine.png"
+                        alt="logo" />
+                </div>
+                <div *ngIf="msg"
+                    style="text-align: justify; margin: 0;"
+                    class="alert"
+                    [ngClass]="error ? 'alert-danger' : 'alert-info'">{{ msg }}</div>
+                <!-- Form -->
+                <div class="row">
+                    <div class="col-12">
+                        <form class="form-horizontal m-t-20"
+                            id="loginform"
+                            (keyup.enter)="submit(u.value, pwd.value)">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                        id="basic-addon1"><i class="ti-user"></i></span>
+                                </div>
+                                <input type="text"
+                                    class="form-control form-control-md"
+                                    placeholder="Username"
+                                    aria-label="Username"
+                                    aria-describedby="basic-addon1"
+                                    #u>
+                            </div>
+                            <div [ngStyle]="getChangePasswordStyle('login')"
+                                class="input-group mb-3"
+                                [@loginFormState]="loginFormState"
+                                (@loginFormState.done)="animationDone($event)"
+                                (@loginFormState.start)="animationStart($event)">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                        id="basic-addon2"><i class="ti-pencil"></i></span>
+                                </div>
+                                <input type="password"
+                                    class="form-control form-control-md"
+                                    placeholder="Password"
+                                    aria-label="Password"
+                                    aria-describedby="basic-addon1"
+                                    #pwd>
+                            </div>
+                            <div [ngStyle]="getChangePasswordStyle('recovery')"
+                                class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                        id="basic-addon2"><i class="ti-pencil"></i></span>
+                                </div>
+                                <input class="form-control form-control-md"
+                                    placeholder="Recovery Code"
+                                    aria-label="Recovery Code"
+                                    aria-describedby="basic-addon1"
+                                    #c>
+                            </div>
+                            <div [ngStyle]="getChangePasswordStyle('recovery')"
+                                class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                        id="basic-addon2"><i class="ti-pencil"></i></span>
+                                </div>
+                                <input type="password"
+                                    class="form-control form-control-md"
+                                    placeholder="New Password"
+                                    aria-label="New Password"
+                                    aria-describedby="basic-addon1"
+                                    #pn1>
+                            </div>
+                            <div [ngStyle]="getChangePasswordStyle('recovery')"
+                                class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                        id="basic-addon2"><i class="ti-pencil"></i></span>
+                                </div>
+                                <input type="password"
+                                    class="form-control form-control-md"
+                                    placeholder="Confirm Password"
+                                    aria-label="Confirm Password"
+                                    aria-describedby="basic-addon1"
+                                    #pn2>
+                            </div>
+                            <div class="form-group text-center">
+                                <button *ngIf="changePassword"
+                                    class="btn btn-block btn-lg btn-success"
+                                    type="button"
+                                    (click)="recoverPassword(u.value, c.value, pn1.value, pn2.value)">
+                                    Submit
+                                    <i *ngIf="isLoading"
+                                        class="fa fa-spinner fa-pulse"></i>
+                                </button>
+                                <button *ngIf="!changePassword"
+                                    class="btn btn-block btn-success"
+                                    type="button"
+                                    (click)="submit(u.value, pwd.value)">
+                                    {{submitText}}
+                                    <i *ngIf="isLoading"
+                                        class="fa fa-spinner fa-pulse"></i>
+                                </button>
+                                <a style="padding: 5px;color:#fff"
+                                    (click)="transformLogin()"
+                                    class="float-right">
+                                    <i *ngIf="loginForm"
+                                        class="fa fa-lock m-r-5"></i>
+                                    {{forgotText}}
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
