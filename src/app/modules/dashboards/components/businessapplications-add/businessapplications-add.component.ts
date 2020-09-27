@@ -66,7 +66,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.recordId = this.route.snapshot.paramMap.get('id');
+    //this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
     //this.documentSelectionTypes = componentData[0];
     this.businessApplicationEditData = (componentData && componentData[1]) ? componentData[1][0] : {};
@@ -168,7 +168,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
   }
 
   private setupEighthForm() {
-    const certify = this.businessApplicationEditData.certify_1 && this.businessApplicationEditData.certify_1 === 'True';
+    const certify = this.businessApplicationEditData.certify === 'True';
     const d = formatDate(new Date(), 'MM/dd/yyyy', 'en');
 
     this.eighthFormGroup = new FormGroup({
@@ -178,8 +178,8 @@ export class BusinessApplicationsAddComponent implements OnInit {
         if (control.value) return null;
         return { required: true };
       }),
-      status: new FormControl(this.businessApplicationEditData.status || 'Open')//,// not in html
-      //dateOfApplicantSubmission: new FormControl(this.businessApplicationEditData.date_of_applicant_submission || d)
+      status: new FormControl(this.businessApplicationEditData.status || 'Open'),
+      related_programs: new FormControl(this.businessApplicationEditData.related_programs || '2')
     });
   }
 
@@ -256,8 +256,8 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
   private submitBusinessApplication() {
 
-    const requiredFields = Constants.APPLICATIONS_MAPPING_REQUIRED;
-    const mappingFilds = Constants.APPLICATIONS_MAPPING;
+    const requiredFields = Constants.BUSINESS_APPLICATIONS_MAPPING_REQUIRED;
+    const mappingFilds = Constants.BUSINESS_APPLICATIONS_MAPPING;
 
     const formData = Object.assign({},
       this.firstFormGroup.value,
@@ -331,7 +331,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
     const err = this.recordId ? 'Updating' : 'Creating';
 
     if (success) {
-      this.toastr.success(`Application ${msg} successfully`, 'Success');
+      this.toastr.success(`Business Application ${msg} successfully`, 'Success');
       this.router.navigate(['businessapplications']);
       // this.loading = false;
     } else {

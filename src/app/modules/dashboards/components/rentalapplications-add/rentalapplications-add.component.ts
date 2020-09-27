@@ -169,7 +169,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   }
 
   private setupEighthForm() {
-    const certify = this.rentalApplicationEditData.certify_1 && this.rentalApplicationEditData.certify_1 === 'True';
+    const certify = this.rentalApplicationEditData.certify === 'True';
     const d = formatDate(new Date(), 'MM/dd/yyyy', 'en');
 
     this.eighthFormGroup = new FormGroup({
@@ -179,8 +179,8 @@ export class RentalApplicationsAddComponent implements OnInit {
         if (control.value) return null;
         return { required: true };
       }),
-      status: new FormControl(this.rentalApplicationEditData.status || 'Open')//,// not in html
-      //dateOfApplicantSubmission: new FormControl(this.rentalApplicationEditData.date_of_applicant_submission || d)
+      status: new FormControl(this.rentalApplicationEditData.status || 'Open'),
+      related_programs: new FormControl(this.rentalApplicationEditData.related_programs || '1')
     });
   }
 
@@ -257,8 +257,8 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   private submitRentalApplication() {
 
-    const requiredFields = Constants.APPLICATIONS_MAPPING_REQUIRED;
-    const mappingFilds = Constants.APPLICATIONS_MAPPING;
+    const requiredFields = Constants.RENTAL_APPLICATIONS_MAPPING_REQUIRED;
+    const mappingFields = Constants.RENTAL_APPLICATIONS_MAPPING;
 
     const formData = Object.assign({},
       this.firstFormGroup.value,
@@ -270,11 +270,10 @@ export class RentalApplicationsAddComponent implements OnInit {
       //this.seventhFormGroup.value,
       this.eighthFormGroup.value,
     )
-    delete formData.dunsNumber;
     const appObject = {};
 
-    for (let key in mappingFilds) {
-      let value = mappingFilds[key];
+    for (let key in mappingFields) {
+      let value = mappingFields[key];
       if (formData[key] || requiredFields.includes(key)) {
         appObject[value] = formData[key];
       }
@@ -290,7 +289,7 @@ export class RentalApplicationsAddComponent implements OnInit {
         null,
         new Array<FieldListItem>()
       );
-
+alert(JSON.stringify(appObject))
       for (let key in appObject) {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }
@@ -299,7 +298,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
       this.loading = true; // Hidden after redirection
       const appResp: any = await this.ignatiusService.postData(recordFAD).toPromise();
-      await this.addDocument(appResp.recordId);
+      /////////////////////await this.addDocument(appResp.recordId);
       this.rentalApplicationFormActionCompleted(true);
     } catch (error) {
       this.rentalApplicationFormActionCompleted(false);
@@ -332,7 +331,7 @@ export class RentalApplicationsAddComponent implements OnInit {
     const err = this.recordId ? 'Updating' : 'Creating';
 
     if (success) {
-      this.toastr.success(`Application ${msg} successfully`, 'Success');
+      this.toastr.success(`Rental Application ${msg} successfully`, 'Success');
       this.router.navigate(['rentalapplications']);
       // this.loading = false;
     } else {

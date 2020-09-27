@@ -65,7 +65,7 @@ export class RentalApplicationsComponent implements OnInit {
       this.storageService.getItem('userData')['userName'];
     this.dropdownSettings = new MultiselectModel();
     await this.getRentalApplicationList();
-    this.setupFilters(); // Don't change order
+    //this.setupFilters(); // Don't change order
 
     this.spinner.hide();
   }
@@ -84,35 +84,35 @@ export class RentalApplicationsComponent implements OnInit {
     }
   }
 
-  openFilter(content) {
-    this.modelConfig = new PopupModel();
-    this.ngbModal.open(content, this.modelConfig.settings)
-  }
+  // openFilter(content) {
+  //   this.modelConfig = new PopupModel();
+  //   this.ngbModal.open(content, this.modelConfig.settings)
+  // }
 
-  applyFilter(): void {
-    this.spinner.show();
-    if(this.selectedStatus.length){
-      let filteredRows = this.rentalApplicationList.filter(app => this.selectedStatus.includes(app.status));
-      this.rows = filteredRows;  
-    } else {
-      this.rows = this.rentalApplicationList;
-    }
+  // applyFilter(): void {
+  //   this.spinner.show();
+  //   if(this.selectedStatus.length){
+  //     let filteredRows = this.rentalApplicationList.filter(app => this.selectedStatus.includes(app.status));
+  //     this.rows = filteredRows;  
+  //   } else {
+  //     this.rows = this.rentalApplicationList;
+  //   }
 
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      // Destroy the table first
-      dtInstance.destroy();
-      // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
-      setTimeout(() => {
-        this.spinner.hide();
-      }, 300);
-    });   
-    this.ngbModal.dismissAll()
-  }
+  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //     // Destroy the table first
+  //     dtInstance.destroy();
+  //     // Call the dtTrigger to rerender again
+  //     this.dtTrigger.next();
+  //     setTimeout(() => {
+  //       this.spinner.hide();
+  //     }, 300);
+  //   });   
+  //   this.ngbModal.dismissAll()
+  // }
 
-  private setupFilters(): void {
-    this.statusList = [...new Set(this.rentalApplicationList.map(app => app.status))].filter(status => status);
-  }
+  // private setupFilters(): void {
+  //   this.statusList = [...new Set(this.rentalApplicationList.map(app => app.status))].filter(status => status);
+  // }
 
   editRecord(id) {
     this.router.navigate([`rentalapplications-edit/${id}`])
@@ -130,8 +130,8 @@ export class RentalApplicationsComponent implements OnInit {
     const obj = {};
     //obj['date_of_applicant_submission'] = new Date();
     //obj['submitted_by'] = this.loggedInuserEmail;
-    //obj['status'] = 'Submitted';
-    //this.updateRentalApplication(obj);
+    obj['status'] = 'Submitted';
+    this.updateRentalApplication(obj);
   }
 
   private async updateRentalApplication(appObject) {
