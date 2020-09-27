@@ -63,12 +63,3 @@ export class RequiredDocumentsData {
     // RelatedCommResponsesFieldId: number
     // RelatedPaymentRequestsFieldId:number
 }
-
-export class TreasuryReportingData {
-    TableId: number
-    RecordIdFieldId: number
-    RelatedPaymentRequestsFieldId: number
-    TypeMultipleChoiceID:number
-    ExpenditureCategoryMultipleChoiceID:number
-}
-

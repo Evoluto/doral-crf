@@ -19,21 +19,6 @@ export class DashboardResolverService implements Resolve<Object[]>{
     let observables = new Array<Observable<Object[]>>();
     let postBodies = new Array<any>();
 
-    switch (subjectTableName) {
-      case "threads":
-
-        // postBodies.push({ "ApplicationTableId": projectSpecificData.commThreadData.TableId });
-
-        // observables = observables.concat(
-        //   this.ignatiusService.getQueryReportObservables(
-        //     projectSpecificData.appData,
-        //     postBodies
-        //   )
-        // );
-
-        break;
-    }
-
     this.spinner.show();
     return forkJoin(observables)
   }
