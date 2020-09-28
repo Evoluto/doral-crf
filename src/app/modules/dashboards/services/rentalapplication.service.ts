@@ -24,6 +24,12 @@ export class RentalApplicationService implements Resolve<Object[]>{
       case "rentalapplications-add":
 
         // NES - FOR NOW
+        observables.push(
+          this.ignatiusService.getDropdownValues(
+            projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
+          )
+        )
+        // NES - FOR NOW
         // observables.push(
         //   this.ignatiusService.getDropdownValues(
         //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
@@ -36,6 +42,12 @@ export class RentalApplicationService implements Resolve<Object[]>{
 
         const recordId = route.paramMap.get("id");
 
+        // NES - FOR NOW
+        observables.push(
+          this.ignatiusService.getDropdownValues(
+            projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
+          )
+        )
         // NES - FOR NOW
         // observables.push(
         //   this.ignatiusService.getDropdownValues(

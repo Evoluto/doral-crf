@@ -58,6 +58,8 @@ export class ProjectSpecificService {
 		projectSpecificData.businessApplicationsData.BusinessApplicationListReportId = appData.getAppItemId(businessApplicationsData.Reports, 'List All');
 		projectSpecificData.businessApplicationsData.RecordIdFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Record Id');
 		projectSpecificData.businessApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Related Programs');
+		projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID = appData.getAppItemId(businessApplicationsData.Fields, 'Organization Type');
+		projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID = appData.getAppItemId(businessApplicationsData.Fields, 'Own or Lease');
 
 		/* ===================== [3] Table = 'Rental Applications' ======================*/
 		let rentalApplicationsData = appData.Tables.find(t => t.Name === 'Rental Applications');
@@ -81,7 +83,7 @@ export class ProjectSpecificService {
 		projectSpecificData.documentsData.RecordIdFieldId = appData.getAppItemId(documentsData.Fields, 'Record Id');
 		// projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
 		// projectSpecificData.documentsData.DocumentTypeExpenditureCategoryMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Expenditure Category');
-		// projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Selection');
+		projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Selection');
 		// projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
 		// projectSpecificData.documentsData.RelatedCommThreadFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Threads');
 		projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Business Applications');

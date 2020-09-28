@@ -89,11 +89,15 @@
           <div class="row">
             <div class="col-md-4">
               <p>
-                <span class="bolt">Organization Type (dropdown):</span>
+                <span class="bolt">Organization Type:</span>
               </p>
-              <input class="form-control"
-                placeholder="Enter Organization Type ..."
-                formControlName="organization_type">
+              <select class="form-control"
+                  formControlName="organization_type">
+                  <option value=""
+                    hidden>- Select Organization Type -</option>
+                  <option *ngFor="let ot of organizationTypes"
+                    value="{{ot.id}}">{{ot.name}}</option>
+              </select>
             </div>
             <div class="col-md-4">
               <p>
@@ -207,11 +211,15 @@
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Does Your Business (dropdown):</span>
+                <span class="bolt">Does Your Business:</span>
               </p>
-              <input type="email" class="form-control"
-                placeholder="Enter Own or Lease ..."
-                formControlName="own_or_lease">
+              <select class="form-control"
+                  formControlName="own_or_lease">
+                  <option value=""
+                    hidden>- Select Own or Lease -</option>
+                  <option *ngFor="let ol of ownOrLease"
+                    value="{{ol.id}}">{{ol.name}}</option>
+              </select>
             </div>
           </div>
           <br>
@@ -237,11 +245,12 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Is Your Business a National Chain Store or Franchise (checkbox):</span>
+                <span class="bolt">Is Your Business a National Chain Store or Franchise:
+                  <mat-checkbox class="example-margin"
+                      formControlName="national_chain_or_franchise">
+                  </mat-checkbox>
+                </span>
               </p>
-              <input class="form-control"
-                placeholder="Is Your Business a National Chain Store or Franchise ..."
-                formControlName="national_chain_or_franchise">
             </div>
           </div>
           <br>

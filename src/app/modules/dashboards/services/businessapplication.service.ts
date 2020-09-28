@@ -23,6 +23,16 @@ export class BusinessApplicationService implements Resolve<Object[]>{
 
       case "businessapplications-add":
 
+        observables.push(
+          this.ignatiusService.getDropdownValues(
+            projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
+          )
+        )
+        observables.push(
+          this.ignatiusService.getDropdownValues(
+            projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID.toString()
+          )
+        )
         // NES - FOR NOW
         // observables.push(
         //   this.ignatiusService.getDropdownValues(
@@ -36,6 +46,17 @@ export class BusinessApplicationService implements Resolve<Object[]>{
 
         const recordId = route.paramMap.get("id");
 
+        observables.push(
+          this.ignatiusService.getDropdownValues(
+            projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
+          )
+        )
+        observables.push(
+          this.ignatiusService.getDropdownValues(
+            projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID.toString()
+          )
+        )
+        
         // NES - FOR NOW
         // observables.push(
         //   this.ignatiusService.getDropdownValues(

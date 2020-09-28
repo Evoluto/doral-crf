@@ -22,6 +22,8 @@ export class BusinessApplicationsData {
     BusinessApplicationListReportId: number
     RecordIdFieldId: number
     RelatedProgramsFieldId:number
+    OrganizationTypeMultipleChoiceID: number
+    OwnOrLeaseMultipleChoiceID: number
 }
 
 export class RentalApplicationsData {
@@ -46,7 +48,7 @@ export class DocumentsData {
     RelatedRentalApplicationsFieldId: number
     // DocumentFileId:number
     // DocumentTypeExpenditureCategoryMultipleChoiceID:number
-    // DocumentTypeSelectionMultipleChoiceID:number
+    DocumentTypeSelectionMultipleChoiceID:number
     // DocumentTypeId: number
     // RelatedCommThreadFieldId: number
     // RelatedCommResponsesFieldId: number

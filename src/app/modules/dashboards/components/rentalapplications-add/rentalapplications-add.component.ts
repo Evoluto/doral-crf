@@ -68,7 +68,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   ngOnInit() {
     this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
-    //this.documentSelectionTypes = componentData[0];
+    this.documentSelectionTypes = componentData[0];
     this.rentalApplicationEditData = (componentData && componentData[1]) ? componentData[1][0] : {};
     this.rentalApplicationEditDocumentData = (componentData && componentData[2]) ? componentData[2] : [];
     this.rentalApplicationEditDocumentData = this.rentalApplicationEditDocumentData.filter(
@@ -283,14 +283,12 @@ export class RentalApplicationsAddComponent implements OnInit {
   }
 
   private async createRentalApplication(appObject) {
-    alert("here")
     try {
       const recordFAD = new FormActionData(0,
         this.doralData.rentalApplicationsData.TableId,
         null,
         new Array<FieldListItem>()
       );
-alert(JSON.stringify(appObject))
       for (let key in appObject) {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }

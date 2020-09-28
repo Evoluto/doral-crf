@@ -28,10 +28,14 @@ export class BusinessApplicationsAddComponent implements OnInit {
   recordId: string;
   businessApplicationEditData: any;
   documentSelectionTypes: Array<any>;
+  organizationTypes: Array<any>;
+  ownOrLease: Array<any>;
   businessApplicationEditDocumentData: any;
-
+  
   //applicantList: Array<{ id: string, name: string }>;
   doralData = this.projectSpecificService.getProjectSpecificData();
+  
+  
   documents: Array<any> = [];
   deletedDocuments: Array<any> = [];
   documentTypes = {
@@ -68,9 +72,11 @@ export class BusinessApplicationsAddComponent implements OnInit {
   ngOnInit() {
     //this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
+    this.organizationTypes = componentData[0];
+    this.ownOrLease = componentData[1];
     //this.documentSelectionTypes = componentData[0];
-    this.businessApplicationEditData = (componentData && componentData[1]) ? componentData[1][0] : {};
-    this.businessApplicationEditDocumentData = (componentData && componentData[2]) ? componentData[2] : [];
+    this.businessApplicationEditData = (componentData && componentData[2]) ? componentData[1][0] : {};
+    this.businessApplicationEditDocumentData = (componentData && componentData[3]) ? componentData[3] : [];
     this.businessApplicationEditDocumentData = this.businessApplicationEditDocumentData.filter(
       iterator => iterator.document_type === "Application Attachment"
     )
