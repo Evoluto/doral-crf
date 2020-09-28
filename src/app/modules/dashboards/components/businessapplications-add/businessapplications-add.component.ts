@@ -70,12 +70,12 @@ export class BusinessApplicationsAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.recordId = this.route.snapshot.paramMap.get('id');
+    this.recordId = this.route.snapshot.paramMap.get('id');    
     const componentData = this.route.snapshot.data['componentData'];
     this.organizationTypes = componentData[0];
     this.ownOrLease = componentData[1];
     //this.documentSelectionTypes = componentData[0];
-    this.businessApplicationEditData = (componentData && componentData[2]) ? componentData[1][0] : {};
+    this.businessApplicationEditData = (componentData && componentData[2]) ? componentData[2][0] : {};
     this.businessApplicationEditDocumentData = (componentData && componentData[3]) ? componentData[3] : [];
     this.businessApplicationEditDocumentData = this.businessApplicationEditDocumentData.filter(
       iterator => iterator.document_type === "Application Attachment"
@@ -112,6 +112,9 @@ export class BusinessApplicationsAddComponent implements OnInit {
   }
 
   private setupThirdForm() {
+    console.log('xxxxxxxxxxxxxxxxx',this.businessApplicationEditData.organization_type);
+    console.log('yyyyyyyyyyyyyyyyy',this.businessApplicationEditData.business_legal_name);
+    
     this.thirdFormGroup = new FormGroup({
       organization_type: new FormControl(this.businessApplicationEditData.organization_type || ''),// Validators.required),
       business_legal_name: new FormControl(this.businessApplicationEditData.business_legal_name || ''),// Validators.required),

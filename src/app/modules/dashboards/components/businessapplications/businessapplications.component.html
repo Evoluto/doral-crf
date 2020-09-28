@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let rw of rows">
-            <td class="text-left">
+            <td>
               <!-- <i *ngIf="(rw.status == 'Approved' || rw.status == 'Submitted') && +rw.open_pr_count == 0 && +rw.max_milestone_percentage < 100 && +rw.project_count"
                 class="fas fa-dollar-sign text-success action-btn" 
                 (click)="createPaymentRequest(rw.id)"

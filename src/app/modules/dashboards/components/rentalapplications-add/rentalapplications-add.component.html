@@ -341,15 +341,15 @@
           <div class="card-body">
             <table id="doctable"
               class="table">
-              <tbody *ngIf="applicationEditDocumentData.length === 0">
+              <tbody *ngIf="rentalApplicationEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
                     No attachments.
                   </td>
                 </tr>
               </tbody>
-              <tbody *ngIf="applicationEditDocumentData.length > 0">
-                <tr *ngFor="let aed of applicationEditDocumentData"
+              <tbody *ngIf="rentalApplicationEditDocumentData.length > 0">
+                <tr *ngFor="let aed of rentalApplicationEditDocumentData"
                   style="border-top:none !important">
                   <td>
                     <span>{{aed.document_title}}</span>

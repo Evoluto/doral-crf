@@ -1,16 +1,29 @@
 import { Routes } from '@angular/router';
 
-import { NotfoundComponent } from './404/not-found.component';
-import { LoginComponent } from './login/login.component';
+import {
+  NotfoundComponent,
+  LoginComponent,
+  RegistrationComponent,
+  HomeComponent,
+  PreRegistrationComponent
+} from 'src/app/modules/authentication/components';
 
 export const AuthenticationRoutes: Routes = [
   {
     path: '',
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
       {
         path: '404',
         component: NotfoundComponent
+      },
+      {
+        path: 'home',
+        component: HomeComponent
       },
       {
         path: 'login',
@@ -19,6 +32,14 @@ export const AuthenticationRoutes: Routes = [
       {
         path: 'passwordrecovery',
         component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegistrationComponent
+      },
+      {
+        path: 'pre-register',
+        component: PreRegistrationComponent
       }
     ]
   }

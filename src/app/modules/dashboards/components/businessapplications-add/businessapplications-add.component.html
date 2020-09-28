@@ -96,7 +96,7 @@
                   <option value=""
                     hidden>- Select Organization Type -</option>
                   <option *ngFor="let ot of organizationTypes"
-                    value="{{ot.id}}">{{ot.name}}</option>
+                    value="{{ot.value}}">{{ot.name}}</option>
               </select>
             </div>
             <div class="col-md-4">
@@ -499,15 +499,15 @@
           <div class="card-body">
             <table id="doctable"
               class="table">
-              <tbody *ngIf="applicationEditDocumentData.length === 0">
+              <tbody *ngIf="businessApplicationEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
                     No attachments.
                   </td>
                 </tr>
               </tbody>
-              <tbody *ngIf="applicationEditDocumentData.length > 0">
-                <tr *ngFor="let aed of applicationEditDocumentData"
+              <tbody *ngIf="businessApplicationEditDocumentData.length > 0">
+                <tr *ngFor="let aed of businessApplicationEditDocumentData"
                   style="border-top:none !important">
                   <td>
                     <span>{{aed.document_title}}</span>

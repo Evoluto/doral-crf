@@ -3,12 +3,15 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { NotfoundComponent } from './404/not-found.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-
 import { AuthenticationRoutes } from './authentication.routing';
+
+import {
+  NotfoundComponent,
+  LoginComponent,
+  RegistrationComponent,
+  HomeComponent,
+  PreRegistrationComponent
+} from 'src/app/modules/authentication/components';
 
 @NgModule({
   imports: [
@@ -19,7 +22,9 @@ import { AuthenticationRoutes } from './authentication.routing';
   declarations: [
     NotfoundComponent,
     LoginComponent,
-    SignupComponent
+    RegistrationComponent,
+    HomeComponent,
+    PreRegistrationComponent
   ]
 })
 export class AuthenticationModule {}
