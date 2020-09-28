@@ -76,7 +76,7 @@ export class BusinessApplicationsComponent implements OnInit {
         this.doralData.appData,
         { "ReportId": this.doralData.businessApplicationsData.BusinessApplicationListReportId }
       ).toPromise();
-
+      
       this.rows = [...this.businessApplicationList];
       this.dtTrigger.next();
     } catch (error) {

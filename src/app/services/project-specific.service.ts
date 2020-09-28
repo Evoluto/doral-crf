@@ -65,6 +65,7 @@ export class ProjectSpecificService {
 		let rentalApplicationsData = appData.Tables.find(t => t.Name === 'Rental Applications');
 		projectSpecificData.rentalApplicationsData = new RentalApplicationsData();
 		projectSpecificData.rentalApplicationsData.TableId = rentalApplicationsData.Id;
+		projectSpecificData.rentalApplicationsData.RentalApplicationListReportId = appData.getAppItemId(rentalApplicationsData.Reports, 'List All');
 		projectSpecificData.rentalApplicationsData.RecordIdFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Record Id');
 		projectSpecificData.rentalApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Related Programs');
 
