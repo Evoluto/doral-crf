@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6">
-    <div class="card bg-secondary">
-      <div class="card-header text-white">
+    <div class="card bg-light">
+      <div class="card-header text-black">
         <span style="font-size: 20px;font-weight:500">Business Assistance</span>
         <button class="btn btn-success btn-sm float-right"
           [routerLink]="['/businessapplications-add']">
@@ -10,11 +10,11 @@
       </div>
       <div class="card-body text-center">
         <div *ngFor="let rw of businessApplicationList">
-          <div class="box p-2 rounded bg-warning">
+          <div class="box p-2 rounded yellow-bg">
             <h2 class="font-weight-light text-white">{{rw.status}}</h2>
             <div>
               <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
-                class="btn btn-sm btn-dfa-light"
+                class="btn btn-sm red-bg"
                 (click)="downloadBusinessFile(rw)"
                 data-toggle="tooltip"
                 data-placement="top"
@@ -22,14 +22,14 @@
                 <i class="fa fa-file-pdf"></i> Download
               </button>
               <button *ngIf="rw.status === 'Open'"
-                class="btn btn-sm btn-dfa-light"
+                class="btn btn-sm blue-bg"
                 (click)="editBusinessRecord(rw.id)"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Edit"> <i class="fa fa-edit"></i> Edit
               </button>
               <button *ngIf="rw.status === 'Open'"
-                class="btn btn-sm btn-dfa-light"
+                class="btn btn-sm green-bg"
                 (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
                 data-toggle="tooltip"
                 data-placement="top"
@@ -45,8 +45,8 @@
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card bg-secondary">
-      <div class="card-header text-white">
+    <div class="card bg-light">
+      <div class="card-header text-black">
         <span style="font-size: 20px;font-weight:500">Emergency Rental Assistance</span>
         <button class="btn btn-success btn-sm float-right"
           [routerLink]="['/rentalapplications-add']">
@@ -55,25 +55,25 @@
       </div>
       <div class="card-body text-center">
         <div *ngFor="let rw of rentalApplicationList">
-          <div class="box p-2 rounded bg-warning">
+          <div class="box p-2 rounded yellow-bg">
             <h2 class="font-weight-light text-white">{{rw.status}}</h2>
             <div>
               <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
-                class="btn btn-sm btn-dfa-light"
+                class="btn btn-sm red-bg"
                 (click)="downloadRentalFile(rw)"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Download PDF">
                 <i class="fa fa-file-pdf"></i> Download
               </button>
-              <button class="btn btn-sm btn-dfa-light"
+              <button class="btn btn-sm blue-bg"
                 *ngIf="rw.status === 'Open'"
                 (click)="editRentalRecord(rw.id)"
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Edit"><i class="fa fa-edit"></i> Edit
               </button>
-              <button class="btn btn-sm btn-dfa-light"
+              <button class="btn btn-sm green-bg"
                 *ngIf="rw.status === 'Open'"
                 (click)="openSubmitRentalApplicationPopup(rw,submitRentalApplicationTemp)"
                 data-toggle="tooltip"
