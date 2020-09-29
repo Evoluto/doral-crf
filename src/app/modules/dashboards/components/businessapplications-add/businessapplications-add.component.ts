@@ -31,11 +31,11 @@ export class BusinessApplicationsAddComponent implements OnInit {
   organizationTypes: Array<any>;
   ownOrLease: Array<any>;
   businessApplicationEditDocumentData: any;
-  
+
   //applicantList: Array<{ id: string, name: string }>;
   doralData = this.projectSpecificService.getProjectSpecificData();
-  
-  
+
+
   documents: Array<any> = [];
   deletedDocuments: Array<any> = [];
   documentTypes = {
@@ -53,9 +53,6 @@ export class BusinessApplicationsAddComponent implements OnInit {
   eighthFormGroup: FormGroup;
   modelConfig: PopupModel;
   programData: any;
-  
-  loading: boolean = false;
-  
 
   constructor(
     private fb: FormBuilder,
@@ -70,7 +67,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.recordId = this.route.snapshot.paramMap.get('id');    
+    this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
     this.organizationTypes = componentData[0];
     this.ownOrLease = componentData[1];
@@ -98,7 +95,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
   private setupFirstForm() {
     this.firstFormGroup = new FormGroup({
-      
+
     });
   }
 
@@ -112,9 +109,6 @@ export class BusinessApplicationsAddComponent implements OnInit {
   }
 
   private setupThirdForm() {
-    console.log('xxxxxxxxxxxxxxxxx',this.businessApplicationEditData.organization_type);
-    console.log('yyyyyyyyyyyyyyyyy',this.businessApplicationEditData.business_legal_name);
-    
     this.thirdFormGroup = new FormGroup({
       organization_type: new FormControl(this.businessApplicationEditData.organization_type || ''),// Validators.required),
       business_legal_name: new FormControl(this.businessApplicationEditData.business_legal_name || ''),// Validators.required),
@@ -305,7 +299,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
       const todayDate = new Date();
 
-      this.loading = true; // Hidden after redirection
+      this.spinner.show();
       const appResp: any = await this.ignatiusService.postData(recordFAD).toPromise();
       await this.addDocument(appResp.recordId);
       this.businessApplicationFormActionCompleted(true);
@@ -325,7 +319,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }
 
-      this.loading = true;
+      this.spinner.show();
       await this.ignatiusService.putData(recordFAD).toPromise();
       await this.addDocument(this.recordId);
       await this.deleteDocumentFromDb();
@@ -342,9 +336,8 @@ export class BusinessApplicationsAddComponent implements OnInit {
     if (success) {
       this.toastr.success(`Business Application ${msg} successfully`, 'Success');
       this.router.navigate(['businessapplications']);
-      // this.loading = false;
     } else {
-      this.loading = false;
+      this.spinner.hide();
       this.toastr.error(`Error in ${err} Business Application`, 'Error');
     }
   }
@@ -539,7 +532,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
   cancelChanges(content) {
     const isFormDirty = this.firstFormGroup.dirty || this.secondFormGroup.dirty
-      || this.thirdFormGroup || this.fourthFormGroup.dirty || this.fifthFormGroup.dirty 
+      || this.thirdFormGroup || this.fourthFormGroup.dirty || this.fifthFormGroup.dirty
       || this.sixthFormGroup.dirty || this.seventhFormGroup.dirty || this.eighthFormGroup.dirty;
 
     if (isFormDirty) {
@@ -555,6 +548,21 @@ export class BusinessApplicationsAddComponent implements OnInit {
   redirectToApps(closeModal = false) {
     closeModal && this.ngbModal.dismissAll();
     this.router.navigate(['businessapplications']);
+  }
+
+  saveExit(fmGrp: string) {
+
+    if (!fmGrp) {
+      this.submitBusinessApplication();
+      return;
+    }
+
+    if (this[fmGrp].valid) {
+      this.submitBusinessApplication();
+    } else {
+      this.toastr.error("Form is not valid", "Error");
+      this.validateAllFormFields(this.firstFormGroup);
+    }
   }
 
 }

@@ -16,6 +16,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <!-- <button mat-flat-button
+              type="button"
+              (click)="saveExit('firstFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button> -->
           </div>
         </form>
       </mat-step>
@@ -52,7 +57,8 @@
               <p>
                 <span class="bolt">Email:</span>
               </p>
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter Email ..."
                 formControlName="email">
             </div>
@@ -75,6 +81,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('secondFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -92,11 +103,11 @@
                 <span class="bolt">Organization Type:</span>
               </p>
               <select class="form-control"
-                  formControlName="organization_type">
-                  <option value=""
-                    hidden>- Select Organization Type -</option>
-                  <option *ngFor="let ot of organizationTypes"
-                    value="{{ot.value}}">{{ot.name}}</option>
+                formControlName="organization_type">
+                <option value=""
+                  hidden>- Select Organization Type -</option>
+                <option *ngFor="let ot of organizationTypes"
+                  value="{{ot.value}}">{{ot.name}}</option>
               </select>
             </div>
             <div class="col-md-4">
@@ -122,7 +133,8 @@
               <p>
                 <span class="bolt">EIN (Federal Employer Identification Number):</span>
               </p>
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter EIN ..."
                 formControlName="ein">
             </div>
@@ -170,6 +182,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('thirdFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -214,11 +231,11 @@
                 <span class="bolt">Does Your Business:</span>
               </p>
               <select class="form-control"
-                  formControlName="own_or_lease">
-                  <option value=""
-                    hidden>- Select Own or Lease -</option>
-                  <option *ngFor="let ol of ownOrLease"
-                    value="{{ol.id}}">{{ol.name}}</option>
+                formControlName="own_or_lease">
+                <option value=""
+                  hidden>- Select Own or Lease -</option>
+                <option *ngFor="let ol of ownOrLease"
+                  value="{{ol.id}}">{{ol.name}}</option>
               </select>
             </div>
           </div>
@@ -247,7 +264,7 @@
               <p>
                 <span class="bolt">Is Your Business a National Chain Store or Franchise:
                   <mat-checkbox class="example-margin"
-                      formControlName="national_chain_or_franchise">
+                    formControlName="national_chain_or_franchise">
                   </mat-checkbox>
                 </span>
               </p>
@@ -258,9 +275,14 @@
             <button matStepperPrevious
               class="btn-dfa-light"
               mat-flat-button>Back</button>
-              <button mat-flat-button
+            <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('fourthFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -368,6 +390,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('fifthFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -413,7 +440,8 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-9">
-              <table width="100%" border="1">
+              <table width="100%"
+                border="1">
                 <thead>
                   <th>Type of Financial Info</th>
                   <th>2019</th>
@@ -422,29 +450,29 @@
                 <tr>
                   <th>Gross Revenues</th>
                   <td><input class="form-control"
-                    placeholder="Enter 2019 Gross Revenues ..."
-                    formControlName="gross_revenue_last_year"></td>
+                      placeholder="Enter 2019 Gross Revenues ..."
+                      formControlName="gross_revenue_last_year"></td>
                   <td><input class="form-control"
-                    placeholder="Enter 2020 Gross Revenues ..."
-                    formControlName="gross_revenue_this_year"></td>
+                      placeholder="Enter 2020 Gross Revenues ..."
+                      formControlName="gross_revenue_this_year"></td>
                 </tr>
                 <tr>
                   <th>Total Payroll Expense</th>
                   <td><input class="form-control"
-                    placeholder="Enter 2019 Total Payroll Expense ..."
-                    formControlName="payroll_last_year"></td>
+                      placeholder="Enter 2019 Total Payroll Expense ..."
+                      formControlName="payroll_last_year"></td>
                   <td><input class="form-control"
-                    placeholder="Enter 2020 Total Payroll Expense ..."
-                    formControlName="payroll_this_year"></td>
+                      placeholder="Enter 2020 Total Payroll Expense ..."
+                      formControlName="payroll_this_year"></td>
                 </tr>
                 <tr>
                   <th>Pre-Tax Profit</th>
                   <td><input class="form-control"
-                    placeholder="Enter 2019 Pre-Tax Profit ..."
-                    formControlName="pre_tax_profit_last_year"></td>
+                      placeholder="Enter 2019 Pre-Tax Profit ..."
+                      formControlName="pre_tax_profit_last_year"></td>
                   <td><input class="form-control"
-                    placeholder="Enter 2020 Pre-Tax Profit ..."
-                    formControlName="pre_tax_profit_this_year"></td>
+                      placeholder="Enter 2020 Pre-Tax Profit ..."
+                      formControlName="pre_tax_profit_this_year"></td>
                 </tr>
               </table>
             </div>
@@ -471,6 +499,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('sixthFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -597,11 +630,12 @@
                 <button mat-flat-button
                   matStepperNext
                   class="btn-dfa-dark">Next</button>
-                <!-- <button mat-flat-button
-                  *ngIf="seventhFormStatus"
-                  matStepperNext
-                  class="btn-dfa-dark">Next</button> -->
-                
+                <button mat-flat-button
+                  type="button"
+                  (click)="saveExit(null)"
+                  class="btn-info">Save Draft and Exit
+                </button>
+
               </div>
             </form>
           </div>
@@ -614,14 +648,7 @@
         <ng-template matStepLabel>Certification</ng-template>
         <br>
 
-        <div [hidden]="!loading"
-          class="alert alert-success"
-          style="font-size: 30px;">
-          <i class="fa fa-cog fa-spin"></i> Saving ... (Do not refresh or close browser window)
-        </div>
-
-        <form [hidden]="loading"
-          [formGroup]="eighthFormGroup"
+        <form [formGroup]="eighthFormGroup"
           (ngSubmit)="onStepEightSubmit()">
 
           <table class="table table-bordered">

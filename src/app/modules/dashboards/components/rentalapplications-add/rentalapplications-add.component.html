@@ -15,7 +15,13 @@
           <div class="stepper-button-row">
             <button mat-flat-button
               matStepperNext
-              class="btn-dfa-dark">Next</button>
+              class="btn-dfa-dark">Next
+            </button>
+            <!-- <button mat-flat-button
+              type="button"
+              (click)="saveExit('firstFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button> -->
           </div>
         </form>
       </mat-step>
@@ -52,7 +58,8 @@
               <p>
                 <span class="bolt">Co-Applicant’s Name:</span>
               </p>
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter Co-Applicant’s Name ..."
                 formControlName="co_applicant_name">
             </div>
@@ -60,9 +67,9 @@
               <p>
                 <span class="bolt">Social Security Number:</span>
               </p>
-                <input class="form-control"
-                  placeholder="Enter Co-Applicant's SS# ..."
-                  formControlName="co_applicant_ss_num">
+              <input class="form-control"
+                placeholder="Enter Co-Applicant's SS# ..."
+                formControlName="co_applicant_ss_num">
             </div>
           </div>
           <br>
@@ -71,9 +78,10 @@
               <p>
                 <span class="bolt">Address:</span>
               </p>
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter Address ..."
-                formControlName="address">          
+                formControlName="address">
             </div>
           </div>
           <br>
@@ -82,7 +90,8 @@
               <p>
                 <span class="bolt">Email:</span>
               </p>
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter Email ..."
                 formControlName="email">
             </div>
@@ -90,9 +99,9 @@
               <p>
                 <span class="bolt">Phone:</span>
               </p>
-                <input class="form-control"
-                  placeholder="Enter Phone ..."
-                  formControlName="phone">
+              <input class="form-control"
+                placeholder="Enter Phone ..."
+                formControlName="phone">
             </div>
           </div>
           <br>
@@ -103,6 +112,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('secondFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -141,6 +155,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('thirdFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -200,7 +219,8 @@
               </p>
             </div>
             <div class="col-md-4">
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter Employer Address ..."
                 formControlName="employer_address">
             </div>
@@ -246,6 +266,11 @@
             <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('fourthFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -292,7 +317,8 @@
               <p>
                 <span class="bolt">Landlord Email:</span>
               </p>
-              <input type="email" class="form-control"
+              <input type="email"
+                class="form-control"
                 placeholder="Enter Landlord Email ..."
                 formControlName="landlord_email">
             </div>
@@ -300,9 +326,9 @@
               <p>
                 <span class="bolt">Landlord Phone:</span>
               </p>
-                <input class="form-control"
-                  placeholder="Enter Landlord Phone ..."
-                  formControlName="landlord_phone">
+              <input class="form-control"
+                placeholder="Enter Landlord Phone ..."
+                formControlName="landlord_phone">
             </div>
           </div>
           <br>
@@ -310,9 +336,14 @@
             <button matStepperPrevious
               class="btn-dfa-light"
               mat-flat-button>Back</button>
-              <button mat-flat-button
+            <button mat-flat-button
               matStepperNext
               class="btn-dfa-dark">Next</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('fifthFormGroup')"
+              class="btn-info">Save Draft and Exit
+            </button>
           </div>
         </form>
       </mat-step>
@@ -438,11 +469,13 @@
                   mat-flat-button>Back</button>
                 <button mat-flat-button
                   matStepperNext
-                  class="btn-dfa-dark">Next</button> 
-                <!-- <button mat-flat-button
-                  *ngIf="seventhFormStatus"
-                  matStepperNext
-                  class="btn-dfa-dark">Next</button>  -->      
+                  class="btn-dfa-dark">Next</button>
+                <button mat-flat-button
+                  type="button"
+                  (click)="saveExit(null)"
+                  class="btn-info">Save Draft and Exit
+                </button>
+
               </div>
             </form>
           </div>
@@ -455,14 +488,7 @@
         <ng-template matStepLabel>Certification</ng-template>
         <br>
 
-        <div [hidden]="!loading"
-          class="alert alert-success"
-          style="font-size: 30px;">
-          <i class="fa fa-cog fa-spin"></i> Saving ... (Do not refresh or close browser window)
-        </div>
-
-        <form [hidden]="loading"
-          [formGroup]="eighthFormGroup"
+        <form [formGroup]="eighthFormGroup"
           (ngSubmit)="onStepEightSubmit()">
 
           <table class="table table-bordered">

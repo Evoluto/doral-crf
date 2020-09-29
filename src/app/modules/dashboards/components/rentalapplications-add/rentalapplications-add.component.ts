@@ -49,9 +49,6 @@ export class RentalApplicationsAddComponent implements OnInit {
   eighthFormGroup: FormGroup;
   modelConfig: PopupModel;
   programData: any;
-  
-  loading: boolean = false;
-  
 
   constructor(
     private fb: FormBuilder,
@@ -92,14 +89,14 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   private setupFirstForm() {
     this.firstFormGroup = new FormGroup({
-      
+
     });
   }
 
   private setupSecondForm() {
     const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
     const SSNumPattern = /^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$/;
-    
+
     this.secondFormGroup = new FormGroup({
       applicant_name: new FormControl(this.rentalApplicationEditData.applicant_name || ''),//, Validators.required),
       applicant_ss_num: new FormControl(this.rentalApplicationEditData.applicant_ss_num || ''),//, [Validators.required, Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")]),
@@ -113,10 +110,10 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   private setupThirdForm() {
     const NumberPattern = /^\d{1,2}?$/;
-    
+
     this.thirdFormGroup = new FormGroup({
       household_size: new FormControl(this.rentalApplicationEditData.household_size || ''),//, [Validators.required, Validators.pattern(NumberPattern)]),
-      
+
     });
   }
 
@@ -295,7 +292,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
       const todayDate = new Date();
 
-      this.loading = true; // Hidden after redirection
+      this.spinner.show();
       const appResp: any = await this.ignatiusService.postData(recordFAD).toPromise();
       /////////////////////await this.addDocument(appResp.recordId);
       this.rentalApplicationFormActionCompleted(true);
@@ -315,7 +312,7 @@ export class RentalApplicationsAddComponent implements OnInit {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }
 
-      this.loading = true;
+      this.spinner.show();
       await this.ignatiusService.putData(recordFAD).toPromise();
       await this.addDocument(this.recordId);
       await this.deleteDocumentFromDb();
@@ -332,9 +329,8 @@ export class RentalApplicationsAddComponent implements OnInit {
     if (success) {
       this.toastr.success(`Rental Application ${msg} successfully`, 'Success');
       this.router.navigate(['rentalapplications']);
-      // this.loading = false;
     } else {
-      this.loading = false;
+      this.spinner.hide();
       this.toastr.error(`Error in ${err} Rental Application`, 'Error');
     }
   }
@@ -530,7 +526,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   cancelChanges(content) {
     const isFormDirty = this.firstFormGroup.dirty || this.secondFormGroup.dirty
       || this.thirdFormGroup || this.fourthFormGroup.dirty || this.fifthFormGroup.dirty// || this.sixthFormGroup.dirty
-       || this.seventhFormGroup.dirty || this.eighthFormGroup.dirty;
+      || this.seventhFormGroup.dirty || this.eighthFormGroup.dirty;
 
     if (isFormDirty) {
       this.modelConfig = new PopupModel();
@@ -545,6 +541,21 @@ export class RentalApplicationsAddComponent implements OnInit {
   redirectToApps(closeModal = false) {
     closeModal && this.ngbModal.dismissAll();
     this.router.navigate(['rentalapplications']);
+  }
+
+  saveExit(fmGrp: string) {
+
+    if (!fmGrp) {
+      this.submitRentalApplication();
+      return;
+    }
+
+    if (this[fmGrp].valid) {
+      this.submitRentalApplication();
+    } else {
+      this.toastr.error("Form is not valid", "Error");
+      this.validateAllFormFields(this.firstFormGroup);
+    }
   }
 
 }
