@@ -100,12 +100,17 @@
                                     <i *ngIf="isLoading"
                                         class="fa fa-spinner fa-pulse"></i>
                                 </button>
-                                <a style="padding: 5px;color:#fff"
-                                    (click)="transformLogin()"
-                                    class="float-right">
+                                <br>
+                                <a class="text-white"
+                                    (click)="transformLogin()">
                                     <i *ngIf="loginForm"
-                                        class="fa fa-lock m-r-5"></i>
-                                    {{forgotText}}
+                                        style="cursor: pointer;"
+                                        routerLink="/register"
+                                        class="fa fa-user-plus float-left"> Register</i>
+
+                                    <i *ngIf="loginForm"
+                                        style="cursor: pointer;"
+                                        class="fa fa-lock float-right"> {{forgotText}}</i>
                                 </a>
                             </div>
                         </form>

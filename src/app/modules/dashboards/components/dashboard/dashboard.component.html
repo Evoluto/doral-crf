@@ -1,5 +1,4 @@
-<div class="row">
-  <!-- Column -->
+<!-- <div class="row">
   <div class="col-md-6 col-lg-6 col-xlg-6">
     <div class="card">
       <div class="box p-2 rounded bg-info text-center">
@@ -12,7 +11,6 @@
       <i class="fa fa-plus"></i> I want to request Small Business Assistance
     </button>
   </div>
-  <!-- Column -->
   <div class="col-md-6 col-lg-6 col-xlg-6">
     <div class="card">
       <div class="box p-2 rounded bg-success text-center">
@@ -27,90 +25,36 @@
   </div>
 </div>
 
-<!-- <div class="card">
-  <div class="card-header bg-secondary text-white">
-    <h4>Application Activity</h4>
+<hr> -->
+
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-info text-white">
+        Small Business Assistance
+        <button class="btn btn-dfa-dark btn-sm float-right"
+          [routerLink]="['/businessapplications-add']">
+          <i class="fa fa-plus"> Add</i>
+        </button>
+      </div>
+      <div class="card-body">
+      </div>
+    </div>
   </div>
-  <div class="card-body" *ngIf="apps.length > 0">
-      <table datatable
-          [dtOptions]="dtOptions"
-          [dtTrigger]="dtTrigger"
-          class="row-border hover">
-          <thead>
-              <tr>
-                  <th>App #</th>
-                  <th>Application Title</th>
-                  <th>Status</th>
-                  <th>Total Request</th>
-                  <th>Applicant Submission Date</th>
-                  <th>DFA Review Start Date</th>
-                  <th>DFA Approval Date</th>
-                  <th>DFA Approval Decision</th>
-              </tr>
-          </thead>
-          <tbody>
-              <ng-container *ngFor="let rw of apps let i=index">
-              <tr *ngIf="i<3" (click)="appRowClick(rw)">
-                  <td>APP-{{ rw.id }}</td>
-                  <td>{{ rw.application_title }}</td>
-                  <td>{{ rw.status }}</td>
-                  <td>{{ rw.total_request | currency}} </td>
-                  <td>{{ rw.date_of_applicant_submission }}</td>
-                  <td>{{ rw.date_of_dfa_review_start }}</td>
-                  <td>{{ rw.date_of_dfa_approval}}</td>
-                  <td>{{ rw.dfa_approval_decision}}</td>
-              </tr>
-              </ng-container>
-          </tbody>
-      </table>
-  </div>
-  <div class="card-body" *ngIf="apps.length == 0">
-    <div class="card-header text-center">No Applications with Activity within last 5 days</div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-success text-white">
+        Emergency Rental Assistance
+        <button class="btn btn-dfa-dark btn-sm float-right"
+          [routerLink]="['/rentalapplications-add']">
+          <i class="fa fa-plus"> Add</i>
+        </button>
+      </div>
+      <div class="card-body">
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="card">
-  <div class="card-header bg-secondary text-white">
-    <h4>New Communications</h4>
-  </div>
-  <div class="card-body" *ngIf="threads.length > 0">
-      <table datatable
-          [dtOptions]="threadDtOptions"
-          [dtTrigger]="dtTrigger"
-          class="row-border hover">
-          <thead>
-              <tr>
-                <th></th>
-                <th>App #</th>
-                <th>Application Title</th>
-                <th>Type</th>
-                <th>Created Date</th>
-                <th>Status</th>
-                <th>Subject</th>
-                <th>Details</th>
-              </tr>
-          </thead>
-          <tbody>
-              <ng-container *ngFor="let rw of threads let i=index">
-                <tr *ngIf="i<3" (click)="comRowClick(rw)">
-                  <td class="text-left">
-                    <span *ngIf="hasAttachment(rw)" class="comm-attachment">
-                      <i class="fa fa-paperclip text-secondary"></i>
-                    </span>
-                  </td>
-                  <td>APP-{{ rw.id }}</td>
-                  <td>{{ rw.application_title }}</td>
-                  <td>{{ rw.type }}</td>
-                  <td>{{ rw.datecreated * 1000 | date:'M/dd/yyyy h:mm a'}}</td>
-                  <td>{{ rw.status }}</td>
-                  <td>{{ rw.subject}}</td>
-                  <td>{{ rw.details}}</td>
-                </tr>
-              </ng-container>
-          </tbody>
-      </table>
-  </div>
-  <div class="card-body" *ngIf="threads.length == 0">
-    <div class="card-header text-center">No new communications.</div>
-  </div>
-</div> -->
