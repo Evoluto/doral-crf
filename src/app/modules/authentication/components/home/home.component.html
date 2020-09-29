@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="card">
+    <!-- <div class="card">
         <div class="card-header bg-dark text-white">
             Home
         </div>
@@ -9,6 +9,285 @@
             <button routerLink="/login" class="btn btn-primary">Login</button>
             <button routerLink="/pre-register" class="btn btn-primary">Pre Register</button>
             <button routerLink="/register" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+    <br> -->
+
+    <div>
+        <div class="col-md-12">
+            <div class="row">
+                <!-- <div class="col-md-6">
+                    <img src="/assets/images/doral-seal.png"  width="100" alt="logo" />
+                </div> -->
+                <div class="col-md-9">
+                    <img src="/assets/images/doral-cares_200.png" width="200" alt="logo" />
+                </div>
+                <div class="col-md-3">
+                    <div *ngIf="isEnglish">
+                        <button class="btn yellow-bg" (click)="onLanguageChange('English')">English</button>
+                        <button class="btn blue-bg" (click)="onLanguageChange('Spanish')">Spanish</button>
+                    </div>
+                    <div *ngIf="isSpanish">
+                        <button class="btn yellow-bg" (click)="onLanguageChange('English')">Inglés</button>
+                        <button class="btn blue-bg" (click)="onLanguageChange('Spanish')">Español</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div *ngIf="isEnglish">
+                    <div class="col-md-12">
+                        Mayor Juan Carlos Bermudez and City Council have approved Doral CARES grant programs to small businesses who have been economically impacted by the COVID-19 pandemic and residents who can demonstrate a pressing financial need due to the pandemic. Beginning October 1st, at 8:00 a.m., the City will begin accepting applications for the Doral CARES Emergency Rental Assistance Program and Doral CARES Business Recovery Assistance Grant. Funding for these assistance programs is made possible through funding allocated from federal Coronavirus, Aid, Relief, and Economic Security (CARES) monies provided through Miami- Dade County.
+                    </div>
+                </div>
+                <div *ngIf="isSpanish">
+                    <div class="col-md-12">
+                        El alcalde Juan Carlos Bermúdez y el Concejo Municipal aprobaron los programas de subvenciones Doral CARES para pequeñas empresas que se han visto afectadas económicamente por la pandemia de COVID-19 y residentes que puedan demostrar una necesidad financiera urgente debido a la pandemia. A partir del 1 de octubre a las 8:00 a.m., la Ciudad comenzará a aceptar solicitudes en línea para dos programas de subvenciones independientes: el Programa de Asistencia de Emergencia para Alquiler de Doral CARES y la Subvención de Asistencia para la Recuperación Empresarial Doral CARES. El financiamiento para estos programas de asistencia es posible gracias a los fondos asignados de los fondos federales de Coronavirus, Ayuda, Alivio y Seguridad Económica (CARES) proporcionados a través del Condado de Miami-Dade.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div *ngIf="isEnglish">
+                    <button class="btn yellow-bg" (click)="onApplicationTypeChange('Business')">Small Business Assistance</button>
+                    <button class="btn blue-bg" (click)="onApplicationTypeChange('Rental')">Emergency Rental Assistance</button>
+                </div>
+                <div *ngIf="isSpanish">
+                    <button class="btn yellow-bg" (click)="onApplicationTypeChange('Business')">Programa de Asistencia para Pequeñas Empresas</button>
+                    <button class="btn blue-bg" (click)="onApplicationTypeChange('Rental')">Programa de Asistencia de Emergencia para Alquiler</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>    
+    <br>
+    <div *ngIf="isBusiness">
+        <div *ngIf="isEnglish">
+            <div class="card-header yellow-bg">
+                Doral CARES Small Business Assistance Grant
+            </div>
+            <div class="card-body bg-light">
+                <div class="row">
+                    <div class="col-md-12">
+                        The Doral CARES Small Business Assistance Grant provides financial assistance to small businesses within the city that have been economically impacted by the COVID-19 pandemic. The program provides eligible businesses with a one-time assistance grant of up to $10,000.00 for allowable specified COVID relief. The reimbursement grant program is intended to help small businesses that are not part of a national chain or franchise to recoup COVID-related expenses incurred between March 12, 2020 and September 30, 2020. Expenses may include rent, employee salaries, inventory, insurance, communications, technological upgrades, training, cleaning, and COVID prevention supplies related to the pandemic. Grants will be considered on a first-come first-served basis and will be awarded to eligible businesses until funds are expended. The amount of the grant will be based on the expenses submitted and funding availability. Businesses must submit a completed application online , and provide all required materials to be considered eligible based on the following criteria:
+                    </div>         
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>Business must be a for-profit entity physically located in Doral, established before March 12, 2020 and legally operating in Florida.</li>
+                            <li>Business must have 3 to 25 current employees (part-time employees and subcontractors may be included).</li>
+                            <li>Business must be in good standing with the city, with all taxes and required licenses current.</li>
+                            <li>Business must provide financial documentation that shows proof of financial stress or operational disruptions due to the pandemic.</li>
+                            <li>Business must be open for business or able to open upon lifting of mandatory closure orders.</li>
+                            <li>The program does not apply to national chains and franchises or home-based businesses.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Required documents checklist:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-11">
+                        <input type="checkbox" disabled> Application signed by owner (applicant or applicants must document at least 51% ownership)<br>
+                        <input type="checkbox" disabled> 2019 Business Federal Tax Return<br>
+                        <input type="checkbox" disabled> Employee documentation (IRS Form 941, Employees’ W-2s or 1099s if applicable)<br>
+                        <input type="checkbox" disabled> Proof of payment (cancelled checks, statement) up to the requested grant amount.<br>
+                        <input type="checkbox" disabled> Profit and Loss Statement for 2019 and January-September 2020 *<br>
+                        &nbsp;&nbsp;&nbsp;* If your financial information is proprietary, please check this box:<input type="checkbox" disabled> <br>
+                        <input type="checkbox" disabled> W-9 (signed and dated)  Download here<br>
+                        <input type="checkbox" disabled> Vendor Application (completed)  Download here<br>
+                        <input type="checkbox" disabled> Business Entity Affidavit (signed, dated and notarized)  Download here<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isSpanish">
+            <div class="card-header yellow-bg">
+                Programa de asistencia para pequeñas empresas de Doral CARES
+            </div>
+            <div class="card-body bg-light">
+                <div class="row">
+                    <div class="col-md-12">
+                        La Subvención de Asistencia para Pequeñas Empresas Doral CARES brinda asistencia financiera a las pequeñas empresas dentro de la ciudad que se han visto afectadas económicamente por la pandemia COVID-19. El programa proporciona a las empresas elegibles una subvención de asistencia única de hasta $ 10,000.00 para el alivio COVID especificado permitido. El programa de subvenciones de reembolso está destinado a ayudar a las pequeñas empresas que no forman parte de una cadena o franquicia nacional a recuperar los gastos relacionados con COVID incurridos entre el 12 de marzo de 2020 y el 30 de septiembre de 2020. Los gastos pueden incluir alquiler, salarios de empleados, inventario, seguros, comunicaciones, actualizaciones tecnológicas, capacitación, limpieza y suministros de prevención de COVID relacionados con la pandemia. Las subvenciones se considerarán por orden de llegada y se otorgarán a empresas elegibles hasta que se gasten los fondos. El monto de la subvención se basará en los gastos presentados y la disponibilidad de fondos. Las empresas deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles según los siguientes criterios:
+                    </div>         
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>La empresa debe ser una entidad con fines de lucro ubicada físicamente en Doral, establecida antes del 12 de marzo de 2020 y que opere legalmente en Florida.</li>
+                            <li>La empresa debe tener de 3 a 25 empleados actuales (se pueden incluir empleados a tiempo parcial y subcontratistas).</li>
+                            <li>El negocio debe estar al día con la ciudad, con todos los impuestos y las licencias vigentes requeridas.</li>
+                            <li>La empresa debe proporcionar documentación financiera que muestre pruebas de estrés financiero o interrupciones operativas debido a la pandemia.</li>
+                            <li>El negocio debe estar abierto al público o en condiciones de abrir al levantarse las órdenes de cierre obligatorias.</li>
+                            <li>El programa no se aplica a cadenas y franquicias nacionales o negocios desde el hogar.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Lista de verificación de documentos requeridos:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-11">
+                        <input type="checkbox" disabled> Solicitud firmada por el propietario (el solicitante o los solicitantes deben documentar al menos el 51% de propiedad)<br>
+                        <input type="checkbox" disabled> Declaración de impuestos federales para empresas de 2019<br>
+                        <input type="checkbox" disabled> Documentación del empleado (formulario 941 del IRS, formularios W-2 o 1099 de los empleados si corresponde)<br>
+                        <input type="checkbox" disabled> Comprobante de pago (cheques cancelados, estado de cuenta) hasta el monto de la subvención solicitada.<br>
+                        <input type="checkbox" disabled> Estado de pérdidas y ganancias para 2019 y enero-septiembre de 2020 *<br>
+                        &nbsp;&nbsp;&nbsp;* Si su información financiera es de propiedad exclusiva, marque esta casilla:<input type="checkbox" disabled> <br>
+                        <input type="checkbox" disabled> W-9 (firmado y fechado)  Descargar aquíe<br>
+                        <input type="checkbox" disabled> Solicitud de proveedor (completada)  Descargar aquí<br>
+                        <input type="checkbox" disabled> Declaración jurada de entidad comercial (firmada, fechada y notariada)  Descargar aquí<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isRental">
+        <div *ngIf="isEnglish">
+            <div class="card-header blue-bg">
+                Doral CARES Emergency Rental Assistance Program
+            </div>
+            <div class="card-body bg-light">
+                <div class="row">
+                    <div class="col-md-12">
+                        The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be paid directly to approved landlords in the form of a grant which must be used solely to provide rent forgiveness in the same amount to eligible tenants. Residents must submit a completed application online, and provide all required materials to be considered eligible.
+                    </div>         
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>Applicant must be a current resident of the City of Doral, Florida.</li>
+                            <li>Applicant was unable to pay the rent for at least one month due to a documented loss of income related to COVID-19.</li>
+                            <li>Your landlord must agree to participate.</li>
+                            <li>Funding for outstanding rent that is being requested through this program has not been paid or reimbursed by any other source (county, city, state or federal).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Required documents for the applicant:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-11">
+                        <input type="checkbox" disabled> Copy of one of the following valid government-issued photo IDs: Florida Driver’s License, Florida ID or US passport<br>
+                        <input type="checkbox" disabled> Copy of a signed rental lease agreement executed by the applicant(s)<br>
+                        <input type="checkbox" disabled> Copy of current utility bill or other proof that the applicant is living at the address<br>
+                        <input type="checkbox" disabled> Current past-due rent notice or letter from landlord, or eviction notice.<br>
+                        <input type="checkbox" disabled> A copy of most recent year tax return for each adult member of the household (18 years or older)<br>
+                        <input type="checkbox" disabled> Letter or notice from employer documenting loss of employment or loss of income, or current profit and loss statement if self-employed<br>
+                        <input type="checkbox" disabled> A copy of two (2) most recent and consecutive paycheck stubs showing the employer name, address and telephone number for all employers of every adult (18 years or older) living in the household<br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Required from landlord:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-11">
+                        <input type="checkbox" disabled> A copy of landlord's name, address, tax identification number and verification of ownership or authority to rent the property.<br>
+                        <input type="checkbox" disabled> Landlord Participation Agreement signed by landlord indicating, monthly rent amount, amount owed by applicant, and statement of willingness to participate in the program. (Download form)<br>
+                        <input type="checkbox" disabled> W-9 form must be completed, signed and dated by landlord to enable payment.  Download here<br>
+                        <input type="checkbox" disabled> Vendor Application must be completed to enable payment.  Download here<br>
+                        <input type="checkbox" disabled> Business Entity Affidavit must be completed, signed, notarized to enable payment, if applicable to a management company.  Download here<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isSpanish">
+            <div class="card-header blue-bg">
+                Programa de asistencia de emergencia para alquiler de Doral CARES
+            </div>
+            <div class="card-body bg-light">
+                <div class="row">
+                    <div class="col-md-12">
+                        El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles.
+                    </div>         
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul>
+                            <li>El solicitante debe ser un residente actual de la ciudad de Doral, Florida.</li>
+                            <li>El solicitante no pudo pagar el alquiler durante al menos un mes debido a una pérdida documentada de ingresos relacionada con COVID-19.</li>
+                            <li>El arrendador debe aceptar participar.</li>
+                            <li>El financiamiento del alquiler pendiente que se solicita a través de este programa no ha sido pagado ni reembolsado por ninguna otra fuente (condado, ciudad, estado o federal).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Documentos requeridos para el solicitante:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-11">
+                        <input type="checkbox" disabled> Copia de una de las siguientes identificaciones con fotografía válidas emitidas por el gobierno: Licencia de conducir de Florida, identificación de Florida o Pasaporte estadounidense<br>
+                        <input type="checkbox" disabled> Copia de un contrato de arrendamiento firmado firmado por el solicitante (s)<br>
+                        <input type="checkbox" disabled> Copia de la factura de servicios públicos actual u otra prueba de que el solicitante vive en la dirección<br>
+                        <input type="checkbox" disabled> Aviso actual de alquiler atrasado o carta del propietario o aviso de desalojo<br>
+                        <input type="checkbox" disabled> Una copia de la declaración de impuestos del año más reciente de cada miembro adulto del hogar (18 años o más)<br>
+                        <input type="checkbox" disabled> Carta o aviso del empleador que documente la pérdida del empleo o la pérdida de ingresos o ganancias actuales y declaración de pérdidas si trabaja por cuenta propia<br>
+                        <input type="checkbox" disabled> Una copia de los dos (2) talones de cheques de pago más recientes y consecutivos que muestren el nombre del empleador, la dirección y el número de teléfono de todos los empleadores de cada adulto (18 años o más) que viva en el hogar<br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Requerido del arrendador:
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-11">
+                        <input type="checkbox" disabled> Una copia del nombre del propietario, dirección, número de identificación fiscal y verificación de propiedad o autoridad para alquilar la propiedad<br>
+                        <input type="checkbox" disabled> Acuerdo de participación del propietario firmado por el propietario que indica el monto del alquiler mensual, el monto       adeuda por el solicitante y una declaración de voluntad de participar en el programa. (Descargar formulario)<br>
+                        <input type="checkbox" disabled> El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago.  Descargar formulario<br>
+                        <input type="checkbox" disabled> Se debe completar la Solicitud de proveedor para permitir el pago.  Descargar formulario<br>
+                        <input type="checkbox" disabled> La declaración jurada de la entidad comercial debe completarse, firmarse y certificarse ante notario para permitir el pago, si corresponde, a una empresa de gestión.  Descargar formulario<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div *ngIf="isEnglish">
+                    <button class="btn yellow-bg" routerLink="/register">Register</button>
+                </div>
+                <div *ngIf="isSpanish">
+                    <button class="btn yellow-bg" routerLink="/register">Regístrese</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div *ngIf="isEnglish">
+                    Already registered? <button class="btn blue-bg" routerLink="/login">Login</button>
+                </div>
+                <div *ngIf="isSpanish">
+                    ¿Ya está registrado? <button class="btn blue-bg" routerLink="/login">Login</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
