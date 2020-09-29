@@ -5,6 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ToastrService } from 'ngx-toastr';
 import { PasswordRecoveryData } from 'src/app/models/password-recovery-data';
 import { environment } from 'src/environments/environment';
+import { MatRadioButton, MatRadioChange } from '@angular/material/radio';
 
 @Component({
   selector: 'app-home',
@@ -43,6 +44,11 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent implements OnInit {
   msg = '';
   isLoading = false;
+  
+  isBusiness: boolean = true;
+  isRental: boolean = false;
+  isEnglish: boolean = true;
+  isSpanish: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -51,6 +57,28 @@ export class HomeComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+
   }
 
+  onApplicationTypeChange(type) {
+    if (type == "Business") {
+      this.isBusiness = true;
+      this.isRental = false;
+    }
+    else {
+      this.isRental = true;
+      this.isBusiness = false;
+    }
+  }
+
+  onLanguageChange(type) {
+    if (type == "English") {
+      this.isEnglish = true;
+      this.isSpanish = false;
+    }
+    else {
+      this.isSpanish = true;
+      this.isEnglish = false;
+    }
+  }
 }

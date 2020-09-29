@@ -6,5 +6,14 @@
 }
 
 .blue-bg {
-    background-color: #bfccec !important;
+    background-color: #010080 !important;
+    color: white;
+    font-size: 12px;
+}
+
+.yellow-bg { 
+    background-color: #fecd07 !important;
+    color: black;
+    font-size: 12px;
+
 }
