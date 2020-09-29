@@ -440,10 +440,10 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   addDocumentFormRow() {
 
-    if (this.documents.length === 5) {
-      this.toastr.error('Cant add more then 5 rows', 'Error');
-      return
-    }
+    // if (this.documents.length === 5) {
+    //   this.toastr.error('Cant add more then 5 rows', 'Error');
+    //   return
+    // }
 
     let obj = {};
     let tempId = uuid.v4();
