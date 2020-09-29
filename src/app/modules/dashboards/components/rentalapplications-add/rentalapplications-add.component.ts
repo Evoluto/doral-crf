@@ -328,7 +328,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
     if (success) {
       this.toastr.success(`Rental Application ${msg} successfully`, 'Success');
-      this.router.navigate(['rentalapplications']);
+      this.router.navigate(['dashboard']);
     } else {
       this.spinner.hide();
       this.toastr.error(`Error in ${err} Rental Application`, 'Error');

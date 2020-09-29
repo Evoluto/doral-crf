@@ -335,7 +335,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
     if (success) {
       this.toastr.success(`Business Application ${msg} successfully`, 'Success');
-      this.router.navigate(['businessapplications']);
+      this.router.navigate(['dashboard']);
     } else {
       this.spinner.hide();
       this.toastr.error(`Error in ${err} Business Application`, 'Error');
