@@ -82,8 +82,9 @@ export class ProjectSpecificService {
 		projectSpecificData.documentsData = new DocumentsData();
 		projectSpecificData.documentsData.TableId = documentsData.Id;
 		projectSpecificData.documentsData.RecordIdFieldId = appData.getAppItemId(documentsData.Fields, 'Record Id');
+		projectSpecificData.documentsData.DocumentTypeFieldId = appData.getAppItemId(documentsData.Fields, 'Document Type');
+
 		// projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
-		// projectSpecificData.documentsData.DocumentTypeExpenditureCategoryMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Expenditure Category');
 		projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Selection');
 		// projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
 		// projectSpecificData.documentsData.RelatedCommThreadFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Threads');
@@ -91,6 +92,15 @@ export class ProjectSpecificService {
 		projectSpecificData.documentsData.RelatedRentalApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Rental Applications');
 		// projectSpecificData.documentsData.RelatedCommResponsesFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Responses');
 		// projectSpecificData.documentsData.RelatedPaymentRequestsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Payment Requests');
+
+
+		/* ===================== [4] Table = 'Household Members' ======================*/
+		let requiredDocumentsData = appData.Tables.find(t => t.Name === 'Required Documents');
+		projectSpecificData.requiredDocumentsData = new RequiredDocumentsData();
+		projectSpecificData.requiredDocumentsData.TableId = requiredDocumentsData.Id;
+		projectSpecificData.requiredDocumentsData.RecordIdFieldId = appData.getAppItemId(requiredDocumentsData.Fields, 'Record Id');
+		projectSpecificData.requiredDocumentsData.RecordFormFieldId = appData.getAppItemId(requiredDocumentsData.Fields, 'Required From');
+
 		
 		projectSpecificData.appData = JSON.parse(JSON.stringify(appData));
 		projectSpecificData.appData.Tables.forEach(t => t.Fields = null);

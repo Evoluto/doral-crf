@@ -591,9 +591,9 @@
                       (change)="onChangeDocumentType(doc.tempId,$event.target.value)">
                       <option value=""
                         hidden>- Select type -</option>
-                      <option value="{{opt.value}}"
+                      <option value="{{opt.id}}"
                         *ngFor="let opt of documentSelectionTypes">
-                        {{opt.name}}
+                        {{opt.document_title}}
                       </option>
                     </select>
                   </td>

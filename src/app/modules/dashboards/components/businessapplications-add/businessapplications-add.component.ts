@@ -71,13 +71,9 @@ export class BusinessApplicationsAddComponent implements OnInit {
     const componentData = this.route.snapshot.data['componentData'];
     this.organizationTypes = componentData[0];
     this.ownOrLease = componentData[1];
-    //this.documentSelectionTypes = componentData[0];
-    this.businessApplicationEditData = (componentData && componentData[2]) ? componentData[2][0] : {};
-    this.businessApplicationEditDocumentData = (componentData && componentData[3]) ? componentData[3] : [];
-    this.businessApplicationEditDocumentData = this.businessApplicationEditDocumentData.filter(
-      iterator => iterator.document_type === "Application Attachment"
-    )
-    //this.programData = this.storageService.getItem('userSessionData');
+    this.documentSelectionTypes = componentData[2];
+    this.businessApplicationEditData = (componentData && componentData[3]) ? componentData[3][0] : {};
+    this.businessApplicationEditDocumentData = (componentData && componentData[4]) ? componentData[4] : [];
     this.setupForm();
     this.spinner.hide();
   }
@@ -402,16 +398,11 @@ export class BusinessApplicationsAddComponent implements OnInit {
           new Array<FieldListItem>()
         );
 
-        recordFAD.fieldsList.push(new FieldListItem(
-          'related_applicants',
-          (this.storageService.getItem('userSessionData')).applicantId,
-          '')
-        )
-        recordFAD.fieldsList.push(new FieldListItem('document_type', 'Application Attachment', ''))
-        recordFAD.fieldsList.push(new FieldListItem('document_type_selection', documentType, ''))
+        recordFAD.fieldsList.push(new FieldListItem('document_type', 'Business Application', ''))
+        recordFAD.fieldsList.push(new FieldListItem('related_required_documents', documentType, ''))
         recordFAD.fieldsList.push(new FieldListItem('document_title', documentTitle, ''))
-        recordFAD.fieldsList.push(new FieldListItem('related_applications', applicationId, ''))
-        recordFAD.fieldsList.push(new FieldListItem('document', fileName, document)
+        recordFAD.fieldsList.push(new FieldListItem('related_business_assistance', applicationId, ''))
+        recordFAD.fieldsList.push(new FieldListItem('document_file', fileName, document)
         )
 
         observables.push(this.ignatiusService.postData(recordFAD))
@@ -419,7 +410,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
       await forkJoin(observables).toPromise();
 
-    } catch (error) {
+    } catch (error) {      
       throw error;
     }
 
@@ -447,10 +438,10 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
   addDocumentFormRow() {
 
-    if (this.documents.length === 5) {
-      this.toastr.error('Cant add more then 5 rows', 'Error');
-      return
-    }
+    // if (this.documents.length === 5) {
+    //   this.toastr.error('Cant add more then 5 rows', 'Error');
+    //   return
+    // }
 
     let obj = {};
     let tempId = uuid.v4();
@@ -474,13 +465,12 @@ export class BusinessApplicationsAddComponent implements OnInit {
   }
 
   downloadFile(file: any) {
-    // NES - FOR NOW
-    // this.ignatiusService.downloadFile(
-    //   this.doralData.documentsData.TableId,
-    //   file["id"],
-    //   this.doralData.documentsData.DocumentFileId,
-    //   file["document"]
-    // );
+    this.ignatiusService.downloadFile(
+      this.doralData.documentsData.TableId,
+      file["id"],
+      this.doralData.documentsData.RecordIdFieldId,
+      file["document_file"]
+    );
   }
 
   deleteDocument(docId) {

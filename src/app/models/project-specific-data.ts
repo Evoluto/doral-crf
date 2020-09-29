@@ -7,7 +7,7 @@ export class ProjectSpecificData {
     businessApplicationsData: BusinessApplicationsData
     rentalApplicationsData: RentalApplicationsData
     documentsData: DocumentsData
-    requredDocumentsData: RequiredDocumentsData
+    requiredDocumentsData: RequiredDocumentsData 
     householdMembersData: HouseholdMembersData
 }
 
@@ -46,6 +46,7 @@ export class DocumentsData {
     RecordIdFieldId: number
     RelatedBusinessApplicationsFieldId: number
     RelatedRentalApplicationsFieldId: number
+    DocumentTypeFieldId: number
     // DocumentFileId:number
     // DocumentTypeExpenditureCategoryMultipleChoiceID:number
     DocumentTypeSelectionMultipleChoiceID:number
@@ -54,9 +55,11 @@ export class DocumentsData {
     // RelatedCommResponsesFieldId: number
     // RelatedPaymentRequestsFieldId:number
 }
+
 export class RequiredDocumentsData {
     TableId: number
     RecordIdFieldId: number
+    RecordFormFieldId:number
     //RelatedBusinessApplicationsFieldId: number
     // DocumentFileId:number
     // DocumentTypeExpenditureCategoryMultipleChoiceID:number
