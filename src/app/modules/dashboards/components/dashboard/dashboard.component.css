@@ -6,3 +6,30 @@ tbody tr {
     color: #bfccec;
     padding: 5px;
 }
+
+.blue-bg {
+    background-color: #010080 !important;
+    color: white;
+    font-size: 12px;
+}
+
+.yellow-bg { 
+    background-color: #fecd07 !important;
+    color: black;
+    font-size: 12px;
+
+}
+
+.green-bg {
+    background-color: #177328 !important;
+    color: black;
+    font-size: 12px;
+
+}
+
+.red-bg {
+    background-color: #ed1e24 !important;
+    color: black;
+    font-size: 12px;
+
+}

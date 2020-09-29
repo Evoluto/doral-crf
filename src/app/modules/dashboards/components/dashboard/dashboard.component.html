@@ -19,21 +19,21 @@
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Download PDF">
-                <i class="fa fa-file-pdf"></i> Download
+                <i class="fa fa-file-pdf"> Download</i>
               </button>
               <button *ngIf="rw.status === 'Open'"
                 class="btn btn-sm blue-bg"
                 (click)="editBusinessRecord(rw.id)"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Edit"> <i class="fa fa-edit"></i> Edit
+                title="Edit"> <i class="fa fa-edit"> Edit</i>
               </button>
               <button *ngIf="rw.status === 'Open'"
                 class="btn btn-sm green-bg"
                 (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Submit"> <i class="fa fa-check"></i> Submit
+                title="Submit"> <i class="fa fa-check"> Submit</i>
               </button>
               <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
             </div>
@@ -64,21 +64,21 @@
                 data-toggle="tooltip"
                 data-placement="top"
                 title="Download PDF">
-                <i class="fa fa-file-pdf"></i> Download
+                <i class="fa fa-file-pdf"> Download</i>
               </button>
               <button class="btn btn-sm blue-bg"
                 *ngIf="rw.status === 'Open'"
                 (click)="editRentalRecord(rw.id)"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Edit"><i class="fa fa-edit"></i> Edit
+                title="Edit"><i class="fa fa-edit"> Edit</i>
               </button>
               <button class="btn btn-sm green-bg"
                 *ngIf="rw.status === 'Open'"
                 (click)="openSubmitRentalApplicationPopup(rw,submitRentalApplicationTemp)"
                 data-toggle="tooltip"
                 data-placement="top"
-                title="Submit"><i class="fa fa-check"></i> Submit
+                title="Submit"><i class="fa fa-check"> Submit</i>
               </button>
               <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
             </div>

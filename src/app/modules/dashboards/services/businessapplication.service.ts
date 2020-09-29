@@ -26,19 +26,33 @@ export class BusinessApplicationService implements Resolve<Object[]>{
         observables.push(
           this.ignatiusService.getDropdownValues(
             projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
-          )
-        )
-        observables.push(
+          ),
           this.ignatiusService.getDropdownValues(
             projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID.toString()
-          )
+          ),
+          this.ignatiusService
+            .getQueryReportObservable(
+              projectSpecificData.appData,
+              {
+                "ApplicationTableId": projectSpecificData.requiredDocumentsData.TableId,
+                "ConditionGroups": [
+                  {
+                    "Type": "all",
+                    "Conditions": [
+                      {
+                        "ConditionField": {
+                          "Id": projectSpecificData.requiredDocumentsData.RecordFormFieldId
+                        },
+                        "OperationType": "is equal",
+                        "Value": 'Business'
+                      }
+                    ]
+                  }
+                ]
+              })
         )
-        // NES - FOR NOW
-        // observables.push(
-        //   this.ignatiusService.getDropdownValues(
-        //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
-        //   )
-        // )
+
+
 
         break;
 
@@ -47,38 +61,71 @@ export class BusinessApplicationService implements Resolve<Object[]>{
         const recordId = route.paramMap.get("id");
 
         observables.push(
+
           this.ignatiusService.getDropdownValues(
             projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
-          )
-        )
-        observables.push(
+          ),
+
           this.ignatiusService.getDropdownValues(
             projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID.toString()
-          )
-        )
-        
-        // NES - FOR NOW
-        // observables.push(
-        //   this.ignatiusService.getDropdownValues(
-        //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
-        //   )
-        // )
+          ),
 
-        observables.push(
+          this.ignatiusService
+            .getQueryReportObservable(
+              projectSpecificData.appData,
+              {
+                "ApplicationTableId": projectSpecificData.requiredDocumentsData.TableId,
+                "ConditionGroups": [
+                  {
+                    "Type": "all",
+                    "Conditions": [
+                      {
+                        "ConditionField": {
+                          "Id": projectSpecificData.requiredDocumentsData.RecordFormFieldId
+                        },
+                        "OperationType": "is equal",
+                        "Value": 'Business'
+                      }
+                    ]
+                  }
+                ]
+              }),
+
           this.ignatiusService.getTargetTableObservable(
             projectSpecificData.appData,
             recordId,
             projectSpecificData.businessApplicationsData.TableId as number,
             projectSpecificData.businessApplicationsData.RecordIdFieldId as number
-          )
-        );
+          ),
 
-        observables.push(this.ignatiusService.getTargetTableObservable(
-          projectSpecificData.appData,
-          recordId,
-          projectSpecificData.documentsData.TableId,
-          projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId as number
-        ))
+          this.ignatiusService
+            .getQueryReportObservable(
+              projectSpecificData.appData,
+              {
+                "ApplicationTableId": projectSpecificData.documentsData.TableId,
+                "ConditionGroups": [
+                  {
+                    "Type": "all",
+                    "Conditions": [
+                      {
+                        "ConditionField": {
+                          "Id": projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId
+                        },
+                        "OperationType": "is equal",
+                        "Value": recordId
+                      },
+                      {
+                        "ConditionField": {
+                          "Id": projectSpecificData.documentsData.DocumentTypeFieldId
+                        },
+                        "OperationType": "is equal",
+                        "Value": 'Business Application'
+                      }
+                    ]
+                  }
+                ]
+              })
+        )
 
         break;
     }
