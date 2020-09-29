@@ -84,36 +84,6 @@ export class BusinessApplicationsComponent implements OnInit {
     }
   }
 
-  // openFilter(content) {
-  //   this.modelConfig = new PopupModel();
-  //   this.ngbModal.open(content, this.modelConfig.settings)
-  // }
-
-  // applyFilter(): void {
-  //   this.spinner.show();
-  //   if(this.selectedStatus.length){
-  //     let filteredRows = this.businessApplicationList.filter(app => this.selectedStatus.includes(app.status));
-  //     this.rows = filteredRows;  
-  //   } else {
-  //     this.rows = this.businessApplicationList;
-  //   }
-
-  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-  //     // Destroy the table first
-  //     dtInstance.destroy();
-  //     // Call the dtTrigger to rerender again
-  //     this.dtTrigger.next();
-  //     setTimeout(() => {
-  //       this.spinner.hide();
-  //     }, 300);
-  //   });   
-  //   this.ngbModal.dismissAll()
-  // }
-
-  // private setupFilters(): void {
-  //   this.statusList = [...new Set(this.businessApplicationList.map(app => app.status))].filter(status => status);
-  // }
-
   editRecord(id) {
     this.router.navigate([`businessapplications-edit/${id}`])
   }

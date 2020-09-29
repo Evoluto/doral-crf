@@ -23,17 +23,21 @@ export class DashboardService implements Resolve<Object[]>{
     switch (subjectTableName) {
       case "dashboard":
 
-        //////??????????? NES - NOT NOW postBodies.push({ "ApplicationTableId": projectSpecificData.businessApplicationsData.TableId })
-        
-        observables = observables.concat(
-          this.ignatiusService.getQueryReportObservables(
+
+        observables.push(
+          this.ignatiusService.getQueryReportObservable(
             projectSpecificData.appData,
-            postBodies
+            { "ReportId": projectSpecificData.businessApplicationsData.BusinessApplicationListReportId }
+          ),
+          this.ignatiusService.getQueryReportObservable(
+            projectSpecificData.appData,
+            { "ReportId": projectSpecificData.rentalApplicationsData.RentalApplicationListReportId }
           )
-        );
+        )
+
 
         break;
-      
+
     }
 
     this.spinner.show();
@@ -44,9 +48,8 @@ export class DashboardService implements Resolve<Object[]>{
     private spinner: NgxSpinnerService,
     private ignatiusService: IgnatiusService,
     private routeDataService: RouteDataService,
-    private projectSpecificService: ProjectSpecificService)
-  {}
+    private projectSpecificService: ProjectSpecificService) { }
 
- 
+
 }
 

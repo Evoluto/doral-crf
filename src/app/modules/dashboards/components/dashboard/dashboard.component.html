@@ -1,60 +1,157 @@
-<!-- <div class="row">
-  <div class="col-md-6 col-lg-6 col-xlg-6">
-    <div class="card">
-      <div class="box p-2 rounded bg-info text-center">
-        <h1 class="font-weight-light text-white">Small Business Assistance</h1>
-      </div>
-    </div>
-    <br>
-    <button class="btn btn-dfa-dark btn-sm float-right"
-      [routerLink]="['/businessapplications']">
-      <i class="fa fa-plus"></i> I want to request Small Business Assistance
-    </button>
-  </div>
-  <div class="col-md-6 col-lg-6 col-xlg-6">
-    <div class="card">
-      <div class="box p-2 rounded bg-success text-center">
-        <h1 class="font-weight-light text-white">Emergency Rental Assistance</h1>
-      </div>
-    </div>
-    <br>
-    <button class="btn btn-dfa-dark btn-sm"
-      [routerLink]="['/rentalapplications']">
-      <i class="fa fa-plus"></i> I want to request Emergency Rental Assistance
-    </button>
-  </div>
-</div>
-
-<hr> -->
-
-
-
-
 <div class="row">
   <div class="col-md-6">
-    <div class="card">
-      <div class="card-header bg-info text-white">
-        Small Business Assistance
-        <button class="btn btn-dfa-dark btn-sm float-right"
+    <div class="card bg-secondary">
+      <div class="card-header text-white">
+        <span style="font-size: 20px;font-weight:500">Business Assistance</span>
+        <button class="btn btn-success btn-sm float-right"
           [routerLink]="['/businessapplications-add']">
           <i class="fa fa-plus"> Add</i>
         </button>
       </div>
-      <div class="card-body">
+      <div class="card-body text-center">
+        <div *ngFor="let rw of businessApplicationList">
+          <div class="box p-2 rounded bg-warning">
+            <h2 class="font-weight-light text-white">{{rw.status}}</h2>
+            <div>
+              <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                class="btn btn-sm btn-dfa-light"
+                (click)="downloadBusinessFile(rw)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Download PDF">
+                <i class="fa fa-file-pdf"></i> Download
+              </button>
+              <button *ngIf="rw.status === 'Open'"
+                class="btn btn-sm btn-dfa-light"
+                (click)="editBusinessRecord(rw.id)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Edit"> <i class="fa fa-edit"></i> Edit
+              </button>
+              <button *ngIf="rw.status === 'Open'"
+                class="btn btn-sm btn-dfa-light"
+                (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Submit"> <i class="fa fa-check"></i> Submit
+              </button>
+              <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
+            </div>
+          </div>
+          <br>
+        </div>
+
       </div>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="card">
-      <div class="card-header bg-success text-white">
-        Emergency Rental Assistance
-        <button class="btn btn-dfa-dark btn-sm float-right"
+    <div class="card bg-secondary">
+      <div class="card-header text-white">
+        <span style="font-size: 20px;font-weight:500">Emergency Rental Assistance</span>
+        <button class="btn btn-success btn-sm float-right"
           [routerLink]="['/rentalapplications-add']">
           <i class="fa fa-plus"> Add</i>
         </button>
       </div>
-      <div class="card-body">
+      <div class="card-body text-center">
+        <div *ngFor="let rw of rentalApplicationList">
+          <div class="box p-2 rounded bg-warning">
+            <h2 class="font-weight-light text-white">{{rw.status}}</h2>
+            <div>
+              <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                class="btn btn-sm btn-dfa-light"
+                (click)="downloadRentalFile(rw)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Download PDF">
+                <i class="fa fa-file-pdf"></i> Download
+              </button>
+              <button class="btn btn-sm btn-dfa-light"
+                *ngIf="rw.status === 'Open'"
+                (click)="editRentalRecord(rw.id)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Edit"><i class="fa fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-sm btn-dfa-light"
+                *ngIf="rw.status === 'Open'"
+                (click)="openSubmitRentalApplicationPopup(rw,submitRentalApplicationTemp)"
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Submit"><i class="fa fa-check"></i> Submit
+              </button>
+              <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
+            </div>
+          </div>
+          <br>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+<ng-template #submitRentalApplicationTemp
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      {{modelConfig.title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        Are you sure you want to submit ?
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-success"
+          (click)="submitRentalApplication()">
+          <span *ngIf="!modelConfig.busy">Submit</span>
+          <span *ngIf="modelConfig.busy"><i class="fa fa-cog fa-spin"></i> <strong> Submitting...</strong></span>
+        </button>
+        <button type="button"
+          class="btn btn-dark"
+          (click)="modal.close('Save click')">Close</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #submitBusinessApplicationTemp
+  let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title"
+      id="modal-basic-title">
+      {{modelConfig.title}}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        Are you sure you want to submit ?
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-success"
+          (click)="submitBusinessApplication()">
+          <span *ngIf="!modelConfig.busy">Submit</span>
+          <span *ngIf="modelConfig.busy"><i class="fa fa-cog fa-spin"></i> <strong> Submitting...</strong></span>
+        </button>
+        <button type="button"
+          class="btn btn-dark"
+          (click)="modal.close('Save click')">Close</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
