@@ -83,18 +83,12 @@ export class ProjectSpecificService {
 		projectSpecificData.documentsData.TableId = documentsData.Id;
 		projectSpecificData.documentsData.RecordIdFieldId = appData.getAppItemId(documentsData.Fields, 'Record Id');
 		projectSpecificData.documentsData.DocumentTypeFieldId = appData.getAppItemId(documentsData.Fields, 'Document Type');
-
-		// projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
-		projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID = appData.getAppItemId(documentsData.Fields, 'Document Type Selection');
-		// projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
-		// projectSpecificData.documentsData.RelatedCommThreadFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Threads');
 		projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Business Applications');
 		projectSpecificData.documentsData.RelatedRentalApplicationsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Rental Applications');
-		// projectSpecificData.documentsData.RelatedCommResponsesFieldId = appData.getAppItemId(documentsData.Fields, 'Related Comm Responses');
-		// projectSpecificData.documentsData.RelatedPaymentRequestsFieldId = appData.getAppItemId(documentsData.Fields, 'Related Payment Requests');
+		projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
+		projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
 
-
-		/* ===================== [4] Table = 'Household Members' ======================*/
+		/* ===================== [6] Table = 'Required Documents' ======================*/
 		let requiredDocumentsData = appData.Tables.find(t => t.Name === 'Required Documents');
 		projectSpecificData.requiredDocumentsData = new RequiredDocumentsData();
 		projectSpecificData.requiredDocumentsData.TableId = requiredDocumentsData.Id;

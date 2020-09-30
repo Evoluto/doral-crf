@@ -7,11 +7,12 @@
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup"
           (ngSubmit)="onStepOneSubmit()">
-          <ng-template matStepLabel>Requirements</ng-template>
+          <ng-template matStepLabel>Requirements<br>Requisitos</ng-template>
           <br>
-          <span>Display Program Information here</span>
+          <span>The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be paid directly to approved landlords in the form of a grant which must be used solely to provide rent forgiveness in the same amount to eligible tenants. Residents must submit a completed application online, and provide all required materials to be considered eligible.</span>
           <hr style="background-color: #bfcced">
-
+          <span>El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles.</span>
+          <hr style="background-color: #bfcced">
           <div class="stepper-button-row">
             <button mat-flat-button
               matStepperNext
@@ -31,7 +32,7 @@
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup"
           (ngSubmit)="onStepTwoSubmit()">
-          <ng-template matStepLabel>General Applicant Information</ng-template>
+          <ng-template matStepLabel>General Applicant Information<br>Información General del Solicitante</ng-template>
           <br>
           <div class="row">
             <div class="col-md-6">
@@ -74,7 +75,7 @@
           </div>
           <br>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <p>
                 <span class="bolt">Address:</span>
               </p>
@@ -82,6 +83,14 @@
                 class="form-control"
                 placeholder="Enter Address ..."
                 formControlName="address">
+            </div>
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Grant Amount Requested ($2,500 max):</span>
+              </p>
+              <input class="form-control"
+                placeholder="Enter Grant Amount Requested ..."
+                formControlName="amount_requested">
             </div>
           </div>
           <br>
@@ -117,6 +126,10 @@
               (click)="saveExit('secondFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
@@ -126,7 +139,7 @@
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup"
           (ngSubmit)="onStepThreeSubmit()">
-          <ng-template matStepLabel>Household</ng-template>
+          <ng-template matStepLabel>Household<br>Hogar</ng-template>
           <br>
           <div class="row">
             <div class="col-md-4">
@@ -148,36 +161,6 @@
               </p>
             </div>
           </div>
-          <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next</button>
-            <button mat-flat-button
-              type="button"
-              (click)="saveExit('thirdFormGroup')"
-              class="btn-info">Save Draft and Exit
-            </button>
-          </div>
-        </form>
-      </mat-step>
-      <!-- Step three end -->
-
-      <!-- Step four start -->
-      <mat-step [stepControl]="fourthFormGroup">
-        <form [formGroup]="fourthFormGroup"
-          (ngSubmit)="onStepFourSubmit()">
-          <ng-template matStepLabel>Employment</ng-template>
-          <br>
-
-          <!-- <div class="row">
-            <div class="col-md-12">
-              Applicant
-            </div>
-          </div> -->
-          <hr>
           <div class="row">
             <div class="col-md-2">
               <p>
@@ -188,6 +171,16 @@
               <input class="form-control"
                 placeholder="Enter Applicant Name ..."
                 formControlName="name">
+            </div>
+            <div class="col-md-2">
+              <p>
+                <span class="bolt">Age:</span>
+              </p>
+            </div>
+            <div class="col-md-4">
+              <input class="form-control"
+                placeholder="Enter  Age ..."
+                formControlName="age">
             </div>
           </div>
           <div class="row">
@@ -257,8 +250,6 @@
                 formControlName="supervisor">
             </div>
           </div>
-          <hr>
-          <br>
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
@@ -268,11 +259,151 @@
               class="btn-dfa-dark">Next</button>
             <button mat-flat-button
               type="button"
-              (click)="saveExit('fourthFormGroup')"
+              (click)="saveExit('thirdFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
+      </mat-step>
+      <!-- Step three end -->
+
+      <!-- Step four start -->
+      <mat-step [completed]="isCompletedStepFour">
+
+        <ng-template matStepLabel>Applicant Documents<br>Documentos</ng-template>
+        <br>
+
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <strong class="bolt">Documentation : </strong>
+            </p>
+          </div>
+        </div>
+        <br>
+
+        <div *ngIf="recordId"
+          class="card bg-dfa">
+          <div class="card-header">Existing Documents</div>
+          <div class="card-body">
+            <table id="doctable"
+              class="table">
+              <tbody *ngIf="rentalApplicationEditDocumentData.length === 0">
+                <tr>
+                  <td colspan="2">
+                    No attachments.
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="rentalApplicationEditDocumentData.length > 0">
+                <tr *ngFor="let aed of rentalApplicationEditDocumentData"
+                  style="border-top:none !important">
+                  <td>
+                    <span>{{aed.document_title}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document_type_selection}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document}}</span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="downloadFile(aed)">
+                      <i class="fa fa-download text-success"></i>
+                    </button>
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="deleteDocument(aed.id)">
+                      <i class="fa fa-trash text-danger"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card bg-dfa">
+          <div class="card-header">
+            Add New documents
+            <button class="btn btn-sm btn-rounded btn-success float-right"
+              (click)="addDocumentFormRow()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <!-- Is this correct?????????????????? -->
+            <form (ngSubmit)="onStepFourSubmit()"> 
+              <span *ngIf="documents.length === 0">Click on Plus button to add documents.</span>
+              <br>
+
+              <table class="table table-bordered">
+                <tr *ngFor="let doc of documents">
+                  <td>
+                    <select [value]="documentTypes[doc.tempId]"
+                      name="documentTypes[doc.tempId]"
+                      class="form-control"
+                      (change)="onChangeDocumentType(doc.tempId,$event.target.value)">
+                      <option value=""
+                        hidden>- Select type -</option>
+                      <option value="{{opt.value}}"
+                        *ngFor="let opt of documentSelectionTypes">
+                        {{opt.name}}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <input class="form-control"
+                      type="text"
+                      (change)="onChangeDocumentTitle(doc.tempId,$event.target.value)"
+                      [value]="documentTitles[doc.tempId]"
+                      name="documentTitles[doc.tempId]"
+                      placeholder="Document Title">
+                  </td>
+                  <td>
+                    <div class="col-md-10">
+                      <input type="file"
+                        class="form-control-file form-control-sm"
+                        id="add_file"
+                        (change)="handleUpload(doc.tempId,$event)">
+                    </div>
+                  </td>
+                  <td>
+                    <button (click)="removeDocumentRow(doc.tempId)"
+                      class="btn btn-sm btn-rounded btn-danger">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back</button>
+                <button mat-flat-button
+                  matStepperNext
+                  class="btn-dfa-dark">Next</button>
+                <button mat-flat-button
+                  type="button"
+                  (click)="saveExit(null)"
+                  class="btn-info">Save Draft and Exit
+                </button>
+                <button mat-flat-button
+                class="btn-dark"
+                type="button"
+                (click)="cancelChanges(discardchanges)">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </mat-step>
       <!-- Step four end -->
 
@@ -280,7 +411,7 @@
       <mat-step [stepControl]="fifthFormGroup">
         <form [formGroup]="fifthFormGroup"
           (ngSubmit)="onStepFiveSubmit()">
-          <ng-template matStepLabel>Landlord</ng-template>
+          <ng-template matStepLabel>Landlord<br>Propietario</ng-template>
           <br>
           <div class="row">
             <div class="col-md-6">
@@ -344,28 +475,46 @@
               (click)="saveExit('fifthFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
       <!-- Step five end -->
 
-      <!-- Step seven start -->
-      <mat-step [completed]="isCompletedStepSeven">
+      <!-- Step six start -->
+      <mat-step [completed]="isCompletedStepSix">
 
-        <ng-template matStepLabel>Documents</ng-template>
+        <ng-template matStepLabel>Landlord Documents<br>Documentos de Propietario</ng-template>
         <br>
 
         <div class="row">
           <div class="col-md-12">
             <p>
-              <strong class="bolt">Documentation : </strong>Documents uploaded here are only for those related
-              application and pre-planning activities. For invoice
-              and expenditure related documentation, please upload via the Payment Request module.
+              <strong class="bolt">Documentation : </strong>
             </p>
           </div>
         </div>
         <br>
-
+        <div class="card-header">Downloads</div>
+        <div class="card-body">
+          <table id="doctable" class="table">
+            <tr>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>W-9 form must be completed, signed and dated by landlord to enable payment. </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago. </a></td>
+            </tr>
+            <tr>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Vendor Application must be completed to enable payment.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Se debe completar la Solicitud de proveedor para permitir el pago.  </a></td>
+            </tr>
+            <tr>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>Business Entity Affidavit must be completed, signed, notarized to enable payment, if applicable to a management company.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>La declaración jurada de la entidad comercial debe completarse, firmarse y certificarse ante notario para permitir el pago, si corresponde, a una empresa de gestión.  </a></td>
+            </tr>
+          </table>
+        </div>
         <div *ngIf="recordId"
           class="card bg-dfa">
           <div class="card-header">Existing Documents</div>
@@ -418,7 +567,8 @@
             </button>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="onStepFourSubmit()">
+            <!-- Is this correct?????????????????? -->
+            <form (ngSubmit)="onStepSixSubmit()"> 
               <span *ngIf="documents.length === 0">Click on Plus button to add documents.</span>
               <br>
 
@@ -475,17 +625,19 @@
                   (click)="saveExit(null)"
                   class="btn-info">Save Draft and Exit
                 </button>
-
+                <button mat-flat-button
+                class="btn-dark"
+                type="button"
+                (click)="cancelChanges(discardchanges)">Cancel</button>
               </div>
             </form>
           </div>
         </div>
       </mat-step>
-      <!-- Step seven end -->
 
       <!-- Step eight start -->
       <mat-step>
-        <ng-template matStepLabel>Certification</ng-template>
+        <ng-template matStepLabel>Certification<br>Certificación</ng-template>
         <br>
 
         <form [formGroup]="eighthFormGroup"

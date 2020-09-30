@@ -37,15 +37,16 @@ export class RentalApplicationsAddComponent implements OnInit {
   documentTypes = {
   };
   documentTitles = {};
-  isCompletedStepSeven: boolean = true;
+  isCompletedStepFour: boolean = true;
+  isCompletedStepSix: boolean = true;
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
   fourthFormGroup: FormGroup;
   fifthFormGroup: FormGroup;
-  //sixthFormGroup: FormGroup;
-  seventhFormGroup: FormGroup;
+  sixthFormGroup: FormGroup;
+  //seventhFormGroup: FormGroup;
   eighthFormGroup: FormGroup;
   modelConfig: PopupModel;
   programData: any;
@@ -82,8 +83,8 @@ export class RentalApplicationsAddComponent implements OnInit {
     this.setupThirdForm();
     this.setupFourthForm();
     this.setupFifthForm();
-    //this.setupSixthForm();
-    this.setupSeventhForm();
+    this.setupSixthForm();
+    //this.setupSeventhForm();
     this.setupEighthForm();
   }
 
@@ -105,24 +106,19 @@ export class RentalApplicationsAddComponent implements OnInit {
       address: new FormControl(this.rentalApplicationEditData.address || ''),//, Validators.required),
       email: new FormControl(this.rentalApplicationEditData.email || ''),//, [Validators.required, Validators.email]),
       phone: new FormControl(this.rentalApplicationEditData.phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
+      amount_requested: new FormControl(this.rentalApplicationEditData.amount_requested || '')//, [Validators.required,Validators.pattern(DecimalNumberPattern)]),
     });
   }
 
   private setupThirdForm() {
     const NumberPattern = /^\d{1,2}?$/;
+    const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
+    const DecimalNumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
     this.thirdFormGroup = new FormGroup({
       household_size: new FormControl(this.rentalApplicationEditData.household_size || ''),//, [Validators.required, Validators.pattern(NumberPattern)]),
-
-    });
-  }
-
-  private setupFourthForm() {
-    const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
-    const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
-
-    this.fourthFormGroup = new FormGroup({
       name: new FormControl(this.rentalApplicationEditData.name || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      age: new FormControl(this.rentalApplicationEditData.age || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       employer: new FormControl(this.rentalApplicationEditData.employer || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       employer_phone: new FormControl(this.rentalApplicationEditData.employer_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
       employer_address: new FormControl(this.rentalApplicationEditData.employer_address || ''),//, Validators.required),
@@ -132,11 +128,16 @@ export class RentalApplicationsAddComponent implements OnInit {
     });
   }
 
+  private setupFourthForm() {
+
+  }
+
   private setupFifthForm() {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
     const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
 
-    this.fifthFormGroup = new FormGroup({
+    this.fifthFormGroup = new 
+    FormGroup({
       landlord: new FormControl(this.rentalApplicationEditData.landlord || ''),//, Validators.required),
       landlord_authorized_representative: new FormControl(this.rentalApplicationEditData.landlord_authorized_representative || ''),
       landlord_address: new FormControl(this.rentalApplicationEditData.landlord_address || ''),
@@ -145,21 +146,9 @@ export class RentalApplicationsAddComponent implements OnInit {
     });
   }
 
-  // private setupSixthForm() {
-  //   const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
+  private setupSixthForm() {
 
-  //   this.sixthFormGroup = new FormGroup({
-  //     amount_requested: new FormControl(this.rentalApplicationEditData.amount_requested || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     estimated_loss: new FormControl(this.rentalApplicationEditData.estimated_loss || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     gross_revenue_last_year: new FormControl(this.rentalApplicationEditData.gross_revenue_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     gross_revenue_this_year: new FormControl(this.rentalApplicationEditData.gross_revenue_this_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     payroll_last_year: new FormControl(this.rentalApplicationEditData.payroll_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     payroll_this_year: new FormControl(this.rentalApplicationEditData.payroll_this_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     pre_tax_profit_last_year: new FormControl(this.rentalApplicationEditData.pre_tax_profit_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     pre_tax_profit_this_year: new FormControl(this.rentalApplicationEditData.pre_tax_profit_this_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-  //     costs_to_recover: new FormControl(this.rentalApplicationEditData.costs_to_recover || ''),//, Validators.required),
-  //   });
-  // }
+  }
 
   private setupSeventhForm() {
 
@@ -208,13 +197,21 @@ export class RentalApplicationsAddComponent implements OnInit {
     }
   }
 
+  // onStepFourSubmit() {
+  //   if (this.fourthFormGroup.valid) {
+  //     console.log('fourth form values => ', this.fourthFormGroup.value);
+  //   } else {
+  //     this.toastr.error("Form is not valid", "Error");
+  //     this.validateAllFormFields(this.fourthFormGroup);
+  //   }
+  // }
+
   onStepFourSubmit() {
-    if (this.fourthFormGroup.valid) {
-      console.log('fourth form values => ', this.fourthFormGroup.value);
-    } else {
+    if (!this.isCompletedStepFour) {
       this.toastr.error("Form is not valid", "Error");
-      this.validateAllFormFields(this.fourthFormGroup);
+      return;
     }
+    console.log('fourth form values => ', this.documents);
   }
 
   onStepFiveSubmit() {
@@ -226,21 +223,20 @@ export class RentalApplicationsAddComponent implements OnInit {
     }
   }
 
-  // onStepSixSubmit() {
-  //   if (this.sixthFormGroup.valid) {
-  //     console.log('sixth form values => ', this.sixthFormGroup.value);
-  //   } else {
-  //     this.toastr.error("Form is not valid", "Error");
-  //     this.validateAllFormFields(this.sixthFormGroup);
-  //   }
-  // }
-
-  onStepSevenSubmit() {
-    if (!this.isCompletedStepSeven) {
+  onStepSixSubmit() {
+    if (!this.isCompletedStepSix) {
       this.toastr.error("Form is not valid", "Error");
       return;
     }
-    console.log('seventh form values => ', this.documents);
+    console.log('sixth form values => ', this.documents);
+  }
+
+  onStepSevenSubmit() {
+    // if (!this.isCompletedStepSeven) {
+    //   this.toastr.error("Form is not valid", "Error");
+    //   return;
+    // }
+    // console.log('seventh form values => ', this.documents);
   }
 
   onStepEightSubmit() {
@@ -261,9 +257,9 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.firstFormGroup.value,
       this.secondFormGroup.value,
       this.thirdFormGroup.value,
-      this.fourthFormGroup.value,
+      //this.fourthFormGroup.value, /////(because documents)
       this.fifthFormGroup.value,
-      // this.sixthFormGroup.value,
+      //this.sixthFormGroup.value, /////(because documents)
       //this.seventhFormGroup.value,
       this.eighthFormGroup.value,
     )
@@ -462,18 +458,17 @@ export class RentalApplicationsAddComponent implements OnInit {
   removeDocumentRow(tempId) {
     const index = this.documents.findIndex(x => x.tempId === tempId);
     this.documents.splice(index, 1);
-    if (this.documents.length === 0) this.isCompletedStepSeven = true;
+    if (this.documents.length === 0) this.isCompletedStepFour = true;
     else this.validateDocumentForm();
   }
 
   downloadFile(file: any) {
-    // NES - FOR NOW
-    // this.ignatiusService.downloadFile(
-    //   this.doralData.documentsData.TableId,
-    //   file["id"],
-    //   this.doralData.documentsData.DocumentFileId,
-    //   file["document"]
-    // );
+    this.ignatiusService.downloadFile(
+      this.doralData.documentsData.TableId,
+      file["id"],
+      this.doralData.documentsData.DocumentFileId,
+      file["document"]
+    );
   }
 
   deleteDocument(docId) {
@@ -499,7 +494,7 @@ export class RentalApplicationsAddComponent implements OnInit {
         break;
       }
     }
-    this.isCompletedStepSeven = Boolean(this.documents.length === 0) || status;
+    this.isCompletedStepFour = Boolean(this.documents.length === 0) || status;
   }
 
   private async deleteDocumentFromDb() {
@@ -525,8 +520,10 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   cancelChanges(content) {
     const isFormDirty = this.firstFormGroup.dirty || this.secondFormGroup.dirty
-      || this.thirdFormGroup || this.fourthFormGroup.dirty || this.fifthFormGroup.dirty// || this.sixthFormGroup.dirty
-      || this.seventhFormGroup.dirty || this.eighthFormGroup.dirty;
+      || this.thirdFormGroup || this.fourthFormGroup.dirty 
+      || this.fifthFormGroup.dirty || this.sixthFormGroup.dirty
+      //|| this.seventhFormGroup.dirty 
+      || this.eighthFormGroup.dirty;
 
     if (isFormDirty) {
       this.modelConfig = new PopupModel();

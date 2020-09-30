@@ -7,9 +7,11 @@
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup"
           (ngSubmit)="onStepOneSubmit()">
-          <ng-template matStepLabel>Requirements</ng-template>
+          <ng-template matStepLabel>Requirements<br>Requisitos</ng-template>
           <br>
-          <span>Display Program Information here</span>
+          <span>The Doral CARES Small Business Assistance Grant provides financial assistance to small businesses within the city that have been economically impacted by the COVID-19 pandemic. The program provides eligible businesses with a one-time assistance grant of up to $10,000.00 for allowable specified COVID relief. The reimbursement grant program is intended to help small businesses that are not part of a national chain or franchise to recoup COVID-related expenses incurred between March 12, 2020 and September 30, 2020. Expenses may include rent, employee salaries, inventory, insurance, communications, technological upgrades, training, cleaning, and COVID prevention supplies related to the pandemic. Grants will be considered on a first-come first-served basis and will be awarded to eligible businesses until funds are expended. The amount of the grant will be based on the expenses submitted and funding availability.</span>
+          <hr style="background-color: #bfcced">
+          <span>La Subvención de Asistencia para Pequeñas Empresas Doral CARES brinda asistencia financiera a las pequeñas empresas dentro de la ciudad que se han visto afectadas económicamente por la pandemia COVID-19. El programa proporciona a las empresas elegibles una subvención de asistencia única de hasta $ 10,000.00 para el alivio COVID especificado permitido. El programa de subvenciones de reembolso está destinado a ayudar a las pequeñas empresas que no forman parte de una cadena o franquicia nacional a recuperar los gastos relacionados con COVID incurridos entre el 12 de marzo de 2020 y el 30 de septiembre de 2020. Los gastos pueden incluir alquiler, salarios de empleados, inventario, seguros, comunicaciones, actualizaciones tecnológicas, capacitación, limpieza y suministros de prevención de COVID relacionados con la pandemia. Las subvenciones se considerarán por orden de llegada y se otorgarán a empresas elegibles hasta que se gasten los fondos. El monto de la subvención se basará en los gastos presentados y la disponibilidad de fondos.</span>
           <hr style="background-color: #bfcced">
 
           <div class="stepper-button-row">
@@ -30,7 +32,7 @@
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup"
           (ngSubmit)="onStepTwoSubmit()">
-          <ng-template matStepLabel>Contact Info</ng-template>
+          <ng-template matStepLabel>Contact Info<br>Información de Contacto</ng-template>
           <br>
           <div class="row">
             <div class="col-md-6">
@@ -86,6 +88,10 @@
               (click)="saveExit('secondFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
@@ -95,7 +101,7 @@
       <mat-step [stepControl]="thirdFormGroup">
         <form [formGroup]="thirdFormGroup"
           (ngSubmit)="onStepThreeSubmit()">
-          <ng-template matStepLabel>Business Info</ng-template>
+          <ng-template matStepLabel>Business Info<br>Información de Negocios</ng-template>
           <br>
           <div class="row">
             <div class="col-md-4">
@@ -187,6 +193,10 @@
               (click)="saveExit('thirdFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
@@ -196,7 +206,7 @@
       <mat-step [stepControl]="fourthFormGroup">
         <form [formGroup]="fourthFormGroup"
           (ngSubmit)="onStepFourSubmit()">
-          <ng-template matStepLabel>Business Details</ng-template>
+          <ng-template matStepLabel>Business Details<br>Detalles de negocio</ng-template>
           <br>
           <div class="row">
             <div class="col-md-6">
@@ -283,6 +293,10 @@
               (click)="saveExit('fourthFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
@@ -292,7 +306,7 @@
       <mat-step [stepControl]="fifthFormGroup">
         <form [formGroup]="fifthFormGroup"
           (ngSubmit)="onStepFiveSubmit()">
-          <ng-template matStepLabel>Applicants</ng-template>
+          <ng-template matStepLabel>Applicants<br>Solicitantes</ng-template>
           <br>
           <div class="row">
             <div class="col-md-2">
@@ -395,6 +409,10 @@
               (click)="saveExit('fifthFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
@@ -405,12 +423,12 @@
       <mat-step [stepControl]="sixthFormGroup">
         <form [formGroup]="sixthFormGroup"
           (ngSubmit)="onStepSixSubmit()">
-          <ng-template matStepLabel>Financials</ng-template>
+          <ng-template matStepLabel>Financials<br>Finanzas</ng-template>
           <br>
           <div class="row">
             <div class="col-md-3">
               <p>
-                <span class="bolt">Grant Amount Requested($10,000 max):</span>
+                <span class="bolt">Grant Amount Requested ($10,000 max):</span>
               </p>
             </div>
             <div class="col-md-3">
@@ -440,8 +458,7 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-9">
-              <table width="100%"
-                border="1">
+              <table width="100%" border="1">
                 <thead>
                   <th>Type of Financial Info</th>
                   <th>2019</th>
@@ -504,6 +521,10 @@
               (click)="saveExit('sixthFormGroup')"
               class="btn-info">Save Draft and Exit
             </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel</button>
           </div>
         </form>
       </mat-step>
@@ -512,20 +533,34 @@
       <!-- Step seven start -->
       <mat-step [completed]="isCompletedStepSeven">
 
-        <ng-template matStepLabel>Documents</ng-template>
+        <ng-template matStepLabel>Documents<br>Documentos</ng-template>
         <br>
 
         <div class="row">
           <div class="col-md-12">
             <p>
-              <strong class="bolt">Documentation : </strong>Documents uploaded here are only for those related
-              application and pre-planning activities. For invoice
-              and expenditure related documentation, please upload via the Payment Request module.
+              <strong class="bolt">Documentation : </strong>
             </p>
           </div>
         </div>
         <br>
-
+        <div class="card-header">Downloads</div>
+        <div class="card-body">
+          <table id="doctable" class="table">
+            <tr>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>W-9 (signed and dated)</a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>W-9 (firmado y fechado)</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Vendor Application (completed)</a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Solicitud de proveedor (completada)</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>Business Entity Affidavit (signed, dated and notarized)</a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>Declaración jurada de entidad comercial (firmada, fechada y notariada)</a></td>
+            </tr>
+          </table>
+        </div>
         <div *ngIf="recordId"
           class="card bg-dfa">
           <div class="card-header">Existing Documents</div>
@@ -635,7 +670,10 @@
                   (click)="saveExit(null)"
                   class="btn-info">Save Draft and Exit
                 </button>
-
+                <button mat-flat-button
+                class="btn-dark"
+                type="button"
+                (click)="cancelChanges(discardchanges)">Cancel</button>
               </div>
             </form>
           </div>
@@ -645,7 +683,7 @@
 
       <!-- Step eight start -->
       <mat-step>
-        <ng-template matStepLabel>Certification</ng-template>
+        <ng-template matStepLabel>Certification<br>Certificación</ng-template>
         <br>
 
         <form [formGroup]="eighthFormGroup"

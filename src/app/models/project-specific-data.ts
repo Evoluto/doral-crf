@@ -47,24 +47,19 @@ export class DocumentsData {
     RelatedBusinessApplicationsFieldId: number
     RelatedRentalApplicationsFieldId: number
     DocumentTypeFieldId: number
-    // DocumentFileId:number
-    // DocumentTypeExpenditureCategoryMultipleChoiceID:number
-    DocumentTypeSelectionMultipleChoiceID:number
-    // DocumentTypeId: number
-    // RelatedCommThreadFieldId: number
-    // RelatedCommResponsesFieldId: number
-    // RelatedPaymentRequestsFieldId:number
+    DocumentFileId:number
+    DocumentTypeId: number
 }
 
 export class RequiredDocumentsData {
     TableId: number
     RecordIdFieldId: number
     RecordFormFieldId:number
+    //DocumentTypeId: number
     //RelatedBusinessApplicationsFieldId: number
     // DocumentFileId:number
     // DocumentTypeExpenditureCategoryMultipleChoiceID:number
     // DocumentTypeSelectionMultipleChoiceID:number
-    // DocumentTypeId: number
     // RelatedCommThreadFieldId: number
     // RelatedCommResponsesFieldId: number
     // RelatedPaymentRequestsFieldId:number

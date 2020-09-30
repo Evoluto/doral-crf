@@ -23,6 +23,7 @@ tbody tr {
 .green-bg {
     background-color: #177328 !important;
     color: black;
+    color: white;
     font-size: 12px;
 
 }
@@ -31,5 +32,6 @@ tbody tr {
     background-color: #ed1e24 !important;
     color: black;
     font-size: 12px;
+    color: white;
 
 }

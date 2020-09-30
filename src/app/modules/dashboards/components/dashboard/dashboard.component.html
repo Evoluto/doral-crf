@@ -10,8 +10,8 @@
       </div>
       <div class="card-body text-center">
         <div *ngFor="let rw of businessApplicationList">
-          <div class="box p-2 rounded yellow-bg">
-            <h2 class="font-weight-light text-white">{{rw.status}}</h2>
+          <div class="box p-2 rounded bg-light">
+            <h2 class="font-weight-light text-black">{{rw.status}}</h2>
             <div>
               <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                 class="btn btn-sm red-bg"
@@ -55,8 +55,8 @@
       </div>
       <div class="card-body text-center">
         <div *ngFor="let rw of rentalApplicationList">
-          <div class="box p-2 rounded yellow-bg">
-            <h2 class="font-weight-light text-white">{{rw.status}}</h2>
+          <div class="box p-2 rounded bg-light">
+            <h2 class="font-weight-light text-black">{{rw.status}}</h2>
             <div>
               <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                 class="btn btn-sm red-bg"
