@@ -27,16 +27,24 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   recordId: string;
   rentalApplicationEditData: any;
-  documentSelectionTypes: Array<any>;
-  rentalApplicationEditDocumentData: any;
+  landlordDocumentSelectionTypes: Array<any>;
+  applicantsDocumentSelectionTypes: Array<any>;
+  applicantEditDocumentData: any;
+  landlordEditDocumentData: any;
 
   //applicantList: Array<{ id: string, name: string }>;
   doralData = this.projectSpecificService.getProjectSpecificData();
-  documents: Array<any> = [];
-  deletedDocuments: Array<any> = [];
-  documentTypes = {
-  };
-  documentTitles = {};
+
+  landlordDocuments: Array<any> = [];
+  deletedLandlordDocuments: Array<any> = [];
+  landlordDocumentTypes = {};
+  landlordDocumentTitles = {};
+
+  applicantDocuments: Array<any> = [];
+  deletedApplicantDocuments: Array<any> = [];
+  applicantDocumentTypes = {};
+  applicantDocumentTitles = {};
+
   isCompletedStepFour: boolean = true;
   isCompletedStepSix: boolean = true;
 
@@ -65,13 +73,12 @@ export class RentalApplicationsAddComponent implements OnInit {
   ngOnInit() {
     this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
-    this.documentSelectionTypes = componentData[0];
+    this.applicantsDocumentSelectionTypes = this.getDocumentTypes(componentData[0], 'Applicant');
+    this.landlordDocumentSelectionTypes = this.getDocumentTypes(componentData[0], 'Landlord');
     this.rentalApplicationEditData = (componentData && componentData[1]) ? componentData[1][0] : {};
-    this.rentalApplicationEditDocumentData = (componentData && componentData[2]) ? componentData[2] : [];
-    this.rentalApplicationEditDocumentData = this.rentalApplicationEditDocumentData.filter(
-      iterator => iterator.document_type === "Application Attachment"
-    )
-    //this.programData = this.storageService.getItem('userSessionData');
+    const documentEditdata = (componentData && componentData[2]) ? componentData[2] : [];
+    this.applicantEditDocumentData = this.getDocumentEditData(documentEditdata, 'Rental Application Applicant');
+    this.landlordEditDocumentData = this.getDocumentEditData(documentEditdata, 'Rental Application Landlord');
     this.setupForm();
     this.spinner.hide();
   }
@@ -135,14 +142,14 @@ export class RentalApplicationsAddComponent implements OnInit {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
     const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
 
-    this.fifthFormGroup = new 
-    FormGroup({
-      landlord: new FormControl(this.rentalApplicationEditData.landlord || ''),//, Validators.required),
-      landlord_authorized_representative: new FormControl(this.rentalApplicationEditData.landlord_authorized_representative || ''),
-      landlord_address: new FormControl(this.rentalApplicationEditData.landlord_address || ''),
-      landlord_email: new FormControl(this.rentalApplicationEditData.landlord_email || ''),//, [Validators.required, Validators.email]),
-      landlord_phone: new FormControl(this.rentalApplicationEditData.landlord_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
-    });
+    this.fifthFormGroup = new
+      FormGroup({
+        landlord: new FormControl(this.rentalApplicationEditData.landlord || ''),//, Validators.required),
+        landlord_authorized_representative: new FormControl(this.rentalApplicationEditData.landlord_authorized_representative || ''),
+        landlord_address: new FormControl(this.rentalApplicationEditData.landlord_address || ''),
+        landlord_email: new FormControl(this.rentalApplicationEditData.landlord_email || ''),//, [Validators.required, Validators.email]),
+        landlord_phone: new FormControl(this.rentalApplicationEditData.landlord_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
+      });
   }
 
   private setupSixthForm() {
@@ -196,21 +203,12 @@ export class RentalApplicationsAddComponent implements OnInit {
     }
   }
 
-  // onStepFourSubmit() {
-  //   if (this.fourthFormGroup.valid) {
-  //     console.log('fourth form values => ', this.fourthFormGroup.value);
-  //   } else {
-  //     this.toastr.error("Form is not valid", "Error");
-  //     this.validateAllFormFields(this.fourthFormGroup);
-  //   }
-  // }
-
   onStepFourSubmit() {
     if (!this.isCompletedStepFour) {
       this.toastr.error("Form is not valid", "Error");
       return;
     }
-    console.log('fourth form values => ', this.documents);
+    console.log('fourth form values => ', this.landlordDocuments);
   }
 
   onStepFiveSubmit() {
@@ -227,7 +225,7 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.toastr.error("Form is not valid", "Error");
       return;
     }
-    console.log('sixth form values => ', this.documents);
+    console.log('sixth form values => ', this.landlordDocuments);
   }
 
   onStepSevenSubmit() {
@@ -235,7 +233,7 @@ export class RentalApplicationsAddComponent implements OnInit {
     //   this.toastr.error("Form is not valid", "Error");
     //   return;
     // }
-    // console.log('seventh form values => ', this.documents);
+    // console.log('seventh form values => ', this.landlordDocuments);
   }
 
   onStepEightSubmit() {
@@ -256,9 +254,9 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.firstFormGroup.value,
       this.secondFormGroup.value,
       this.thirdFormGroup.value,
-      //this.fourthFormGroup.value, /////(because documents)
+      //this.fourthFormGroup.value, /////(because Documents)
       this.fifthFormGroup.value,
-      //this.sixthFormGroup.value, /////(because documents)
+      //this.sixthFormGroup.value, /////(because Documents)
       //this.seventhFormGroup.value,
       this.eighthFormGroup.value,
     )
@@ -289,7 +287,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
       this.spinner.show();
       const appResp: any = await this.ignatiusService.postData(recordFAD).toPromise();
-      /////////////////////await this.addDocument(appResp.recordId);
+      await this.addDocument(appResp.recordId);
       this.rentalApplicationFormActionCompleted(true);
     } catch (error) {
       this.rentalApplicationFormActionCompleted(false);
@@ -341,179 +339,9 @@ export class RentalApplicationsAddComponent implements OnInit {
     });
   }
 
-
-  handleUpload(tempId, event) {
-    const file = event.target.files[0];
-    let base64String = "";
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      base64String = reader.result.toString().split(",")[1];
-      for (const iterator of this.documents) {
-        if (iterator.tempId === tempId) {
-          iterator[`document_${tempId}`] = base64String;
-          iterator[`fileName_${tempId}`] = file.name;
-          break;
-        }
-      }
-      this.validateDocumentForm();
-    };
-  }
-
-  async addDocument(applicationId) {
-    try {
-
-      const observables = [];
-
-      for (const iterator of this.documents) {
-
-        const tempId = iterator['tempId'];
-
-        if (!iterator[`document_${tempId}`]) continue;
-
-        const documentType = iterator[`documentType_${tempId}`];
-        const documentTitle = iterator[`documentTitle_${tempId}`];
-        const document = iterator[`document_${tempId}`];
-        const fileName = iterator[`fileName_${tempId}`];
-
-        const condition = (
-          !iterator[`document_${tempId}`] ||
-          !iterator[`documentTitle_${tempId}`] ||
-          !iterator[`documentType_${tempId}`]
-        )
-
-        if (condition) continue;
-
-        const recordFAD = new FormActionData(0,
-          this.doralData.documentsData.TableId,
-          null,
-          new Array<FieldListItem>()
-        );
-
-        recordFAD.fieldsList.push(new FieldListItem(
-          'related_applicants',
-          (this.storageService.getItem('userSessionData')).applicantId,
-          '')
-        )
-        recordFAD.fieldsList.push(new FieldListItem('document_type', 'Application Attachment', ''))
-        recordFAD.fieldsList.push(new FieldListItem('document_type_selection', documentType, ''))
-        recordFAD.fieldsList.push(new FieldListItem('document_title', documentTitle, ''))
-        recordFAD.fieldsList.push(new FieldListItem('related_applications', applicationId, ''))
-        recordFAD.fieldsList.push(new FieldListItem('document', fileName, document)
-        )
-
-        observables.push(this.ignatiusService.postData(recordFAD))
-      }
-
-      await forkJoin(observables).toPromise();
-
-    } catch (error) {
-      throw error;
-    }
-
-  }
-
-  onChangeDocumentTitle(tempId, title) {
-    for (const iterator of this.documents) {
-      if (iterator.tempId === tempId) {
-        iterator[`documentTitle_${tempId}`] = title;
-        break;
-      }
-    }
-    this.validateDocumentForm();
-  }
-
-  onChangeDocumentType(tempId, type) {
-    for (const iterator of this.documents) {
-      if (iterator.tempId === tempId) {
-        iterator[`documentType_${tempId}`] = type;
-        break;
-      }
-    }
-    this.validateDocumentForm();
-  }
-
-  addDocumentFormRow() {
-    let obj = {};
-    let tempId = uuid.v4();
-
-    obj['tempId'] = tempId;
-    obj[`document_${tempId}`] = "";
-    obj[`fileName_${tempId}`] = "";
-    obj[`documentTitle_${tempId}`] = "";
-
-    this.documentTypes[tempId] = "";
-    this.documentTitles[tempId] = "";
-
-    this.documents.push(obj);
-  }
-
-  removeDocumentRow(tempId) {
-    const index = this.documents.findIndex(x => x.tempId === tempId);
-    this.documents.splice(index, 1);
-    if (this.documents.length === 0) this.isCompletedStepFour = true;
-    else this.validateDocumentForm();
-  }
-
-  downloadFile(file: any) {
-    this.ignatiusService.downloadFile(
-      this.doralData.documentsData.TableId,
-      file["id"],
-      this.doralData.documentsData.DocumentFileId,
-      file["document"]
-    );
-  }
-
-  deleteDocument(docId) {
-    this.deletedDocuments.push(docId);
-    this.rentalApplicationEditDocumentData = this.rentalApplicationEditDocumentData.filter(
-      iterator => iterator.id !== docId
-    )
-  }
-
-  private validateDocumentForm() {
-    let status = true;
-    for (const iterator of this.documents) {
-      let tempId = iterator['tempId'];
-
-      const condition = (
-        !iterator[`document_${tempId}`] ||
-        !iterator[`documentTitle_${tempId}`] ||
-        !iterator[`documentType_${tempId}`]
-      )
-
-      if (condition) {
-        status = false;
-        break;
-      }
-    }
-    this.isCompletedStepFour = Boolean(this.documents.length === 0) || status;
-  }
-
-  private async deleteDocumentFromDb() {
-    try {
-      if (this.deletedDocuments.length === 0) return;
-
-      const observables = [];
-      for (let id of this.deletedDocuments) {
-        const formActionData =
-          new FormActionData(
-            0,
-            this.doralData.documentsData.TableId,
-            new Where(id),
-            null
-          );
-        observables.push(this.ignatiusService.deleteData(formActionData))
-      }
-      await forkJoin(observables).toPromise();
-    } catch (error) {
-      throw error;
-    }
-  }
-
   cancelChanges(content) {
     const isFormDirty = this.firstFormGroup.dirty || this.secondFormGroup.dirty
-      || this.thirdFormGroup || this.fourthFormGroup.dirty 
+      || this.thirdFormGroup || this.fourthFormGroup.dirty
       || this.fifthFormGroup.dirty || this.sixthFormGroup.dirty
       //|| this.seventhFormGroup.dirty 
       || this.eighthFormGroup.dirty;
@@ -547,6 +375,313 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.validateAllFormFields(this.firstFormGroup);
     }
   }
+
+
+
+
+  /*================================== Documents section Start ==================================*/
+
+  getDocumentTypes(data: Array<any>, type: string): Array<any> {
+    if (data.length === 0) return [];
+    return data.filter(elem => elem.required_from === type)
+  }
+
+  getDocumentEditData(data: Array<any>, type: string): Array<any> {
+    if (data.length === 0) return [];
+    return data.filter(elem => elem.document_type === type)
+  }
+
+  addDocumentFormRow(type: string) {
+    let obj = {};
+    let tempId = uuid.v4();
+
+    obj['tempId'] = tempId;
+    obj[`document_${tempId}`] = "";
+    obj[`fileName_${tempId}`] = "";
+    obj[`documentTitle_${tempId}`] = "";
+
+    switch (type) {
+      case 'Landlord':
+        this.landlordDocumentTypes[tempId] = "";
+        this.landlordDocumentTitles[tempId] = "";
+        this.landlordDocuments.push(obj);
+        break;
+
+      case 'Applicant':
+        this.applicantDocumentTypes[tempId] = "";
+        this.applicantDocumentTitles[tempId] = "";
+        this.applicantDocuments.push(obj);
+        break;
+
+      default:
+        break;
+    }
+
+  }
+
+  removeLandlordDocumentRow(tempId) {
+    const index = this.landlordDocuments.findIndex(x => x.tempId === tempId);
+    this.landlordDocuments.splice(index, 1);
+    if (this.landlordDocuments.length === 0) this.isCompletedStepFour = true; //[TODO]
+    else this.validateLandlordDocumentForm();
+  }
+
+  removeApplicantDocumentRow(tempId) {
+    const index = this.applicantDocuments.findIndex(x => x.tempId === tempId);
+    this.applicantDocuments.splice(index, 1);
+    if (this.applicantDocuments.length === 0) this.isCompletedStepSix = true; //[TODO]
+    else this.validateApplicantDocumentForm();
+  }
+
+  onChangeLandlordDocumentTitle(tempId, title) {
+    for (const iterator of this.landlordDocuments) {
+      if (iterator.tempId === tempId) {
+        iterator[`documentTitle_${tempId}`] = title;
+        break;
+      }
+    }
+    this.validateLandlordDocumentForm();
+  }
+
+  onChangeApplicantDocumentTitle(tempId, title) {
+    for (const iterator of this.applicantDocuments) {
+      if (iterator.tempId === tempId) {
+        iterator[`documentTitle_${tempId}`] = title;
+        break;
+      }
+    }
+    this.validateApplicantDocumentForm();
+  }
+
+  onChangeLandlordDocumentType(tempId, type) {
+    for (const iterator of this.landlordDocuments) {
+      if (iterator.tempId === tempId) {
+        iterator[`documentType_${tempId}`] = type;
+        break;
+      }
+    }
+    this.validateLandlordDocumentForm();
+  }
+
+  onChangeApplicantDocumentType(tempId, type) {
+    for (const iterator of this.applicantDocuments) {
+      if (iterator.tempId === tempId) {
+        iterator[`documentType_${tempId}`] = type;
+        break;
+      }
+    }
+    this.validateApplicantDocumentForm();
+  }
+
+
+  deleteLandlordDocument(docId) {
+    this.deletedLandlordDocuments.push(docId);
+    this.landlordEditDocumentData = this.landlordEditDocumentData.filter(
+      iterator => iterator.id !== docId
+    )
+  }
+
+  deleteApplicantDocument(docId) {
+    this.deletedApplicantDocuments.push(docId);
+    this.applicantEditDocumentData = this.applicantEditDocumentData.filter(
+      iterator => iterator.id !== docId
+    )
+  }
+
+  private validateLandlordDocumentForm() {
+    let status = true;
+    for (const iterator of this.landlordDocuments) {
+      let tempId = iterator['tempId'];
+
+      const condition = (
+        !iterator[`document_${tempId}`] ||
+        // !iterator[`documentTitle_${tempId}`] ||
+        !iterator[`documentType_${tempId}`]
+      )
+
+      if (condition) {
+        status = false;
+        break;
+      }
+    }
+    this.isCompletedStepFour = Boolean(this.landlordDocuments.length === 0) || status; //[TODO]
+  }
+
+  private validateApplicantDocumentForm() {
+    let status = true;
+    for (const iterator of this.applicantDocuments) {
+      let tempId = iterator['tempId'];
+
+      const condition = (
+        !iterator[`document_${tempId}`] ||
+        // !iterator[`documentTitle_${tempId}`] ||
+        !iterator[`documentType_${tempId}`]
+      )
+
+      if (condition) {
+        status = false;
+        break;
+      }
+    }
+    this.isCompletedStepSix = Boolean(this.applicantDocuments.length === 0) || status; //[TODO]
+  }
+
+
+  handleUploadLandlord(tempId, event) {
+    const file = event.target.files[0];
+    let base64String = "";
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      base64String = reader.result.toString().split(",")[1];
+      for (const iterator of this.landlordDocuments) {
+        if (iterator.tempId === tempId) {
+          iterator[`document_${tempId}`] = base64String;
+          iterator[`fileName_${tempId}`] = file.name;
+          break;
+        }
+      }
+      this.validateLandlordDocumentForm();
+    };
+  }
+
+  handleUploadApplicant(tempId, event) {
+    const file = event.target.files[0];
+    let base64String = "";
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      base64String = reader.result.toString().split(",")[1];
+      for (const iterator of this.applicantDocuments) {
+        if (iterator.tempId === tempId) {
+          iterator[`document_${tempId}`] = base64String;
+          iterator[`fileName_${tempId}`] = file.name;
+          break;
+        }
+      }
+      this.validateApplicantDocumentForm();
+    };
+  }
+
+  async addDocument(applicationId) {
+    try {
+
+      const observables = [];
+
+      // =============== For landlord =================
+      for (const iterator of this.landlordDocuments) {
+
+        const tempId = iterator['tempId'];
+        if (!iterator[`document_${tempId}`]) continue;
+
+        const documentType = iterator[`documentType_${tempId}`];
+        const documentTitle = iterator[`documentTitle_${tempId}`];
+        const document = iterator[`document_${tempId}`];
+        const fileName = iterator[`fileName_${tempId}`];
+
+        const condition = (
+          !iterator[`document_${tempId}`] ||
+          // !iterator[`documentTitle_${tempId}`] ||
+          !iterator[`documentType_${tempId}`]
+        )
+
+        if (condition) continue;
+
+        const recordFAD = new FormActionData(0,
+          this.doralData.documentsData.TableId,
+          null,
+          new Array<FieldListItem>()
+        );
+
+        //[TODO]
+        recordFAD.fieldsList.push(new FieldListItem('document_type', 'Rental Application Landlord', ''))
+        recordFAD.fieldsList.push(new FieldListItem('related_required_documents', documentType, ''))
+        recordFAD.fieldsList.push(new FieldListItem('document_title', documentTitle, ''))
+        recordFAD.fieldsList.push(new FieldListItem('related_rental_assistance', applicationId, ''))
+        recordFAD.fieldsList.push(new FieldListItem('document_file', fileName, document))
+
+        observables.push(this.ignatiusService.postData(recordFAD))
+      }
+
+
+      // =============== For applicant =================
+      for (const iterator of this.applicantDocuments) {
+
+        const tempId = iterator['tempId'];
+        if (!iterator[`document_${tempId}`]) continue;
+
+        const documentType = iterator[`documentType_${tempId}`];
+        const documentTitle = iterator[`documentTitle_${tempId}`];
+        const document = iterator[`document_${tempId}`];
+        const fileName = iterator[`fileName_${tempId}`];
+
+        const condition = (
+          !iterator[`document_${tempId}`] ||
+          // !iterator[`documentTitle_${tempId}`] ||
+          !iterator[`documentType_${tempId}`]
+        )
+
+        if (condition) continue;
+
+        const recordFAD = new FormActionData(0,
+          this.doralData.documentsData.TableId,
+          null,
+          new Array<FieldListItem>()
+        );
+
+        //[TODO]
+        recordFAD.fieldsList.push(new FieldListItem('document_type', 'Rental Application Applicant', ''))
+        recordFAD.fieldsList.push(new FieldListItem('related_required_documents', documentType, ''))
+        recordFAD.fieldsList.push(new FieldListItem('document_title', documentTitle, ''))
+        recordFAD.fieldsList.push(new FieldListItem('related_rental_assistance', applicationId, ''))
+        recordFAD.fieldsList.push(new FieldListItem('document_file', fileName, document))
+
+        observables.push(this.ignatiusService.postData(recordFAD))
+      }
+
+      await forkJoin(observables).toPromise();
+
+    } catch (error) {
+      throw error;
+    }
+
+  }
+
+  private async deleteDocumentFromDb() {
+    try {
+      if (this.deletedLandlordDocuments.length === 0 && this.deletedApplicantDocuments.length === 0) {
+        return;
+      }
+      const deletedArr = [...this.deletedLandlordDocuments, ...this.deletedApplicantDocuments]
+
+      const observables = [];
+      for (let id of deletedArr) {
+        const formActionData =
+          new FormActionData(
+            0,
+            this.doralData.documentsData.TableId,
+            new Where(id),
+            null
+          );
+        observables.push(this.ignatiusService.deleteData(formActionData))
+      }
+      await forkJoin(observables).toPromise();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  downloadFile(file: any) {
+    this.ignatiusService.downloadFile(
+      this.doralData.documentsData.TableId,
+      file["id"],
+      this.doralData.documentsData.RecordIdFieldId,
+      file["document_file"]
+    );
+  }
+
+
+  /*================================== Documents section End ==================================*/
 
 }
 

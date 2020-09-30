@@ -45,7 +45,7 @@ export class DocumentsData {
     TableId: number
     RecordIdFieldId: number
     RelatedBusinessAssistanceFieldId: number
-    RelatedRentalApplicationsFieldId: number
+    RelatedRentalAssistanceFieldId: number
     DocumentTypeFieldId: number
     DocumentFileId:number
     DocumentTypeId: number
