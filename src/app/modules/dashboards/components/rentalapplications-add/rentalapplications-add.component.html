@@ -713,7 +713,8 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to discard all changes and continue?
+        Are you sure you want to discard all changes and continue?<br>
+        ¿Está seguro de que desea descartar todos los cambios y continuar?
       </div>
     </div>
     <br>
@@ -721,10 +722,10 @@
       <div class="col-md-12">
         <button type="button"
           class="btn btn-success"
-          (click)="redirectToApps(true)">Yes</button>
+          (click)="redirectToApps(true)">Yes (Si)</button>
         <button type="button"
           class="btn btn-dark"
-          (click)="modal.close('discard')">No</button>
+          (click)="modal.close('discard')">No (No)</button>
       </div>
     </div>
   </div>
