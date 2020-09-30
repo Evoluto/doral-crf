@@ -10,9 +10,18 @@ tbody tr {
 .blue-bg {
     background-color: #010080 !important;
     color: white;
-    font-size: 12px;
+    font-size: 12px;   
 }
 
+.blue-bg .h4 {
+    color: white;
+}
+
+.blue-bg1 {
+    background-color: #010080 !important;
+    color: black;
+    font-size: 12px;
+}
 .yellow-bg { 
     background-color: #fecd07 !important;
     color: black;

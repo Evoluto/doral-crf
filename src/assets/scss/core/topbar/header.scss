@@ -31,7 +31,7 @@
       .navbar-brand {
         display: flex;
         align-items: center;
-        margin: 0px;
+        margin: 5px;
         padding: $topbar-navbrand-padding;
 
         .dark-logo {
@@ -39,7 +39,7 @@
         }
 
         .logo-icon {
-          margin-right: 5px;
+          margin: 5px;
         }
       }
     }

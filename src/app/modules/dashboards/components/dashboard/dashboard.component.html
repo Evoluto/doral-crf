@@ -1,86 +1,102 @@
 <div class="row">
   <div class="col-md-6">
-    <div class="card bg-secondary">
-      <div class="card-header text-white">
+    <div class="card ">
+      <div class="card-header yellow-bg ">
         <span style="font-size: 20px;font-weight:500">Business Assistance</span>
-        <button class="btn btn-success btn-sm float-right"
+        <button class="btn green-bg btn-md float-right"
           [routerLink]="['/businessapplications-add']">
-          <i class="fa fa-plus"> Add</i>
+          <h5><i class="fa fa-plus"> Start Process</i></h5>
         </button>
       </div>
       <div class="card-body text-center">
         <div *ngFor="let rw of businessApplicationList">
           <div class="box p-2 rounded bg-light">
-            <h2 class="font-weight-light text-black">{{rw.status}}</h2>
-            <div>
-              <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
-                class="btn btn-sm red-bg"
-                (click)="downloadBusinessFile(rw)"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Download PDF">
-                <i class="fa fa-file-pdf"> Download</i>
-              </button>
-              <button *ngIf="rw.status === 'Open'"
-                class="btn btn-sm blue-bg"
-                (click)="editBusinessRecord(rw.id)"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Edit"> <i class="fa fa-edit"> Edit</i>
-              </button>
-              <button *ngIf="rw.status === 'Open'"
-                class="btn btn-sm green-bg"
-                (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Submit"> <i class="fa fa-check"> Submit</i>
-              </button>
-              <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
+            <div class="row">
+              <div class="col-md-6">
+                <h3 class="font-weight-light text-black">{{rw.status}}</h3>
+              </div>
+              <div class="col-md-6">
+                <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                  class="btn btn-sm red-bg"
+                  (click)="downloadBusinessFile(rw)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Download PDF">
+                  <i class="fa fa-file-pdf"> Download</i>
+                </button>
+                <button *ngIf="rw.status === 'Open'"
+                  class="btn btn-sm blue-bg"
+                  (click)="editBusinessRecord(rw.id)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"> <i class="fa fa-edit"> Edit</i>
+                </button>
+                <button *ngIf="rw.status === 'Open'"
+                  class="btn btn-sm green-bg"
+                  (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Submit"> <i class="fa fa-check"> Submit</i>
+                </button>
+                <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
+              </div>
             </div>
           </div>
           <br>
         </div>
-
       </div>
-    </div>
+      <!-- <div class="card-header yellow-bg">
+        <span style="font-size: 20px;font-weight:500">Business Assistance</span>
+        <button class="btn green-bg btn-md float-right"
+          [routerLink]="['/businessapplications-add']">
+          <h5><i class="fa fa-plus"> Start Process</i></h5>
+        </button>
+      </div>
+      <div class="card-body text-center">
+      </div>-->
+    </div> 
   </div>
   <div class="col-md-6">
-    <div class="card bg-secondary">
-      <div class="card-header text-white">
-        <span style="font-size: 20px;font-weight:500">Emergency Rental Assistance</span>
-        <button class="btn btn-success btn-sm float-right"
+    <div class="card ">
+      <div class="card-header blue-bg">
+        <span style="font-size: 20px;font-weight:500"><span style="color:white;">Emergency Rental Assistance</span></span>
+        <button class="btn green-bg btn-sm float-right"
           [routerLink]="['/rentalapplications-add']">
-          <i class="fa fa-plus"> Add</i>
+          <h5><i class="fa fa-plus"> Start Process</i></h5>
         </button>
       </div>
       <div class="card-body text-center">
         <div *ngFor="let rw of rentalApplicationList">
           <div class="box p-2 rounded bg-light">
-            <h2 class="font-weight-light text-black">{{rw.status}}</h2>
-            <div>
-              <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
-                class="btn btn-sm red-bg"
-                (click)="downloadRentalFile(rw)"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Download PDF">
-                <i class="fa fa-file-pdf"> Download</i>
-              </button>
-              <button class="btn btn-sm blue-bg"
-                *ngIf="rw.status === 'Open'"
-                (click)="editRentalRecord(rw.id)"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Edit"><i class="fa fa-edit"> Edit</i>
-              </button>
-              <button class="btn btn-sm green-bg"
-                *ngIf="rw.status === 'Open'"
-                (click)="openSubmitRentalApplicationPopup(rw,submitRentalApplicationTemp)"
-                data-toggle="tooltip"
-                data-placement="top"
-                title="Submit"><i class="fa fa-check"> Submit</i>
-              </button>
-              <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
+            <div class="row">
+              <div class="col-md-6">
+                <h4 class="font-weight-light text-black">{{rw.status}}</h4>
+              </div>
+              <div class="col-md-6">
+                <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                  class="btn btn-sm red-bg"
+                  (click)="downloadBusinessFile(rw)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Download PDF">
+                  <i class="fa fa-file-pdf"> Download</i>
+                </button>
+                <button *ngIf="rw.status === 'Open'"
+                  class="btn btn-sm blue-bg"
+                  (click)="editBusinessRecord(rw.id)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"> <i class="fa fa-edit"> Edit</i>
+                </button>
+                <button *ngIf="rw.status === 'Open'"
+                  class="btn btn-sm green-bg"
+                  (click)="openSubmitRentalApplicationPopup(rw,submitRentalApplicationTemp)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Submit"> <i class="fa fa-check"> Submit</i>
+                </button>
+                <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
+              </div>
             </div>
           </div>
           <br>
@@ -89,6 +105,53 @@
       </div>
     </div>
   </div>
+  <!-- <div class="col-md-6">
+    <div class="card blue-bg">
+      <div class="card-header">
+        <span style="font-size: 20px;font-weight:500">Emergency Rental Assistance</span>
+        <button class="btn green-bg btn-sm float-right"
+          [routerLink]="['/rentalapplications-add']">
+          <i class="fa fa-plus"> Start Process</i>
+        </button>
+      </div>
+      <div class="card-body text-center">
+        <div *ngFor="let rw of rentalApplicationList">
+          <div class="box p-2 rounded bg-light">
+            <div class="row">
+              <div class="col-md-6">
+                <h4 class="font-weight-light text-black">{{rw.status}}</h4>
+              </div>
+              <div class="col-md-6">
+                <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                  class="btn btn-sm red-bg"
+                  (click)="downloadBusinessFile(rw)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Download PDF">
+                  <i class="fa fa-file-pdf"> Download</i>
+                </button>
+                <button *ngIf="rw.status === 'Open'"
+                  class="btn btn-sm blue-bg"
+                  (click)="editBusinessRecord(rw.id)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"> <i class="fa fa-edit"> Edit</i>
+                </button>
+                <button *ngIf="rw.status === 'Open'"
+                  class="btn btn-sm green-bg"
+                  (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Submit"> <i class="fa fa-check"> Submit</i>
+                </button>
+              </div>
+            </div>
+          <br>
+        </div> 
+
+      </div>
+    </div>
+  </div>-->
 </div>
 
 
@@ -107,7 +170,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to submit ?
+        Are you sure you want to submit?
       </div>
     </div>
     <br>
@@ -137,7 +200,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to submit ?
+        Are you sure you want to submit?
       </div>
     </div>
     <br>

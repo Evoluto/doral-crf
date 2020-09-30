@@ -9,18 +9,30 @@
           (ngSubmit)="onStepOneSubmit()">
           <ng-template matStepLabel>Requirements<br>Requisitos</ng-template>
           <br>
-          <span>The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be paid directly to approved landlords in the form of a grant which must be used solely to provide rent forgiveness in the same amount to eligible tenants. Residents must submit a completed application online, and provide all required materials to be considered eligible.</span>
-          <hr style="Background-color: #bfcced">
-          <span>El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles.</span>
-          <hr style="Background-color: #bfcced">
+          <div class="card ">
+            <div class="card-header blue-bg">
+              Doral CARES Emergency Rental Assistance Program
+            </div>
+            <div class="card-body bg-light">
+              <span>The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be paid directly to approved landlords in the form of a grant which must be used solely to provide rent forgiveness in the same amount to eligible tenants. Residents must submit a completed application online, and provide all required materials to be considered eligible.</span>
+            </div>
+          </div>
+          <div class="card ">
+            <div class="card-header blue-bg">
+              Programa de asistencia de emergencia para alquiler de Doral CARES
+            </div>
+            <div class="card-body bg-light">
+              <span>El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles.</span>
+            </div>
+          </div>
           <div class="stepper-button-row">
             <button mat-flat-button
               matStepperNext
-              class="btn-dfa-dark">Next (Contiguo)</button>
+              class="btn-dfa-dark">Next / Contiguo</button>
             <!-- <button mat-flat-button
               type="button"
               (click)="saveExit('firstFormGroup')"
-              class="btn-info">Save Draft and Exit (Guardar y Salir)
+              class="btn-info">Save Draft and Exit / Guardar y Salir
             </button> -->
           </div>
         </form>
@@ -36,18 +48,18 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Applicant’s Name (Nombre del Solicitante):</span>
+                <span class="bolt">Applicant’s Name / Nombre del Solicitante:</span>
               </p>
               <input class="form-control"
-                placeholder="Applicant’s Name (Nombre del solicitante)"
+                placeholder="Applicant’s Name / Nombre del solicitante"
                 formControlName="applicant_name">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Social Security Number (SS#):</span>
+                <span class="bolt">Social Security Number / SS# del Solicitante:</span>
               </p>
               <input class="form-control"
-                placeholder="Applicant's SS# (SS# del Solicitante)"
+                placeholder="Applicant's SS# / SS# del Solicitante"
                 rows="4"
                 formControlName="applicant_ss_num">
             </div>
@@ -56,19 +68,19 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Co-Applicant’s Name (Nombre del Solicitante):</span>
+                <span class="bolt">Co-Applicant’s Name / Nombre del Solicitante:</span>
               </p>
               <input type="email"
                 class="form-control"
-                placeholder="Applicant’s Name (Nombre del solicitante)"
+                placeholder="Applicant’s Name / Nombre del solicitante"
                 formControlName="co_applicant_name">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Social Security Number (SS#):</span>
+                <span class="bolt">Social Security Number / SS# del Solicitante:</span>
               </p>
               <input class="form-control"
-                placeholder="Applicant's SS# (SS# del Solicitante)"
+                placeholder="Applicant's SS# / SS# del Solicitante"
                 formControlName="co_applicant_ss_num">
             </div>
           </div>
@@ -76,19 +88,19 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Address (Dirección):</span>
+                <span class="bolt">Address / Dirección:</span>
               </p>
               <input type="email"
                 class="form-control"
-                placeholder="Address (Dirección)"
+                placeholder="Address / Dirección"
                 formControlName="address">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Grant Amount Requested (Cantidad de la Subvencion Solcitada) - $2,500 max:</span>
+                <span class="bolt">Grant Amount Requested / Cantidad de la Subvencion Solcitada - $2,500 max:</span>
               </p>
               <input class="form-control"
-                placeholder="$2,500 max ($2,500 máx)"
+                placeholder="$2,500 max / $2,500 máx"
                 formControlName="amount_requested">
             </div>
           </div>
@@ -96,19 +108,19 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Email (Correo Electrónico):</span>
+                <span class="bolt">Email / Correo Electrónico:</span>
               </p>
               <input type="email"
                 class="form-control"
-                placeholder="Email (Correo Electrónico)"
+                placeholder="Email / Correo Electrónico"
                 formControlName="email">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Phone (Teléfono):</span>
+                <span class="bolt">Phone / Teléfono:</span>
               </p>
               <input class="form-control"
-                placeholder="Phone (Teléfono)"
+                placeholder="Phone / Teléfono"
                 formControlName="phone">
             </div>
           </div>
@@ -116,19 +128,19 @@
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
-              mat-flat-button>Back (Atrás)</button>
+              mat-flat-button>Back / Atrás</button>
             <button mat-flat-button
               matStepperNext
-              class="btn-dfa-dark">Next (Contiguo)</button>
+              class="btn-dfa-dark">Next / Contiguo</button>
             <button mat-flat-button
               type="button"
               (click)="saveExit('secondFormGroup')"
-              class="btn-info">Save Draft and Exit (Guardar y Salir)
+              class="btn-info">Save Draft and Exit / Guardar y Salir
             </button>
             <button mat-flat-button
               class="btn-dark"
               type="button"
-              (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
           </div>
         </form>
       </mat-step>
@@ -141,14 +153,14 @@
           <ng-template matStepLabel>Household<br>Hogar</ng-template>
           <br>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-10">
               <p>
-                <span class="bolt">Household Size (Number of People who live in unit)<br>(Tamaño del Hogar (Número de personas que viven en la unidad)):</span>
+                <span class="bolt">Household Size (Number of People who live in unit) / Tamaño del Hogar (Número de personas que viven en la unidad):</span>
               </p>
             </div>
             <div class="col-md-2">
               <input class="form-control"
-                placeholder="Household Size (Tamaño del Hogar)"
+                placeholder="Household Size / Tamaño del Hogar"
                 formControlName="household_size">
             </div>
           </div>
@@ -156,115 +168,115 @@
           <div class="row">
             <div class="col-md-12">
               <p>
-                <span class="bolt">Please list ALL household members currently living at this address<br>(Por favor, enumere TODOS los miembros del hogar que viven actualmente en esta dirección)</span>
+                <span class="bolt">Please list ALL household members currently living at this address / Por favor, enumere TODOS los miembros del hogar que viven actualmente en esta dirección</span>
               </p>
             </div>
           </div>
           <div class="row">
             <div class="col-md-2">
               <p>
-                <span class="bolt">Name <br>(Nombre):</span>
+                <span class="bolt">Name /<br>Nombre:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Name (Nombre)"
+                placeholder="Name / Nombre"
                 formControlName="name">
             </div>
             <div class="col-md-2">
               <p>
-                <span class="bolt">Age<br>(Edad):</span>
+                <span class="bolt">Age /<br>Edad:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Age (Edad)"
+                placeholder="Age / Edad"
                 formControlName="age">
             </div>
           </div>
           <div class="row">
             <div class="col-md-2">
               <p>
-                <span class="bolt">Name of Employer<br>(Nombre del Empleador):</span>
+                <span class="bolt">Name of Employer /<br>Nombre del Empleador:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Name of Employer (Nombre del Empleador)"
+                placeholder="Name of Employer / Nombre del Empleador"
                 formControlName="employer">
             </div>
             <div class="col-md-2">
               <p>
-                <span class="bolt">Employer Phone<br>(Teléfono del Empleador):</span>
+                <span class="bolt">Employer Phone /<br>Teléfono del Empleador:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Employer Phone (Teléfono del Empleador)"
+                placeholder="Employer Phone / Teléfono del Empleador"
                 formControlName="employer_phone">
             </div>
           </div>
           <div class="row">
             <div class="col-md-2">
               <p>
-                <span class="bolt">Employer Address<br>(Dirección del Empleador):</span>
+                <span class="bolt">Employer Address /<br>Dirección del Empleador:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input type="email"
                 class="form-control"
-                placeholder="Employer Address (Dirección del Empleador)"
+                placeholder="Employer Address / Dirección del Empleador"
                 formControlName="employer_address">
             </div>
             <div class="col-md-2">
               <p>
-                <span class="bolt">Position<br>(Posición):</span>
+                <span class="bolt">Position /<br>Posición:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Position (Posición)"
+                placeholder="Position / Posición"
                 formControlName="position">
             </div>
           </div>
           <div class="row">
             <div class="col-md-2">
               <p>
-                <span class="bolt">Years Employed<br>(Años Empleado):</span>
+                <span class="bolt">Years Employed /<br>Años Empleado:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Years Employed (Años Empleado)"
+                placeholder="Years Employed / Años Empleado"
                 formControlName="years_employed">
             </div>
             <div class="col-md-2">
               <p>
-                <span class="bolt">Supervisor<br>(Supervisor):</span>
+                <span class="bolt">Supervisor /<br>Supervisor:</span>
               </p>
             </div>
             <div class="col-md-4">
               <input class="form-control"
-                placeholder="Supervisor (Supervisor)"
+                placeholder="Supervisor / Supervisor"
                 formControlName="supervisor">
             </div>
           </div>
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
-              mat-flat-button>Back (Atrás)</button>
+              mat-flat-button>Back / Atrás</button>
             <button mat-flat-button
               matStepperNext
-              class="btn-dfa-dark">Next (Contiguo)</button>
+              class="btn-dfa-dark">Next / Contiguo</button>
             <button mat-flat-button
               type="button"
               (click)="saveExit('thirdFormGroup')"
-              class="btn-info">Save Draft and Exit (Guardar y Salir)
+              class="btn-info">Save Draft and Exit / Guardar y Salir
             </button>
             <button mat-flat-button
               class="btn-dark"
               type="button"
-              (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
           </div>
         </form>
       </mat-step>
@@ -279,12 +291,12 @@
         <div class="row">
           <div class="col-md-12">
             <p>
-              <strong class="bolt">Documentation (Documentación): </strong>
+              <strong class="bolt">Documentation / Documentación: </strong>
             </p>
           </div>
         </div>
         <br>
-        <div class="card-header">Downloads (Descargas)</div>
+        <div class="card-header">Downloads / Descargas</div>
         <div class="card-body">
           <table id="doctable" class="table">
             <tr>
@@ -303,14 +315,14 @@
         </div>
         <div *ngIf="recordId"
           class="card bg-dfa">
-          <div class="card-header">Existing Documents (Documentos Existentes)</div>
+          <div class="card-header">Existing Documents / Documentos Existentes</div>
           <div class="card-body">
             <table id="doctable"
               class="table">
               <tbody *ngIf="landlordEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
-                    No Attachments (Sin Adjunto).
+                    No Attachments / Sin Adjunto.
                   </td>
                 </tr>
               </tbody>
@@ -346,7 +358,7 @@
 
         <div class="card bg-dfa">
           <div class="card-header">
-            Add New Documents (Agregar Nuevos Documentos)
+            Add New Documents / Agregar Nuevos Documentos
             <button class="btn btn-sm btn-rounded btn-success float-right"
               (click)="addDocumentFormRow('Landlord')">
               <i class="fa fa-plus"></i>
@@ -354,7 +366,7 @@
           </div>
           <div class="card-body">
             <form (ngSubmit)="onStepFourSubmit()"> 
-              <span *ngIf="landlordDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+              <span *ngIf="landlordDocuments.length === 0">Click on Plus button to add documents / Haga clic en el botón Más para agregar documentos.</span>
               <br>
 
               <table class="table table-bordered">
@@ -365,7 +377,7 @@
                       class="form-control"
                       (change)="onChangeLandlordDocumentType(doc.tempId,$event.target.value)">
                       <option value=""
-                        hidden>- Select Type (Seleccione Tipo) -</option>
+                        hidden>- Select Type / Seleccione Tipo -</option>
                       <option value="{{opt.id}}"
                         *ngFor="let opt of landlordDocumentSelectionTypes">
                         {{opt.document_title}}
@@ -378,7 +390,7 @@
                       (change)="onChangeLandlordDocumentTitle(doc.tempId,$event.target.value)"
                       [value]="landlordDocumentTitles[doc.tempId]"
                       name="landlordDocumentTitles[doc.tempId]"
-                      placeholder="Document Title (Titulo del Documento)">
+                      placeholder="Document Title / Titulo del Documento">
                   </td>
                   <td>
                     <div class="col-md-10">
@@ -401,19 +413,19 @@
               <div class="stepper-button-row">
                 <button matStepperPrevious
                   class="btn-dfa-light"
-                  mat-flat-button>Back (Atrás)</button>
+                  mat-flat-button>Back / Atrás</button>
                 <button mat-flat-button
                   matStepperNext
-                  class="btn-dfa-dark">Next (Contiguo)</button>
+                  class="btn-dfa-dark">Next / Contiguo</button>
                 <button mat-flat-button
                   type="button"
                   (click)="saveExit(null)"
-                  class="btn-info">Save Draft and Exit (Guardar y Salir)
+                  class="btn-info">Save Draft and Exit / Guardar y Salir
                 </button>
                 <button mat-flat-button
                 class="btn-dark"
                 type="button"
-                (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+                (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
               </div>
             </form>
           </div>
@@ -431,18 +443,18 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Landlord (Propietario):</span>
+                <span class="bolt">Landlord / Propietario:</span>
               </p>
               <input class="form-control"
-                placeholder="Landlord (Propietario)"
+                placeholder="Landlord / Propietario"
                 formControlName="landlord">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Authorized Representative (Representante Autorizado):</span>
+                <span class="bolt">Authorized Representative / Representante Autorizado:</span>
               </p>
               <input class="form-control"
-                placeholder="Authorized Representative (Representante Autorizado)"
+                placeholder="Authorized Representative / Representante Autorizado"
                 formControlName="landlord_authorized_representative">
             </div>
           </div>
@@ -450,10 +462,10 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Landlord Address (Dirección del Propietario):</span>
+                <span class="bolt">Landlord Address / Dirección del Propietario:</span>
               </p>
               <input class="form-control"
-                placeholder="Landlord Address (Dirección del Propietario)"
+                placeholder="Landlord Address / Dirección del Propietario"
                 formControlName="landlord_address">
             </div>
           </div>
@@ -461,19 +473,19 @@
           <div class="row">
             <div class="col-md-6">
               <p>
-                <span class="bolt">Landlord Email (Correo Electrónico del Propietario):</span>
+                <span class="bolt">Landlord Email / Correo Electrónico del Propietario:</span>
               </p>
               <input type="email"
                 class="form-control"
-                placeholder="Landlord Email (Correo Electrónico del Propietario)"
+                placeholder="Landlord Email / Correo Electrónico del Propietario"
                 formControlName="landlord_email">
             </div>
             <div class="col-md-6">
               <p>
-                <span class="bolt">Landlord Phone (Teléfono del Propietario):</span>
+                <span class="bolt">Landlord Phone / Teléfono del Propietario:</span>
               </p>
               <input class="form-control"
-                placeholder="Landlord Phone (Teléfono del Propietario)"
+                placeholder="Landlord Phone / Teléfono del Propietario"
                 formControlName="landlord_phone">
             </div>
           </div>
@@ -481,19 +493,19 @@
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
-              mat-flat-button>Back (Atrás)</button>
+              mat-flat-button>Back / Atrás</button>
             <button mat-flat-button
               matStepperNext
-              class="btn-dfa-dark">Next (Contiguo)</button>
+              class="btn-dfa-dark">Next / Contiguo</button>
             <button mat-flat-button
               type="button"
               (click)="saveExit('fifthFormGroup')"
-              class="btn-info">Save Draft and Exit (Guardar y Salir)
+              class="btn-info">Save Draft and Exit / Guardar y Salir
             </button>
             <button mat-flat-button
               class="btn-dark"
               type="button"
-              (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
           </div>
         </form>
       </mat-step>
@@ -509,7 +521,7 @@
         <div class="row">
           <div class="col-md-12">
             <p>
-              <strong class="bolt">Documentation (Documentación): </strong>
+              <strong class="bolt">Documentation / Documentación: </strong>
             </p>
           </div>
         </div>
@@ -517,14 +529,14 @@
 
         <div *ngIf="recordId"
           class="card bg-dfa">
-          <div class="card-header">Existing Documents (Documentos Existentes)</div>
+          <div class="card-header">Existing Documents / Documentos Existentes</div>
           <div class="card-body">
             <table id="doctable"
               class="table">
               <tbody *ngIf="applicantEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
-                    No Attachments (Sin Adjunto).
+                    No Attachments / Sin Adjunto.
                   </td>
                 </tr>
               </tbody>
@@ -560,7 +572,7 @@
 
         <div class="card bg-dfa">
           <div class="card-header">
-            Add New Documents (Agregar Nuevos Documentos)
+            Add New Documents / Agregar Nuevos Documentos
             <button class="btn btn-sm btn-rounded btn-success float-right"
               (click)="addDocumentFormRow('Applicant')">
               <i class="fa fa-plus"></i>
@@ -568,7 +580,7 @@
           </div>
           <div class="card-body">
             <form (ngSubmit)="onStepSixSubmit()"> 
-              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents / Haga clic en el botón Más para agregar documentos.</span>
               <br>
 
               <table class="table table-bordered">
@@ -579,7 +591,7 @@
                       class="form-control"
                       (change)="onChangeApplicantDocumentType(doc.tempId,$event.target.value)">
                       <option value=""
-                        hidden>- Select Type (Seleccione Tipo) -</option>
+                        hidden>- Select Type / Seleccione Tipo -</option>
                       <option value="{{opt.id}}"
                         *ngFor="let opt of applicantsDocumentSelectionTypes">
                         {{opt.document_title}}
@@ -592,7 +604,7 @@
                       (change)="onChangeApplicantDocumentTitle(doc.tempId,$event.target.value)"
                       [value]="applicantDocumentTitles[doc.tempId]"
                       name="applicantDocumentTitles[doc.tempId]"
-                      placeholder="Document Title (Titulo del Documento)">
+                      placeholder="Document Title / Titulo del Documento">
                   </td>
                   <td>
                     <div class="col-md-10">
@@ -615,19 +627,19 @@
               <div class="stepper-button-row">
                 <button matStepperPrevious
                   class="btn-dfa-light"
-                  mat-flat-button>Back (Atrás)</button>
+                  mat-flat-button>Back / Atrás</button>
                 <button mat-flat-button
                   matStepperNext
-                  class="btn-dfa-dark">Next (Contiguo)</button>
+                  class="btn-dfa-dark">Next / Contiguo</button>
                 <button mat-flat-button
                   type="button"
                   (click)="saveExit(null)"
-                  class="btn-info">Save Draft and Exit (Guardar y Salir)
+                  class="btn-info">Save Draft and Exit / Guardar y Salir
                 </button>
                 <button mat-flat-button
                 class="btn-dark"
                 type="button"
-                (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+                (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
               </div>
             </form>
           </div>
@@ -686,14 +698,14 @@
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
-              mat-flat-button>Back (Atrás)</button>
+              mat-flat-button>Back / Atrás</button>
             <button mat-flat-button
               class="btn-dfa-dark"
               type="submit">Save (Guardar)</button>
             <button mat-flat-button
               class="btn-dark"
               type="button"
-              (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
           </div>
         </form>
 
@@ -705,8 +717,8 @@
 </div>
 
 <ng-template #discardchanges
-  let-modal>
-  <div class="modal-header">
+  let-modal >
+  <div class="modal-header" >
     <h4 class="modal-title"
       id="modal-basic-title">
       {{modelConfig.title}}
@@ -715,7 +727,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to discard all changes and continue?<br>
+        Are you sure you want to discard all changes and continue? / <br>
         ¿Está seguro de que desea descartar todos los cambios y continuar?
       </div>
     </div>
@@ -724,10 +736,10 @@
       <div class="col-md-12">
         <button type="button"
           class="btn btn-success"
-          (click)="redirectToApps(true)">Yes (Si)</button>
+          (click)="redirectToApps(true)">Yes / Si</button>
         <button type="button"
           class="btn btn-dark"
-          (click)="modal.close('discard')">No (No)</button>
+          (click)="modal.close('discard')">No / No</button>
       </div>
     </div>
   </div>

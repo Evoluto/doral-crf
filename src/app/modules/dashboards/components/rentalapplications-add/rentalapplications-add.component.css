@@ -23,7 +23,7 @@
 }
 
 .cost-table-header{
-  background-color:#33639145
+  background-color:#010080
 }
 
 label {
@@ -35,7 +35,4 @@ label {
 .field-has-error {
   color: red
 }
-.duns-info {
-  color: red;
-  margin-top: 25px;
-}
+
