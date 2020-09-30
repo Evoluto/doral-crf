@@ -8,3 +8,9 @@
 .blue-bg {
     background-color: #bfccec !important;
 }
+
+.btn-auth {
+    background: #FACD48 !important;
+    border-color: #FACD48 !important;
+    color:black !important;
+}
