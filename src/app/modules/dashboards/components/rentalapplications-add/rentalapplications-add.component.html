@@ -9,9 +9,25 @@
           (ngSubmit)="onStepOneSubmit()">
           <ng-template matStepLabel>Requirements<br>Requisitos</ng-template>
           <br>
-          <span>The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be paid directly to approved landlords in the form of a grant which must be used solely to provide rent forgiveness in the same amount to eligible tenants. Residents must submit a completed application online, and provide all required materials to be considered eligible.</span>
+          <span>The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who
+            can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time
+            assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying
+            residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds
+            will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be
+            paid directly to approved landlords in the form of a grant which must be used solely to provide rent
+            forgiveness in the same amount to eligible tenants. Residents must submit a completed application online,
+            and provide all required materials to be considered eligible.</span>
           <hr style="Background-color: #bfcced">
-          <span>El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles.</span>
+          <span>El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el
+            alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia
+            de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a
+            los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia
+            para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la
+            subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que
+            se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención
+            que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los
+            inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los
+            materiales necesarios para ser considerados elegibles.</span>
           <hr style="Background-color: #bfcced">
           <div class="stepper-button-row">
             <button mat-flat-button
@@ -142,113 +158,157 @@
           <br>
           <div class="row">
             <div class="col-md-6">
-              <p>
-                <span class="bolt">Household Size (Number of People who live in unit)<br>(Tamaño del Hogar (Número de personas que viven en la unidad)):</span>
-              </p>
+              <div>
+                <span class="bolt">Household Size (Number of People who live in unit)<br>(Tamaño del Hogar (Número de
+                  personas que viven en la unidad)):</span>
+              </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-6">
               <input class="form-control"
+                type="number"
                 placeholder="Household Size (Tamaño del Hogar)"
                 formControlName="household_size">
             </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-md-12">
-              <p>
-                <span class="bolt">Please list ALL household members currently living at this address<br>(Por favor, enumere TODOS los miembros del hogar que viven actualmente en esta dirección)</span>
-              </p>
+            <div class="col-md-6">
+              <label>Applicant’s Name (Nombre del Solicitante):</label>
+              <input class="form-control"
+                type="text"
+                value="{{this.secondFormGroup.get('applicant_name').value}}"
+                readonly>
+            </div>
+            <div *ngIf="this.secondFormGroup.get('co_applicant_name').value"
+              class="col-md-6">
+              <label>Co-Applicant’s Name (Nombre del Solicitante):</label>
+              <input class="form-control"
+                type="text"
+                value="{{this.secondFormGroup.get('co_applicant_name').value}}"
+                readonly>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Name <br>(Nombre):</span>
-              </p>
+          <br>
+          <div *ngIf="this.thirdFormGroup.get('household_size').value">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="alert alert-success">
+                  <span class="bolt">Please list ALL household members currently living at this address (Por favor,
+                    enumere TODOS los miembros del hogar que viven actualmente en esta dirección)</span>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Name (Nombre)"
-                formControlName="name">
+
+            <div formArrayName="items"
+              *ngFor="let item of thirdFormGroup.get('items').controls; let i = index;">
+
+              <div [formGroupName]="i"
+                class="card-body bg-light">
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Name <br>(Nombre):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      placeholder="Name (Nombre)"
+                      type="text"
+                      formControlName="name">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Age<br>(Edad):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Age (Edad)"
+                      formControlName="age">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Name of Employer<br>(Nombre del Empleador):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Name of Employer (Nombre del Empleador)"
+                      formControlName="employer">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Employer Phone<br>(Teléfono del Empleador):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Employer Phone (Teléfono del Empleador)"
+                      formControlName="employer_phone">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Employer Address<br>(Dirección del Empleador):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input type="email"
+                      class="form-control"
+                      type="text"
+                      placeholder="Employer Address (Dirección del Empleador)"
+                      formControlName="employer_address">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Position<br>(Posición):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Position (Posición)"
+                      formControlName="position">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Years Employed<br>(Años Empleado):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Years Employed (Años Empleado)"
+                      formControlName="years_employed">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Supervisor<br>(Supervisor):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Supervisor (Supervisor)"
+                      formControlName="supervisor">
+                  </div>
+                </div>
+              </div>
+
+              <br>
             </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Age<br>(Edad):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Age (Edad)"
-                formControlName="age">
-            </div>
+
           </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Name of Employer<br>(Nombre del Empleador):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Name of Employer (Nombre del Empleador)"
-                formControlName="employer">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Employer Phone<br>(Teléfono del Empleador):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Employer Phone (Teléfono del Empleador)"
-                formControlName="employer_phone">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Employer Address<br>(Dirección del Empleador):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input type="email"
-                class="form-control"
-                placeholder="Employer Address (Dirección del Empleador)"
-                formControlName="employer_address">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Position<br>(Posición):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Position (Posición)"
-                formControlName="position">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Years Employed<br>(Años Empleado):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Years Employed (Años Empleado)"
-                formControlName="years_employed">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Supervisor<br>(Supervisor):</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Supervisor (Supervisor)"
-                formControlName="supervisor">
-            </div>
-          </div>
+
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
@@ -270,8 +330,8 @@
       </mat-step>
       <!-- Step three end -->
 
-       <!-- Step four start -->
-       <mat-step [completed]="isCompletedStepFour">
+      <!-- Step four start -->
+      <mat-step [completed]="isCompletedStepFour">
 
         <ng-template matStepLabel>Landlord Documents<br>Documentos de Propietario</ng-template>
         <br>
@@ -286,18 +346,28 @@
         <br>
         <div class="card-header">Downloads (Descargas)</div>
         <div class="card-body">
-          <table id="doctable" class="table">
+          <table id="doctable"
+            class="table">
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>W-9 form must be completed, signed and dated by landlord to enable payment. </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago. </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf"
+                  download>W-9 form must be completed, signed and dated by landlord to enable payment. </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf"
+                  download>El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago. </a>
+              </td>
             </tr>
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Vendor Application must be completed to enable payment.  </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Se debe completar la Solicitud de proveedor para permitir el pago.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf"
+                  download>Vendor Application must be completed to enable payment.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf"
+                  download>Se debe completar la Solicitud de proveedor para permitir el pago.  </a></td>
             </tr>
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>Business Entity Affidavit must be completed, signed, notarized to enable payment, if applicable to a management company.  </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>La declaración jurada de la entidad comercial debe completarse, firmarse y certificarse ante notario para permitir el pago, si corresponde, a una empresa de gestión.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf"
+                  download>Business Entity Affidavit must be completed, signed, notarized to enable payment, if
+                  applicable to a management company.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf"
+                  download>La declaración jurada de la entidad comercial debe completarse, firmarse y certificarse ante
+                  notario para permitir el pago, si corresponde, a una empresa de gestión.  </a></td>
             </tr>
           </table>
         </div>
@@ -353,8 +423,9 @@
             </button>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="onStepFourSubmit()"> 
-              <span *ngIf="landlordDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+            <form (ngSubmit)="onStepFourSubmit()">
+              <span *ngIf="landlordDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón
+                Más para agregar documentos).</span>
               <br>
 
               <table class="table table-bordered">
@@ -411,9 +482,9 @@
                   class="btn-info">Save Draft and Exit (Guardar y Salir)
                 </button>
                 <button mat-flat-button
-                class="btn-dark"
-                type="button"
-                (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+                  class="btn-dark"
+                  type="button"
+                  (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
               </div>
             </form>
           </div>
@@ -500,8 +571,8 @@
       <!-- Step five end -->
 
 
-       <!-- Step Six start -->
-       <mat-step [completed]="isCompletedStepSix">
+      <!-- Step Six start -->
+      <mat-step [completed]="isCompletedStepSix">
 
         <ng-template matStepLabel>Applicant Documents<br>Documentos del Solicitante</ng-template>
         <br>
@@ -567,8 +638,9 @@
             </button>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="onStepSixSubmit()"> 
-              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+            <form (ngSubmit)="onStepSixSubmit()">
+              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón
+                Más para agregar documentos).</span>
               <br>
 
               <table class="table table-bordered">
@@ -625,9 +697,9 @@
                   class="btn-info">Save Draft and Exit (Guardar y Salir)
                 </button>
                 <button mat-flat-button
-                class="btn-dark"
-                type="button"
-                (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+                  class="btn-dark"
+                  type="button"
+                  (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
               </div>
             </form>
           </div>
@@ -653,7 +725,10 @@
               </td>
               <td width="96%">
                 <p [ngClass]="{'field-has-error': eighthFormGroup.get('certify').hasError('required') }">
-                  By entering your name, you certify that you are the correct person to fill out this form, that all information you presented is true to the best of your knowledge, and that you are requesting to participate in the City of Doral’s Small Business Assistance Grant Program. You also certify that you are authorized to submit this form on behalf of the aforementioned Small Business.
+                  By entering your name, you certify that you are the correct person to fill out this form, that all
+                  information you presented is true to the best of your knowledge, and that you are requesting to
+                  participate in the City of Doral’s Small Business Assistance Grant Program. You also certify that you
+                  are authorized to submit this form on behalf of the aforementioned Small Business.
                 </p>
               </td>
             </tr>

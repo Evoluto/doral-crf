@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl, FormArray, AbstractControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl, FormArray, AbstractControl, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { ProjectSpecificService } from 'src/app/services/project-specific.servic
 import { StorageService } from 'src/app/services/storage.service';
 import { formatDate } from '@angular/common';
 import * as uuid from 'uuid';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription, Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PopupModel } from 'src/app/modules/dashboards/models/popup';
 
@@ -59,6 +59,8 @@ export class RentalApplicationsAddComponent implements OnInit {
   modelConfig: PopupModel;
   programData: any;
 
+  items: FormArray;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -67,6 +69,7 @@ export class RentalApplicationsAddComponent implements OnInit {
     private ignatiusService: IgnatiusService,
     private storageService: StorageService,
     private projectSpecificService: ProjectSpecificService,
+    private formBuilder: FormBuilder,
     private ngbModal: NgbModal
   ) { }
 
@@ -116,22 +119,24 @@ export class RentalApplicationsAddComponent implements OnInit {
     });
   }
 
-  private setupThirdForm() {
-    const NumberPattern = /^\d{1,2}?$/;
-    const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
-    const DecimalNumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
-    this.thirdFormGroup = new FormGroup({
-      household_size: new FormControl(this.rentalApplicationEditData.household_size || ''),//, [Validators.required, Validators.pattern(NumberPattern)]),
-      name: new FormControl(this.rentalApplicationEditData.name || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      age: new FormControl(this.rentalApplicationEditData.age || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      employer: new FormControl(this.rentalApplicationEditData.employer || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      employer_phone: new FormControl(this.rentalApplicationEditData.employer_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
-      employer_address: new FormControl(this.rentalApplicationEditData.employer_address || ''),//, Validators.required),
-      position: new FormControl(this.rentalApplicationEditData.position || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      years_employed: new FormControl(this.rentalApplicationEditData.years_employed || ''),//, Validators.required),
-      supervisor: new FormControl(this.rentalApplicationEditData.supervisor || ''),//, Validators.required)
+  private setupThirdForm() {
+    // const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
+    // const SSNumPattern = /^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$/;
+
+    this.thirdFormGroup = this.formBuilder.group({
+      household_size: new FormControl(
+        this.rentalApplicationEditData.household_size || "",
+        [Validators.required, Validators.pattern("^[1-9]*$")]
+      ),
+      items: this.formBuilder.array([])
     });
+
+    this.thirdFormGroup.get('household_size')
+      .valueChanges
+      .subscribe(value => {
+        this.onHouseholdSizeChange(value)
+      })
   }
 
   private setupFourthForm() {
@@ -682,6 +687,53 @@ export class RentalApplicationsAddComponent implements OnInit {
 
 
   /*================================== Documents section End ==================================*/
+
+
+  /*================================== Household section Start ==================================*/
+
+  createHouseholdForms(): FormGroup {
+    return this.formBuilder.group({
+      name: new FormControl(this.rentalApplicationEditData.name || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      age: new FormControl(this.rentalApplicationEditData.age || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      employer: new FormControl(this.rentalApplicationEditData.employer || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      employer_phone: new FormControl(this.rentalApplicationEditData.employer_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
+      employer_address: new FormControl(this.rentalApplicationEditData.employer_address || ''),//, Validators.required),
+      position: new FormControl(this.rentalApplicationEditData.position || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      years_employed: new FormControl(this.rentalApplicationEditData.years_employed || ''),//, Validators.required),
+      supervisor: new FormControl(this.rentalApplicationEditData.supervisor || ''),//, Validators.required)
+    });
+  }
+
+  addItem(): void {
+    this.items = this.thirdFormGroup.get('items') as FormArray;
+    this.items.push(this.createHouseholdForms());
+  }
+
+  onHouseholdSizeChange(value: String) {
+    if (!value || !Number(value) || Number(value) < 1) return;
+
+    const numValue = Number(value);
+
+    const arrLength = (<FormArray>this.thirdFormGroup.get('items')).length;
+
+    if (arrLength < numValue) {
+      for (let index = arrLength; index < numValue; index++) {
+        (<FormArray>this.thirdFormGroup.get('items')).push(this.createHouseholdForms());
+      }
+    } else if (arrLength > numValue) {
+      for (let index = arrLength - 1; index >= numValue; index--) {
+        (<FormArray>this.thirdFormGroup.get('items')).removeAt(index)
+      }
+    } else {
+      //Nothing to do :)
+    }
+
+
+  }
+
+
+
+  /*================================== Household section End ==================================*/
 
 }
 
