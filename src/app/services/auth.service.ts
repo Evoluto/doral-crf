@@ -46,6 +46,25 @@ export class AuthService {
       console.log(e);
     }
   }
+
+  register(user) {
+    const body = [{
+      Email: user.email,
+      Password: user.password,
+      Role: 'participant',
+      ApplicationIds: [119],
+      ApplicationRoleIds: [700]
+    }];
+        
+    return this.http.post<string>('/api/user/create', body)
+      .pipe(
+        catchError(error => {
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
   signIn(username: string, password: string): Observable<User> {
     const tokenUrl = '/token';
     let tokenParams = new HttpParams();
