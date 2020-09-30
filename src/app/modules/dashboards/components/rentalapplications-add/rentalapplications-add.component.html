@@ -10,9 +10,9 @@
           <ng-template matStepLabel>Requirements<br>Requisitos</ng-template>
           <br>
           <span>The Doral CARES Emergency Rental Assistance Program provides rental assistance to residents of Doral who can demonstrate a pressing financial need due to the COVID-19 pandemic. The program provides a one-time assistance grant of up to $2,500.00 to help residents cover unpaid rental payments. For qualifying residents, rental assistance will be based on one month’s rent up to the maximum grant amount. Grant funds will be disbursed first come, first served directly to landlords until funds are exhausted. Funds will be paid directly to approved landlords in the form of a grant which must be used solely to provide rent forgiveness in the same amount to eligible tenants. Residents must submit a completed application online, and provide all required materials to be considered eligible.</span>
-          <hr style="Back (Atrás)ground-color: #bfcced">
+          <hr style="Background-color: #bfcced">
           <span>El Programa de Asistencia de Emergencia para el Alquiler de Doral CARES brinda asistencia para el alquiler a los residentes de Doral que puedan demostrar una necesidad económica urgente debido a la pandemia de COVID-19. El programa proporciona una subvención de asistencia única de hasta $ 2,500.00 para ayudar a los residentes a cubrir los pagos de alquiler impagos. Para los residentes que califiquen, la asistencia para el alquiler se basará en el alquiler de un mes hasta el monto máximo de la subvención. Los fondos de la subvención se desembolsarán por orden de llegada, primero servido directamente a los propietarios hasta que se agoten los fondos. Los fondos se pagarán directamente a los propietarios aprobados en forma de subvención que debe utilizarse únicamente para proporcionar la condonación del alquiler por la misma cantidad a los inquilinos elegibles. Los residentes deben enviar una solicitud completa en línea y proporcionar todos los materiales necesarios para ser considerados elegibles.</span>
-          <hr style="Back (Atrás)ground-color: #bfcced">
+          <hr style="Background-color: #bfcced">
           <div class="stepper-button-row">
             <button mat-flat-button
               matStepperNext
@@ -291,15 +291,15 @@
           <div class="card-body">
             <table id="doctable"
               class="table">
-              <tbody *ngIf="rentalApplicationEditDocumentData.length === 0">
+              <tbody *ngIf="applicantEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
                     No Attachments (Sin Adjunto).
                   </td>
                 </tr>
               </tbody>
-              <tbody *ngIf="rentalApplicationEditDocumentData.length > 0">
-                <tr *ngFor="let aed of rentalApplicationEditDocumentData"
+              <tbody *ngIf="applicantEditDocumentData.length > 0">
+                <tr *ngFor="let aed of applicantEditDocumentData"
                   style="border-top:none !important">
                   <td>
                     <span>{{aed.document_title}}</span>
@@ -318,7 +318,7 @@
                     </button>
                     <button type="button"
                       class="btn btn-sm btn-circle"
-                      (click)="deleteDocument(aed.id)">
+                      (click)="deleteApplicantDocument(aed.id)">
                       <i class="fa fa-trash text-danger"></i>
                     </button>
                   </td>
@@ -332,37 +332,37 @@
           <div class="card-header">
             Add New Documents (Agregar Nuevos Documentos)
             <button class="btn btn-sm btn-rounded btn-success float-right"
-              (click)="addDocumentFormRow()">
+              (click)="addDocumentFormRow('Applicant')">
               <i class="fa fa-plus"></i>
             </button>
           </div>
           <div class="card-body">
             <!-- Is this correct?????????????????? -->
             <form (ngSubmit)="onStepFourSubmit()"> 
-              <span *ngIf="documents.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
               <br>
 
               <table class="table table-bordered">
-                <tr *ngFor="let doc of documents">
+                <tr *ngFor="let doc of applicantDocuments">
                   <td>
-                    <select [value]="documentTypes[doc.tempId]"
-                      name="documentTypes[doc.tempId]"
+                    <select [value]="applicantDocumentTypes[doc.tempId]"
+                      name="applicantDocumentTypes[doc.tempId]"
                       class="form-control"
-                      (change)="onChangeDocumentType(doc.tempId,$event.target.value)">
+                      (change)="onChangeApplicantDocumentType(doc.tempId,$event.target.value)">
                       <option value=""
                         hidden>- Select Type (Seleccione Tipo) -</option>
-                      <option value="{{opt.value}}"
-                        *ngFor="let opt of documentSelectionTypes">
-                        {{opt.name}}
+                      <option value="{{opt.id}}"
+                        *ngFor="let opt of applicantsDocumentSelectionTypes">
+                        {{opt.document_title}}
                       </option>
                     </select>
                   </td>
                   <td>
                     <input class="form-control"
                       type="text"
-                      (change)="onChangeDocumentTitle(doc.tempId,$event.target.value)"
-                      [value]="documentTitles[doc.tempId]"
-                      name="documentTitles[doc.tempId]"
+                      (change)="onChangeApplicantDocumentTitle(doc.tempId,$event.target.value)"
+                      [value]="applicantDocumentTitles[doc.tempId]"
+                      name="applicantDocumentTitles[doc.tempId]"
                       placeholder="Document Title (Titulo del Documento)">
                   </td>
                   <td>
@@ -370,11 +370,11 @@
                       <input type="file"
                         class="form-control-file form-control-sm"
                         id="add_file"
-                        (change)="handleUpload(doc.tempId,$event)">
+                        (change)="handleUploadApplicant(doc.tempId,$event)">
                     </div>
                   </td>
                   <td>
-                    <button (click)="removeDocumentRow(doc.tempId)"
+                    <button (click)="removeApplicantDocumentRow(doc.tempId)"
                       class="btn btn-sm btn-rounded btn-danger">
                       <i class="fa fa-minus"></i>
                     </button>
@@ -520,15 +520,15 @@
           <div class="card-body">
             <table id="doctable"
               class="table">
-              <tbody *ngIf="rentalApplicationEditDocumentData.length === 0">
+              <tbody *ngIf="landlordEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
                     No Attachments (Sin Adjunto).
                   </td>
                 </tr>
               </tbody>
-              <tbody *ngIf="rentalApplicationEditDocumentData.length > 0">
-                <tr *ngFor="let aed of rentalApplicationEditDocumentData"
+              <tbody *ngIf="landlordEditDocumentData.length > 0">
+                <tr *ngFor="let aed of landlordEditDocumentData"
                   style="border-top:none !important">
                   <td>
                     <span>{{aed.document_title}}</span>
@@ -547,7 +547,7 @@
                     </button>
                     <button type="button"
                       class="btn btn-sm btn-circle"
-                      (click)="deleteDocument(aed.id)">
+                      (click)="deleteLandlordDocument(aed.id)">
                       <i class="fa fa-trash text-danger"></i>
                     </button>
                   </td>
@@ -561,37 +561,36 @@
           <div class="card-header">
             Add New Documents (Agregar Nuevos Documentos)
             <button class="btn btn-sm btn-rounded btn-success float-right"
-              (click)="addDocumentFormRow()">
+              (click)="addDocumentFormRow('Landlord')">
               <i class="fa fa-plus"></i>
             </button>
           </div>
           <div class="card-body">
-            <!-- Is this correct?????????????????? -->
             <form (ngSubmit)="onStepSixSubmit()"> 
-              <span *ngIf="documents.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+              <span *ngIf="landlordDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
               <br>
 
               <table class="table table-bordered">
-                <tr *ngFor="let doc of documents">
+                <tr *ngFor="let doc of landlordDocuments">
                   <td>
-                    <select [value]="documentTypes[doc.tempId]"
-                      name="documentTypes[doc.tempId]"
+                    <select [value]="landlordDocumentTypes[doc.tempId]"
+                      name="landlordDocumentTypes[doc.tempId]"
                       class="form-control"
-                      (change)="onChangeDocumentType(doc.tempId,$event.target.value)">
+                      (change)="onChangeLandlordDocumentType(doc.tempId,$event.target.value)">
                       <option value=""
                         hidden>- Select Type (Seleccione Tipo) -</option>
-                      <option value="{{opt.value}}"
-                        *ngFor="let opt of documentSelectionTypes">
-                        {{opt.name}}
+                      <option value="{{opt.id}}"
+                        *ngFor="let opt of landlordDocumentSelectionTypes">
+                        {{opt.document_title}}
                       </option>
                     </select>
                   </td>
                   <td>
                     <input class="form-control"
                       type="text"
-                      (change)="onChangeDocumentTitle(doc.tempId,$event.target.value)"
-                      [value]="documentTitles[doc.tempId]"
-                      name="documentTitles[doc.tempId]"
+                      (change)="onChangeLandlordDocumentTitle(doc.tempId,$event.target.value)"
+                      [value]="landlordDocumentTitles[doc.tempId]"
+                      name="landlordDocumentTitles[doc.tempId]"
                       placeholder="Document Title (Titulo del Documento)">
                   </td>
                   <td>
@@ -599,11 +598,11 @@
                       <input type="file"
                         class="form-control-file form-control-sm"
                         id="add_file"
-                        (change)="handleUpload(doc.tempId,$event)">
+                        (change)="handleUploadLandlord(doc.tempId,$event)">
                     </div>
                   </td>
                   <td>
-                    <button (click)="removeDocumentRow(doc.tempId)"
+                    <button (click)="removeLandlordDocumentRow(doc.tempId)"
                       class="btn btn-sm btn-rounded btn-danger">
                       <i class="fa fa-minus"></i>
                     </button>
