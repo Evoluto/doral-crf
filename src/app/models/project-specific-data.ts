@@ -44,7 +44,7 @@ export class HouseholdMembersData {
 export class DocumentsData {
     TableId: number
     RecordIdFieldId: number
-    RelatedBusinessApplicationsFieldId: number
+    RelatedBusinessAssistanceFieldId: number
     RelatedRentalApplicationsFieldId: number
     DocumentTypeFieldId: number
     DocumentFileId:number
@@ -56,7 +56,7 @@ export class RequiredDocumentsData {
     RecordIdFieldId: number
     RecordFormFieldId:number
     //DocumentTypeId: number
-    //RelatedBusinessApplicationsFieldId: number
+    //RelatedBusinessAssistanceFieldId: number
     // DocumentFileId:number
     // DocumentTypeExpenditureCategoryMultipleChoiceID:number
     // DocumentTypeSelectionMultipleChoiceID:number

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormArray, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, Validators, FormControl, FormArray, AbstractControl } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -52,7 +52,6 @@ export class RentalApplicationsAddComponent implements OnInit {
   programData: any;
 
   constructor(
-    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
@@ -435,12 +434,6 @@ export class RentalApplicationsAddComponent implements OnInit {
   }
 
   addDocumentFormRow() {
-
-    // if (this.documents.length === 5) {
-    //   this.toastr.error('Cant add more then 5 rows', 'Error');
-    //   return
-    // }
-
     let obj = {};
     let tempId = uuid.v4();
 
@@ -537,7 +530,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   redirectToApps(closeModal = false) {
     closeModal && this.ngbModal.dismissAll();
-    this.router.navigate(['rentalapplications']);
+    this.router.navigate(['dashboard']);
   }
 
   saveExit(fmGrp: string) {

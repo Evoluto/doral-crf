@@ -109,7 +109,7 @@ export class BusinessApplicationService implements Resolve<Object[]>{
                     "Conditions": [
                       {
                         "ConditionField": {
-                          "Id": projectSpecificData.documentsData.RelatedBusinessApplicationsFieldId
+                          "Id": projectSpecificData.documentsData.RelatedBusinessAssistanceFieldId
                         },
                         "OperationType": "is equal",
                         "Value": recordId
