@@ -153,114 +153,158 @@
           <ng-template matStepLabel>Household<br>Hogar</ng-template>
           <br>
           <div class="row">
-            <div class="col-md-7">
-              <p>
-                <span class="bolt">Household Size (Number of People who live in unit) / Tamaño del Hogar (Número de personas que viven en la unidad):</span>
-              </p>
+            <div class="col-md-6">
+              <div>
+                <span class="bolt">Household Size (Number of People who live in unit)<br>(Tamaño del Hogar (Número de
+                  personas que viven en la unidad)):</span>
+              </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
               <input class="form-control"
-                placeholder="Household Size / Tamaño del Hogar"
+                type="number"
+                placeholder="Household Size (Tamaño del Hogar)"
                 formControlName="household_size">
             </div>
           </div>
           <br>
           <div class="row">
-            <div class="col-md-12">
-              <p>
-                <span class="bolt">Please list ALL household members currently living at this address / Por favor, enumere TODOS los miembros del hogar que viven actualmente en esta dirección:</span>
-              </p>
+            <div class="col-md-6">
+              <label>Applicant’s Name (Nombre del Solicitante):</label>
+              <input class="form-control"
+                type="text"
+                value="{{this.secondFormGroup.get('applicant_name').value}}"
+                readonly>
+            </div>
+            <div *ngIf="this.secondFormGroup.get('co_applicant_name').value"
+              class="col-md-6">
+              <label>Co-Applicant’s Name (Nombre del Solicitante):</label>
+              <input class="form-control"
+                type="text"
+                value="{{this.secondFormGroup.get('co_applicant_name').value}}"
+                readonly>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Name /<br>Nombre:</span>
-              </p>
+          <br>
+          <div *ngIf="this.thirdFormGroup.get('household_size').value">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="alert alert-success">
+                  <span class="bolt">Please list ALL household members currently living at this address (Por favor,
+                    enumere TODOS los miembros del hogar que viven actualmente en esta dirección)</span>
+                </div>
+              </div>
             </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Name / Nombre"
-                formControlName="name">
+
+            <div formArrayName="items"
+              *ngFor="let item of thirdFormGroup.get('items').controls; let i = index;">
+
+              <div [formGroupName]="i"
+                class="card-body bg-light">
+
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Name <br>(Nombre):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      placeholder="Name (Nombre)"
+                      type="text"
+                      formControlName="name">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Age<br>(Edad):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Age (Edad)"
+                      formControlName="age">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Name of Employer<br>(Nombre del Empleador):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Name of Employer (Nombre del Empleador)"
+                      formControlName="employer">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Employer Phone<br>(Teléfono del Empleador):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Employer Phone (Teléfono del Empleador)"
+                      formControlName="employer_phone">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Employer Address<br>(Dirección del Empleador):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input type="email"
+                      class="form-control"
+                      type="text"
+                      placeholder="Employer Address (Dirección del Empleador)"
+                      formControlName="employer_address">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Position<br>(Posición):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Position (Posición)"
+                      formControlName="position">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Years Employed<br>(Años Empleado):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Years Employed (Años Empleado)"
+                      formControlName="years_employed">
+                  </div>
+                  <div class="col-md-2">
+                    <p>
+                      <span class="bolt">Supervisor<br>(Supervisor):</span>
+                    </p>
+                  </div>
+                  <div class="col-md-4">
+                    <input class="form-control"
+                      type="text"
+                      placeholder="Supervisor (Supervisor)"
+                      formControlName="supervisor">
+                  </div>
+                </div>
+              </div>
+
+              <br>
             </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Age /<br>Edad:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Age / Edad"
-                formControlName="age">
-            </div>
+
           </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Name of Employer /<br>Nombre del Empleador:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Name of Employer / Nombre del Empleador"
-                formControlName="employer">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Employer Phone /<br>Teléfono del Empleador:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Employer Phone / Teléfono del Empleador"
-                formControlName="employer_phone">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Employer Address /<br>Dirección del Empleador:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input type="email"
-                class="form-control"
-                placeholder="Employer Address / Dirección del Empleador"
-                formControlName="employer_address">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Position /<br>Posición:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Position / Posición"
-                formControlName="position">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Years Employed /<br>Años Empleado:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Years Employed / Años Empleado"
-                formControlName="years_employed">
-            </div>
-            <div class="col-md-2">
-              <p>
-                <span class="bolt">Supervisor /<br>Supervisor:</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <input class="form-control"
-                placeholder="Supervisor / Supervisor"
-                formControlName="supervisor">
-            </div>
-          </div>
+
           <div class="stepper-button-row">
             <button matStepperPrevious
               class="btn-dfa-light"
@@ -282,8 +326,8 @@
       </mat-step>
       <!-- Step three end -->
 
-       <!-- Step four start -->
-       <mat-step [completed]="isCompletedStepFour">
+      <!-- Step four start -->
+      <mat-step [completed]="isCompletedStepFour">
 
         <ng-template matStepLabel>Landlord Documents<br>Documentos de Propietario</ng-template>
         <br>
@@ -298,18 +342,28 @@
         <br>
         <div class="card-header">Downloads / Descargas</div>
         <div class="card-body">
-          <table id="doctable" class="table">
+          <table id="doctable"
+            class="table">
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>W-9 form must be completed, signed and dated by landlord to enable payment. </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago. </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf"
+                  download>W-9 form must be completed, signed and dated by landlord to enable payment. </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf"
+                  download>El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago. </a>
+              </td>
             </tr>
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Vendor Application must be completed to enable payment.  </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf" download>Se debe completar la Solicitud de proveedor para permitir el pago.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf"
+                  download>Vendor Application must be completed to enable payment.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Vendor_Registration_Form.pdf"
+                  download>Se debe completar la Solicitud de proveedor para permitir el pago.  </a></td>
             </tr>
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>Business Entity Affidavit must be completed, signed, notarized to enable payment, if applicable to a management company.  </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf" download>La declaración jurada de la entidad comercial debe completarse, firmarse y certificarse ante notario para permitir el pago, si corresponde, a una empresa de gestión.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf"
+                  download>Business Entity Affidavit must be completed, signed, notarized to enable payment, if
+                  applicable to a management company.  </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/City_of_Doral_Business_Entity_Affidavit.pdf"
+                  download>La declaración jurada de la entidad comercial debe completarse, firmarse y certificarse ante
+                  notario para permitir el pago, si corresponde, a una empresa de gestión.  </a></td>
             </tr>
           </table>
         </div>
@@ -512,8 +566,8 @@
       <!-- Step five end -->
 
 
-       <!-- Step Six start -->
-       <mat-step [completed]="isCompletedStepSix">
+      <!-- Step Six start -->
+      <mat-step [completed]="isCompletedStepSix">
 
         <ng-template matStepLabel>Applicant Documents<br>Documentos del Solicitante</ng-template>
         <br>
@@ -665,7 +719,10 @@
               </td>
               <td width="96%">
                 <p [ngClass]="{'field-has-error': eighthFormGroup.get('certify').hasError('required') }">
-                  By entering your name, you certify that you are the correct person to fill out this form, that all information you presented is true to the best of your knowledge, and that you are requesting to participate in the City of Doral’s Small Business Assistance Grant Program. You also certify that you are authorized to submit this form on behalf of the aforementioned Small Business.
+                  By entering your name, you certify that you are the correct person to fill out this form, that all
+                  information you presented is true to the best of your knowledge, and that you are requesting to
+                  participate in the City of Doral’s Small Business Assistance Grant Program. You also certify that you
+                  are authorized to submit this form on behalf of the aforementioned Small Business.
                 </p>
               </td>
             </tr>
