@@ -27,9 +27,7 @@ import {
 import {
   UnauthorisedComponent,
   DashboardComponent,
-  BusinessApplicationsComponent,
   BusinessApplicationsAddComponent,
-  RentalApplicationsComponent,
   RentalApplicationsAddComponent
 } from 'src/app/modules/dashboards/components';
 
@@ -53,9 +51,7 @@ import { DashboardResolverService } from 'src/app/services/dashboard-resolver.se
   declarations: [
     UnauthorisedComponent,
     DashboardComponent,
-    BusinessApplicationsComponent,
     BusinessApplicationsAddComponent,
-    RentalApplicationsComponent,
     RentalApplicationsAddComponent,
   ],
   providers: [

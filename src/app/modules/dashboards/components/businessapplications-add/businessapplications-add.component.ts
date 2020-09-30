@@ -386,7 +386,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
         const condition = (
           !iterator[`document_${tempId}`] ||
-          !iterator[`documentTitle_${tempId}`] ||
+          // !iterator[`documentTitle_${tempId}`] || (Not required)
           !iterator[`documentType_${tempId}`]
         )
 
@@ -487,7 +487,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
       const condition = (
         !iterator[`document_${tempId}`] ||
-        !iterator[`documentTitle_${tempId}`] ||
+        // !iterator[`documentTitle_${tempId}`] || (Not required)
         !iterator[`documentType_${tempId}`]
       )
 
@@ -537,7 +537,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
   redirectToApps(closeModal = false) {
     closeModal && this.ngbModal.dismissAll();
-    this.router.navigate(['businessapplications']);
+    this.router.navigate(['dashboard']);
   }
 
   saveExit(fmGrp: string) {
