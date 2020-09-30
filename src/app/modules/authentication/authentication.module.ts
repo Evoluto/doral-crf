@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationRoutes } from './authentication.routing';
+import { FormsModule } from '@angular/forms';
 
 import {
   NotfoundComponent,
@@ -16,6 +17,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild(AuthenticationRoutes),
     NgbModule
   ],

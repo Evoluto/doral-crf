@@ -1,10 +1,10 @@
 <div class="auth-wrapper d-flex no-block justify-content-center align-items-center blue-bg">
     <div>
         <div class="auth-box"
-            style="width:500px; margin-top: 40px; background-color:#346491">
+            style="width:500px; margin-top: 40px; background-color:#010080">
             <div id="loginform">
                 <div class="logo">
-                    <img src="/assets/images/doral-seal.png"
+                    <img src="/assets/images/doral-cares_200.png"
                         alt="logo" />
                 </div>
                 <div *ngIf="msg"
@@ -93,7 +93,7 @@
                                         class="fa fa-spinner fa-pulse"></i>
                                 </button>
                                 <button *ngIf="!changePassword"
-                                    class="btn btn-block btn-success"
+                                    class="btn btn-block btn-success btn-auth"
                                     type="button"
                                     (click)="submit(u.value, pwd.value)">
                                     {{submitText}}
