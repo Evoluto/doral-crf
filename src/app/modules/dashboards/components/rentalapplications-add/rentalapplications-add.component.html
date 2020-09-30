@@ -270,221 +270,8 @@
       </mat-step>
       <!-- Step three end -->
 
-      <!-- Step four start -->
-      <mat-step [completed]="isCompletedStepFour">
-
-        <ng-template matStepLabel>Applicant Documents<br>Documentos del Solicitante</ng-template>
-        <br>
-
-        <div class="row">
-          <div class="col-md-12">
-            <p>
-              <strong class="bolt">Documentation (Documentación): </strong>
-            </p>
-          </div>
-        </div>
-        <br>
-
-        <div *ngIf="recordId"
-          class="card bg-dfa">
-          <div class="card-header">Existing Documents (Documentos Existentes)</div>
-          <div class="card-body">
-            <table id="doctable"
-              class="table">
-              <tbody *ngIf="applicantEditDocumentData.length === 0">
-                <tr>
-                  <td colspan="2">
-                    No Attachments (Sin Adjunto).
-                  </td>
-                </tr>
-              </tbody>
-              <tbody *ngIf="applicantEditDocumentData.length > 0">
-                <tr *ngFor="let aed of applicantEditDocumentData"
-                  style="border-top:none !important">
-                  <td>
-                    <span>{{aed.document_title}}</span>
-                  </td>
-                  <td>
-                    <span>{{aed.document_type_selection}}</span>
-                  </td>
-                  <td>
-                    <span>{{aed.document}}</span>
-                  </td>
-                  <td class="text-right">
-                    <button type="button"
-                      class="btn btn-sm btn-circle"
-                      (click)="downloadFile(aed)">
-                      <i class="fa fa-download text-success"></i>
-                    </button>
-                    <button type="button"
-                      class="btn btn-sm btn-circle"
-                      (click)="deleteApplicantDocument(aed.id)">
-                      <i class="fa fa-trash text-danger"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card bg-dfa">
-          <div class="card-header">
-            Add New Documents (Agregar Nuevos Documentos)
-            <button class="btn btn-sm btn-rounded btn-success float-right"
-              (click)="addDocumentFormRow('Applicant')">
-              <i class="fa fa-plus"></i>
-            </button>
-          </div>
-          <div class="card-body">
-            <!-- Is this correct?????????????????? -->
-            <form (ngSubmit)="onStepFourSubmit()"> 
-              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
-              <br>
-
-              <table class="table table-bordered">
-                <tr *ngFor="let doc of applicantDocuments">
-                  <td>
-                    <select [value]="applicantDocumentTypes[doc.tempId]"
-                      name="applicantDocumentTypes[doc.tempId]"
-                      class="form-control"
-                      (change)="onChangeApplicantDocumentType(doc.tempId,$event.target.value)">
-                      <option value=""
-                        hidden>- Select Type (Seleccione Tipo) -</option>
-                      <option value="{{opt.id}}"
-                        *ngFor="let opt of applicantsDocumentSelectionTypes">
-                        {{opt.document_title}}
-                      </option>
-                    </select>
-                  </td>
-                  <td>
-                    <input class="form-control"
-                      type="text"
-                      (change)="onChangeApplicantDocumentTitle(doc.tempId,$event.target.value)"
-                      [value]="applicantDocumentTitles[doc.tempId]"
-                      name="applicantDocumentTitles[doc.tempId]"
-                      placeholder="Document Title (Titulo del Documento)">
-                  </td>
-                  <td>
-                    <div class="col-md-10">
-                      <input type="file"
-                        class="form-control-file form-control-sm"
-                        id="add_file"
-                        (change)="handleUploadApplicant(doc.tempId,$event)">
-                    </div>
-                  </td>
-                  <td>
-                    <button (click)="removeApplicantDocumentRow(doc.tempId)"
-                      class="btn btn-sm btn-rounded btn-danger">
-                      <i class="fa fa-minus"></i>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-
-              <br>
-              <div class="stepper-button-row">
-                <button matStepperPrevious
-                  class="btn-dfa-light"
-                  mat-flat-button>Back (Atrás)</button>
-                <button mat-flat-button
-                  matStepperNext
-                  class="btn-dfa-dark">Next (Contiguo)</button>
-                <button mat-flat-button
-                  type="button"
-                  (click)="saveExit(null)"
-                  class="btn-info">Save Draft and Exit (Guardar y Salir)
-                </button>
-                <button mat-flat-button
-                class="btn-dark"
-                type="button"
-                (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </mat-step>
-      <!-- Step four end -->
-
-      <!-- Step five start -->
-      <mat-step [stepControl]="fifthFormGroup">
-        <form [formGroup]="fifthFormGroup"
-          (ngSubmit)="onStepFiveSubmit()">
-          <ng-template matStepLabel>Landlord<br>Propietario</ng-template>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Landlord (Propietario):</span>
-              </p>
-              <input class="form-control"
-                placeholder="Landlord (Propietario)"
-                formControlName="landlord">
-            </div>
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Authorized Representative (Representante Autorizado):</span>
-              </p>
-              <input class="form-control"
-                placeholder="Authorized Representative (Representante Autorizado)"
-                formControlName="landlord_authorized_representative">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Landlord Address (Dirección del Propietario):</span>
-              </p>
-              <input class="form-control"
-                placeholder="Landlord Address (Dirección del Propietario)"
-                formControlName="landlord_address">
-            </div>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Landlord Email (Correo Electrónico del Propietario):</span>
-              </p>
-              <input type="email"
-                class="form-control"
-                placeholder="Landlord Email (Correo Electrónico del Propietario)"
-                formControlName="landlord_email">
-            </div>
-            <div class="col-md-6">
-              <p>
-                <span class="bolt">Landlord Phone (Teléfono del Propietario):</span>
-              </p>
-              <input class="form-control"
-                placeholder="Landlord Phone (Teléfono del Propietario)"
-                formControlName="landlord_phone">
-            </div>
-          </div>
-          <br>
-          <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back (Atrás)</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next (Contiguo)</button>
-            <button mat-flat-button
-              type="button"
-              (click)="saveExit('fifthFormGroup')"
-              class="btn-info">Save Draft and Exit (Guardar y Salir)
-            </button>
-            <button mat-flat-button
-              class="btn-dark"
-              type="button"
-              (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
-          </div>
-        </form>
-      </mat-step>
-      <!-- Step five end -->
-
-      <!-- Step six start -->
-      <mat-step [completed]="isCompletedStepSix">
+       <!-- Step four start -->
+       <mat-step [completed]="isCompletedStepFour">
 
         <ng-template matStepLabel>Landlord Documents<br>Documentos de Propietario</ng-template>
         <br>
@@ -566,7 +353,7 @@
             </button>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="onStepSixSubmit()"> 
+            <form (ngSubmit)="onStepFourSubmit()"> 
               <span *ngIf="landlordDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
               <br>
 
@@ -632,6 +419,222 @@
           </div>
         </div>
       </mat-step>
+      <!-- Step four start -->
+
+
+      <!-- Step five start -->
+      <mat-step [stepControl]="fifthFormGroup">
+        <form [formGroup]="fifthFormGroup"
+          (ngSubmit)="onStepFiveSubmit()">
+          <ng-template matStepLabel>Landlord<br>Propietario</ng-template>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Landlord (Propietario):</span>
+              </p>
+              <input class="form-control"
+                placeholder="Landlord (Propietario)"
+                formControlName="landlord">
+            </div>
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Authorized Representative (Representante Autorizado):</span>
+              </p>
+              <input class="form-control"
+                placeholder="Authorized Representative (Representante Autorizado)"
+                formControlName="landlord_authorized_representative">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Landlord Address (Dirección del Propietario):</span>
+              </p>
+              <input class="form-control"
+                placeholder="Landlord Address (Dirección del Propietario)"
+                formControlName="landlord_address">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Landlord Email (Correo Electrónico del Propietario):</span>
+              </p>
+              <input type="email"
+                class="form-control"
+                placeholder="Landlord Email (Correo Electrónico del Propietario)"
+                formControlName="landlord_email">
+            </div>
+            <div class="col-md-6">
+              <p>
+                <span class="bolt">Landlord Phone (Teléfono del Propietario):</span>
+              </p>
+              <input class="form-control"
+                placeholder="Landlord Phone (Teléfono del Propietario)"
+                formControlName="landlord_phone">
+            </div>
+          </div>
+          <br>
+          <div class="stepper-button-row">
+            <button matStepperPrevious
+              class="btn-dfa-light"
+              mat-flat-button>Back (Atrás)</button>
+            <button mat-flat-button
+              matStepperNext
+              class="btn-dfa-dark">Next (Contiguo)</button>
+            <button mat-flat-button
+              type="button"
+              (click)="saveExit('fifthFormGroup')"
+              class="btn-info">Save Draft and Exit (Guardar y Salir)
+            </button>
+            <button mat-flat-button
+              class="btn-dark"
+              type="button"
+              (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step five end -->
+
+
+       <!-- Step Six start -->
+       <mat-step [completed]="isCompletedStepSix">
+
+        <ng-template matStepLabel>Applicant Documents<br>Documentos del Solicitante</ng-template>
+        <br>
+
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <strong class="bolt">Documentation (Documentación): </strong>
+            </p>
+          </div>
+        </div>
+        <br>
+
+        <div *ngIf="recordId"
+          class="card bg-dfa">
+          <div class="card-header">Existing Documents (Documentos Existentes)</div>
+          <div class="card-body">
+            <table id="doctable"
+              class="table">
+              <tbody *ngIf="applicantEditDocumentData.length === 0">
+                <tr>
+                  <td colspan="2">
+                    No Attachments (Sin Adjunto).
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="applicantEditDocumentData.length > 0">
+                <tr *ngFor="let aed of applicantEditDocumentData"
+                  style="border-top:none !important">
+                  <td>
+                    <span>{{aed.document_title}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document_type_selection}}</span>
+                  </td>
+                  <td>
+                    <span>{{aed.document}}</span>
+                  </td>
+                  <td class="text-right">
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="downloadFile(aed)">
+                      <i class="fa fa-download text-success"></i>
+                    </button>
+                    <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="deleteApplicantDocument(aed.id)">
+                      <i class="fa fa-trash text-danger"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card bg-dfa">
+          <div class="card-header">
+            Add New Documents (Agregar Nuevos Documentos)
+            <button class="btn btn-sm btn-rounded btn-success float-right"
+              (click)="addDocumentFormRow('Applicant')">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onStepSixSubmit()"> 
+              <span *ngIf="applicantDocuments.length === 0">Click on Plus button to add documents (Haga clic en el botón Más para agregar documentos).</span>
+              <br>
+
+              <table class="table table-bordered">
+                <tr *ngFor="let doc of applicantDocuments">
+                  <td>
+                    <select [value]="applicantDocumentTypes[doc.tempId]"
+                      name="applicantDocumentTypes[doc.tempId]"
+                      class="form-control"
+                      (change)="onChangeApplicantDocumentType(doc.tempId,$event.target.value)">
+                      <option value=""
+                        hidden>- Select Type (Seleccione Tipo) -</option>
+                      <option value="{{opt.id}}"
+                        *ngFor="let opt of applicantsDocumentSelectionTypes">
+                        {{opt.document_title}}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <input class="form-control"
+                      type="text"
+                      (change)="onChangeApplicantDocumentTitle(doc.tempId,$event.target.value)"
+                      [value]="applicantDocumentTitles[doc.tempId]"
+                      name="applicantDocumentTitles[doc.tempId]"
+                      placeholder="Document Title (Titulo del Documento)">
+                  </td>
+                  <td>
+                    <div class="col-md-10">
+                      <input type="file"
+                        class="form-control-file form-control-sm"
+                        id="add_file"
+                        (change)="handleUploadApplicant(doc.tempId,$event)">
+                    </div>
+                  </td>
+                  <td>
+                    <button (click)="removeApplicantDocumentRow(doc.tempId)"
+                      class="btn btn-sm btn-rounded btn-danger">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+
+              <br>
+              <div class="stepper-button-row">
+                <button matStepperPrevious
+                  class="btn-dfa-light"
+                  mat-flat-button>Back (Atrás)</button>
+                <button mat-flat-button
+                  matStepperNext
+                  class="btn-dfa-dark">Next (Contiguo)</button>
+                <button mat-flat-button
+                  type="button"
+                  (click)="saveExit(null)"
+                  class="btn-info">Save Draft and Exit (Guardar y Salir)
+                </button>
+                <button mat-flat-button
+                class="btn-dark"
+                type="button"
+                (click)="cancelChanges(discardchanges)">Cancel (Cancelar)</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <!-- Step Six end -->
+
 
       <!-- Step eight start -->
       <mat-step>
@@ -712,7 +715,8 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to discard all changes and continue?
+        Are you sure you want to discard all changes and continue?<br>
+        ¿Está seguro de que desea descartar todos los cambios y continuar?
       </div>
     </div>
     <br>
@@ -720,10 +724,10 @@
       <div class="col-md-12">
         <button type="button"
           class="btn btn-success"
-          (click)="redirectToApps(true)">Yes</button>
+          (click)="redirectToApps(true)">Yes (Si)</button>
         <button type="button"
           class="btn btn-dark"
-          (click)="modal.close('discard')">No</button>
+          (click)="modal.close('discard')">No (No)</button>
       </div>
     </div>
   </div>

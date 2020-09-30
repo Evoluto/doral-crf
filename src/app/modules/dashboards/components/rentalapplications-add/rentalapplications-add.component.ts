@@ -348,7 +348,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
     if (isFormDirty) {
       this.modelConfig = new PopupModel();
-      this.modelConfig.title = 'Confirmation';
+      this.modelConfig.title = 'Confirmation (Confirmación)';
       this.modelConfig.settings.size = 'sm';
       this.ngbModal.open(content, this.modelConfig.settings)
     } else {
@@ -429,7 +429,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   removeApplicantDocumentRow(tempId) {
     const index = this.applicantDocuments.findIndex(x => x.tempId === tempId);
     this.applicantDocuments.splice(index, 1);
-    if (this.applicantDocuments.length === 0) this.isCompletedStepFour = true; //[TODO]
+    if (this.applicantDocuments.length === 0) this.isCompletedStepSix = true; //[TODO]
     else this.validateApplicantDocumentForm();
   }
 
@@ -523,7 +523,7 @@ export class RentalApplicationsAddComponent implements OnInit {
         break;
       }
     }
-    this.isCompletedStepFour = Boolean(this.landlordDocuments.length === 0) || status; //[TODO]
+    this.isCompletedStepSix = Boolean(this.applicantDocuments.length === 0) || status; //[TODO]
   }
 
 
