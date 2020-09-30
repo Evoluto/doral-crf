@@ -35,6 +35,7 @@ export class RegistrationComponent implements OnInit {
       .register(this.user)
       .subscribe((res) => {
         if (res) {
+          localStorage.clear();
           this.routes.navigate(['/login']);
         } else {
           this.errMsg = 'Error while Registration';
@@ -45,8 +46,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   login() {
-    const username = 'register_user@mail.com';
-    const password = 'rU$loraD1001!';
+    // const username = 'register_user@mail.com';
+    // const password = 'rU$loraD1001!';
+    const username = 'super_gaurav@mail.com';
+    const password = 'Summer@1234';
     this.authService
       .signIn(username, password)
       .subscribe((user) => {
