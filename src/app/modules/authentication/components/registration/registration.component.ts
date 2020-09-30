@@ -35,6 +35,7 @@ export class RegistrationComponent implements OnInit {
       .register(this.user)
       .subscribe((res) => {
         if (res) {
+          this.authService.user.next(null);
           localStorage.clear();
           this.routes.navigate(['/login']);
         } else {
