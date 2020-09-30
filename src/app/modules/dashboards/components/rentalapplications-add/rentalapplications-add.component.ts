@@ -159,7 +159,7 @@ export class RentalApplicationsAddComponent implements OnInit {
 
     this.eighthFormGroup = new FormGroup({
       certifier_name: new FormControl(this.rentalApplicationEditData.certifier_name || '', Validators.required),
-      certifier_title: new FormControl(this.rentalApplicationEditData.certifier_title || '', Validators.required),
+      //certifier_title: new FormControl(this.rentalApplicationEditData.certifier_title || '', Validators.required),
       certify: new FormControl(certify, (control: AbstractControl): any => {
         if (control.value) return null;
         return { required: true };
