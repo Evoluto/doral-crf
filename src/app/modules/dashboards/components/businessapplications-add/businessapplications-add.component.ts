@@ -527,7 +527,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
     if (isFormDirty) {
       this.modelConfig = new PopupModel();
-      this.modelConfig.title = 'Confirmation (Confirmación)';
+      this.modelConfig.title = 'Confirmation / Confirmación';
       this.modelConfig.settings.size = 'sm';
       this.ngbModal.open(content, this.modelConfig.settings)
     } else {
