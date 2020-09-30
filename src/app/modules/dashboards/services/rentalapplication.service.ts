@@ -23,18 +23,13 @@ export class RentalApplicationService implements Resolve<Object[]>{
 
       case "rentalapplications-add":
 
-        // NES - FOR NOW
         observables.push(
-          this.ignatiusService.getDropdownValues(
-            projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
-          )
+          this.ignatiusService
+            .getQueryReportObservable(
+              projectSpecificData.appData,
+              { "ApplicationTableId": projectSpecificData.requiredDocumentsData.TableId }
+            )
         )
-        // NES - FOR NOW
-        // observables.push(
-        //   this.ignatiusService.getDropdownValues(
-        //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
-        //   )
-        // )
 
         break;
 
@@ -42,18 +37,13 @@ export class RentalApplicationService implements Resolve<Object[]>{
 
         const recordId = route.paramMap.get("id");
 
-        // NES - FOR NOW
         observables.push(
-          this.ignatiusService.getDropdownValues(
-            projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID.toString()
-          )
+          this.ignatiusService
+            .getQueryReportObservable(
+              projectSpecificData.appData,
+              { "ApplicationTableId": projectSpecificData.requiredDocumentsData.TableId }
+            )
         )
-        // NES - FOR NOW
-        // observables.push(
-        //   this.ignatiusService.getDropdownValues(
-        //     projectSpecificData.documentsData.DocumentTypeSelectionMultipleChoiceID.toString()
-        //   )
-        // )
 
         observables.push(
           this.ignatiusService.getTargetTableObservable(
@@ -68,7 +58,7 @@ export class RentalApplicationService implements Resolve<Object[]>{
           projectSpecificData.appData,
           recordId,
           projectSpecificData.documentsData.TableId,
-          projectSpecificData.documentsData.RelatedRentalApplicationsFieldId as number
+          projectSpecificData.documentsData.RelatedRentalAssistanceFieldId as number
         ))
 
         break;

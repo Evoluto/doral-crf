@@ -11,10 +11,7 @@ import {
 import {
   DashboardComponent,
   UnauthorisedComponent,
-  //ProgramsComponent,
-  BusinessApplicationsComponent,
   BusinessApplicationsAddComponent,
-  RentalApplicationsComponent,
   RentalApplicationsAddComponent
 } from 'src/app/modules/dashboards/components';
 
@@ -39,17 +36,6 @@ export const DashboardRoutes: Routes = [
         },
         resolve: {
           componentData: DashboardService
-        }
-      },
-      {
-        path: 'businessapplications',
-        component: BusinessApplicationsComponent,
-        data: {
-          title: 'Business Applications',
-          subjectTableName: 'businessapplications',
-          urls: [
-            { title: '' }
-          ]
         }
       },
       {
@@ -78,17 +64,6 @@ export const DashboardRoutes: Routes = [
         },
         resolve: {
           componentData: BusinessApplicationService
-        }
-      },
-      {
-        path: 'rentalapplications',
-        component: RentalApplicationsComponent,
-        data: {
-          title: 'Rental Applications',
-          subjectTableName: 'rentalapplications',
-          urls: [
-            { title: '' }
-          ]
         }
       },
       {

@@ -386,7 +386,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
         const condition = (
           !iterator[`document_${tempId}`] ||
-          !iterator[`documentTitle_${tempId}`] ||
+          // !iterator[`documentTitle_${tempId}`] || (Not required)
           !iterator[`documentType_${tempId}`]
         )
 
@@ -487,7 +487,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
       const condition = (
         !iterator[`document_${tempId}`] ||
-        !iterator[`documentTitle_${tempId}`] ||
+        // !iterator[`documentTitle_${tempId}`] || (Not required)
         !iterator[`documentType_${tempId}`]
       )
 
@@ -527,7 +527,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
     if (isFormDirty) {
       this.modelConfig = new PopupModel();
-      this.modelConfig.title = 'Confirmation';
+      this.modelConfig.title = 'Confirmation (Confirmación)';
       this.modelConfig.settings.size = 'sm';
       this.ngbModal.open(content, this.modelConfig.settings)
     } else {
@@ -537,7 +537,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
   redirectToApps(closeModal = false) {
     closeModal && this.ngbModal.dismissAll();
-    this.router.navigate(['businessapplications']);
+    this.router.navigate(['dashboard']);
   }
 
   saveExit(fmGrp: string) {
