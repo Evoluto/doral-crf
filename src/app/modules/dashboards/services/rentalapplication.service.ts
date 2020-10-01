@@ -61,6 +61,27 @@ export class RentalApplicationService implements Resolve<Object[]>{
           projectSpecificData.documentsData.RelatedRentalAssistanceFieldId as number
         ))
 
+
+        observables.push(this.ignatiusService.getQueryReportObservable(
+          projectSpecificData.appData,
+          {
+            "ApplicationTableId": projectSpecificData.householdMembersData.TableId,
+            "ConditionGroups": [
+              {
+                "Type": "all",
+                "Conditions": [
+                  {
+                    "ConditionField": {
+                      "Id": projectSpecificData.householdMembersData.RelatedRentalAssistanceFieldId
+                    },
+                    "OperationType": "is equal",
+                    "Value": recordId
+                  }
+                ]
+              }
+            ]
+          }))
+
         break;
     }
 
