@@ -7,7 +7,8 @@ import {
 	RentalApplicationsData,
 	DocumentsData,
 	RequiredDocumentsData,
-	HouseholdMembersData
+	HouseholdMembersData,
+	BTRsData
 } from '../models/project-specific-data';
 
 @Injectable()
@@ -96,6 +97,12 @@ export class ProjectSpecificService {
 		projectSpecificData.requiredDocumentsData.RecordIdFieldId = appData.getAppItemId(requiredDocumentsData.Fields, 'Record Id');
 		projectSpecificData.requiredDocumentsData.RecordFormFieldId = appData.getAppItemId(requiredDocumentsData.Fields, 'Required From');
 
+		/* ===================== [7] Table = 'BTRs' ======================*/
+		let btrsData = appData.Tables.find(t => t.Name === 'BTRs');
+		projectSpecificData.btrsData = new BTRsData();
+		projectSpecificData.btrsData.TableId = btrsData.Id;
+		projectSpecificData.btrsData.RecordIdFieldId = appData.getAppItemId(btrsData.Fields, 'Record Id');
+		projectSpecificData.btrsData.BTRsReportId = appData.getAppItemId(programsData.Reports, 'List All');
 		
 		projectSpecificData.appData = JSON.parse(JSON.stringify(appData));
 		projectSpecificData.appData.Tables.forEach(t => t.Fields = null);

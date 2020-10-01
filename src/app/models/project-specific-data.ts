@@ -9,6 +9,7 @@ export class ProjectSpecificData {
     documentsData: DocumentsData
     requiredDocumentsData: RequiredDocumentsData 
     householdMembersData: HouseholdMembersData
+    btrsData: BTRsData
 }
 
 export class ProgramsData {
@@ -64,4 +65,11 @@ export class RequiredDocumentsData {
     // RelatedCommThreadFieldId: number
     // RelatedCommResponsesFieldId: number
     // RelatedPaymentRequestsFieldId:number
+}
+
+
+export class BTRsData {
+    TableId: number
+    BTRsReportId: number
+    RecordIdFieldId: number
 }
