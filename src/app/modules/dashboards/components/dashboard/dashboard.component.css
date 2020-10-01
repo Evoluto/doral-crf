@@ -44,3 +44,7 @@ tbody tr {
     color: white;
 
 }
+
+.modal-xl {
+    max-width: 1000px;
+  }

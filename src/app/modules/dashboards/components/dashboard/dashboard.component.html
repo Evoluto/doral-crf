@@ -158,7 +158,6 @@
 
 
 
-
 <ng-template #submitRentalApplicationTemp
   let-modal>
   <div class="modal-header">
@@ -170,7 +169,37 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to submit?
+        <table class="table table-bordered">
+          <tr>
+            <td width="4%">
+              <mat-checkbox class="example-margin"
+                formControlName="certify">
+              </mat-checkbox>
+            </td>
+            <td width="96%">
+              <p [ngClass]="{'field-has-error': eighthFormGroup.get('certify').hasError('required') }">
+                By signing your name, you certify that you are the correct person to fill out this form, that all information presented above is true to the best of your knowledge, and that you are willing to participate in the City of Doral’s Rental Assistance Program. You also certify that you are authorized to submit this form as the Renter of the aforementioned rental property. 
+                <br>
+                Al firmar su nombre, usted certifica que eres la persona correcta para llenar este formulario, que toda la información presentada anteriormente es fiel a su mejor conocimiento, y que está dispuesto a participar en el Programa de Asistencia de Alquiler de la Ciudad de Doral. También certifica que está autorizado a enviar este formulario como el arrendatario de la propiedad de alquiler antes mencionada.                
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Certifier Name</label>
+                    <input type="text"
+                      formControlName="certifier_name"
+                      placeholder="Certifier Name"
+                      class="form-control">
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <br>
@@ -189,6 +218,7 @@
   </div>
 </ng-template>
 
+
 <ng-template #submitBusinessApplicationTemp
   let-modal>
   <div class="modal-header">
@@ -200,7 +230,46 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-12">
-        Are you sure you want to submit?
+        <table class="table table-bordered">
+          <tr>
+            <td width="4%">
+              <mat-checkbox class="example-margin"
+                formControlName="certify">
+              </mat-checkbox>
+            </td>
+            <td width="96%">
+              <p [ngClass]="{'field-has-error': eighthFormGroup.get('certify').hasError('required') }">
+                By signing your name, you certify that you are the correct person to fill out this form, that all information presented above is true to the best of your knowledge, and that you are willing to participate in the City of Doral’s Rental Assistance Program. You also certify that you are authorized to submit this form as the Renter of the aforementioned rental property. 
+                <br>
+                Al firmar su nombre, usted certifica que eres la persona correcta para llenar este formulario, que toda la información presentada anteriormente es fiel a su mejor conocimiento, y que está dispuesto a participar en el Programa de Asistencia de Alquiler de la Ciudad de Doral. También certifica que está autorizado a enviar este formulario como el arrendatario de la propiedad de alquiler antes mencionada.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Certifier Name</label>
+                    <input type="text"
+                      formControlName="certifier_name"
+                      placeholder="Certifier Name"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Certifier Title</label>
+                    <input type="text"
+                      formControlName="certifier_title"
+                      placeholder="Certifier Title"
+                      class="form-control">
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <br>
