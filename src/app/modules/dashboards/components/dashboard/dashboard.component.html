@@ -1,10 +1,11 @@
-<div class="row">
-  <div class="col-md-6">
+<div class="row" *ngIf="applicationData.name == 'Business Applicant'">
+  <div class="col-md-12">
     <div class="card ">
       <div class="card-header yellow-bg ">
         <span style="font-size: 20px;font-weight:500">Business Assistance</span>
         <button class="btn green-bg btn-md float-right"
-          [routerLink]="['/businessapplications-add']">
+          [routerLink]="['/businessapplications-add']"
+          *ngIf="!businessApplicationList.length">
           <i class="fa fa-plus"> Start Process</i>
         </button>
       </div>
@@ -12,10 +13,10 @@
         <div *ngFor="let rw of businessApplicationList">
           <div class="box p-2 rounded bg-light">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 text-left">
                 <h3 class="font-weight-light text-black">{{rw.status}}</h3>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 text-right">
                 <!-- <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                   class="btn btn-sm red-bg"
                   (click)="downloadBusinessFile(rw)"
@@ -56,12 +57,16 @@
       </div>-->
     </div> 
   </div>
-  <div class="col-md-6">
+</div>
+
+<div class="row" *ngIf="applicationData.name == 'Rental Applicant'">
+  <div class="col-md-12">
     <div class="card ">
       <div class="card-header blue-bg">
         <span style="font-size: 20px;font-weight:500"><span style="color:white;">Emergency Rental Assistance</span></span>
         <button class="btn green-bg btn-sm float-right"
-          [routerLink]="['/rentalapplications-add']">
+          [routerLink]="['/rentalapplications-add']"
+          *ngIf="!rentalApplicationList.length">
           <i class="fa fa-plus"> Start Process</i>
         </button>
       </div>
@@ -69,10 +74,10 @@
         <div *ngFor="let rw of rentalApplicationList">
           <div class="box p-2 rounded bg-light">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 text-left">
                 <h4 class="font-weight-light text-black">{{rw.status}}</h4>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 text-right">
                 <!-- <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                   class="btn btn-sm red-bg"
                   (click)="downloadRentalFile(rw)"
