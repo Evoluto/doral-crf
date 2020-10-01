@@ -47,6 +47,7 @@ export class Constants {
     };
 
     public static BUSINESS_APPLICATIONS_MAPPING_REQUIRED: Array<string> = [
+        'national_chain_or_franchise',
         'certify'
     ];
 
