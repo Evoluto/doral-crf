@@ -120,13 +120,21 @@ export class BusinessApplicationsAddComponent implements OnInit {
   private setupFourthForm() {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
+    const dateBusinessEstablished = (this.businessApplicationEditData.date_business_established)
+      ? new Date(this.businessApplicationEditData.date_business_established).toISOString().split('T')[0]
+      : null
+
+    const lastRentMortgagePaid = (this.businessApplicationEditData.last_rent_mortgage_paid)
+      ? new Date(this.businessApplicationEditData.last_rent_mortgage_paid).toISOString().split('T')[0]
+      : null
+
     this.fourthFormGroup = new FormGroup({
       number_of_employees_last_year: new FormControl(this.businessApplicationEditData.number_of_employees_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       number_of_employees_current: new FormControl(this.businessApplicationEditData.number_of_employees_current || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      date_business_established: new FormControl(this.businessApplicationEditData.date_business_established || ''),//, Validators.required),
+      date_business_established: new FormControl(dateBusinessEstablished),//, Validators.required),
       own_or_lease: new FormControl(this.businessApplicationEditData.own_or_lease || ''),//, Validators.required),
       monthly_rent_mortgage: new FormControl(this.businessApplicationEditData.monthly_rent_mortgage || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      last_rent_mortgage_paid: new FormControl(this.businessApplicationEditData.last_rent_mortgage_paid || ''),//, Validators.required),
+      last_rent_mortgage_paid: new FormControl(lastRentMortgagePaid),//, Validators.required),
       national_chain_or_franchise: new FormControl(this.businessApplicationEditData.national_chain_or_franchise || ''),//, Validators.required)
     });
   }
@@ -413,7 +421,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
 
       await forkJoin(observables).toPromise();
 
-    } catch (error) {      
+    } catch (error) {
       throw error;
     }
 
