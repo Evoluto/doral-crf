@@ -256,7 +256,7 @@
                 <option value=""
                   hidden>- Select Own / Alquila or Lease / Es Dueño -</option>
                 <option *ngFor="let ol of ownOrLease"
-                  value="{{ol.id}}">{{ol.name}}</option>
+                  value="{{ol.value}}">{{ol.name}}</option>
               </select>
             </div>
           </div>
@@ -469,7 +469,7 @@
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
-              <table width="100%" style="border:1;">
+              <table width="100%" table-bordered>
                 <thead>
                   <th>Type of Financial Info / Tipo de Información Financiera</th>
                   <th>2019</th>
@@ -696,7 +696,7 @@
 
       <!-- Step eight start -->
       <mat-step>
-        <ng-template matStepLabel>Certification<br>Certificación</ng-template>
+        <ng-template matStepLabel>Save<br>Guardar</ng-template>
         <br>
 
         <form [formGroup]="eighthFormGroup"
@@ -704,41 +704,20 @@
 
           <table class="table table-bordered">
             <tr>
-              <td width="4%">
-                <mat-checkbox class="example-margin"
-                  formControlName="certify">
-                </mat-checkbox>
+              <td width="100%">
+                <p>Saving your Application does NOT constitute a submission.</p>
+                <p>After saving, review the main screen for any items requiring your attention.</p>
+                <p>Once all applicable fields have been filled out and at least one (1) of each Required Documents have been uploaded, you will be able to Submit your Application.</p>
+                <p>It is important to review your Application, including the attached documents, to ensure correctness and completeness prior to submitting.</p>
               </td>
-              <td width="96%">
-                <p [ngClass]="{'field-has-error': eighthFormGroup.get('certify').hasError('required') }">
-                  By entering your name, you certify that you are the correct person to fill out this form, that all information you presented is true to the best of your knowledge, and that you are requesting to participate in the City of Doral’s Small Business Assistance Grant Program. You also certify that you are authorized to submit this form on behalf of the aforementioned Small Business.
-                </p>
-              </td>
-            </tr>
+            </tr>     
             <tr>
-              <td colspan="2">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Certifier Name</label>
-                      <input type="text"
-                        formControlName="certifier_name"
-                        placeholder="Certifier Name"
-                        class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Certifier Title</label>
-                      <input type="text"
-                        formControlName="certifier_title"
-                        placeholder="Certifier Title"
-                        class="form-control">
-                    </div>
-                  </div>
-                </div>
+              <td width="100%">
+                <p>Guardar su aplicación no constituye un envío. Después de guardar, revise la pantalla principal en busca de elementos que requieran su atención.</p>
+                <p>Una vez que se hayan completado todos los campos aplicables y se haya cargado al menos uno (1) de cada Documento requerido, podrá enviar su solicitud. </p>
+                <p>Es importante revisar su solicitud, incluidos los documentos adjuntos, para asegurarse de que sea correcta y esté completa antes de enviarla.</p>
               </td>
-            </tr>
+            </tr>  
           </table>
 
           <div class="stepper-button-row">

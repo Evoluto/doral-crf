@@ -170,14 +170,17 @@ export class BusinessApplicationsAddComponent implements OnInit {
     const certify = this.businessApplicationEditData.certify === 'True';
     const d = formatDate(new Date(), 'MM/dd/yyyy', 'en');
 
+    const userData = this.storageService.getItem('userData');
+
     this.eighthFormGroup = new FormGroup({
-      certifier_name: new FormControl(this.businessApplicationEditData.certifier_name || '', Validators.required),
-      certifier_title: new FormControl(this.businessApplicationEditData.certifier_title || '', Validators.required),
-      certify: new FormControl(certify, (control: AbstractControl): any => {
-        if (control.value) return null;
-        return { required: true };
-      }),
+      // certifier_name: new FormControl(this.businessApplicationEditData.certifier_name || '', Validators.required),
+      // certifier_title: new FormControl(this.businessApplicationEditData.certifier_title || '', Validators.required),
+      // certify: new FormControl(certify, (control: AbstractControl): any => {
+      //   if (control.value) return null;
+      //   return { required: true };
+      // }),
       status: new FormControl(this.businessApplicationEditData.status || 'Open'),
+      email_user: new FormControl(userData.userName),
       related_programs: new FormControl(this.businessApplicationEditData.related_programs || '2')
     });
   }
@@ -528,7 +531,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
     if (isFormDirty) {
       this.modelConfig = new PopupModel();
       this.modelConfig.title = 'Confirmation / Confirmación';
-      this.modelConfig.settings.size = 'sm';
+      this.modelConfig.settings.size = 'lg';
       this.ngbModal.open(content, this.modelConfig.settings)
     } else {
       this.redirectToApps();

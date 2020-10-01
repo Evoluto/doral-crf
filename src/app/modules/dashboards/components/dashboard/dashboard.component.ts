@@ -58,8 +58,8 @@ export class DashboardComponent implements OnInit {
   openSubmitRentalApplicationPopup(row, content) {
     this.selectedRentalRow = row;
     this.modelConfig = new PopupModel();
-    this.modelConfig.title = 'Submit Rental Application';
-    this.modelConfig.settings.size = 'sm';
+    this.modelConfig.title = 'Certification / Certificación<br>Submit Rental Application';
+    this.modelConfig.settings.size = 'lg';
     this.ngbModal.open(content, this.modelConfig.settings)
   }
 
@@ -123,7 +123,7 @@ export class DashboardComponent implements OnInit {
   openSubmitBusinessApplicationPopup(row, content) {
     this.selectedBusinessRow = row;
     this.modelConfig = new PopupModel();
-    this.modelConfig.title = 'Submit Business Application';
+    this.modelConfig.title = 'Certification / Certificación<br>Submit Business Application';
     this.modelConfig.settings.size = 'sm';
     this.ngbModal.open(content, this.modelConfig.settings)
   }

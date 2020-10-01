@@ -168,15 +168,17 @@ export class RentalApplicationsAddComponent implements OnInit {
   private setupEighthForm() {
     const certify = this.rentalApplicationEditData.certify === 'True';
     const d = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+    const userData = this.storageService.getItem('userData');
 
     this.eighthFormGroup = new FormGroup({
-      certifier_name: new FormControl(this.rentalApplicationEditData.certifier_name || '', Validators.required),
-      //certifier_title: new FormControl(this.rentalApplicationEditData.certifier_title || '', Validators.required),
-      certify: new FormControl(certify, (control: AbstractControl): any => {
-        if (control.value) return null;
-        return { required: true };
-      }),
+      // certifier_name: new FormControl(this.rentalApplicationEditData.certifier_name || '', Validators.required),
+      // //certifier_title: new FormControl(this.rentalApplicationEditData.certifier_title || '', Validators.required),
+      // certify: new FormControl(certify, (control: AbstractControl): any => {
+      //   i  f (control.value) return null;
+      //   return { required: true };
+      // }),
       status: new FormControl(this.rentalApplicationEditData.status || 'Open'),
+      email_user: new FormControl(userData.userName),
       related_programs: new FormControl(this.rentalApplicationEditData.related_programs || '1')
     });
   }
@@ -354,7 +356,7 @@ export class RentalApplicationsAddComponent implements OnInit {
     if (isFormDirty) {
       this.modelConfig = new PopupModel();
       this.modelConfig.title = 'Confirmation / Confirmación';
-      this.modelConfig.settings.size = 'sm';
+      this.modelConfig.settings.size = 'lg';
       this.ngbModal.open(content, this.modelConfig.settings)
     } else {
       this.redirectToApps();
