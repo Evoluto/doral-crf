@@ -78,13 +78,16 @@ export class DashboardComponent implements OnInit {
   }
 
   getCertifyObj(){
-    return {
+    const obj = {
       certifier_name: this.certifyDetails.certifier_name,
-      certifier_title: this.certifyDetails.certifier_title,
       certify: this.certifyDetails.certify && 'True',
       certified_dt: (new Date()).toDateString(),
       certified_by: this.userData.userName
     }
+    if(this.certifyDetails.certifier_title) {
+      obj['certifier_title'] = this.certifyDetails.certifier_title;
+    }
+    return obj;
   }
 
   submitRentalApplication() {
