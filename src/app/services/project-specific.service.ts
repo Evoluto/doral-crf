@@ -60,6 +60,7 @@ export class ProjectSpecificService {
 		projectSpecificData.businessApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Related Programs');
 		projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID = appData.getAppItemId(businessApplicationsData.Fields, 'Organization Type');
 		projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID = appData.getAppItemId(businessApplicationsData.Fields, 'Own or Lease');
+		projectSpecificData.businessApplicationsData.DateFields = ["date_business_established", "last_rent_mortgage_paid"];
 
 		/* ===================== [3] Table = 'Rental Applications' ======================*/
 		let rentalApplicationsData = appData.Tables.find(t => t.Name === 'Rental Applications');
