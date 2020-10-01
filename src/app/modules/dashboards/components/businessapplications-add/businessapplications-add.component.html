@@ -81,7 +81,7 @@
               </p>
               <div class="col-md-6">
                 <input class="form-control"
-                  placeholder="Phone / Teléfono"
+                  placeholder="Phone / Teléfono (###-###-####)"
                   formControlName="phone">
               </div>
             </div>
@@ -245,7 +245,8 @@
               </p>
               <input class="form-control"
                 placeholder="Date Business Established / Fecha de Negocio Establecido"
-                formControlName="date_business_established">
+                formControlName="date_business_established"
+                type="date">
             </div>
             <div class="col-md-6">
               <p>
@@ -256,7 +257,7 @@
                 <option value=""
                   hidden>- Select Own / Alquila or Lease / Es Dueño -</option>
                 <option *ngFor="let ol of ownOrLease"
-                  value="{{ol.id}}">{{ol.name}}</option>
+                  value="{{ol.value}}">{{ol.name}}</option>
               </select>
             </div>
           </div>
@@ -276,7 +277,8 @@
               </p>
               <input class="form-control"
                 placeholder="Last Month Rent/Mortgage Paid / Ultimo Mes Pagado"
-                formControlName="last_rent_mortgage_paid">
+                formControlName="last_rent_mortgage_paid"
+                type="date">
             </div>
           </div>
           <br>
@@ -600,11 +602,11 @@
                     <span>{{aed.document}}</span>
                   </td>
                   <td class="text-right">
-                    <button type="button"
+                    <!-- <button type="button"
                       class="btn btn-sm btn-circle"
                       (click)="downloadFile(aed)">
                       <i class="fa fa-download text-success"></i>
-                    </button>
+                    </button> -->
                     <button type="button"
                       class="btn btn-sm btn-circle"
                       (click)="deleteDocument(aed.id)">
@@ -710,7 +712,14 @@
                 <p>Once all applicable fields have been filled out and at least one (1) of each Required Documents have been uploaded, you will be able to Submit your Application.</p>
                 <p>It is important to review your Application, including the attached documents, to ensure correctness and completeness prior to submitting.</p>
               </td>
-            </tr>            
+            </tr>     
+            <tr>
+              <td width="100%">
+                <p>Guardar su aplicación no constituye un envío. Después de guardar, revise la pantalla principal en busca de elementos que requieran su atención.</p>
+                <p>Una vez que se hayan completado todos los campos aplicables y se haya cargado al menos uno (1) de cada Documento requerido, podrá enviar su solicitud. </p>
+                <p>Es importante revisar su solicitud, incluidos los documentos adjuntos, para asegurarse de que sea correcta y esté completa antes de enviarla.</p>
+              </td>
+            </tr>  
           </table>
 
           <div class="stepper-button-row">

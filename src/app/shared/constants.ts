@@ -43,6 +43,7 @@ export class Constants {
         certify: 'certify',
         status: 'status',
         related_programs: 'related_programs',
+        email_user: 'email_user'
     };
 
     public static BUSINESS_APPLICATIONS_MAPPING_REQUIRED: Array<string> = [
@@ -55,6 +56,7 @@ export class Constants {
         applicant_ss_num: 'applicant_ss_num',
         co_applicant_name: 'co_applicant_name',
         co_applicant_ss_num: 'co_applicant_ss_num',
+        amount_requested: 'amount_requested',
         address: 'address',
         email: 'email',
         phone: 'phone',
@@ -76,6 +78,7 @@ export class Constants {
         certify: 'certify',
         status: 'status',
         related_programs: 'related_programs',
+        email_user: 'email_user'
     };
 
     public static RENTAL_APPLICATIONS_MAPPING_REQUIRED: Array<string> = [

@@ -24,6 +24,7 @@ export class BusinessApplicationsData {
     RelatedProgramsFieldId:number
     OrganizationTypeMultipleChoiceID: number
     OwnOrLeaseMultipleChoiceID: number
+    DateFields: string[]
 }
 
 export class RentalApplicationsData {

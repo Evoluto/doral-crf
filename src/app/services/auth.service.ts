@@ -47,16 +47,18 @@ export class AuthService {
     }
   }
 
-  register(user) {
-    const body = [{
+  register(user: { email: any; password: any; cpassword?: string; roleId?: any; }) {
+    const body = {
       Email: user.email,
       Password: user.password,
-      Role: 'participant',
-      ApplicationIds: [119],
-      ApplicationRoleIds: [700]
-    }];
-
-    return this.http.post<string>('/api/user/create', body)
+      ApplicationRoleIds: [user.roleId]
+    };
+    const regOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<string>('/api/user/doral-register', body, regOptions)
       .pipe(
         catchError(error => {
           console.log(error);
