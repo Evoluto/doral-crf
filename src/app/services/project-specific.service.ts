@@ -76,6 +76,8 @@ export class ProjectSpecificService {
 		projectSpecificData.householdMembersData = new HouseholdMembersData();
 		projectSpecificData.householdMembersData.TableId = householdMembersData.Id;
 		projectSpecificData.householdMembersData.RecordIdFieldId = appData.getAppItemId(householdMembersData.Fields, 'Record Id');
+		projectSpecificData.householdMembersData.RelatedRentalAssistanceFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Rental Assistance');
+		
 		projectSpecificData.householdMembersData.RelatedProgramsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Programs');
 		projectSpecificData.householdMembersData.RelatedRentalApplicationsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Rental Applications');
 

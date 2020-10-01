@@ -128,6 +128,9 @@ export class BusinessApplicationsAddComponent implements OnInit {
       ? new Date(this.businessApplicationEditData.last_rent_mortgage_paid).toISOString().split('T')[0]
       : null
 
+    const nationalChainOrFranchise = (this.businessApplicationEditData.national_chain_or_franchise &&
+      this.businessApplicationEditData.national_chain_or_franchise === 'True') ? true : false;
+
     this.fourthFormGroup = new FormGroup({
       number_of_employees_last_year: new FormControl(this.businessApplicationEditData.number_of_employees_last_year || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       number_of_employees_current: new FormControl(this.businessApplicationEditData.number_of_employees_current || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
@@ -135,8 +138,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
       own_or_lease: new FormControl(this.businessApplicationEditData.own_or_lease || ''),//, Validators.required),
       monthly_rent_mortgage: new FormControl(this.businessApplicationEditData.monthly_rent_mortgage || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       last_rent_mortgage_paid: new FormControl(lastRentMortgagePaid),//, Validators.required),
-      national_chain_or_franchise: new FormControl(this.businessApplicationEditData.national_chain_or_franchise, (control: AbstractControl): any => {
-      }),
+      national_chain_or_franchise: new FormControl(nationalChainOrFranchise),
     });
   }
 
@@ -148,7 +150,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
       applicant2_name: new FormControl(this.businessApplicationEditData.applicant2_name || ''),
       applicant3_name: new FormControl(this.businessApplicationEditData.applicant3_name || ''),
       applicant4_name: new FormControl(this.businessApplicationEditData.applicant4_name || ''),
-      applicant1_ownership_percentage: new FormControl(this.businessApplicationEditData.applicant1_ownership_percentage || '', [Validators.required,Validators.pattern(NumberPattern)]),
+      applicant1_ownership_percentage: new FormControl(this.businessApplicationEditData.applicant1_ownership_percentage || '', [Validators.required, Validators.pattern(NumberPattern)]),
       applicant2_ownership_percentage: new FormControl(this.businessApplicationEditData.applicant2_ownership_percentage || '', Validators.pattern(NumberPattern)),
       applicant3_ownership_percentage: new FormControl(this.businessApplicationEditData.applicant3_ownership_percentage || '', Validators.pattern(NumberPattern)),
       applicant4_ownership_percentage: new FormControl(this.businessApplicationEditData.applicant4_ownership_percentage || '', Validators.pattern(NumberPattern)),
@@ -159,14 +161,14 @@ export class BusinessApplicationsAddComponent implements OnInit {
     const NumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
     this.sixthFormGroup = new FormGroup({
-      amount_requested: new FormControl(this.businessApplicationEditData.amount_requested || '', [Validators.required,Validators.pattern(NumberPattern),Validators.min(1),Validators.max(10000)]),
-      estimated_loss: new FormControl(this.businessApplicationEditData.estimated_loss || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      gross_revenue_last_year: new FormControl(this.businessApplicationEditData.gross_revenue_last_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      gross_revenue_this_year: new FormControl(this.businessApplicationEditData.gross_revenue_this_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      payroll_last_year: new FormControl(this.businessApplicationEditData.payroll_last_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      payroll_this_year: new FormControl(this.businessApplicationEditData.payroll_this_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      pre_tax_profit_last_year: new FormControl(this.businessApplicationEditData.pre_tax_profit_last_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      pre_tax_profit_this_year: new FormControl(this.businessApplicationEditData.pre_tax_profit_this_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      amount_requested: new FormControl(this.businessApplicationEditData.amount_requested || '', [Validators.required, Validators.pattern(NumberPattern), Validators.min(1), Validators.max(10000)]),
+      estimated_loss: new FormControl(this.businessApplicationEditData.estimated_loss || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      gross_revenue_last_year: new FormControl(this.businessApplicationEditData.gross_revenue_last_year || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      gross_revenue_this_year: new FormControl(this.businessApplicationEditData.gross_revenue_this_year || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      payroll_last_year: new FormControl(this.businessApplicationEditData.payroll_last_year || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      payroll_this_year: new FormControl(this.businessApplicationEditData.payroll_this_year || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      pre_tax_profit_last_year: new FormControl(this.businessApplicationEditData.pre_tax_profit_last_year || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      pre_tax_profit_this_year: new FormControl(this.businessApplicationEditData.pre_tax_profit_this_year || '', Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
       costs_to_recover: new FormControl(this.businessApplicationEditData.costs_to_recover || '')//, Validators.required),
     });
   }
