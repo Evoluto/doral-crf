@@ -55,7 +55,7 @@ export class AuthService {
       ApplicationIds: [119],
       ApplicationRoleIds: [700]
     }];
-        
+
     return this.http.post<string>('/api/user/create', body)
       .pipe(
         catchError(error => {
@@ -202,14 +202,21 @@ export class AuthService {
     return throwError('Error Logging In');
   }
 
-  private getApplicationData(data): any {
-    const resourcesData = data.find(elem => elem.Name === 'Resources');
-    if (!resourcesData) return null;
-    if (!resourcesData.ApplicationRoles) return null;
-    return JSON.stringify({
-      id: resourcesData.ApplicationRoles['Id'],
-      name: resourcesData.ApplicationRoles['Name']
-    });
+  private getApplicationData(rights): any {
+    const isBusinessApplicant = rights.map(ar => ar.ApplicationRolesId).includes(700);
+    const isRentalApplicant = rights.map(ar => ar.ApplicationRolesId).includes(703);
+
+    if (isBusinessApplicant) {
+      return JSON.stringify({
+        id: 700,
+        name: 'Business Applicant'
+      });
+    } else if (isRentalApplicant) {
+      return JSON.stringify({
+        id: 700,
+        name: 'Rental Applicant'
+      });
+    } else return null;
   }
 
   checkAdmin(): boolean {
