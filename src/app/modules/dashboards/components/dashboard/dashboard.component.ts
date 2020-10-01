@@ -42,6 +42,8 @@ export class DashboardComponent implements OnInit {
   rentalApplicationList: Array<any> = [];
   selectedRentalRow: any;
   applicationData: any;
+  userData: any;
+  certifyDetails: any = {};
 
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class DashboardComponent implements OnInit {
     this.businessApplicationList = componentData[0];
     this.rentalApplicationList = componentData[1];
     this.applicationData = this.projectSpecificService.getApplicationData();
+    this.userData = this.storageService.getItem('userData');
     this.spinner.hide();
   }
 
@@ -60,13 +63,32 @@ export class DashboardComponent implements OnInit {
   openSubmitRentalApplicationPopup(row, content) {
     this.selectedRentalRow = row;
     this.modelConfig = new PopupModel();
-    this.modelConfig.title = 'Certification / Certificación<br>Submit Rental Application';
+    this.modelConfig['type'] = 'rental';
+    this.modelConfig.title = 'Certification / Certificación - Submit Rental Application';
     this.modelConfig.settings.size = 'lg';
     this.ngbModal.open(content, this.modelConfig.settings)
   }
 
+  submitApplication(type) {
+    if(type == 'business') {
+      this.submitBusinessApplication();
+    } else if ( type == 'rental') {
+      this.submitRentalApplication();
+    }
+  }
+
+  getCertifyObj(){
+    return {
+      certifier_name: this.certifyDetails.certifier_name,
+      certifier_title: this.certifyDetails.certifier_title,
+      certify: this.certifyDetails.certify && 'True',
+      certified_dt: (new Date()).toDateString(),
+      certified_by: this.userData.userName
+    }
+  }
+
   submitRentalApplication() {
-    const obj = {};
+    const obj = { ...this.getCertifyObj() };
     //obj['date_of_applicant_submission'] = new Date();
     //obj['submitted_by'] = this.loggedInuserEmail;
     obj['status'] = 'Submitted';
@@ -125,13 +147,14 @@ export class DashboardComponent implements OnInit {
   openSubmitBusinessApplicationPopup(row, content) {
     this.selectedBusinessRow = row;
     this.modelConfig = new PopupModel();
-    this.modelConfig.title = 'Certification / Certificación<br>Submit Business Application';
-    this.modelConfig.settings.size = 'sm';
-    this.ngbModal.open(content, this.modelConfig.settings)
+    this.modelConfig['type'] = 'business';
+    this.modelConfig.title = 'Certification / Certificación  - Submit Business Application';
+    this.modelConfig.settings.size = 'lg';
+    this.ngbModal.open(content, this.modelConfig.settings);
   }
 
   submitBusinessApplication() {
-    const obj = {};
+    const obj = { ...this.getCertifyObj() };
     //obj['date_of_applicant_submission'] = new Date();
     //obj['submitted_by'] = this.loggedInuserEmail;
     obj['status'] = 'Submitted';
