@@ -10,7 +10,7 @@ import { ProjectSpecificService } from 'src/app/services/project-specific.servic
 import { StorageService } from 'src/app/services/storage.service';
 import { formatDate } from '@angular/common';
 import * as uuid from 'uuid';
-import { forkJoin, Subscription, Subject } from 'rxjs';
+import { forkJoin, Subscription, Subject, Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PopupModel } from 'src/app/modules/dashboards/models/popup';
 
@@ -31,6 +31,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   applicantsDocumentSelectionTypes: Array<any>;
   applicantEditDocumentData: any;
   landlordEditDocumentData: any;
+  householdEditdata: Array<any>;
 
   //applicantList: Array<{ id: string, name: string }>;
   doralData = this.projectSpecificService.getProjectSpecificData();
@@ -59,7 +60,7 @@ export class RentalApplicationsAddComponent implements OnInit {
   modelConfig: PopupModel;
   programData: any;
 
-  items: FormArray;
+  private householdSizeSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -80,6 +81,7 @@ export class RentalApplicationsAddComponent implements OnInit {
     this.landlordDocumentSelectionTypes = this.getDocumentTypes(componentData[0], 'Landlord');
     this.rentalApplicationEditData = (componentData && componentData[1]) ? componentData[1][0] : {};
     const documentEditdata = (componentData && componentData[2]) ? componentData[2] : [];
+    this.householdEditdata = (componentData && componentData[3]) ? componentData[3] : [];
     this.applicantEditDocumentData = this.getDocumentEditData(documentEditdata, 'Rental Application Applicant');
     this.landlordEditDocumentData = this.getDocumentEditData(documentEditdata, 'Rental Application Landlord');
     this.setupForm();
@@ -132,11 +134,13 @@ export class RentalApplicationsAddComponent implements OnInit {
       items: this.formBuilder.array([])
     });
 
-    this.thirdFormGroup.get('household_size')
+    this.householdSizeSubscription = this.thirdFormGroup.get('household_size')
       .valueChanges
       .subscribe(value => {
         this.onHouseholdSizeChange(value)
       })
+
+    this.getExistingHouseHoldData();
   }
 
   private setupFourthForm() {
@@ -295,6 +299,7 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.spinner.show();
       const appResp: any = await this.ignatiusService.postData(recordFAD).toPromise();
       await this.addDocument(appResp.recordId);
+      await this.submitHousehold(appResp.recordId);
       this.rentalApplicationFormActionCompleted(true);
     } catch (error) {
       this.rentalApplicationFormActionCompleted(false);
@@ -315,6 +320,7 @@ export class RentalApplicationsAddComponent implements OnInit {
       this.spinner.show();
       await this.ignatiusService.putData(recordFAD).toPromise();
       await this.addDocument(this.recordId);
+      await this.submitHousehold(this.recordId);
       await this.deleteDocumentFromDb();
       this.rentalApplicationFormActionCompleted(true);
     } catch (error) {
@@ -693,22 +699,19 @@ export class RentalApplicationsAddComponent implements OnInit {
 
   /*================================== Household section Start ==================================*/
 
-  createHouseholdForms(): FormGroup {
+  createHouseholdForms(data: any = {}): FormGroup {
     return this.formBuilder.group({
-      name: new FormControl(this.rentalApplicationEditData.name || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      age: new FormControl(this.rentalApplicationEditData.age || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      employer: new FormControl(this.rentalApplicationEditData.employer || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      employer_phone: new FormControl(this.rentalApplicationEditData.employer_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
-      employer_address: new FormControl(this.rentalApplicationEditData.employer_address || ''),//, Validators.required),
-      position: new FormControl(this.rentalApplicationEditData.position || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      years_employed: new FormControl(this.rentalApplicationEditData.years_employed || ''),//, Validators.required),
-      supervisor: new FormControl(this.rentalApplicationEditData.supervisor || ''),//, Validators.required)
+      id: new FormControl(data.id || null),
+      name: new FormControl(data.name || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      age: new FormControl(data.age || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      employer: new FormControl(data.employer || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      employer_phone: new FormControl(data.employer_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
+      employer_address: new FormControl(data.employer_address || ''),//, Validators.required),
+      position: new FormControl(data.position || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
+      years_employed: new FormControl(data.years_employed || ''),//, Validators.required),
+      supervisor: new FormControl(data.supervisor || ''),//, Validators.required)
+      type: new FormControl(data.type || 'Household Member (18 and over)'),//, Validators.required)
     });
-  }
-
-  addItem(): void {
-    this.items = this.thirdFormGroup.get('items') as FormArray;
-    this.items.push(this.createHouseholdForms());
   }
 
   onHouseholdSizeChange(value: String) {
@@ -729,9 +732,117 @@ export class RentalApplicationsAddComponent implements OnInit {
     } else {
       //Nothing to do :)
     }
+  }
+
+  getExistingHouseHoldData() {
+    if (!this.recordId) return;
+    if (this.householdEditdata.length === 0) return;
+
+    for (const iterator of this.householdEditdata) {
+      (<FormArray>this.thirdFormGroup.get('items')).push(this.createHouseholdForms(iterator));
+    }
+  }
+
+  async submitHousehold(rentalId = "") {
+    try {
+      if (this.recordId) await this.updateHousehold();
+      else await this.createHousehold(rentalId);
+    } catch (error) {
+      console.log('Error in [submitHousehold] => ', error);
+    }
+  }
+
+  async createHousehold(rentalId: string) {
+
+    try {
+      const observables: Array<any> = [];
+      const formValuesArr = this.thirdFormGroup.get('items').value;
+
+      for (const iterator of formValuesArr) {
+
+        const recordFAD = new FormActionData(0,
+          this.doralData.householdMembersData.TableId,
+          null,
+          new Array<FieldListItem>()
+        );
+
+        recordFAD.fieldsList = [
+          new FieldListItem("name", iterator.name, ""),
+          new FieldListItem("age", iterator.age, ""),
+          new FieldListItem("employer", iterator.employer, ""),
+          new FieldListItem("employer_phone", iterator.employer_phone, ""),
+          new FieldListItem("employer_address", iterator.employer_address, ""),
+          new FieldListItem("position", iterator.position, ""),
+          new FieldListItem("years_employed", iterator.years_employed, ""),
+          new FieldListItem("supervisor", iterator.supervisor, ""),
+          new FieldListItem("type", iterator.type, ""),
+          new FieldListItem("related_rental_assistance", rentalId, ""),
+        ]
+
+        observables.push(this.ignatiusService.postData(recordFAD));
+      }
+
+      this.spinner.show();
+      await forkJoin(observables).toPromise();
+
+    } catch (error) {
+      throw error;
+    }
+
 
 
   }
+
+  async updateHousehold() {
+
+    try {
+      const observables: Array<any> = [];
+      const formValuesArr = this.thirdFormGroup.get('items').value;
+
+      for (const iterator of formValuesArr) {
+
+        const recordFAD = new FormActionData(0,
+          this.doralData.householdMembersData.TableId,
+          null,
+          new Array<FieldListItem>()
+        );
+
+        recordFAD.fieldsList = [
+          new FieldListItem("name", iterator.name, ""),
+          new FieldListItem("age", iterator.age, ""),
+          new FieldListItem("employer", iterator.employer, ""),
+          new FieldListItem("employer_phone", iterator.employer_phone, ""),
+          new FieldListItem("employer_address", iterator.employer_address, ""),
+          new FieldListItem("position", iterator.position, ""),
+          new FieldListItem("years_employed", iterator.years_employed, ""),
+          new FieldListItem("supervisor", iterator.supervisor, ""),
+          new FieldListItem("type", iterator.type, "")
+        ];
+
+        if (iterator.id) {
+          recordFAD.where = new Where(iterator.id)
+          observables.push(this.ignatiusService.putData(recordFAD));
+        } else {
+          recordFAD.fieldsList.push(new FieldListItem("related_rental_assistance", this.recordId, ""));
+          observables.push(this.ignatiusService.postData(recordFAD));
+        }
+      }
+
+      this.spinner.show();
+      await forkJoin(observables).toPromise();
+
+    } catch (error) {
+      throw error;
+    }
+
+  }
+
+
+  ngOnDestroy() {
+    this.householdSizeSubscription.unsubscribe();
+  }
+
+
 
 
 

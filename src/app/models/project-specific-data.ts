@@ -38,6 +38,7 @@ export class HouseholdMembersData {
     TableId: number
     HouseholdMembersListReportId: number
     RecordIdFieldId: number
+    RelatedRentalAssistanceFieldId:number
     RelatedProgramsFieldId:number
     RelatedRentalApplicationsFieldId:number
 }
