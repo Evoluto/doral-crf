@@ -135,7 +135,8 @@ export class BusinessApplicationsAddComponent implements OnInit {
       own_or_lease: new FormControl(this.businessApplicationEditData.own_or_lease || ''),//, Validators.required),
       monthly_rent_mortgage: new FormControl(this.businessApplicationEditData.monthly_rent_mortgage || ''),//, [Validators.required,Validators.pattern(NumberPattern)]),
       last_rent_mortgage_paid: new FormControl(lastRentMortgagePaid),//, Validators.required),
-      national_chain_or_franchise: new FormControl(this.businessApplicationEditData.national_chain_or_franchise || ''),//, Validators.required)
+      national_chain_or_franchise: new FormControl(this.businessApplicationEditData.national_chain_or_franchise, (control: AbstractControl): any => {
+      }),
     });
   }
 
