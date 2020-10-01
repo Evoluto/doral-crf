@@ -41,13 +41,15 @@ export class DashboardComponent implements OnInit {
 
   rentalApplicationList: Array<any> = [];
   selectedRentalRow: any;
+  applicationData: any;
 
 
   ngOnInit() {
     const componentData = this.route.snapshot.data['componentData'];
     this.doralData = this.projectSpecificService.getProjectSpecificData();
-    this.businessApplicationList = componentData[0]
-    this.rentalApplicationList = componentData[1]
+    this.businessApplicationList = componentData[0];
+    this.rentalApplicationList = componentData[1];
+    this.applicationData = this.projectSpecificService.getApplicationData();
     this.spinner.hide();
   }
 
