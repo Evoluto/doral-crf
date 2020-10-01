@@ -237,7 +237,7 @@
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="form-row" *ngIf="modelConfig.type == 'business'">
         <div class="form-group col-12">
           <label>Certifier Title</label>
           <input type="text" name="certifier_title" class="form-control" [(ngModel)]="certifyDetails.certifier_title"
