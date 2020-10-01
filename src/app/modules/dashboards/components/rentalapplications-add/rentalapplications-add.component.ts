@@ -108,16 +108,17 @@ export class RentalApplicationsAddComponent implements OnInit {
   private setupSecondForm() {
     const PhonePattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
     const SSNumPattern = /^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$/;
+    const DecimalNumberPattern = /^\d{1,8}(?:\.\d{1,2})?$/;
 
     this.secondFormGroup = new FormGroup({
-      applicant_name: new FormControl(this.rentalApplicationEditData.applicant_name || ''),//, Validators.required),
-      applicant_ss_num: new FormControl(this.rentalApplicationEditData.applicant_ss_num || ''),//, [Validators.required, Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")]),
+      applicant_name: new FormControl(this.rentalApplicationEditData.applicant_name || '', Validators.required),
+      applicant_ss_num: new FormControl(this.rentalApplicationEditData.applicant_ss_num || '',Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")),//, [Validators.required, Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")]),
       co_applicant_name: new FormControl(this.rentalApplicationEditData.co_applicant_name || ''),//, Validators.required),
-      co_applicant_ss_num: new FormControl(this.rentalApplicationEditData.co_applicant_ss_num || ''),//,  [Validators.required, Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")]),
-      address: new FormControl(this.rentalApplicationEditData.address || ''),//, Validators.required),
-      email: new FormControl(this.rentalApplicationEditData.email || ''),//, [Validators.required, Validators.email]),
-      phone: new FormControl(this.rentalApplicationEditData.phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
-      amount_requested: new FormControl(this.rentalApplicationEditData.amount_requested || '')//, [Validators.required,Validators.pattern(DecimalNumberPattern)]),
+      co_applicant_ss_num: new FormControl(this.rentalApplicationEditData.co_applicant_ss_num || '',Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")),//,  [Validators.required, Validators.pattern("^(?!666|000|9\\d{2})\\d{3}-(?!00)\\d{2}-(?!0{4})\\d{4}$")]),
+      address: new FormControl(this.rentalApplicationEditData.address || '', Validators.required),
+      email: new FormControl(this.rentalApplicationEditData.email || '', [Validators.required, Validators.email]),
+      phone: new FormControl(this.rentalApplicationEditData.phone || '', [Validators.required, Validators.pattern(PhonePattern)]),
+      amount_requested: new FormControl(this.rentalApplicationEditData.amount_requested || '', [Validators.required,Validators.pattern(DecimalNumberPattern), Validators.min(1), Validators.max(2500)]),
     });
   }
 
@@ -156,8 +157,8 @@ export class RentalApplicationsAddComponent implements OnInit {
         landlord: new FormControl(this.rentalApplicationEditData.landlord || ''),//, Validators.required),
         landlord_authorized_representative: new FormControl(this.rentalApplicationEditData.landlord_authorized_representative || ''),
         landlord_address: new FormControl(this.rentalApplicationEditData.landlord_address || ''),
-        landlord_email: new FormControl(this.rentalApplicationEditData.landlord_email || ''),//, [Validators.required, Validators.email]),
-        landlord_phone: new FormControl(this.rentalApplicationEditData.landlord_phone || ''),//, [Validators.required, Validators.pattern(PhonePattern)])
+        landlord_email: new FormControl(this.rentalApplicationEditData.landlord_email || '', Validators.email),//, [Validators.required, Validators.email]),
+        landlord_phone: new FormControl(this.rentalApplicationEditData.landlord_phone || '', Validators.pattern(PhonePattern)),//, [Validators.required, Validators.pattern(PhonePattern)])
       });
   }
 
@@ -170,17 +171,10 @@ export class RentalApplicationsAddComponent implements OnInit {
   }
 
   private setupEighthForm() {
-    const certify = this.rentalApplicationEditData.certify === 'True';
     const d = formatDate(new Date(), 'MM/dd/yyyy', 'en');
     const userData = this.storageService.getItem('userData');
 
     this.eighthFormGroup = new FormGroup({
-      // certifier_name: new FormControl(this.rentalApplicationEditData.certifier_name || '', Validators.required),
-      // //certifier_title: new FormControl(this.rentalApplicationEditData.certifier_title || '', Validators.required),
-      // certify: new FormControl(certify, (control: AbstractControl): any => {
-      //   i  f (control.value) return null;
-      //   return { required: true };
-      // }),
       status: new FormControl(this.rentalApplicationEditData.status || 'Open'),
       email_user: new FormControl(userData.userName),
       related_programs: new FormControl(this.rentalApplicationEditData.related_programs || '1')
