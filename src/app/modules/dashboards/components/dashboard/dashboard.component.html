@@ -16,14 +16,14 @@
                 <h3 class="font-weight-light text-black">{{rw.status}}</h3>
               </div>
               <div class="col-md-6">
-                <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                <!-- <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                   class="btn btn-sm red-bg"
                   (click)="downloadBusinessFile(rw)"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Download PDF">
                   <i class="fa fa-file-pdf"> Download</i>
-                </button>
+                </button> -->
                 <button *ngIf="rw.status === 'Open'"
                   class="btn btn-sm blue-bg"
                   (click)="editBusinessRecord(rw.id)"
@@ -73,17 +73,17 @@
                 <h4 class="font-weight-light text-black">{{rw.status}}</h4>
               </div>
               <div class="col-md-6">
-                <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
+                <!-- <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                   class="btn btn-sm red-bg"
-                  (click)="downloadBusinessFile(rw)"
+                  (click)="downloadRentalFile(rw)"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Download PDF">
                   <i class="fa fa-file-pdf"> Download</i>
-                </button>
+                </button> -->
                 <button *ngIf="rw.status === 'Open'"
                   class="btn btn-sm blue-bg"
-                  (click)="editBusinessRecord(rw.id)"
+                  (click)="editRentalRecord(rw.id)"
                   data-toggle="tooltip"
                   data-placement="top"
                   title="Edit"> <i class="fa fa-edit"> Edit</i>
