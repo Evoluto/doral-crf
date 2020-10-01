@@ -167,7 +167,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
       payroll_this_year: new FormControl(this.businessApplicationEditData.payroll_this_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
       pre_tax_profit_last_year: new FormControl(this.businessApplicationEditData.pre_tax_profit_last_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
       pre_tax_profit_this_year: new FormControl(this.businessApplicationEditData.pre_tax_profit_this_year || '',Validators.pattern(NumberPattern)),//, [Validators.required,Validators.pattern(NumberPattern)]),
-      costs_to_recover: new FormControl(this.businessApplicationEditData.costs_to_recover || '',Validators.pattern(NumberPattern)),//, Validators.required),
+      costs_to_recover: new FormControl(this.businessApplicationEditData.costs_to_recover || '')//, Validators.required),
     });
   }
 
