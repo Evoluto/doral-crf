@@ -2,10 +2,10 @@
   <div class="col-md-6">
     <div class="card ">
       <div class="card-header yellow-bg ">
-        <span style="font-size: 20px;font-weight:500">Business Assistance</span>
+        <span style="font-size: 20px;font-weight:500">Business Assistance / Subvención de Asistencia para Pequeñas Empresas </span>
         <button class="btn green-bg btn-md float-right"
           [routerLink]="['/businessapplications-add']">
-          <i class="fa fa-plus"> Start Process</i>
+          <i class="fa fa-plus"> Start the Application Process / Iniciar el proceso de solicitud</i>
         </button>
       </div>
       <div class="card-body text-center">
@@ -13,9 +13,17 @@
           <div class="box p-2 rounded bg-light">
             <div class="row">
               <div class="col-md-6">
-                <h3 class="font-weight-light text-black">{{rw.status}}</h3>
+                The status of your application is <b>{{rw.status}}</b>.<br>
+                El estado de su solicitud es <b>{{rw.status}}</b>.
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3" *ngIf="rw.status === 'Open'">Please continue to update your information and upload all of the required documents. Applications submitted without <b>ALL required documents</b>. Applications submitted without all required information will <b>delay or limit</b> your opportunity to receive funding.<br>
+                <p></p>Continúe actualizando su información y cargue todos los documentos necesarios. Solicitudes presentadas sin <b>TODOS los documentos requeridos</b>. Las solicitudes presentadas sin toda la información requerida <b>retrasarán o limitarán</b> su oportunidad de recibir fondos.
+              </div>
+              <div class="col-md-3" *ngIf="rw.status === 'Submitted'">Your application is currently in review. Please check back periodically for an update. Additionally, check your email account for correspondence from the review team.<br>
+                <p></p>Su solicitud está actualmente en revisión. Por favor, vuelva periódicamente para una actualización. Además, revise su cuenta de correo electrónico para la correspondencia del equipo de revisión.
+              </div>
+              
+              <div class="col-md-3">
                 <!-- <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                   class="btn btn-sm red-bg"
                   (click)="downloadBusinessFile(rw)"
@@ -29,14 +37,19 @@
                   (click)="editBusinessRecord(rw.id)"
                   data-toggle="tooltip"
                   data-placement="top"
-                  title="Edit"> <i class="fa fa-edit"> Edit</i>
+                  title="Edit"> <i class="fa fa-edit"> Edit / Corregir</i>
                 </button>
+                
+                <div *ngIf="rw.status === 'Open'"><br><span style="color: #ed1e24;">Only submit once <b>ALL</b> information and documents are uploaded. You will <b>NOT</b> be able to edit once submitted.<br>
+                  <p></p>Solo envíe una vez que se carguen <b>TODA</b> la información y los documentos. <b>NO</b> podrá editar una vez enviado.</span>
+                </div>
+                <br>
                 <button *ngIf="rw.status === 'Open'"
                   class="btn btn-sm green-bg"
                   (click)="openSubmitBusinessApplicationPopup(rw,submitBusinessApplicationTemp)"
                   data-toggle="tooltip"
                   data-placement="top"
-                  title="Submit"> <i class="fa fa-check"> Submit</i>
+                  title="Submit"> <i class="fa fa-check"> Submit / Enviar</i>
                 </button>
                 <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
               </div>
@@ -59,10 +72,10 @@
   <div class="col-md-6">
     <div class="card ">
       <div class="card-header blue-bg">
-        <span style="font-size: 20px;font-weight:500"><span style="color:white;">Emergency Rental Assistance</span></span>
+        <span style="font-size: 20px;font-weight:500"><span style="color:white;">Emergency Rental Assistance / Programa de Asistencia de Emergencia para el Alquiler</span></span>
         <button class="btn green-bg btn-sm float-right"
           [routerLink]="['/rentalapplications-add']">
-          <i class="fa fa-plus"> Start Process</i>
+          <i class="fa fa-plus"> Start the Application Process / Iniciar el proceso de solicitud</i>
         </button>
       </div>
       <div class="card-body text-center">
@@ -70,9 +83,17 @@
           <div class="box p-2 rounded bg-light">
             <div class="row">
               <div class="col-md-6">
-                <h4 class="font-weight-light text-black">{{rw.status}}</h4>
+                The status of your application is <b>{{rw.status}}</b>.<br>
+                El estado de su solicitud es <b>{{rw.status}}</b>.
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3" *ngIf="rw.status === 'Open'">Please continue to update your information and upload all of the required documents. Applications submitted without <b>ALL required documents</b>. Applications submitted without all required information will <b>delay or limit</b> your opportunity to receive funding.<br>
+                <p></p>Continúe actualizando su información y cargue todos los documentos necesarios. Solicitudes presentadas sin <b>TODOS los documentos requeridos</b>. Las solicitudes presentadas sin toda la información requerida <b>retrasarán o limitarán</b> su oportunidad de recibir fondos.
+              </div>
+              <div class="col-md-3" *ngIf="rw.status === 'Submitted'">Your application is currently in review. Please check back periodically for an update. Additionally, check your email account for correspondence from the review team.<br>
+                <p></p>Su solicitud está actualmente en revisión. Por favor, vuelva periódicamente para una actualización. Además, revise su cuenta de correo electrónico para la correspondencia del equipo de revisión.
+              </div>
+
+              <div class="col-md-3">
                 <!-- <button *ngIf="rw.status != 'Open' && rw.haspdf != '0'"
                   class="btn btn-sm red-bg"
                   (click)="downloadRentalFile(rw)"
@@ -86,22 +107,27 @@
                   (click)="editRentalRecord(rw.id)"
                   data-toggle="tooltip"
                   data-placement="top"
-                  title="Edit"> <i class="fa fa-edit"> Edit</i>
+                  title="Edit"> <i class="fa fa-edit"> Edit / Corregir</i>
                 </button>
+                
+                <div *ngIf="rw.status === 'Open'"><br><span style="color: #ed1e24;">Only submit once <b>ALL</b> information and documents are uploaded. You will <b>NOT</b> be able to edit once submitted.<br>
+                  <p></p>Solo envíe una vez que se carguen <b>TODA</b> la información y los documentos. <b>NO</b> podrá editar una vez enviado.</span>
+                </div>
+                <br>
                 <button *ngIf="rw.status === 'Open'"
                   class="btn btn-sm green-bg"
                   (click)="openSubmitRentalApplicationPopup(rw,submitRentalApplicationTemp)"
                   data-toggle="tooltip"
                   data-placement="top"
-                  title="Submit"> <i class="fa fa-check"> Submit</i>
+                  title="Submit"> <i class="fa fa-check"> Submit / Enviar</i>
                 </button>
+
                 <!-- <button class="btn btn-sm btn-dfa-light">Delete</button> -->
               </div>
             </div>
           </div>
           <br>
         </div>
-
       </div>
     </div>
   </div>
