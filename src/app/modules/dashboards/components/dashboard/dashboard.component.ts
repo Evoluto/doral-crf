@@ -205,56 +205,56 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  async downloadBusinessFile(row) {
-    this.spinner.show();
-    await this.ignatiusService
-      .getQueryReportObservable(
-        this.doralData.appData,
-        {
-          "ApplicationTableId": this.doralData.documentsData.TableId,
-          "ConditionGroups": [
-            {
-              "Type": "all",
-              "Conditions": [
-                {
-                  "ConditionField": {
-                    "Id": this.doralData.documentsData.RelatedApplicationsFieldId
-                  },
-                  "OperationType": "is equal",
-                  "Value": Number(row.id)
-                },
-                {
-                  "ConditionField": {
-                    "Id": this.doralData.documentsData.DocumentTypeId
-                  },
-                  "OperationType": "is equal",
-                  "Value": "Package file"
-                },
-                {
-                  "ConditionField": {
-                    "Id": this.doralData.documentsData.DocumentFileId
-                  },
-                  "OperationType": "start with",
-                  "Value": "CTCApplication"
-                }
-              ]
-            }
-          ]
-        }).subscribe((response) => {
-          if (response.length === 0) {
-            this.toastr.warning("PDF is creating.. please wait a few minutes and try again.");
-            this.spinner.hide();
-            return;
-          }
-          let pdfJob = response.sort((a, b) => b["datecreated"] - a["datecreated"]);
-          this.ignatiusService.downloadFile(
-            this.doralData.documentsData.TableId,
-            pdfJob[0]["id"],
-            this.doralData.documentsData.DocumentFileId,
-            pdfJob[0]["document"]
-          );
-          this.spinner.hide();
-        });
-  }
+  // async downloadBusinessFile(row) {
+  //   this.spinner.show();
+  //   await this.ignatiusService
+  //     .getQueryReportObservable(
+  //       this.doralData.appData,
+  //       {
+  //         "ApplicationTableId": this.doralData.documentsData.TableId,
+  //         "ConditionGroups": [
+  //           {
+  //             "Type": "all",
+  //             "Conditions": [
+  //               {
+  //                 "ConditionField": {
+  //                   "Id": this.doralData.documentsData.RelatedApplicationsFieldId
+  //                 },
+  //                 "OperationType": "is equal",
+  //                 "Value": Number(row.id)
+  //               },
+  //               {
+  //                 "ConditionField": {
+  //                   "Id": this.doralData.documentsData.DocumentTypeId
+  //                 },
+  //                 "OperationType": "is equal",
+  //                 "Value": "Package file"
+  //               },
+  //               {
+  //                 "ConditionField": {
+  //                   "Id": this.doralData.documentsData.DocumentFileId
+  //                 },
+  //                 "OperationType": "start with",
+  //                 "Value": "CTCApplication"
+  //               }
+  //             ]
+  //           }
+  //         ]
+  //       }).subscribe((response) => {
+  //         if (response.length === 0) {
+  //           this.toastr.warning("PDF is creating.. please wait a few minutes and try again.");
+  //           this.spinner.hide();
+  //           return;
+  //         }
+  //         let pdfJob = response.sort((a, b) => b["datecreated"] - a["datecreated"]);
+  //         this.ignatiusService.downloadFile(
+  //           this.doralData.documentsData.TableId,
+  //           pdfJob[0]["id"],
+  //           this.doralData.documentsData.DocumentFileId,
+  //           pdfJob[0]["document"]
+  //         );
+  //         this.spinner.hide();
+  //       });
+  // }
 
 }

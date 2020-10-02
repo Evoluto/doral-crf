@@ -29,7 +29,7 @@ export class FullComponent implements OnInit {
     }
     this.defaultSidebar = this.options.sidebartype;
     this.handleSidebar();
-    this.getResponses();
+    //this.getResponses();
   }
 
   public config: PerfectScrollbarConfigInterface = {};
@@ -175,34 +175,34 @@ export class FullComponent implements OnInit {
   //   )
   // }
 
-  private async getResponses() {
-    const userData = this.storageService.getItem('userData');
-    console.log(userData.userName);
-    let observables = new Array<Observable<Object[]>>();
-    let postBodies = new Array<any>();
-    // NES - NOT NOW    
-    //postBodies.push({ "ApplicationTableId": this.doralData.commRespData.TableId });
+  // private async getResponses() {
+  //   const userData = this.storageService.getItem('userData');
+  //   console.log(userData.userName);
+  //   let observables = new Array<Observable<Object[]>>();
+  //   let postBodies = new Array<any>();
+  //   // NES - NOT NOW    
+  //   //postBodies.push({ "ApplicationTableId": this.doralData.commRespData.TableId });
         
-        observables = observables.concat(
-          this.ignatiusService.getQueryReportObservables(
-            this.doralData.appData,
-            postBodies
-          )
-        );
-    forkJoin(observables).subscribe(data => {
-        console.log(data[0]);
-        for(const inner of data[0]){
-          if (inner["read"] === "False" &&
-          inner["createdby"] != userData.userName) {
-            this.storageService.setItem('responses', {
-              read: false
-            });
-          }
-        }
+  //       observables = observables.concat(
+  //         this.ignatiusService.getQueryReportObservables(
+  //           this.doralData.appData,
+  //           postBodies
+  //         )
+  //       );
+  //   forkJoin(observables).subscribe(data => {
+  //       console.log(data[0]);
+  //       for(const inner of data[0]){
+  //         if (inner["read"] === "False" &&
+  //         inner["createdby"] != userData.userName) {
+  //           this.storageService.setItem('responses', {
+  //             read: false
+  //           });
+  //         }
+  //       }
       
-    }, error => {
+  //   }, error => {
      
-    });
+  //   });
 
-  }
+  // }
 }
