@@ -107,7 +107,6 @@ export class ProjectSpecificService {
 		projectSpecificData.appData = JSON.parse(JSON.stringify(appData));
 		projectSpecificData.appData.Tables.forEach(t => t.Fields = null);
 
-
 		/**
 		 * Saving in local storage 
 		 */
