@@ -106,15 +106,15 @@ export class DashboardComponent implements OnInit {
         new Where(Number(this.selectedRentalRow.id)),
         new Array<FieldListItem>()
       );
-      const recordPackage = new PackageJob(environment.applicationId,
-        this.doralData.documentsData.DocumentFileId,
-        this.doralData.documentsData.RelatedApplicationsFieldId,
-        Number(this.selectedRentalRow.id), true, 0, "Rental Application Attachment");
+      // const recordPackage = new PackageJob(environment.applicationId,
+      //   this.doralData.documentsData.DocumentFileId,
+      //   this.doralData.documentsData.RelatedApplicationsFieldId,
+      //   Number(this.selectedRentalRow.id), true, 0, "Rental Application Attachment");
 
       for (let key in appObject) {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }
-      await this.ignatiusService.postPackage(recordPackage).toPromise();
+      // await this.ignatiusService.postPackage(recordPackage).toPromise();
       await this.ignatiusService.putData(recordFAD).toPromise();
       this.rentalApplicationUpdateCompleted('Submitted', null, true);
     } catch (error) {
@@ -172,15 +172,15 @@ export class DashboardComponent implements OnInit {
         new Where(Number(this.selectedBusinessRow.id)),
         new Array<FieldListItem>()
       );
-      const recordPackage = new PackageJob(environment.applicationId,
-        this.doralData.documentsData.DocumentFileId,
-        this.doralData.documentsData.RelatedApplicationsFieldId,
-        Number(this.selectedBusinessRow.id), true, 0, "Business Application Attachment");
+      // const recordPackage = new PackageJob(environment.applicationId,
+      //   this.doralData.documentsData.DocumentFileId,
+      //   this.doralData.documentsData.RelatedApplicationsFieldId,
+      //   Number(this.selectedBusinessRow.id), true, 0, "Business Application Attachment");
 
       for (let key in appObject) {
         recordFAD.fieldsList.push(new FieldListItem(key, appObject[key], ""))
       }
-      await this.ignatiusService.postPackage(recordPackage).toPromise();
+      // await this.ignatiusService.postPackage(recordPackage).toPromise();
       await this.ignatiusService.putData(recordFAD).toPromise();
       this.businessApplicationUpdateCompleted('Submitted', null, true);
     } catch (error) {
