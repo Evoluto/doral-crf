@@ -58,7 +58,7 @@ export class ProjectSpecificService {
 		projectSpecificData.businessApplicationsData.TableId = businessApplicationsData.Id;
 		projectSpecificData.businessApplicationsData.BusinessApplicationListReportId = appData.getAppItemId(businessApplicationsData.Reports, 'List All');
 		projectSpecificData.businessApplicationsData.RecordIdFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Record Id');
-		projectSpecificData.businessApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Related Programs');
+		//projectSpecificData.businessApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(businessApplicationsData.Fields, 'Related Programs');
 		projectSpecificData.businessApplicationsData.OrganizationTypeMultipleChoiceID = appData.getAppItemId(businessApplicationsData.Fields, 'Organization Type');
 		projectSpecificData.businessApplicationsData.OwnOrLeaseMultipleChoiceID = appData.getAppItemId(businessApplicationsData.Fields, 'Own or Lease');
 		projectSpecificData.businessApplicationsData.DateFields = ["date_business_established", "last_rent_mortgage_paid"];
@@ -69,7 +69,7 @@ export class ProjectSpecificService {
 		projectSpecificData.rentalApplicationsData.TableId = rentalApplicationsData.Id;
 		projectSpecificData.rentalApplicationsData.RentalApplicationListReportId = appData.getAppItemId(rentalApplicationsData.Reports, 'List All');
 		projectSpecificData.rentalApplicationsData.RecordIdFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Record Id');
-		projectSpecificData.rentalApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Related Programs');
+		//projectSpecificData.rentalApplicationsData.RelatedProgramsFieldId = appData.getAppItemId(rentalApplicationsData.Fields, 'Related Programs');
 
 		/* ===================== [4] Table = 'Household Members' ======================*/
 		let householdMembersData = appData.Tables.find(t => t.Name === 'Household Members');
@@ -77,9 +77,7 @@ export class ProjectSpecificService {
 		projectSpecificData.householdMembersData.TableId = householdMembersData.Id;
 		projectSpecificData.householdMembersData.RecordIdFieldId = appData.getAppItemId(householdMembersData.Fields, 'Record Id');
 		projectSpecificData.householdMembersData.RelatedRentalAssistanceFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Rental Assistance');
-		
-		projectSpecificData.householdMembersData.RelatedProgramsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Programs');
-		projectSpecificData.householdMembersData.RelatedRentalApplicationsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Rental Applications');
+		//projectSpecificData.householdMembersData.RelatedProgramsFieldId = appData.getAppItemId(householdMembersData.Fields, 'Related Programs');
 
 		/* ===================== [5] Table = 'Documents' ================*/
 		let documentsData = appData.Tables.find(t => t.Name === 'Documents');
@@ -89,7 +87,7 @@ export class ProjectSpecificService {
 		projectSpecificData.documentsData.DocumentTypeFieldId = appData.getAppItemId(documentsData.Fields, 'Document Type');
 		projectSpecificData.documentsData.RelatedBusinessAssistanceFieldId = appData.getAppItemId(documentsData.Fields, 'Related Business Assistance');
 		projectSpecificData.documentsData.RelatedRentalAssistanceFieldId = appData.getAppItemId(documentsData.Fields, 'Related Rental Assistance');
-		projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document');
+		projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Record Id');
 		projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
 
 		/* ===================== [6] Table = 'Required Documents' ======================*/
