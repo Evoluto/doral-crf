@@ -637,12 +637,19 @@
                   <td>
                     <span>{{aed.document}}</span>
                   </td>
+                  
                   <td class="text-right">
-                    <button type="button"
+                    <a type="button"
                       class="btn btn-sm btn-circle"
-                      (click)="downloadFile(aed)">
+                      href="{{aed.document_file_url}}"
+                      download>
                       <i class="fa fa-download text-success"></i>
-                    </button>
+                    </a>
+                    <!-- <button type="button"
+                      class="btn btn-sm btn-circle"
+                      (click)="{{aed.document_file_url}}">
+                      <i class="fa fa-download text-success"></i>
+                    </button> -->
                     <button type="button"
                       class="btn btn-sm btn-circle"
                       (click)="deleteApplicantDocument(aed.id)">
