@@ -49,9 +49,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const componentData = this.route.snapshot.data['componentData'];
     this.doralData = this.projectSpecificService.getProjectSpecificData();
-    this.businessApplicationList = componentData[0];
-    this.rentalApplicationList = componentData[1];
     this.applicationData = this.projectSpecificService.getApplicationData();
+    if (this.applicationData.name == 'Business Applicant')
+      this.businessApplicationList = componentData[0];
+    else 
+      this.rentalApplicationList = componentData[1];
     this.userData = this.storageService.getItem('userData');
     this.spinner.hide();
   }
