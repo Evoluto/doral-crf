@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
           this.routes.navigate(['/login']);
         
       }, error => {
-        this.errMsg = 'Error while Registration';
+        this.errMsg = 'Error while Registering';
       });
   }
 }
