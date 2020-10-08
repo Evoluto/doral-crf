@@ -70,21 +70,21 @@ export class DashboardComponent implements OnInit {
   }
 
   submitApplication(type) {
-    if(type == 'business') {
+    if (type == 'business') {
       this.submitBusinessApplication();
-    } else if ( type == 'rental') {
+    } else if (type == 'rental') {
       this.submitRentalApplication();
     }
   }
 
-  getCertifyObj(){
+  getCertifyObj() {
     const obj = {
       certifier_name: this.certifyDetails.certifier_name,
       certify: this.certifyDetails.certify && 'True',
-      certified_dt: (new Date()).toDateString(),
+      certified_dt: new Date(),
       certified_by: this.userData.userName
     }
-    if(this.certifyDetails.certifier_title) {
+    if (this.certifyDetails.certifier_title) {
       obj['certifier_title'] = this.certifyDetails.certifier_title;
     }
     return obj;

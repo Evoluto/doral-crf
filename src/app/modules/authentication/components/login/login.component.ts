@@ -5,6 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ToastrService } from 'ngx-toastr';
 import { PasswordRecoveryData } from 'src/app/models/password-recovery-data';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -52,6 +53,7 @@ export class LoginComponent implements OnInit {
   forgotPassword = false;
 
   constructor(
+    private spinner: NgxSpinnerService,
     private authService: AuthService,
     private routes: Router,
     private toastr: ToastrService,
@@ -61,6 +63,7 @@ export class LoginComponent implements OnInit {
     if (this.router.url.includes("passwordrecovery")) {
       this.changePassword = true;
     }
+    this.spinner.hide();
   }
 
   transformLogin() {
@@ -85,7 +88,7 @@ export class LoginComponent implements OnInit {
       this.authService
         .signIn(username, password)
         .subscribe((user) => {
-          
+
           if (user) {
             this.routes.navigate(['/']);
           } else {
