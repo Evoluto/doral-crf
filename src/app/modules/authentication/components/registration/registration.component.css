@@ -24,3 +24,10 @@
   border-color: #FACD48 !important;
   color:black !important;
 }
+
+.capta {
+  background-image: url('/assets/images/capta-background.jpeg');
+  color: #ecdb0a;
+  text-align: center;
+  cursor: default;
+}

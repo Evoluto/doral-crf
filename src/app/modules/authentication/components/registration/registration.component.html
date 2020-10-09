@@ -8,37 +8,30 @@
 
             <!-- Form -->
             <div class="row">
-                <form class="col-12" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" autocomplete="off" novalidate>
+                <form class="col-12"
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    autocomplete="off"
+                    novalidate>
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <span class="input-group-append">
                                 <div class="input-group-text bg-white icon-box"><i class="fas fa-at"></i></div>
                             </span>
-                            <input class="form-control py-2 border-right-0 border" type="text" placeholder="Email" name="email"
-                                [(ngModel)]="user.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
-                                required email />
-                            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                            <input class="form-control py-2 border-right-0 border"
+                                type="text"
+                                placeholder="Email"
+                                name="email"
+                                [(ngModel)]="user.email"
+                                #email="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                                required
+                                email />
+                            <div *ngIf="f.submitted && email.invalid"
+                                class="invalid-feedback">
                                 <div *ngIf="email.errors.required">Email is required</div>
                                 <div *ngIf="email.errors.email">Email must be a valid email address</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="input-group mb-3">
-                            <span class="input-group-append">
-                                <div class="input-group-text bg-white icon-box">
-                                    <i class="fas fa-unlock-alt" data-toggle="tooltip" title="Password">
-                                    </i>
-                                </div>
-                            </span>
-                            <input class="form-control py-2 border-right-0 border" type="password" placeholder="Password" name="password"
-                                [(ngModel)]="user.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
-                                required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
-                            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
-                                <div *ngIf="password.errors.required">Password is required</div>
-                                <div *ngIf="password.errors.minlength">Must be at leasta 8 characters</div>
-                                <div *ngIf="password.errors.pattern">Must have at least an uppercase, a lowercase, and a number</div>
                             </div>
                         </div>
                     </div>
@@ -46,26 +39,103 @@
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <span class="input-group-append">
-                                <div class="input-group-text bg-white icon-box"><i class="fas fa-check-square"></i></div>
+                                <div class="input-group-text bg-white icon-box">
+                                    <i class="fas fa-unlock-alt"
+                                        data-toggle="tooltip"
+                                        title="Password">
+                                    </i>
+                                </div>
                             </span>
-                            <input class="form-control py-2 border-right-0 border" type="password" placeholder="Confirm Password" name="cpassword"
-                                [(ngModel)]="user.cpassword" #cpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && cpassword.invalid }"
-                                required minlength="8">
-                            <div *ngIf="f.submitted && cpassword.invalid" class="invalid-feedback">
-                                <div *ngIf="cpassword.errors.required">Confirm Password is required</div>
-                                <div *ngIf="password.value !== cpassword.value">Confirm Password should be same as Password</div>
+                            <input class="form-control py-2 border-right-0 border"
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                [(ngModel)]="user.password"
+                                #password="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                                required
+                                minlength="8"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$">
+                            <div *ngIf="f.submitted && password.invalid"
+                                class="invalid-feedback">
+                                <div *ngIf="password.errors.required">Password is required</div>
+                                <div *ngIf="password.errors.minlength">Must be at leasta 8 characters</div>
+                                <div *ngIf="password.errors.pattern">Must have at least an uppercase, a lowercase, and a
+                                    number</div>
                             </div>
                         </div>
                     </div>
-                    
+
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <span class="input-group-append">
+                                <div class="input-group-text bg-white icon-box"><i class="fas fa-check-square"></i>
+                                </div>
+                            </span>
+                            <input class="form-control py-2 border-right-0 border"
+                                type="password"
+                                placeholder="Confirm Password"
+                                name="cpassword"
+                                [(ngModel)]="user.cpassword"
+                                #cpassword="ngModel"
+                                [ngClass]="{ 'is-invalid': f.submitted && cpassword.invalid }"
+                                required
+                                minlength="8">
+                            <div *ngIf="f.submitted && cpassword.invalid"
+                                class="invalid-feedback">
+                                <div *ngIf="cpassword.errors.required">Confirm Password is required</div>
+                                <div *ngIf="password.value !== cpassword.value">Confirm Password should be same as
+                                    Password</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <input type="text"
+                                    value="{{displayCapta}}"
+                                    class="capta form-control"
+                                    readonly>
+                                <button type="button"
+                                    class="btn btn-warning"
+                                    (click)="reloadCapta()">
+                                    <i class="ti-reload text-info"
+                                        aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text"
+                                [(ngModel)]="enteredCapta"
+                                name="enteredCaptaRef"
+                                #enteredCaptaRef="ngModel"
+                                placeholder="Enter capta"
+                                class="form-control"
+                                required>
+                            <div *ngIf="f.submitted && enteredCaptaRef.invalid">
+                                <small class="text-danger"
+                                    *ngIf="displayCapta !== enteredCapta">Capta is required</small>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <div *ngIf="f.submitted && roleId.invalid" class="invalid-feedback"> 
+                            <div *ngIf="f.submitted && roleId.invalid"
+                                class="invalid-feedback">
                                 <div *ngIf="roleId.errors.required">Applicant Type is required </div>
                             </div>
-                            <input type="radio" #roleId="ngModel" required [value]="703" name="roleId" [(ngModel)]="user.roleId" [ngClass]="{ 'is-invalid': f.submitted && roleId.invalid }" > <label class="text-white">&nbsp;Rental Applicant</label>
+                            <input type="radio"
+                                #roleId="ngModel"
+                                required
+                                [value]="703"
+                                name="roleId"
+                                [(ngModel)]="user.roleId"
+                                [ngClass]="{ 'is-invalid': f.submitted && roleId.invalid }"> <label
+                                class="text-white">&nbsp;Rental Applicant</label>
                         </div>
-                    <!-- <div class="form-group row">
+                        <!-- <div class="form-group row">
                         <div class="col-md-6">
                             <input type="radio" #roleId="ngModel" required [value]="700" name="roleId" [(ngModel)]="user.roleId" [ngClass]="{ 'is-invalid': f.submitted && roleId.invalid }" > <label class="text-white">&nbsp;Business Applicant</label>
                             <div *ngIf="f.submitted && roleId.invalid" class="invalid-feedback"> 
@@ -76,11 +146,18 @@
                             <input type="radio" #roleId="ngModel" required [value]="703" name="roleId" [(ngModel)]="user.roleId" [ngClass]="{ 'is-invalid': f.submitted && roleId.invalid }" > <label class="text-white">&nbsp;Rental Applicant</label>
                         </div> -->
                     </div>
+
                     <div class="form-group row">
                         <div class="col-md-12 ">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" [(ngModel)]="termsChecked" [ngModelOptions]="{standalone: true}" [value]="termsChecked" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label text-white" for="customCheck1">I agree to all
+                                <input type="checkbox"
+                                    [(ngModel)]="termsChecked"
+                                    [ngModelOptions]="{standalone: true}"
+                                    [value]="termsChecked"
+                                    class="custom-control-input"
+                                    id="customCheck1">
+                                <label class="custom-control-label text-white"
+                                    for="customCheck1">I agree to all
                                     <a>Terms</a></label>
                             </div>
                         </div>
@@ -88,6 +165,7 @@
                     <div style="color: red;">
                         {{ errMsg }}
                     </div>
+
                     <div class="form-group text-center ">
                         <div class="col-xs-12 p-b-20 ">
                             <button class="btn btn-block btn-md btn-success btn-auth"
@@ -96,8 +174,8 @@
                     </div>
                     <div class="form-group m-b-0 m-t-10 ">
                         <div class="col-sm-12 text-center text-white">
-                            Already have an account? <a routerLink="/login" class="text-info m-l-5 text-white"><b
-                                    class="text-white">Sign In</b></a>
+                            Already have an account? <a routerLink="/login"
+                                class="text-info m-l-5 text-white"><b class="text-white">Sign In</b></a>
                         </div>
                     </div>
                 </form>

@@ -13,6 +13,9 @@ export class RegistrationComponent implements OnInit {
   user = { email: '', password: '', cpassword: '', roleId: '' };
   errMsg = '';
   termsChecked: boolean = true;
+  displayCapta: string = this.getCapta();
+  enteredCapta: String = '';
+
 
   constructor(
     private authService: AuthService,
@@ -26,12 +29,17 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.user);
     this.errMsg = '';
     if (!this.termsChecked) {
       this.errMsg = 'Please agree to all Tearms';
       return;
     }
+
+    if (this.displayCapta !== this.enteredCapta) {
+      this.toastr.error('Invalid Capta',"Error");
+      return;
+    }
+
     this.register();
   }
 
@@ -50,7 +58,11 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  async isUserExists() {
+  private getCapta() {
+    return Math.trunc(Math.random() * 1000000).toString();
+  }
 
+  reloadCapta() {
+    this.displayCapta = this.getCapta()
   }
 }
