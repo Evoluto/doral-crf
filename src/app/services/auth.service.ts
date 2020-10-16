@@ -218,7 +218,12 @@ export class AuthService {
         id: 700,
         name: 'Rental Applicant'
       });
-    } else return null;
+    } else {
+      return JSON.stringify({
+        id: null,
+        name: 'Admin'
+      })
+    }
   }
 
   checkAdmin(): boolean {
@@ -233,5 +238,5 @@ export class AuthService {
     if (!userSessionData) return false;
     return Boolean(userSessionData.related_companies);
   }
-  
+
 }

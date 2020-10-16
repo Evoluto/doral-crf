@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
 import { RouteDataService } from 'src/app/services/route-data.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { IgnatiusService } from 'src/app/services/ignatius.service';

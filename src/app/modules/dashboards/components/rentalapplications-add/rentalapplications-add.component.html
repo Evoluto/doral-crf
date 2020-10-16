@@ -1,12 +1,10 @@
 <div class="card">
   <div class="card-body">
-    <mat-horizontal-stepper [linear]="true"
-      #stepper>
+    <mat-horizontal-stepper [linear]="true" #stepper>
 
       <!-- Step one start -->
       <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup"
-          (ngSubmit)="onStepOneSubmit()">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onStepOneSubmit()">
           <ng-template matStepLabel>Requirements<br>Requisitos</ng-template>
           <br>
           <div class="card ">
@@ -43,9 +41,7 @@
             </div>
           </div>
           <div class="stepper-button-row">
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next / Contiguo</button>
+            <button mat-flat-button matStepperNext class="btn-dfa-dark">Next / Contiguo</button>
             <!-- <button mat-flat-button
               type="button"
               (click)="saveExit('firstFormGroup')"
@@ -58,8 +54,7 @@
 
       <!-- Step two start -->
       <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup"
-          (ngSubmit)="onStepTwoSubmit()">
+        <form [formGroup]="secondFormGroup" (ngSubmit)="onStepTwoSubmit()">
           <ng-template matStepLabel>General Applicant Information<br>Información General del Solicitante</ng-template>
           <br>
           <div class="row">
@@ -67,17 +62,14 @@
               <p>
                 <span class="bolt">Applicant’s Name / Nombre del Solicitante:</span>
               </p>
-              <input class="form-control"
-                placeholder="Applicant’s Name / Nombre del solicitante"
+              <input class="form-control" placeholder="Applicant’s Name / Nombre del solicitante"
                 formControlName="applicant_name">
             </div>
             <div class="col-md-6">
               <p>
                 <span class="bolt">Social Security Number / SS# del Solicitante:</span>
               </p>
-              <input class="form-control"
-                placeholder="Applicant's SS# / SS# del Solicitante"
-                rows="4"
+              <input class="form-control" placeholder="Applicant's SS# / SS# del Solicitante" rows="4"
                 formControlName="applicant_ss_num">
             </div>
           </div>
@@ -87,17 +79,14 @@
               <p>
                 <span class="bolt">Co-Applicant’s Name / Nombre del Solicitante:</span>
               </p>
-              <input type="email"
-                class="form-control"
-                placeholder="Applicant’s Name / Nombre del solicitante"
+              <input type="email" class="form-control" placeholder="Applicant’s Name / Nombre del solicitante"
                 formControlName="co_applicant_name">
             </div>
             <div class="col-md-6">
               <p>
                 <span class="bolt">Social Security Number / SS# del Solicitante:</span>
               </p>
-              <input class="form-control"
-                placeholder="Applicant's SS# / SS# del Solicitante"
+              <input class="form-control" placeholder="Applicant's SS# / SS# del Solicitante"
                 formControlName="co_applicant_ss_num">
             </div>
           </div>
@@ -107,18 +96,13 @@
               <p>
                 <span class="bolt">Address / Dirección:</span>
               </p>
-              <input type="email"
-                class="form-control"
-                placeholder="Address / Dirección"
-                formControlName="address">
+              <input type="email" class="form-control" placeholder="Address / Dirección" formControlName="address">
             </div>
             <div class="col-md-6">
               <p>
                 <span class="bolt">Grant Amount Requested / Cantidad de la Subvencion Solcitada - $2,500 max:</span>
               </p>
-              <input class="form-control"
-                placeholder="$2,500 max / $2,500 máx"
-                formControlName="amount_requested">
+              <input class="form-control" placeholder="$2,500 max / $2,500 máx" formControlName="amount_requested">
             </div>
           </div>
           <br>
@@ -127,37 +111,24 @@
               <p>
                 <span class="bolt">Email / Correo Electrónico:</span>
               </p>
-              <input type="email"
-                class="form-control"
-                placeholder="Email / Correo Electrónico"
-                formControlName="email">
+              <input type="email" class="form-control" placeholder="Email / Correo Electrónico" formControlName="email">
             </div>
             <div class="col-md-6">
               <p>
                 <span class="bolt">Phone / Teléfono:</span>
               </p>
-              <input class="form-control"
-                placeholder="Phone / Teléfono"
-                formControlName="phone">
+              <input class="form-control" placeholder="Phone / Teléfono" formControlName="phone">
             </div>
           </div>
           <br>
           <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back / Atrás</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next / Contiguo</button>
-            <button mat-flat-button
-              type="button"
-              (click)="saveExit('secondFormGroup')"
-              class="btn-info">Save Draft and Exit / Guardar y Salir
+            <button matStepperPrevious class="btn-dfa-light" mat-flat-button>Back / Atrás</button>
+            <button mat-flat-button matStepperNext class="btn-dfa-dark">Next / Contiguo</button>
+            <button mat-flat-button type="button" (click)="saveExit('secondFormGroup')" class="btn-info">Save Draft and
+              Exit / Guardar y Salir
             </button>
-            <button mat-flat-button
-              class="btn-dark"
-              type="button"
-              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
+            <button mat-flat-button class="btn-dark" type="button" (click)="cancelChanges(discardchanges)">Cancel /
+              Cancelar</button>
           </div>
         </form>
       </mat-step>
@@ -165,8 +136,7 @@
 
       <!-- Step three start -->
       <mat-step [stepControl]="thirdFormGroup">
-        <form [formGroup]="thirdFormGroup"
-          (ngSubmit)="onStepThreeSubmit()">
+        <form [formGroup]="thirdFormGroup" (ngSubmit)="onStepThreeSubmit()">
           <ng-template matStepLabel>Household<br>Hogar</ng-template>
           <br>
           <div class="row">
@@ -174,12 +144,10 @@
               <div>
                 <span class="bolt">Household Size (Number of People who live in unit) /<br>Tamaño del Hogar (Número de
                   personas que viven en la unidad):</span>
-              </div>  
+              </div>
             </div>
             <div class="col-md-6">
-              <input class="form-control"
-                type="number"
-                placeholder="Household Size / Tamaño del Hogar"
+              <input class="form-control" type="number" placeholder="Household Size / Tamaño del Hogar"
                 formControlName="household_size">
             </div>
           </div>
@@ -187,17 +155,12 @@
           <div class="row">
             <div class="col-md-6">
               <label>Applicant’s Name / Nombre del Solicitante:</label>
-              <input class="form-control"
-                type="text"
-                value="{{this.secondFormGroup.get('applicant_name').value}}"
+              <input class="form-control" type="text" value="{{this.secondFormGroup.get('applicant_name').value}}"
                 readonly>
             </div>
-            <div *ngIf="this.secondFormGroup.get('co_applicant_name').value"
-              class="col-md-6">
+            <div *ngIf="this.secondFormGroup.get('co_applicant_name').value" class="col-md-6">
               <label>Co-Applicant’s Name / Nombre del Solicitante:</label>
-              <input class="form-control"
-                type="text"
-                value="{{this.secondFormGroup.get('co_applicant_name').value}}"
+              <input class="form-control" type="text" value="{{this.secondFormGroup.get('co_applicant_name').value}}"
                 readonly>
             </div>
           </div>
@@ -212,11 +175,9 @@
               </div>
             </div>
 
-            <div formArrayName="items"
-              *ngFor="let item of thirdFormGroup.get('items').controls; let i = index;">
+            <div formArrayName="items" *ngFor="let item of thirdFormGroup.get('items').controls; let i = index;">
 
-              <div [formGroupName]="i"
-                class="card-body bg-light">
+              <div [formGroupName]="i" class="card-body bg-light">
 
                 <div class="row">
                   <div class="col-md-2">
@@ -225,10 +186,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      placeholder="Name (Nombre)"
-                      type="text"
-                      formControlName="name">
+                    <input class="form-control" placeholder="Name (Nombre)" type="text" formControlName="name">
                   </div>
                   <div class="col-md-2">
                     <p>
@@ -236,10 +194,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      type="text"
-                      placeholder="Age (Edad)"
-                      formControlName="age">
+                    <input class="form-control" type="text" placeholder="Age (Edad)" formControlName="age">
                   </div>
                 </div>
                 <div class="row">
@@ -249,9 +204,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      type="text"
-                      placeholder="Name of Employer / Nombre del Empleador"
+                    <input class="form-control" type="text" placeholder="Name of Employer / Nombre del Empleador"
                       formControlName="employer">
                   </div>
                   <div class="col-md-2">
@@ -260,9 +213,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      type="text"
-                      placeholder="Employer Phone / Teléfono del Empleador"
+                    <input class="form-control" type="text" placeholder="Employer Phone / Teléfono del Empleador"
                       formControlName="employer_phone">
                   </div>
                 </div>
@@ -273,11 +224,8 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input type="email"
-                      class="form-control"
-                      type="text"
-                      placeholder="Employer Address (Dirección del Empleador)"
-                      formControlName="employer_address">
+                    <input type="email" class="form-control" type="text"
+                      placeholder="Employer Address (Dirección del Empleador)" formControlName="employer_address">
                   </div>
                   <div class="col-md-2">
                     <p>
@@ -285,9 +233,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      type="text"
-                      placeholder="Position / Posición"
+                    <input class="form-control" type="text" placeholder="Position / Posición"
                       formControlName="position">
                   </div>
                 </div>
@@ -298,9 +244,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      type="text"
-                      placeholder="Years Employed / Años Empleado"
+                    <input class="form-control" type="text" placeholder="Years Employed / Años Empleado"
                       formControlName="years_employed">
                   </div>
                   <div class="col-md-2">
@@ -309,9 +253,7 @@
                     </p>
                   </div>
                   <div class="col-md-4">
-                    <input class="form-control"
-                      type="text"
-                      placeholder="Supervisor / Supervisor"
+                    <input class="form-control" type="text" placeholder="Supervisor / Supervisor"
                       formControlName="supervisor">
                   </div>
                 </div>
@@ -323,21 +265,13 @@
           </div>
 
           <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back / Atrás</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next / Contiguo</button>
-            <button mat-flat-button
-              type="button"
-              (click)="saveExit('thirdFormGroup')"
-              class="btn-info">Save Draft and Exit / Guardar y Salir
+            <button matStepperPrevious class="btn-dfa-light" mat-flat-button>Back / Atrás</button>
+            <button mat-flat-button matStepperNext class="btn-dfa-dark">Next / Contiguo</button>
+            <button mat-flat-button type="button" (click)="saveExit('thirdFormGroup')" class="btn-info">Save Draft and
+              Exit / Guardar y Salir
             </button>
-            <button mat-flat-button
-              class="btn-dark"
-              type="button"
-              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
+            <button mat-flat-button class="btn-dark" type="button" (click)="cancelChanges(discardchanges)">Cancel /
+              Cancelar</button>
           </div>
         </form>
       </mat-step>
@@ -359,8 +293,7 @@
         <br>
         <div class="card-header">Downloads / Descargas</div>
         <div class="card-body">
-          <table id="doctable"
-            class="table">
+          <table id="doctable" class="table">
             <tr>
             <tr>
               <td><a
@@ -374,10 +307,10 @@
                   programa.</a></td>
             </tr>
             <tr>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf"
-                  download>W-9 form must be completed, signed and dated by landlord to enable payment. </a></td>
-              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf"
-                  download>El arrendador debe completar, firmar y fechar el formulario W-9 para permitir el pago. </a>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>W-9 form must be
+                  completed, signed and dated by landlord to enable payment. </a></td>
+              <td><a href="https://d3dr6irtq668i9.cloudfront.net/templates/W-9_Blank.pdf" download>El arrendador debe
+                  completar, firmar y fechar el formulario W-9 para permitir el pago. </a>
               </td>
             </tr>
             <tr>
@@ -396,12 +329,10 @@
             </tr>
           </table>
         </div>
-        <div *ngIf="recordId"
-          class="card bg-dfa">
+        <div *ngIf="recordId" class="card bg-dfa">
           <div class="card-header">Existing Documents / Documentos Existentes</div>
           <div class="card-body">
-            <table id="doctable"
-              class="table">
+            <table id="doctable" class="table">
               <tbody *ngIf="landlordEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
@@ -410,8 +341,7 @@
                 </tr>
               </tbody>
               <tbody *ngIf="landlordEditDocumentData.length > 0">
-                <tr *ngFor="let aed of landlordEditDocumentData"
-                  style="border-top:none !important">
+                <tr *ngFor="let aed of landlordEditDocumentData" style="border-top:none !important">
                   <td>
                     <span>{{aed.document_title}}</span>
                   </td>
@@ -422,15 +352,10 @@
                     <span>{{aed.document}}</span>
                   </td>
                   <td class="text-right">
-                    <a type="button"
-                      class="btn btn-sm btn-circle"
-                      href="{{aed.document_file_url}}"
-                      download>
+                    <a type="button" class="btn btn-sm btn-circle" href="{{aed.document_file_url}}" download>
                       <i class="fa fa-download text-success"></i>
                     </a>
-                    <button type="button"
-                      class="btn btn-sm btn-circle"
-                      (click)="deleteLandlordDocument(aed.id)">
+                    <button type="button" class="btn btn-sm btn-circle" (click)="deleteLandlordDocument(aed.id)">
                       <i class="fa fa-trash text-danger"></i>
                     </button>
                   </td>
@@ -443,8 +368,7 @@
         <div class="card bg-dfa">
           <div class="card-header">
             Add New Documents / Agregar Nuevos Documentos
-            <button class="btn btn-sm btn-rounded btn-success float-right"
-              (click)="addDocumentFormRow('Landlord')">
+            <button class="btn btn-sm btn-rounded btn-success float-right" (click)="addDocumentFormRow('Landlord')">
               <i class="fa fa-plus"></i>
             </button>
           </div>
@@ -457,37 +381,28 @@
               <table class="table table-bordered">
                 <tr *ngFor="let doc of landlordDocuments">
                   <td>
-                    <select [value]="landlordDocumentTypes[doc.tempId]"
-                      name="landlordDocumentTypes[doc.tempId]"
-                      class="form-control"
-                      (change)="onChangeLandlordDocumentType(doc.tempId,$event.target.value)">
-                      <option value=""
-                        hidden>- Select Type / Seleccione Tipo -</option>
-                      <option value="{{opt.id}}"
-                        *ngFor="let opt of landlordDocumentSelectionTypes">
+                    <select [value]="landlordDocumentTypes[doc.tempId]" name="landlordDocumentTypes[doc.tempId]"
+                      class="form-control" (change)="onChangeLandlordDocumentType(doc.tempId,$event.target.value)">
+                      <option value="" hidden>- Select Type / Seleccione Tipo -</option>
+                      <option value="{{opt.id}}" *ngFor="let opt of landlordDocumentSelectionTypes">
                         {{opt.document_title}}
                       </option>
                     </select>
                   </td>
                   <td>
-                    <input class="form-control"
-                      type="text"
+                    <input class="form-control" type="text"
                       (change)="onChangeLandlordDocumentTitle(doc.tempId,$event.target.value)"
-                      [value]="landlordDocumentTitles[doc.tempId]"
-                      name="landlordDocumentTitles[doc.tempId]"
+                      [value]="landlordDocumentTitles[doc.tempId]" name="landlordDocumentTitles[doc.tempId]"
                       placeholder="Document Title / Titulo del Documento">
                   </td>
                   <td>
                     <div class="col-md-10">
-                      <input type="file"
-                        class="form-control-file form-control-sm"
-                        id="add_file"
+                      <input type="file" class="form-control-file form-control-sm" id="add_file"
                         (change)="handleUploadLandlord(doc.tempId,$event)">
                     </div>
                   </td>
                   <td>
-                    <button (click)="removeLandlordDocumentRow(doc.tempId)"
-                      class="btn btn-sm btn-rounded btn-danger">
+                    <button (click)="removeLandlordDocumentRow(doc.tempId)" class="btn btn-sm btn-rounded btn-danger">
                       <i class="fa fa-minus"></i>
                     </button>
                   </td>
@@ -496,21 +411,13 @@
 
               <br>
               <div class="stepper-button-row">
-                <button matStepperPrevious
-                  class="btn-dfa-light"
-                  mat-flat-button>Back / Atrás</button>
-                <button mat-flat-button
-                  matStepperNext
-                  class="btn-dfa-dark">Next / Contiguo</button>
-                <button mat-flat-button
-                  type="button"
-                  (click)="saveExit(null)"
-                  class="btn-info">Save Draft and Exit / Guardar y Salir
+                <button matStepperPrevious class="btn-dfa-light" mat-flat-button>Back / Atrás</button>
+                <button mat-flat-button matStepperNext class="btn-dfa-dark">Next / Contiguo</button>
+                <button mat-flat-button type="button" (click)="saveExit(null)" class="btn-info">Save Draft and Exit /
+                  Guardar y Salir
                 </button>
-                <button mat-flat-button
-                  class="btn-dark"
-                  type="button"
-                  (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
+                <button mat-flat-button class="btn-dark" type="button" (click)="cancelChanges(discardchanges)">Cancel /
+                  Cancelar</button>
               </div>
             </form>
           </div>
@@ -521,8 +428,7 @@
 
       <!-- Step five start -->
       <mat-step [stepControl]="fifthFormGroup">
-        <form [formGroup]="fifthFormGroup"
-          (ngSubmit)="onStepFiveSubmit()">
+        <form [formGroup]="fifthFormGroup" (ngSubmit)="onStepFiveSubmit()">
           <ng-template matStepLabel>Landlord<br>Propietario</ng-template>
           <br>
           <div class="row">
@@ -530,16 +436,13 @@
               <p>
                 <span class="bolt">Landlord / Propietario:</span>
               </p>
-              <input class="form-control"
-                placeholder="Landlord / Propietario"
-                formControlName="landlord">
+              <input class="form-control" placeholder="Landlord / Propietario" formControlName="landlord">
             </div>
             <div class="col-md-6">
               <p>
                 <span class="bolt">Authorized Representative / Representante Autorizado:</span>
               </p>
-              <input class="form-control"
-                placeholder="Authorized Representative / Representante Autorizado"
+              <input class="form-control" placeholder="Authorized Representative / Representante Autorizado"
                 formControlName="landlord_authorized_representative">
             </div>
           </div>
@@ -549,8 +452,7 @@
               <p>
                 <span class="bolt">Landlord Address / Dirección del Propietario:</span>
               </p>
-              <input class="form-control"
-                placeholder="Landlord Address / Dirección del Propietario"
+              <input class="form-control" placeholder="Landlord Address / Dirección del Propietario"
                 formControlName="landlord_address">
             </div>
           </div>
@@ -560,37 +462,26 @@
               <p>
                 <span class="bolt">Landlord Email / Correo Electrónico del Propietario:</span>
               </p>
-              <input type="email"
-                class="form-control"
-                placeholder="Landlord Email / Correo Electrónico del Propietario"
+              <input type="email" class="form-control" placeholder="Landlord Email / Correo Electrónico del Propietario"
                 formControlName="landlord_email">
             </div>
             <div class="col-md-6">
               <p>
                 <span class="bolt">Landlord Phone / Teléfono del Propietario:</span>
               </p>
-              <input class="form-control"
-                placeholder="Landlord Phone / Teléfono del Propietario"
+              <input class="form-control" placeholder="Landlord Phone / Teléfono del Propietario"
                 formControlName="landlord_phone">
             </div>
           </div>
           <br>
           <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back / Atrás</button>
-            <button mat-flat-button
-              matStepperNext
-              class="btn-dfa-dark">Next / Contiguo</button>
-            <button mat-flat-button
-              type="button"
-              (click)="saveExit('fifthFormGroup')"
-              class="btn-info">Save Draft and Exit / Guardar y Salir
+            <button matStepperPrevious class="btn-dfa-light" mat-flat-button>Back / Atrás</button>
+            <button mat-flat-button matStepperNext class="btn-dfa-dark">Next / Contiguo</button>
+            <button mat-flat-button type="button" (click)="saveExit('fifthFormGroup')" class="btn-info">Save Draft and
+              Exit / Guardar y Salir
             </button>
-            <button mat-flat-button
-              class="btn-dark"
-              type="button"
-              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
+            <button mat-flat-button class="btn-dark" type="button" (click)="cancelChanges(discardchanges)">Cancel /
+              Cancelar</button>
           </div>
         </form>
       </mat-step>
@@ -612,12 +503,10 @@
         </div>
         <br>
 
-        <div *ngIf="recordId"
-          class="card bg-dfa">
+        <div *ngIf="recordId" class="card bg-dfa">
           <div class="card-header">Existing Documents / Documentos Existentes</div>
           <div class="card-body">
-            <table id="doctable"
-              class="table">
+            <table id="doctable" class="table">
               <tbody *ngIf="applicantEditDocumentData.length === 0">
                 <tr>
                   <td colspan="2">
@@ -626,8 +515,7 @@
                 </tr>
               </tbody>
               <tbody *ngIf="applicantEditDocumentData.length > 0">
-                <tr *ngFor="let aed of applicantEditDocumentData"
-                  style="border-top:none !important">
+                <tr *ngFor="let aed of applicantEditDocumentData" style="border-top:none !important">
                   <td>
                     <span>{{aed.document_title}}</span>
                   </td>
@@ -637,12 +525,9 @@
                   <td>
                     <span>{{aed.document}}</span>
                   </td>
-                  
+
                   <td class="text-right">
-                    <a type="button"
-                      class="btn btn-sm btn-circle"
-                      href="{{aed.document_file_url}}"
-                      download>
+                    <a type="button" class="btn btn-sm btn-circle" href="{{aed.document_file_url}}" download>
                       <i class="fa fa-download text-success"></i>
                     </a>
                     <!-- <button type="button"
@@ -650,9 +535,7 @@
                       (click)="{{aed.document_file_url}}">
                       <i class="fa fa-download text-success"></i>
                     </button> -->
-                    <button type="button"
-                      class="btn btn-sm btn-circle"
-                      (click)="deleteApplicantDocument(aed.id)">
+                    <button type="button" class="btn btn-sm btn-circle" (click)="deleteApplicantDocument(aed.id)">
                       <i class="fa fa-trash text-danger"></i>
                     </button>
                   </td>
@@ -665,8 +548,7 @@
         <div class="card bg-dfa">
           <div class="card-header">
             Add New Documents / Agregar Nuevos Documentos
-            <button class="btn btn-sm btn-rounded btn-success float-right"
-              (click)="addDocumentFormRow('Applicant')">
+            <button class="btn btn-sm btn-rounded btn-success float-right" (click)="addDocumentFormRow('Applicant')">
               <i class="fa fa-plus"></i>
             </button>
           </div>
@@ -679,37 +561,28 @@
               <table class="table table-bordered">
                 <tr *ngFor="let doc of applicantDocuments">
                   <td>
-                    <select [value]="applicantDocumentTypes[doc.tempId]"
-                      name="applicantDocumentTypes[doc.tempId]"
-                      class="form-control"
-                      (change)="onChangeApplicantDocumentType(doc.tempId,$event.target.value)">
-                      <option value=""
-                        hidden>- Select Type / Seleccione Tipo -</option>
-                      <option value="{{opt.id}}"
-                        *ngFor="let opt of applicantsDocumentSelectionTypes">
+                    <select [value]="applicantDocumentTypes[doc.tempId]" name="applicantDocumentTypes[doc.tempId]"
+                      class="form-control" (change)="onChangeApplicantDocumentType(doc.tempId,$event.target.value)">
+                      <option value="" hidden>- Select Type / Seleccione Tipo -</option>
+                      <option value="{{opt.id}}" *ngFor="let opt of applicantsDocumentSelectionTypes">
                         {{opt.document_title}}
                       </option>
                     </select>
                   </td>
                   <td>
-                    <input class="form-control"
-                      type="text"
+                    <input class="form-control" type="text"
                       (change)="onChangeApplicantDocumentTitle(doc.tempId,$event.target.value)"
-                      [value]="applicantDocumentTitles[doc.tempId]"
-                      name="applicantDocumentTitles[doc.tempId]"
+                      [value]="applicantDocumentTitles[doc.tempId]" name="applicantDocumentTitles[doc.tempId]"
                       placeholder="Document Title / Titulo del Documento">
                   </td>
                   <td>
                     <div class="col-md-10">
-                      <input type="file"
-                        class="form-control-file form-control-sm"
-                        id="add_file"
+                      <input type="file" class="form-control-file form-control-sm" id="add_file"
                         (change)="handleUploadApplicant(doc.tempId,$event)">
                     </div>
                   </td>
                   <td>
-                    <button (click)="removeApplicantDocumentRow(doc.tempId)"
-                      class="btn btn-sm btn-rounded btn-danger">
+                    <button (click)="removeApplicantDocumentRow(doc.tempId)" class="btn btn-sm btn-rounded btn-danger">
                       <i class="fa fa-minus"></i>
                     </button>
                   </td>
@@ -718,21 +591,13 @@
 
               <br>
               <div class="stepper-button-row">
-                <button matStepperPrevious
-                  class="btn-dfa-light"
-                  mat-flat-button>Back / Atrás</button>
-                <button mat-flat-button
-                  matStepperNext
-                  class="btn-dfa-dark">Next / Contiguo</button>
-                <button mat-flat-button
-                  type="button"
-                  (click)="saveExit(null)"
-                  class="btn-info">Save Draft and Exit / Guardar y Salir
+                <button matStepperPrevious class="btn-dfa-light" mat-flat-button>Back / Atrás</button>
+                <button mat-flat-button matStepperNext class="btn-dfa-dark">Next / Contiguo</button>
+                <button mat-flat-button type="button" (click)="saveExit(null)" class="btn-info">Save Draft and Exit /
+                  Guardar y Salir
                 </button>
-                <button mat-flat-button
-                  class="btn-dark"
-                  type="button"
-                  (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
+                <button mat-flat-button class="btn-dark" type="button" (click)="cancelChanges(discardchanges)">Cancel /
+                  Cancelar</button>
               </div>
             </form>
           </div>
@@ -746,8 +611,7 @@
         <ng-template matStepLabel>Save<br>Guardar</ng-template>
         <br>
 
-        <form [formGroup]="eighthFormGroup"
-          (ngSubmit)="onStepEightSubmit()">
+        <form [formGroup]="eighthFormGroup" (ngSubmit)="onStepEightSubmit()">
 
           <table class="table table-bordered">
             <tr>
@@ -773,16 +637,10 @@
           </table>
 
           <div class="stepper-button-row">
-            <button matStepperPrevious
-              class="btn-dfa-light"
-              mat-flat-button>Back / Atrás</button>
-            <button mat-flat-button
-              class="btn-dfa-dark"
-              type="submit">Save (Guardar)</button>
-            <button mat-flat-button
-              class="btn-dark"
-              type="button"
-              (click)="cancelChanges(discardchanges)">Cancel / Cancelar</button>
+            <button matStepperPrevious class="btn-dfa-light" mat-flat-button>Back / Atrás</button>
+            <button mat-flat-button class="btn-dfa-dark" type="submit">Save (Guardar)</button>
+            <button mat-flat-button class="btn-dark" type="button" (click)="cancelChanges(discardchanges)">Cancel /
+              Cancelar</button>
           </div>
         </form>
 
@@ -793,11 +651,9 @@
   </div>
 </div>
 
-<ng-template #discardchanges
-  let-modal>
+<ng-template #discardchanges let-modal>
   <div class="modal-header">
-    <h4 class="modal-title"
-      id="modal-basic-title">
+    <h4 class="modal-title" id="modal-basic-title">
       {{modelConfig.title}}
     </h4>
   </div>
@@ -811,12 +667,8 @@
     <br>
     <div class="row">
       <div class="col-md-12">
-        <button type="button"
-          class="btn btn-success"
-          (click)="redirectToApps(true)">Yes / Si</button>
-        <button type="button"
-          class="btn btn-dark"
-          (click)="modal.close('discard')">No / No</button>
+        <button type="button" class="btn btn-success" (click)="redirectToApps(true)">Yes / Si</button>
+        <button type="button" class="btn btn-dark" (click)="modal.close('discard')">No / No</button>
       </div>
     </div>
   </div>

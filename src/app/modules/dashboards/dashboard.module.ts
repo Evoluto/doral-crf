@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
@@ -28,7 +28,11 @@ import {
   UnauthorisedComponent,
   DashboardComponent,
   BusinessApplicationsAddComponent,
-  RentalApplicationsAddComponent
+  RentalApplicationsAddComponent,
+  BusinessapplicationsComponent,
+  BusinessapplicationsViewComponent,
+  RentalapplicationsComponent,
+  RentalapplicationsViewComponent
 } from 'src/app/modules/dashboards/components';
 
 import { AdminGuard } from 'src/app/modules/dashboards/guards';
@@ -53,13 +57,16 @@ import { DashboardResolverService } from 'src/app/services/dashboard-resolver.se
     DashboardComponent,
     BusinessApplicationsAddComponent,
     RentalApplicationsAddComponent,
+    BusinessapplicationsComponent,
+    BusinessapplicationsViewComponent,
+    RentalapplicationsComponent,
+    RentalapplicationsViewComponent,
   ],
   providers: [
     DashboardService,
     BusinessApplicationService,
     RentalApplicationService,
     DashboardResolverService,
-    CurrencyPipe,
     AdminGuard,
     ExportService
   ]

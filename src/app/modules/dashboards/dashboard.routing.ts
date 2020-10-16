@@ -12,7 +12,11 @@ import {
   DashboardComponent,
   UnauthorisedComponent,
   BusinessApplicationsAddComponent,
-  RentalApplicationsAddComponent
+  RentalApplicationsAddComponent,
+  BusinessapplicationsComponent,
+  BusinessapplicationsViewComponent,
+  RentalapplicationsComponent,
+  RentalapplicationsViewComponent
 } from 'src/app/modules/dashboards/components';
 
 export const DashboardRoutes: Routes = [
@@ -36,6 +40,20 @@ export const DashboardRoutes: Routes = [
         },
         resolve: {
           componentData: DashboardService
+        }
+      },
+      {
+        path: 'businessapplications',
+        component: BusinessapplicationsComponent,
+        data: {
+          title: '',
+          subjectTableName: 'businessapplications',
+          urls: [
+            { title: '' }
+          ]
+        },
+        resolve: {
+          componentData: BusinessApplicationService
         }
       },
       {
@@ -67,11 +85,53 @@ export const DashboardRoutes: Routes = [
         }
       },
       {
+        path: 'businessapplications-view/:id',
+        component: BusinessapplicationsViewComponent,
+        data: {
+          title: 'View Business Application',
+          subjectTableName: 'businessapplications-view',
+          urls: [
+            { title: '' }
+          ]
+        },
+        resolve: {
+          componentData: BusinessApplicationService
+        }
+      },
+      {
+        path: 'rentalapplications',
+        component: RentalapplicationsComponent, 
+        data: { 
+          title: 'Rental Applications',
+          subjectTableName: 'rentalapplications',
+          urls: [
+            { title: '' }
+          ]
+        },
+        resolve: {
+          componentData: RentalApplicationService
+        }
+      },
+      {
         path: 'rentalapplications-add',
         component: RentalApplicationsAddComponent,
         data: {
           title: 'Add Rental Application',
           subjectTableName: 'rentalapplications-add',
+          urls: [
+            { title: '' }
+          ]
+        },
+        resolve: {
+          componentData: RentalApplicationService
+        }
+      },
+      {
+        path: 'rentalapplications-view/:id',
+        component: BusinessapplicationsViewComponent,
+        data: {
+          title: 'Rental Application',
+          subjectTableName: 'rentalapplications-view',
           urls: [
             { title: '' }
           ]

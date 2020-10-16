@@ -21,6 +21,20 @@ export class BusinessApplicationService implements Resolve<Object[]>{
 
     switch (subjectTableName) {
 
+
+
+      case "businessapplications":
+
+        observables.push(
+          this.ignatiusService.getQueryReportObservable(
+            projectSpecificData.appData,
+            { "ReportId": projectSpecificData.businessApplicationsData.BusinessApplicationListReportId }
+          )
+        )
+
+
+        break
+
       case "businessapplications-add":
 
         observables.push(
@@ -52,11 +66,10 @@ export class BusinessApplicationService implements Resolve<Object[]>{
               })
         )
 
-
-
         break;
 
       case "businessapplications-edit":
+      case "businessapplications-view":
 
         const recordId = route.paramMap.get("id");
 

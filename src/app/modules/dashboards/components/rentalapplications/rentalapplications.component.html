@@ -1,0 +1,70 @@
+<div class="card">
+	<div class="card-header bg-secondary">
+		<button class="btn btn-dfa-dark btn-sm float-right" (click)="openFilter(filterTemplate)">
+			<i class="fa fa-filter"></i> Filter
+		</button>
+	</div>
+
+	<div class="card-body">
+		<div class="table-responsive">
+            <h1>Under development</h1>
+			<!-- <table datatable [dtOptions]="dtOptions" class="row-border hover">
+				<thead>
+					<tr>
+						<th>Actions</th>
+						<th>Rental Name</th>
+						<th>Status</th>
+						<th>Review Status</th>
+						<th>Review Issues</th>
+						<th>No of Documents</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let rw of rows">
+						<td>
+							<i style="cursor: pointer;" (click)="viewRentalRecord(rw.id)" class="fas fa-eye text-success"
+								data-toggle="tooltip" data-placement="top" title="view">
+							</i>
+						</td>
+						<td>{{ rw.rental_legal_name }}</td>
+						<td>{{ rw.status}}</td>
+						<td>{{ rw.review_status }}</td>
+						<td>{{ rw.review_issue_reason }}</td>
+						<td>{{ rw.number_of_documents }}</td>
+					</tr>
+				</tbody>
+			</table> -->
+		</div>
+	</div>
+</div>
+
+
+<!-- Filter template Start -->
+<ng-template #filterTemplate let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">
+			Filters
+		</h4>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-md-12">
+				<ng-multiselect-dropdown [placeholder]="'Select Status'" style="width: 100%;" [data]="statusList"
+					[(ngModel)]="selectedStatus" [settings]="dropdownSettings">
+				</ng-multiselect-dropdown>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-12">
+				<button type="button" class="btn btn-dfa-dark" (click)="applyFilter()">
+					Apply
+				</button>
+				<button type="button" class="btn btn-dfa-light" (click)="modal.close()">
+					Cancel
+				</button>
+			</div>
+		</div>
+	</div>
+</ng-template>
+<!-- Filter template End -->

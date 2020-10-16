@@ -21,6 +21,16 @@ export class RentalApplicationService implements Resolve<Object[]>{
 
     switch (subjectTableName) {
 
+      case "rentalapplications":
+        observables.push(
+          this.ignatiusService.getQueryReportObservable(
+            projectSpecificData.appData,
+            { "ReportId": projectSpecificData.rentalApplicationsData.RentalApplicationListReportId }
+          )
+        )
+        break;
+
+
       case "rentalapplications-add":
 
         observables.push(
@@ -34,6 +44,7 @@ export class RentalApplicationService implements Resolve<Object[]>{
         break;
 
       case "rentalapplications-edit":
+      case "rentalapplications-view":
 
         const recordId = route.paramMap.get("id");
 
