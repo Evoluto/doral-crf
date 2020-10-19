@@ -1,68 +1,101 @@
 <div class="card">
-    <div class="card-header bg-secondary text-white">
-        Details
-    </div>
-    <div class="card-body">
-        <div class="row">
+	<div class="card-header bg-secondary text-white">
+		Details
+	</div>
+	<div class="card-body">
+		<div class="row">
 
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Business Name</label>
-                    </div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-5">
+						<label>Business Name</label>
+					</div>
 
-                    <div class="col-md-7">
-                        {{applicationData.business_legal_name}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Review Status</label>
-                    </div>
+					<div class="col-md-7">
+						{{applicationData.business_legal_name}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<label>Review Status</label>
+					</div>
 
-                    <div class="col-md-7">
-                        {{applicationData.review_status}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>No of Documents</label>
-                    </div>
+					<div class="col-md-7">
+						{{applicationData.review_status}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<label>No of Documents</label>
+					</div>
 
-                    <div class="col-md-7">
-                        {{applicationData.number_of_documents}}
-                    </div>
-                </div>
-            </div>
+					<div class="col-md-7">
+						{{applicationData.number_of_documents}}
+					</div>
+				</div>
+			</div>
 
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Status</label>
-                    </div>
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-5">
+						<label>Status</label>
+					</div>
 
-                    <div class="col-md-7">
-                        {{applicationData.status}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <label>Review Issues</label>
-                    </div>
+					<div class="col-md-7">
+						{{applicationData.status}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+						<label>Review Issues</label>
+					</div>
 
-                    <div class="col-md-7">
-                        {{applicationData.review_issue_reason}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                    </div>
+					<div class="col-md-7">
+						{{applicationData.review_issue_reason}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+					</div>
 
-                    <div class="col-md-7">
-                    </div>
-                </div>
-            </div>
+					<div class="col-md-7">
+					</div>
+				</div>
+			</div>
 
-        </div>
-    </div>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header bg-secondary text-white">
+		Documents
+		<button (click)="saveZip()" class="btn btn-sm btn-dfa-dark float-right">
+			<i class="ti-zip" aria-hidden="true"> Download Zip</i>
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-sm">
+				<thead>
+					<tr>
+						<th scope="col">Document Name</th>
+						<th scope="col">Document Title</th>
+						<th scope="col">Downloads</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let doc of applicationDocuments">
+						<td>{{doc.document_file}}</td>
+						<td>{{doc.document_title}}</td>
+						<td class="text-center">
+							<a class="btn btn-sm btn-dfa-dark btn-rounded" href="{{doc.document_file_url}}">
+								<i class="fa fa-download"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

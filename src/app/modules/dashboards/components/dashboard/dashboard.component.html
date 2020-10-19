@@ -1,36 +1,47 @@
-<div class="row" *ngIf="applicationData.name == 'Admin'" class="row">
+<div
+  class="row"
+  *ngIf="applicationData.name == 'Admin'"
+  class="row">
   <!-- Column -->
   <div class="col-lg-3 col-md-6">
-      <div class="card">
-          <div class="card-body text-center">
-              <h4 class="card-title">Business Applications</h4>
-              <div >
-                  <button [routerLink]="['/businessapplications']" class="btn btn-success btn-sm btn-block">Goto list</button>
-              </div>
-          </div>
+    <div class="card">
+      <div class="card-body text-center">
+        <h4 class="card-title">Business Applications</h4>
+        <div>
+          <button
+            [routerLink]="['/businessapplications']"
+            class="btn btn-success btn-sm btn-block">Goto list</button>
+        </div>
       </div>
+    </div>
   </div>
 
   <div class="col-lg-3 col-md-6">
     <div class="card">
-        <div class="card-body text-center">
-            <h4 class="card-title">Rental Applications</h4>
-            <div >
-                <button [routerLink]="['/rentalapplications']" class="btn btn-success btn-sm btn-block">Goto list</button>
-            </div>
+      <div class="card-body text-center">
+        <h4 class="card-title">Rental Applications</h4>
+        <div>
+          <button
+            [routerLink]="['/rentalapplications']"
+            class="btn btn-success btn-sm btn-block">Goto list</button>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
 </div>
 
-<div class="row" *ngIf="applicationData.name == 'Business Applicant'">
+<div
+  class="row"
+  *ngIf="applicationData.name == 'Business Applicant'">
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header yellow-bg ">
         <span style="font-size: 20px;font-weight:500">Business Assistance / Subvención de Asistencia para Pequeñas
           Empresas </span>
-        <button class="btn green-bg btn-md float-right" [routerLink]="['/businessapplications-add']"
+        <button
+          class="btn green-bg btn-md float-right"
+          [routerLink]="['/businessapplications-add']"
           *ngIf="!businessApplicationList.length">
           <i class="fa fa-plus"> Start the Application Process / Iniciar el proceso de solicitud</i>
         </button>
@@ -43,7 +54,9 @@
                 The status of your application is <b>{{rw.status}}</b>.<br>
                 El estado de su solicitud es <b>{{rw.status}}</b>.
               </div>
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">Please continue to update your information and upload
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">Please continue to update your information and upload
                 all of the required documents. Applications submitted without <b>ALL required documents</b>.
                 Applications submitted without all required information will <b>delay or limit</b> your opportunity to
                 receive funding.<br>
@@ -52,13 +65,21 @@
                 información requerida <b>retrasarán o limitarán</b> su oportunidad de recibir fondos.
               </div>
 
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">
-                <button class="btn btn-sm blue-bg" (click)="editBusinessRecord(rw.id)" data-toggle="tooltip"
-                  data-placement="top" title="Edit"> <i class="fa fa-edit"> Edit / Corregir</i>
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">
+                <button
+                  class="btn btn-sm blue-bg"
+                  (click)="editBusinessRecord(rw.id)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"> <i class="fa fa-edit"> Edit / Corregir</i>
                 </button>
               </div>
 
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">
                 <span style="color: #ed1e24;">Only submit once <b>ALL</b> information and documents are uploaded. You
                   will <b>NOT</b> be able to edit once submitted.<br>
                   <p></p>Solo envíe una vez que se carguen <b>TODA</b> la información y los documentos. <b>NO</b> podrá
@@ -66,14 +87,21 @@
                 </span>
               </div>
 
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">
-                <button class="btn btn-sm green-bg"
-                  (click)="openSubmitBusinessApplicationPopup(rw, submitApplicationTemp)" data-toggle="tooltip"
-                  data-placement="top" title="Submit"> <i class="fa fa-check"> Submit / Enviar</i>
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">
+                <button
+                  class="btn btn-sm green-bg"
+                  (click)="openSubmitBusinessApplicationPopup(rw, submitApplicationTemp)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Submit"> <i class="fa fa-check"> Submit / Enviar</i>
                 </button>
               </div>
 
-              <div class="col-md-8" *ngIf="rw.status === 'Submitted'">Your application is currently in review. Please
+              <div
+                class="col-md-8"
+                *ngIf="rw.status === 'Submitted'">Your application is currently in review. Please
                 check back periodically for an update. Additionally, check your email account for correspondence from
                 the review team.<br>
                 <p></p>Su solicitud está actualmente en revisión. Por favor, vuelva periódicamente para una
@@ -89,13 +117,17 @@
   </div>
 </div>
 
-<div class="row" *ngIf="applicationData.name == 'Rental Applicant'">
+<div
+  class="row"
+  *ngIf="applicationData.name == 'Rental Applicant'">
   <div class="col-md-12">
     <div class="card ">
       <div class="card-header blue-bg">
         <span style="font-size: 20px;font-weight:500"><span style="color:white;">Emergency Rental Assistance / Programa
             de Asistencia de Emergencia para el Alquiler</span></span>
-        <button class="btn green-bg btn-sm float-right" [routerLink]="['/rentalapplications-add']"
+        <button
+          class="btn green-bg btn-sm float-right"
+          [routerLink]="['/rentalapplications-add']"
           *ngIf="!rentalApplicationList.length">
           <i class="fa fa-plus"> Start the Application Process / Iniciar el proceso de solicitud</i>
         </button>
@@ -108,7 +140,9 @@
                 The status of your application is <b>{{rw.status}}</b>.<br>
                 El estado de su solicitud es <b>{{rw.status}}</b>.
               </div>
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">Please continue to update your information and upload
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">Please continue to update your information and upload
                 all of the required documents. Applications submitted without <b>ALL required documents</b>.
                 Applications submitted without all required information will <b>delay or limit</b> your opportunity to
                 receive funding.<br>
@@ -117,13 +151,21 @@
                 información requerida <b>retrasarán o limitarán</b> su oportunidad de recibir fondos.
               </div>
 
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">
-                <button class="btn btn-sm blue-bg" (click)="editRentalRecord(rw.id)" data-toggle="tooltip"
-                  data-placement="top" title="Edit"> <i class="fa fa-edit"> Edit / Corregir</i>
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">
+                <button
+                  class="btn btn-sm blue-bg"
+                  (click)="editRentalRecord(rw.id)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Edit"> <i class="fa fa-edit"> Edit / Corregir</i>
                 </button>
               </div>
 
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">
                 <span style="color: #ed1e24;">Only submit once <b>ALL</b>
                   information and
                   documents are uploaded. You will <b>NOT</b> be able to edit once submitted.<br>
@@ -133,14 +175,21 @@
                 </span>
               </div>
 
-              <div class="col-md-2" *ngIf="rw.status === 'Open'">
-                <button class="btn btn-sm green-bg"
-                  (click)="openSubmitRentalApplicationPopup(rw, submitApplicationTemp)" data-toggle="tooltip"
-                  data-placement="top" title="Submit"> <i class="fa fa-check"> Submit / Enviar</i>
+              <div
+                class="col-md-2"
+                *ngIf="rw.status === 'Open'">
+                <button
+                  class="btn btn-sm green-bg"
+                  (click)="openSubmitRentalApplicationPopup(rw, submitApplicationTemp)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Submit"> <i class="fa fa-check"> Submit / Enviar</i>
                 </button>
               </div>
 
-              <div class="col-md-8" *ngIf="rw.status === 'Submitted'">Your application is currently in review. Please
+              <div
+                class="col-md-8"
+                *ngIf="rw.status === 'Submitted'">Your application is currently in review. Please
                 check back periodically for an update. Additionally, check your email account for correspondence from
                 the review team.<br>
                 <p></p>Su solicitud está actualmente en revisión. Por favor, vuelva periódicamente para una
@@ -156,17 +205,34 @@
   </div>
 </div>
 
-<ng-template #submitApplicationTemp let-modal>
-  <form name="form" (ngSubmit)="f.form.valid && submitApplication(this.modelConfig.type)" #f="ngForm" novalidate>
+<ng-template
+  #submitApplicationTemp
+  let-modal>
+  <form
+    name="form"
+    (ngSubmit)="f.form.valid && submitApplication(this.modelConfig.type)"
+    #f="ngForm"
+    novalidate>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">{{modelConfig.title}}</h4>
+      <h4
+        class="modal-title"
+        id="modal-basic-title">{{modelConfig.title}}</h4>
     </div>
     <div class="modal-body">
 
       <div class="form-group form-check">
-        <input type="checkbox" name="certify" id="certify" class="form-check-input" [(ngModel)]="certifyDetails.certify"
-          #certify="ngModel" [ngClass]="{ 'is-invalid': f.submitted && certify.invalid }" required>
-        <label for="certify" class="form-check-label">
+        <input
+          type="checkbox"
+          name="certify"
+          id="certify"
+          class="form-check-input"
+          [(ngModel)]="certifyDetails.certify"
+          #certify="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && certify.invalid }"
+          required>
+        <label
+          for="certify"
+          class="form-check-label">
           By signing your name, you certify that you are the correct person to fill out this form, that all information
           presented above is true to the best of your knowledge, and that you are willing to participate in the City of
           Doral’s
@@ -186,20 +252,38 @@
       <div class="form-row">
         <div class="form-group col-12">
           <label>Certifier Name</label>
-          <input type="text" name="certifier_name" class="form-control" [(ngModel)]="certifyDetails.certifier_name"
-            #certifier_name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && certifier_name.invalid }" required>
-          <div *ngIf="f.submitted && certifier_name.invalid" class="invalid-feedback">
+          <input
+            type="text"
+            name="certifier_name"
+            class="form-control"
+            [(ngModel)]="certifyDetails.certifier_name"
+            #certifier_name="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && certifier_name.invalid }"
+            required>
+          <div
+            *ngIf="f.submitted && certifier_name.invalid"
+            class="invalid-feedback">
             <div *ngIf="certifier_name.errors.required">Certifier Name is required</div>
           </div>
         </div>
       </div>
 
-      <div class="form-row" *ngIf="modelConfig.type == 'business'">
+      <div
+        class="form-row"
+        *ngIf="modelConfig.type == 'business'">
         <div class="form-group col-12">
           <label>Certifier Title</label>
-          <input type="text" name="certifier_title" class="form-control" [(ngModel)]="certifyDetails.certifier_title"
-            #certifier_title="ngModel" [ngClass]="{ 'is-invalid': f.submitted && certifier_title.invalid }" required>
-          <div *ngIf="f.submitted && certifier_title.invalid" class="invalid-feedback">
+          <input
+            type="text"
+            name="certifier_title"
+            class="form-control"
+            [(ngModel)]="certifyDetails.certifier_title"
+            #certifier_title="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && certifier_title.invalid }"
+            required>
+          <div
+            *ngIf="f.submitted && certifier_title.invalid"
+            class="invalid-feedback">
             <div *ngIf="certifier_title.errors.required">Certifier Title is required</div>
           </div>
         </div>
@@ -211,7 +295,10 @@
         <span *ngIf="!modelConfig.busy">Submit</span>
         <span *ngIf="modelConfig.busy"><i class="fa fa-cog fa-spin"></i> <strong> Submitting...</strong></span>
       </button>
-      <button type="button" class="btn btn-dark" (click)="modal.close('Save click')">Close</button>
+      <button
+        type="button"
+        class="btn btn-dark"
+        (click)="modal.close('Save click')">Close</button>
     </div>
   </form>
 </ng-template>

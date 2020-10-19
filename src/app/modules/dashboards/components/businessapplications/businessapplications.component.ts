@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
@@ -12,6 +12,8 @@ import { PopupModel } from 'src/app/modules/dashboards/models/popup';
 import { FormActionData, FieldListItem, Where } from 'src/app/models/form-action-data';
 import { StorageService } from 'src/app/services/storage.service';
 import { Subject } from 'rxjs';
+import { iterator } from 'rxjs/internal-compatibility';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-businessapplications',
@@ -31,9 +33,17 @@ export class BusinessapplicationsComponent implements OnInit {
     private storageService: StorageService
   ) { }
 
-  modelConfig:PopupModel;
+  modelConfig: PopupModel;
   businessApplicationList: Array<any> = [];
   rows: Array<any> = [];
+
+  statusList: Array<any> = [];
+  reviewStatusList: Array<any> = [];
+  reviewIssuesList: Array<any> = [];
+
+  selectedStatusList: Array<any> = [];
+  selectedReviewStatusList: Array<any> = [];
+  selectedReviewIssuesList: Array<any> = [];
 
   dtOptions: DataTables.Settings = {
     pagingType: 'full_numbers',
@@ -44,14 +54,21 @@ export class BusinessapplicationsComponent implements OnInit {
       orderable: false
     }]
   };
-  // dtTrigger = new Subject();
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
+
+  dtTrigger = new Subject();
 
 
   ngOnInit() {
     const componentData = this.route.snapshot.data['componentData'];
     this.businessApplicationList = componentData[0];
     this.rows = this.businessApplicationList;
-    this.spinner.hide()
+    this.setupFilters();
+  }
+
+  ngAfterViewInit() {
+    this.dtTrigger.next();
+    this.spinner.hide();
   }
 
   viewBusinessRecord(id) {
@@ -61,6 +78,57 @@ export class BusinessapplicationsComponent implements OnInit {
   openFilter(content) {
     this.modelConfig = new PopupModel();
     this.ngbModal.open(content, this.modelConfig.settings)
+  }
+
+  setupFilters() {
+    for (const iterator of this.businessApplicationList) {
+
+      if (iterator.status && !this.statusList.includes(iterator.status)) {
+        this.statusList.push(iterator.status)
+      }
+
+      if (iterator.review_status && !this.reviewStatusList.includes(iterator.review_status)) {
+        this.reviewStatusList.push(iterator.review_status)
+      }
+
+      if (iterator.review_issue_reason && !this.reviewIssuesList.includes(iterator.review_issue_reason)) {
+        this.reviewIssuesList.push(iterator.review_issue_reason)
+      }
+
+    }
+  }
+
+  applyFilter() {
+
+    this.spinner.show()
+
+    const temp = this.businessApplicationList.filter(iterator => {
+      const condition = (
+        (
+          this.selectedStatusList.length === 0 ||
+          this.selectedStatusList.includes(iterator.status)
+        ) &&
+        (
+          this.selectedReviewStatusList.length === 0 ||
+          this.selectedReviewStatusList.includes(iterator.review_status)
+        ) &&
+        (
+          this.selectedReviewIssuesList.length === 0 ||
+          this.selectedReviewIssuesList.includes(iterator.review_issue_reason)
+        )
+      )
+      return condition;
+    });
+
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      setTimeout(() => {
+        this.dtTrigger.next();
+        this.ngbModal.dismissAll()
+        this.spinner.hide();
+      }, 500);
+    });
+    this.rows = [...temp];
   }
 
 }

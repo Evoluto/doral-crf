@@ -7,7 +7,10 @@
 
 	<div class="card-body">
 		<div class="table-responsive">
-			<table datatable [dtOptions]="dtOptions" class="row-border hover">
+			<table datatable
+				[dtOptions]="dtOptions"
+				[dtTrigger]="dtTrigger"
+				class="row-border hover">
 				<thead>
 					<tr>
 						<th>Actions</th>
@@ -21,8 +24,12 @@
 				<tbody>
 					<tr *ngFor="let rw of rows">
 						<td>
-							<i style="cursor: pointer;" (click)="viewBusinessRecord(rw.id)" class="fas fa-eye text-success"
-								data-toggle="tooltip" data-placement="top" title="view">
+							<i style="cursor: pointer;"
+								(click)="viewBusinessRecord(rw.id)"
+								class="fas fa-eye text-success"
+								data-toggle="tooltip"
+								data-placement="top"
+								title="view">
 							</i>
 						</td>
 						<td>{{ rw.business_legal_name }}</td>
@@ -48,8 +55,32 @@
 	<div class="modal-body">
 		<div class="row">
 			<div class="col-md-12">
-				<ng-multiselect-dropdown [placeholder]="'Select Status'" style="width: 100%;" [data]="statusList"
-					[(ngModel)]="selectedStatus" [settings]="dropdownSettings">
+				<ng-multiselect-dropdown
+					[placeholder]="'Select Status'"
+					style="width: 100%;"
+					[data]="statusList"
+					[(ngModel)]="selectedStatusList"
+					[settings]="dropdownSettings">
+				</ng-multiselect-dropdown>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-md-6">
+				<ng-multiselect-dropdown
+					[placeholder]="'Select Status'"
+					style="width: 100%;"
+					[data]="reviewStatusList"
+					[(ngModel)]="selectedReviewStatusList"
+					[settings]="dropdownSettings">
+				</ng-multiselect-dropdown>
+			</div>
+			<div class="col-md-6">
+				<ng-multiselect-dropdown
+					[placeholder]="'Select Status'"
+					style="width: 100%;"
+					[data]="reviewIssuesList"
+					[(ngModel)]="selectedReviewIssuesList"
+					[settings]="dropdownSettings">
 				</ng-multiselect-dropdown>
 			</div>
 		</div>
