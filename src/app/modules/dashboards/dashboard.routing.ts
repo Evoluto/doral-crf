@@ -128,9 +128,9 @@ export const DashboardRoutes: Routes = [
       },
       {
         path: 'rentalapplications-view/:id',
-        component: BusinessapplicationsViewComponent,
+        component: RentalapplicationsViewComponent,
         data: {
-          title: 'Rental Application',
+          title: 'View Rental Application',
           subjectTableName: 'rentalapplications-view',
           urls: [
             { title: '' }

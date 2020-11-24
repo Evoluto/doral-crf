@@ -45,8 +45,8 @@ export class RentalapplicationsViewComponent implements OnInit {
   ngOnInit() {
     this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
-    this.applicationData = (componentData && componentData[3]) ? componentData[3][0] : {};
-    const applicationDocuments = (componentData && componentData[4]) ? componentData[4] : [];
+    this.applicationData = (componentData && componentData[1]) ? componentData[1][0] : {};
+    const applicationDocuments = (componentData && componentData[2]) ? componentData[2] : [];
     const packageData = componentData[5];
     this.applicationDocuments = this.getRentalAppData(applicationDocuments);
     this.packageDocuments = this.getPackageDocs(applicationDocuments);
