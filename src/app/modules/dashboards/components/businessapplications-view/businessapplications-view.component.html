@@ -69,6 +69,30 @@
 
 <div class="card">
 	<div class="card-header bg-secondary text-white">
+		<button (click)="createPackage()" class="btn btn-sm btn-dfa-dark float-right">
+			Update package
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-sm">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let doc of packageDocuments">
+						<td>{{doc.document_file}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header bg-secondary text-white">
 		Documents
 		<button (click)="saveZip()" class="btn btn-sm btn-dfa-dark float-right">
 			<i class="ti-zip" aria-hidden="true"> Download Zip</i>

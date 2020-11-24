@@ -10,6 +10,8 @@ import * as JSZip from 'jszip';
 
 import { saveAs } from 'file-saver';
 import { forkJoin, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { PackageJob } from 'src/app/models/package';
 @Component({
   selector: 'app-businessapplications-view',
   templateUrl: './businessapplications-view.component.html',
@@ -28,15 +30,30 @@ export class BusinessapplicationsViewComponent implements OnInit {
     private storageService: StorageService
   ) { }
 
+
+  recordId: string;
   doralData = this.projectSpecificService.getProjectSpecificData();
   applicationData: any;
   applicationDocuments: Array<any>;
+  packageDocuments: Array<any>;
+  packageObj: PackageJob;
+  lastRun: Number;
+  packageId: Number;
+  queued: boolean = false;
+  packageExists: Boolean = false;
 
   ngOnInit() {
+    this.recordId = this.route.snapshot.paramMap.get('id');
     const componentData = this.route.snapshot.data['componentData'];
     this.applicationData = (componentData && componentData[3]) ? componentData[3][0] : {};
-    this.applicationDocuments = (componentData && componentData[4]) ? componentData[4] : [];
-    this.spinner.hide()
+    const applicationDocuments = (componentData && componentData[4]) ? componentData[4] : [];
+    this.applicationDocuments = this.getBusinessAppData(applicationDocuments);
+    this.packageDocuments = this.getPackageDocs(applicationDocuments);
+
+    console.log('ssssssssssssss', this.packageDocuments);
+
+
+    this.spinner.hide();
   }
 
   async saveZip() {
@@ -79,5 +96,103 @@ export class BusinessapplicationsViewComponent implements OnInit {
     }
 
   }
+
+  getBusinessAppData(data) {
+    if (data.length === 0) return []
+    return data.filter(elem => elem.document_type === 'Business Application');
+  }
+
+  getPackageDocs(data) {
+    if (data.length === 0) return []
+    return data.filter(elem => elem.document_type === 'Package file');
+  }
+
+  getPackage(packageData: any): void {
+    if (packageData) {
+      this.packageObj = packageData;
+      this.packageId = packageData.Id;
+      this.lastRun = parseInt(packageData.LastRun) * 1000;
+      this.packageExists = true;
+    }
+    else {
+      this.lastRun = null;
+      this.packageExists = false;
+    }
+  }
+
+
+  createPackage() {
+    this.spinner.show();
+    let appId = environment.applicationId;
+
+    if (this.packageExists) {
+      this.packageObj.Queued = true;
+      this.ignatiusService.putPackage(this.packageObj).subscribe(() => {
+        this.spinner.hide();
+        this.queued = true;
+        this.toastr.success("It may take a few minutes to process. You can hit the refresh button to monitor the progress.", "Please wait.");
+      },
+        () => {
+          this.toastr.error("Package update failed.", "Error");
+          this.spinner.hide();
+        }
+      );
+    } else {
+      this.ignatiusService
+        .postPackage(
+          new PackageJob(appId, this.doralData.documentsData.DocumentFileId,
+            this.doralData.documentsData.RelatedBusinessAssistanceFieldId,
+            parseInt(this.recordId), true, 0, "Business Applicant Attachment"))
+        .subscribe(() => {
+          this.spinner.hide();
+          this.queued = true;
+          this.toastr.success("It may take a few minutes to process. You can hit the refresh button to monitor the progress.", "Please wait.");
+        },
+          () => {
+            this.toastr.error("Package creation failed.", "Error");
+            this.spinner.hide();
+          }
+        );
+    }
+  }
+
+
+  // refreshPackages() {
+  //   this.refreshed = true;
+
+  //   this.reportService
+  //     .queryReport({
+  //       "ApplicationTableId": this.femaData.documentsData.TableId,
+  //       "ConditionGroups": [
+  //         {
+  //           "Type": "all",
+  //           "Conditions": [
+  //             {
+  //               "ConditionField": {
+  //                 "Id": this.femaData.documentsData.RelatedProjectsId
+  //               },
+  //               "OperationType": "is equal",
+  //               "Value": parseInt(this.projectID)
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           "Type": "all",
+  //           "Conditions": [
+  //             {
+  //               "ConditionField": {
+  //                 "Id": this.femaData.documentsData.DocumentTypeId
+  //               },
+  //               "OperationType": "is equal",
+  //               "Value": "Package file"
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     }).subscribe((response) => {
+  //       this.getDocumentResults(this.femaData.appData.removeReportDataPrefix(response));
+  //     });
+  // }
+
 
 }

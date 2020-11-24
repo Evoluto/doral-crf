@@ -126,13 +126,6 @@ export class BusinessApplicationService implements Resolve<Object[]>{
                         },
                         "OperationType": "is equal",
                         "Value": recordId
-                      },
-                      {
-                        "ConditionField": {
-                          "Id": projectSpecificData.documentsData.DocumentTypeFieldId
-                        },
-                        "OperationType": "is equal",
-                        "Value": 'Business Application'
                       }
                     ]
                   }

@@ -31,6 +31,7 @@ export class BusinessApplicationsAddComponent implements OnInit {
   organizationTypes: Array<any>;
   ownOrLease: Array<any>;
   businessApplicationEditDocumentData: any;
+  packageDocuments: Array<any>;
 
   //applicantList: Array<{ id: string, name: string }>;
   doralData = this.projectSpecificService.getProjectSpecificData();
@@ -73,7 +74,9 @@ export class BusinessApplicationsAddComponent implements OnInit {
     this.ownOrLease = componentData[1];
     this.documentSelectionTypes = componentData[2];
     this.businessApplicationEditData = (componentData && componentData[3]) ? componentData[3][0] : {};
-    this.businessApplicationEditDocumentData = (componentData && componentData[4]) ? componentData[4] : [];
+    const businessApplicationEditDocumentData = (componentData && componentData[4]) ? componentData[4] : [];
+    this.businessApplicationEditDocumentData = this.getBusinessAppData(businessApplicationEditDocumentData);
+    this.packageDocuments = this.getPackageDocs(businessApplicationEditDocumentData);
     this.setupForm();
     this.spinner.hide();
   }
@@ -567,6 +570,16 @@ export class BusinessApplicationsAddComponent implements OnInit {
       this.toastr.error("Form is not valid", "Error");
       this.validateAllFormFields(this.firstFormGroup);
     }
+  }
+
+  getBusinessAppData(data) {
+    if (data.length === 0) return []
+    return data.filter(elem => elem.document_type === 'Business Application');
+  }
+
+  getPackageDocs(data) {
+    if (data.length === 0) return []
+    return data.filter(elem => elem.document_type === 'Package file');
   }
 
 }
