@@ -65,8 +65,7 @@ export class BusinessapplicationsViewComponent implements OnInit {
       let observables = new Array<Observable<Blob>>();
       let tableId: Number = this.doralData.documentsData.TableId;
       let fid: Number = this.doralData.documentsData.DocumentFileId;
-
-
+      
       for (const iterator of this.applicationDocuments) {
 
         let rid = iterator.id;
@@ -81,15 +80,16 @@ export class BusinessapplicationsViewComponent implements OnInit {
 
       result.forEach((e, i = 0) => {
         zipFile.file(this.applicationDocuments[i].document_file, e);
-        zipFile.generateAsync({ type: "blob" }).then(function (blob) {
-          saveAs(blob, "Package.zip");
-        }, function (err) {
-          this.toastr.error("That isn't working right now. Please try again later.", "Uh oh!");
-          console.log(err);
-        });
-        this.spinner.hide();
-        this.toastr.clear();
       });
+      zipFile.generateAsync({ type: "blob" }).then(function (blob) {
+        saveAs(blob, "Package.zip");
+        this.toastr.clear();
+      }, function (err) {
+        this.toastr.error("That isn't working right now. Please try again later.", "Uh oh!");
+        console.log(err);
+      });
+      this.spinner.hide();
+      
 
     } catch (error) {
       this.toastr.error(error)
