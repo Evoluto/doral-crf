@@ -78,12 +78,18 @@
 			<table class="table table-bordered table-sm">
 				<thead>
 					<tr>
-						<th scope="col">Name</th>
+						<th scope="col">Document Name</th>
+						<th scope="col">Downloads</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr *ngFor="let doc of packageDocuments">
 						<td>{{doc.document_file}}</td>
+						<td class="text-center">
+							<a class="btn btn-sm btn-dfa-dark btn-rounded" href="{{doc.document_file_url}}">
+								<i class="fa fa-download"></i>
+							</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

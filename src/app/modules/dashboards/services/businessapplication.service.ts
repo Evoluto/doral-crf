@@ -134,7 +134,7 @@ export class BusinessApplicationService implements Resolve<Object[]>{
                 ]
               }),
 
-          this.ignatiusService.getPackageJob(recordId, appId.toString(),'Business Applicant Attachment')
+          this.ignatiusService.getPackageJob(recordId, appId.toString(),'Business Application Attachment')
 
 
         )

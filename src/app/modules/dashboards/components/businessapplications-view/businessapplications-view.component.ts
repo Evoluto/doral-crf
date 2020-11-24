@@ -140,7 +140,7 @@ export class BusinessapplicationsViewComponent implements OnInit {
         .postPackage(
           new PackageJob(appId, this.doralData.documentsData.DocumentFileId,
             this.doralData.documentsData.RelatedBusinessAssistanceFieldId,
-            parseInt(this.recordId), true, 0, "Business Applicant Attachment"))
+            parseInt(this.recordId), true, 0, "Business Application Attachment"))
         .subscribe(() => {
           this.spinner.hide();
           this.queued = true;
