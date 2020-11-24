@@ -5,6 +5,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { IgnatiusService } from 'src/app/services/ignatius.service';
 import { ProjectSpecificService } from 'src/app/services/project-specific.service';
 import { forkJoin, Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -72,6 +73,7 @@ export class BusinessApplicationService implements Resolve<Object[]>{
       case "businessapplications-view":
 
         const recordId = route.paramMap.get("id");
+        const appId = environment.applicationId;
 
         observables.push(
 
@@ -130,7 +132,11 @@ export class BusinessApplicationService implements Resolve<Object[]>{
                     ]
                   }
                 ]
-              })
+              }),
+
+          this.ignatiusService.getPackageJob(recordId, appId.toString(),'Business Applicant Attachment')
+
+
         )
 
         break;

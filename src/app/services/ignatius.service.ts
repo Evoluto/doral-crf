@@ -73,8 +73,8 @@ export class IgnatiusService {
     return this.http.post(url, query);
   }
 
-  getPackageJob(id: String): Observable<Object[]> {
-    const url = '/api/pdfjob/?parentId=' + id;
+  getPackageJob(id: String, appId: string, documentType: string): Observable<Object[]> {
+    const url = '/api/pdfjob/?parentId=' + id + '&applicationId=' + appId + '&DocumentType=' + documentType;
     return this.http.get<Object[]>(url);
   }
 

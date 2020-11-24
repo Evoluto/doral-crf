@@ -47,12 +47,10 @@ export class BusinessapplicationsViewComponent implements OnInit {
     const componentData = this.route.snapshot.data['componentData'];
     this.applicationData = (componentData && componentData[3]) ? componentData[3][0] : {};
     const applicationDocuments = (componentData && componentData[4]) ? componentData[4] : [];
+    const packageData = componentData[5];
     this.applicationDocuments = this.getBusinessAppData(applicationDocuments);
     this.packageDocuments = this.getPackageDocs(applicationDocuments);
-
-    console.log('ssssssssssssss', this.packageDocuments);
-
-
+    this.getPackage(packageData);
     this.spinner.hide();
   }
 
