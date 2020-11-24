@@ -87,7 +87,7 @@ export class ProjectSpecificService {
 		projectSpecificData.documentsData.DocumentTypeFieldId = appData.getAppItemId(documentsData.Fields, 'Document Type');
 		projectSpecificData.documentsData.RelatedBusinessAssistanceFieldId = appData.getAppItemId(documentsData.Fields, 'Related Business Assistance');
 		projectSpecificData.documentsData.RelatedRentalAssistanceFieldId = appData.getAppItemId(documentsData.Fields, 'Related Rental Assistance');
-		projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Record Id');
+		projectSpecificData.documentsData.DocumentFileId = appData.getAppItemId(documentsData.Fields, 'Document File');
 		projectSpecificData.documentsData.DocumentTypeId = appData.getAppItemId(documentsData.Fields, "Document Type");
 
 		/* ===================== [6] Table = 'Required Documents' ======================*/
