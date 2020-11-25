@@ -97,7 +97,7 @@ export class RentalapplicationsViewComponent implements OnInit {
 
   getRentalAppData(data) {
     if (data.length === 0) return []
-    return data.filter(elem => elem.document_type === 'Rental Application');
+    return data.filter(elem => elem.document_type === 'Rental Application Applicant');
   }
 
   getPackageDocs(data) {
