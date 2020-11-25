@@ -3,6 +3,7 @@
 		<button class="btn btn-dfa-dark btn-sm float-right" (click)="openFilter(filterTemplate)">
 			<i class="fa fa-filter"></i> Filter
 		</button>
+		<button class="btn-dfa-dark btn-sm" [routerLink]="['/dashboard']">Back</button>
 	</div>
 
 	<div class="card-body">
@@ -36,7 +37,7 @@
 						<td>{{ rw.status}}</td>
 						<td>{{ rw.review_status }}</td>
 						<td>{{ rw.review_issue_reason }}</td>
-						<td>{{ rw.number_of_documents }}</td>
+						<td>{{ rw.no_of_documents }}</td>
 					</tr>
 				</tbody>
 			</table>
