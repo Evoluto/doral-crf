@@ -53,8 +53,9 @@ export class RegistrationComponent implements OnInit {
       this.routes.navigate(['/login']);
 
     } catch (error) {
+      console.log(error)
       this.spinner.hide()
-      this.errMsg = 'Error while Registration';
+      this.errMsg = 'Error Registering User';
     }
   }
 
