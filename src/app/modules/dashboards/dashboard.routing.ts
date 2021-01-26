@@ -102,7 +102,7 @@ export const DashboardRoutes: Routes = [
         path: 'rentalapplications',
         component: RentalapplicationsComponent, 
         data: { 
-          title: 'Rental Applications',
+          title: 'Tenant Applications',
           subjectTableName: 'rentalapplications',
           urls: [
             { title: '' }
@@ -116,7 +116,7 @@ export const DashboardRoutes: Routes = [
         path: 'rentalapplications-add',
         component: RentalApplicationsAddComponent,
         data: {
-          title: 'Add Rental Application',
+          title: 'Add Tenant Application',
           subjectTableName: 'rentalapplications-add',
           urls: [
             { title: '' }
@@ -130,7 +130,7 @@ export const DashboardRoutes: Routes = [
         path: 'rentalapplications-view/:id',
         component: RentalapplicationsViewComponent,
         data: {
-          title: 'View Rental Application',
+          title: 'View Tenant Application',
           subjectTableName: 'rentalapplications-view',
           urls: [
             { title: '' }
@@ -144,7 +144,7 @@ export const DashboardRoutes: Routes = [
         path: 'rentalapplications-edit/:id',
         component: RentalApplicationsAddComponent,
         data: {
-          title: 'Edit Rental Application',
+          title: 'Edit Tenant Application',
           subjectTableName: 'rentalapplications-edit',
           urls: [
             { title: '' }

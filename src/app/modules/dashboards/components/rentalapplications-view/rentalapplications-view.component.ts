@@ -97,7 +97,7 @@ export class RentalapplicationsViewComponent implements OnInit {
 
   getRentalAppData(data) {
     if (data.length === 0) return []
-    return data.filter(elem => elem.document_type === 'Rental Application Applicant');
+    return data.filter(elem => elem.document_type === 'Tenant Application Applicant');
   }
 
   getPackageDocs(data) {
@@ -140,7 +140,7 @@ export class RentalapplicationsViewComponent implements OnInit {
         .postPackage(
           new PackageJob(appId, this.doralData.documentsData.DocumentFileId,
             this.doralData.documentsData.RelatedRentalAssistanceFieldId,
-            parseInt(this.recordId), true, 0, "Rental Application Attachment"))
+            parseInt(this.recordId), true, 0, "Tenant Application Attachment"))
         .subscribe(() => {
           this.spinner.hide();
           this.queued = true;

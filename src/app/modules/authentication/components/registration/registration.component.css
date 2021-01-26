@@ -1,12 +1,12 @@
 .logo img {
-  width: 8rem;
-  height: 200px;
-  width:200px;
+  /* width: 8rem; */
+  height: 75px;
   margin: 25px 0px;
 }
 
+
 .blue-bg {
-  background-color: #bfccec !important;
+  background-color: #004990 !important;
 }
 
 .reg-box {
@@ -20,8 +20,8 @@
 }
 
 .btn-auth {
-  background: #FACD48 !important;
-  border-color: #FACD48 !important;
+  background: #00b5bf !important;
+  border-color: #00b5bf !important;
   color:black !important;
 }
 

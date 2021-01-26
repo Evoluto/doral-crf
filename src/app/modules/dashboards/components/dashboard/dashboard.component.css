@@ -8,7 +8,7 @@ tbody tr {
 }
 
 .blue-bg {
-    background-color: #010080 !important;
+    background-color: #004990 !important;
     color: white;
     font-size: 12px;   
 }
@@ -18,7 +18,7 @@ tbody tr {
 }
 
 .blue-bg1 {
-    background-color: #010080 !important;
+    background-color: #004990 !important;
     color: black;
     font-size: 12px;
 }
@@ -30,7 +30,7 @@ tbody tr {
 }
 
 .green-bg {
-    background-color: #177328 !important;
+    background-color: #86a949 !important;
     color: black;
     color: white;
     font-size: 12px;
@@ -48,3 +48,9 @@ tbody tr {
 .modal-xl {
     max-width: 1000px;
   }
+
+.btn-auth {
+    background: #00b5bf !important;
+    border-color: #00b5bf !important;
+    color:black !important;
+}
