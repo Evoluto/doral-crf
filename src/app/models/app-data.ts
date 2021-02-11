@@ -40,7 +40,7 @@ export class AppData {
         }else{
             let output: any = {};
             tableData.forEach(field => {
-                output[field["dbName"]] = null;
+                output[field["fieldName"]] = null;
             });
 
             return output;
