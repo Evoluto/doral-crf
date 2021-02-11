@@ -122,7 +122,7 @@ export class IgnatiusService {
 
   getTableFields(tableId: number): Observable<Object[]> {
     return this.http.get<Object[]>(
-      '/api/applicationtable/fields?tableId=' + tableId
+      '/api/field/getbytableid?id=' + tableId
     )
       .pipe(
         catchError(
